@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2025/11/12 14:21:03.000.338,=C:\Users\Administrator\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2026/06/25 13:33:43.346,=C:\Users\Administrator\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2026/06/25 13:34:51.573,C:\Projetos\cucabrasil-web-projects\cucabrasil-proloja-datasync-delphi\frmPricipal.dfm=C:\Users\Administrator\Documents\Embarcadero\Studio\Projects\Unit2.dfm</Transaction>
+    <Transaction>2026/06/25 13:34:51.573,C:\Projetos\cucabrasil-web-projects\cucabrasil-proloja-datasync-delphi\frmPricipal.pas=C:\Users\Administrator\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2026/06/25 13:35:31.593,C:\Projetos\cucabrasil-web-projects\cucabrasil-proloja-datasync-delphi\cucabrasil_proloja_datasync.dproj=C:\Users\Administrator\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
