@@ -2,8 +2,8 @@ object Form2: TForm2
   Left = 0
   Top = 0
   Caption = 'Form2'
-  ClientHeight = 441
-  ClientWidth = 624
+  ClientHeight = 661
+  ClientWidth = 884
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,20 +17,21 @@ object Form2: TForm2
   object pnSincronizar: TPanel
     Left = 0
     Top = 33
-    Width = 624
+    Width = 884
     Height = 121
     Align = alTop
     TabOrder = 0
-    ExplicitTop = 0
+    ExplicitWidth = 1343
     object btnSincronizar: TButton
       Left = 1
       Top = 74
-      Width = 622
+      Width = 882
       Height = 46
       Align = alBottom
       Caption = 'Sincronizar Todos Selecionados'
       TabOrder = 0
       OnClick = btnSincronizarClick
+      ExplicitWidth = 1341
     end
     object cxGroupBox1: TcxGroupBox
       Left = 1
@@ -38,8 +39,9 @@ object Form2: TForm2
       Align = alClient
       Caption = 'Selecione para sincronizar TODOS registros de cada Entidade'
       TabOrder = 1
+      ExplicitWidth = 1341
       Height = 73
-      Width = 622
+      Width = 882
       object chkProdutos: TcxCheckBox
         Left = 117
         Top = 43
@@ -49,6 +51,9 @@ object Form2: TForm2
         Style.TransparentBorder = False
         TabOrder = 0
         Transparent = True
+        ExplicitLeft = 123
+        ExplicitTop = 41
+        ExplicitHeight = 30
       end
       object chkClientes: TcxCheckBox
         Left = 2
@@ -59,6 +64,8 @@ object Form2: TForm2
         Style.TransparentBorder = False
         TabOrder = 1
         Transparent = True
+        ExplicitTop = 41
+        ExplicitHeight = 30
       end
       object cmbEmpresa: TcxComboBox
         Left = 2
@@ -67,25 +74,26 @@ object Form2: TForm2
         Properties.ReadOnly = False
         TabOrder = 2
         Text = 'cmbEmpresa'
-        Width = 618
+        ExplicitWidth = 1337
+        Width = 878
       end
     end
   end
   object Memo1: TMemo
     Left = 0
     Top = 154
-    Width = 624
-    Height = 252
+    Width = 884
+    Height = 472
     Align = alClient
     ScrollBars = ssVertical
     TabOrder = 1
-    ExplicitTop = 121
-    ExplicitHeight = 320
+    ExplicitWidth = 1343
+    ExplicitHeight = 252
   end
   object JvNavPanelHeader1: TJvNavPanelHeader
     Left = 0
     Top = 0
-    Width = 624
+    Width = 884
     Height = 33
     Align = alTop
     Font.Charset = DEFAULT_CHARSET
@@ -95,11 +103,12 @@ object Form2: TForm2
     Font.Style = [fsBold]
     ParentFont = False
     ImageIndex = 0
+    ExplicitWidth = 1343
   end
   object JvNavPanelHeader2: TJvNavPanelHeader
     Left = 0
-    Top = 406
-    Width = 624
+    Top = 626
+    Width = 884
     Height = 35
     Align = alBottom
     Font.Charset = DEFAULT_CHARSET
@@ -109,9 +118,11 @@ object Form2: TForm2
     Font.Style = [fsBold]
     ParentFont = False
     ImageIndex = 0
+    ExplicitTop = 406
+    ExplicitWidth = 1343
     object btnSettings: TAdvGlowButton
       AlignWithMargins = True
-      Left = 584
+      Left = 844
       Top = 1
       Width = 35
       Height = 33
@@ -164,9 +175,7 @@ object Form2: TForm2
       Appearance.TextColorDown = 2303013
       Appearance.TextColorHot = 2303013
       Appearance.TextColorDisabled = 13948116
-      ExplicitLeft = 581
-      ExplicitTop = -2
-      ExplicitHeight = 35
+      ExplicitLeft = 1303
     end
   end
   object monitorEventos: TFDEventAlerter

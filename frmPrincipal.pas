@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
   FireDAC.Phys.Intf, FireDAC.Stan.Option, FireDAC.Stan.Intf, FireDAC.Comp.Client,
   Vcl.StdCtrls, System.JSON, system.DateUtils, System.Generics.Collections,
-  uEntityBase, cxGraphics, cxControls, cxCheckBox, cxLookAndFeels,
+   uEntityBase, uLogger, cxGraphics, cxControls, cxCheckBox, cxLookAndFeels,
   cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore, cxGroupBox,
   cxCheckGroup, Vcl.ExtCtrls, cxTextEdit, cxMaskEdit, cxDropDownEdit,
   dxBarBuiltInMenu, cxPC, System.ImageList, Vcl.ImgList, cxImageList,
@@ -48,7 +48,6 @@ type
     procedure IncrementarContador(const ATabela: string; ASucesso: Boolean);
     procedure ExibirResumo;
     procedure EnviarRegistroApi(qrRecord, qrIntegrador, qrParametrosIntegrador: TFDQuery; thConnection: TFDConnection);
-    procedure gerarLog(name, msg: string; query: TFDquery; codFilial: string);
     procedure BuscaIntegrador(qrIntegrador: TFDQuery; thConnection: TFDConnection; vWhereClauses: string = '');
     procedure AutenticaApi(codFilial: string; qrRecord, qrIntegrador, qrParametrosIntegrador: TFDQuery; thConnection: TFDConnection);
     procedure AtualizarEventoSync(qrEvento: TFDQuery; const ASyncResult: TSyncResult);
@@ -77,7 +76,7 @@ begin
   if vParam = 'INDUSTRIAL' then       //comercial proloja
     Result := dtCommercial;
 
-  Self.Memo1.Lines.Add('Modo banco: ' + vParam);
+  TLogger.Log(llInfo, lcSystem, 'Modo banco: ' + vParam, []);
   pnSincronizar.Visible := False;
 
 end;
@@ -104,6 +103,11 @@ begin
   FDatabaseType := GetDatabaseType;
   FAutenticar := True;
   FSummary := TDictionary<string, TTableSummary>.Create;
+
+  TLogger.OnLog := procedure(const ALine: string)
+    begin
+      Memo1.Lines.Add(ALine);
+    end;
 
   with TFDQuery.Create(nil) do
   try
@@ -143,76 +147,6 @@ begin
   Self.monitorEventosAlert(nil, 'Event_DB_CHANGE', null);
 end;
 
-procedure TForm2.gerarLog(name, msg: string; query: TFDquery; codFilial: string);
-var
-  auxText: string;
-begin
-  Self.Memo1.Lines.Add('');
-  if name = 'auth_erro_busca_integrador' then
-  begin
-
-    if query.IsEmpty then
-      auxText := 'Nenhum integrador cadastrado ou habilitado. Verifique.'
-    else
-      auxText := 'Integração para filial ''' + codFilial + ''' não cadastrada ou desabilitada. Verifique.';
-
-    Self.Memo1.Lines.Add( '*******************  AUTENTICAÇÃO  *******************' + #13#10
-                        + auxText + ': ' + DateTimeToStr(Now) + #13#10
-                        + '*******************  AUTENTICAÇÃO  *******************');
-  end
-  else if name = 'auth_erro' then
-  begin
-    Self.Memo1.Lines.Add( '*******************  AUTENTICAÇÃO  *******************' + #13#10
-                        + '- Autenticação NÃO efetuada: ' + DateTimeToStr(Now) + #13#10
-                        + '- Empresa: ' + codFilial + #13#10
-                        + '- Mensagem de Erro: ' + msg + #13#10
-                        + '*******************  AUTENTICAÇÃO  *******************');
-  end
-  else if name = 'auth_sucesso' then
-  begin
-    Self.Memo1.Lines.Add( '###################  AUTENTICAÇÃO  ###################' + #13#10
-                        + '- Autenticação efetuada com SUCESSO: ' + DateTimeToStr(Now) + #13#10
-                        + '- Empresa: ' + codFilial + #13#10
-                        + '###################  AUTENTICAÇÃO  ###################');
-  end
-  else if name = 'evt_erro' then
-  begin
-    Self.Memo1.Lines.Add('*** ERRO: Evento NÃO sincronizado: ' + DateTimeToStr(Now) + '                                 *** ERRO ***' + #13#10 + 'CÓDIGO DO EVENTO: ' + query.FieldByName('codseq').AsString + #13#10 + 'OPERAÇÃO: ' + query.FieldByName('type_db').AsString + #13#10 + 'TABELA: ' + Self.NomeTabela(query.FieldByName('tablename_db').AsString) + #13#10 + 'CÓDIGO DO REGISTRO: ' + query.FieldByName('coderecord_db').AsString + #13#10 + 'MENSAGEM ERRO: ' + msg);
-  end
-  else if name = 'evt_sucesso' then
-  begin
-    Self.Memo1.Lines.Add( '### Evento sincronizado com SUCESSO: ' + DateTimeToStr(Now) + #13#10
-                        + 'CÓDIGO DO EVENTO: ' + query.FieldByName('codseq').AsString + #13#10
-                        + 'OPERAÇÃO: ' + query.FieldByName('type_db').AsString + #13#10
-                        + 'TABELA: ' + Self.NomeTabela(query.FieldByName('tablename_db').AsString) + #13#10
-                        + 'CÓDIGO DO REGISTRO: ' + query.FieldByName('coderecord_db').AsString);
-  end
-  else if name = 'import_sucesso' then
-  begin
-    Self.Memo1.Lines.Add('### Importação realizada com SUCESSO: ' + DateTimeToStr(Now) + #13#10
-                        + msg);
-  end
-  else if name = 'import_erro' then
-  begin
-    Self.Memo1.Lines.Add('### Erro na Importação de Dados: ' + DateTimeToStr(Now) + #13#10
-                        + msg);
-  end
-  else if name = 'export_sucesso' then
-  begin
-    Self.Memo1.Lines.Add('### Exportação realizada com SUCESSO: ' + DateTimeToStr(Now) + #13#10
-                        + msg);
-  end
-  else if name = 'export_msg' then
-  begin
-    Self.Memo1.Lines.Add(msg);
-  end
-  else if name = 'export_erro' then
-  begin
-    Self.Memo1.Lines.Add('### Erro na Exportação de Dados: ' + DateTimeToStr(Now) + #13#10 + msg);
-  end;
-  Self.Memo1.Lines.Add('');
-end;
-
 procedure TForm2.BuscaIntegrador(qrIntegrador: TFDQuery; thConnection: TFDConnection; vWhereClauses: string = '');
 begin
   try
@@ -235,7 +169,7 @@ begin
   except
     on E: Exception do
     begin
-      Self.gerarLog('auth_erro_busca_integrador', 'Mensagem: ' + E.Message, nil, '');
+      TLogger.Log(llError, lcAuth, 'Mensagem: ' + E.Message, []);
 
       raise;
     end;
@@ -338,7 +272,7 @@ begin
 
         if qrIntegrador.IsEmpty then
         begin
-          Self.gerarLog('auth_erro_busca_integrador', 'Nenhum integrador para empresa selecionada', nil, '');
+          TLogger.Log(llWarn, lcAuth, 'Nenhum integrador para empresa selecionada', []);
           Exit;
         end;
 
@@ -368,7 +302,7 @@ begin
               Entity := TEntityFactory.GetEntity(thConnection, ENTIDADES[i].TableName, FDatabaseType);
               Entity.OnProgress := procedure(const AMsg: string)
                 begin
-                  Self.Memo1.Lines.Add(AMsg);
+                  TLogger.Log(llInfo, lcExport, Trim(AMsg), []);
                 end;
               try
                 StartTime := Now;
@@ -393,21 +327,19 @@ begin
                 ElapsedSec := (Now - StartTime) * 24 * 60 * 60;
 
                 if SyncResult.Success then
-                  Self.gerarLog('export_sucesso',
+                  TLogger.Log(llInfo, lcExport,
                     Format('%d registro(s) sincronizado(s) em %.1fs - %s',
-                      [SyncResult.RecordCount, ElapsedSec, Entity.GetSyncAllMessage(True, '')]),
-                    nil, '')
+                      [SyncResult.RecordCount, ElapsedSec, Entity.GetSyncAllMessage(True, '')]), [])
                 else
-                  Self.gerarLog('export_erro',
+                  TLogger.Log(llError, lcExport,
                     Format('%d registro(s) com erro em %.1fs - %s',
-                      [SyncResult.RecordCount, ElapsedSec, Entity.GetSyncAllMessage(False, SyncResult.ErrorMessage)]),
-                    nil, '');
+                      [SyncResult.RecordCount, ElapsedSec, Entity.GetSyncAllMessage(False, SyncResult.ErrorMessage)]), []);
               finally
                 Entity.Free;
               end;
             except
               on E: Exception do
-                Self.gerarLog('export_erro', Entity.GetSyncAllMessage(False, E.Message), nil, '');
+                TLogger.Log(llError, lcExport, Entity.GetSyncAllMessage(False, E.Message), []);
             end;
 
             qrIntegrador.Next;
@@ -501,10 +433,10 @@ begin
       qrToken.SQL.Add('where codigo = ' + QuotedStr(qrParametrosIntegrador.fieldbyname('codintegrador').AsString));
       qrToken.ExecSQL;
 
-      Self.gerarLog('auth_sucesso', '', nil, codFilial);
+      TLogger.Log(llInfo, lcAuth, 'Autenticado com sucesso', ['filial=' + codFilial]);
     end
     else
-      Self.gerarLog('auth_erro', 'API retornou: ' + response.GetValue<string>('status'), nil, codFilial);
+      TLogger.Log(llError, lcAuth, 'API retornou: ' + response.GetValue<string>('status'), ['filial=' + codFilial]);
 
     FreeAndNil(qrToken);
     FreeAndNil(Login);
@@ -513,7 +445,7 @@ begin
   except
     on E: Exception do
     begin
-      Self.gerarLog('auth_erro', 'Falha na autenticacao: ' + E.Message, nil, codFilial);
+      TLogger.Log(llError, lcAuth, 'Falha na autenticacao: ' + E.Message, ['filial=' + codFilial]);
 
       FreeAndNil(qrToken);
       FreeAndNil(Login);
@@ -585,17 +517,15 @@ var
   Key: string;
   Sum: TTableSummary;
 begin
-  Self.Memo1.Lines.Add('');
-  Self.Memo1.Lines.Add('========== RESUMO ==========');
+  TLogger.Log(llInfo, lcSync, '========== RESUMO ==========', []);
 
   for Key in FSummary.Keys do
   begin
     Sum := FSummary[Key];
-    Self.Memo1.Lines.Add(Format('Tabela %s - Sucesso: %d  Erro: %d', [Key, Sum.Sucessos, Sum.Erros]));
+    TLogger.Log(llInfo, lcSync, Format('Tabela %s - Sucesso: %d  Erro: %d', [Key, Sum.Sucessos, Sum.Erros]), []);
   end;
 
-  Self.Memo1.Lines.Add('============================');
-  Self.Memo1.Lines.Add('');
+  TLogger.Log(llInfo, lcSync, '============================', []);
 
   FSummary.Clear;
 end;
@@ -613,7 +543,7 @@ begin
   try
     if not qrIntegrador.Locate('CODIGOFILIAL', qrRecord.FieldByName('CODIGOFILIAL').AsString, []) then
     begin
-      Self.gerarLog('auth_erro_busca_integrador', 'Integrador não cadastrado ou desabilitado para esta empresa. Verifique.', qrIntegrador, qrRecord.FieldByName('CODIGOFILIAL').AsString);
+      TLogger.Log(llError, lcAuth, 'Integrador não cadastrado ou desabilitado', ['filial=' + qrRecord.FieldByName('CODIGOFILIAL').AsString]);
       Exit;
     end;
 
@@ -627,7 +557,10 @@ begin
         SyncResult.ErrorMessage := 'Sem mapper para tabela ' + Self.NomeTabela(qrRecord.FieldByName('tablename_db').AsString) + ': ' + E.Message;
         Self.AtualizarEventoSync(qrRecord, SyncResult);
         Self.IncrementarContador(qrRecord.FieldByName('tablename_db').AsString, False);
-        Self.gerarLog('evt_erro', SyncResult.ErrorMessage, qrRecord, '');
+        TLogger.Log(llError, lcSync, SyncResult.ErrorMessage, [
+          'codseq=' + qrRecord.FieldByName('codseq').AsString,
+          'coderecord=' + qrRecord.FieldByName('coderecord_db').AsString,
+          'tabela=' + Self.NomeTabela(qrRecord.FieldByName('tablename_db').AsString)]);
         Exit;
       end;
     end;
@@ -671,12 +604,18 @@ begin
       if SyncResult.Success then
       begin
         Self.IncrementarContador(qrRecord.FieldByName('tablename_db').AsString, True);
-        Self.gerarLog('evt_sucesso', '', qrRecord, '')
+        TLogger.Log(llInfo, lcSync, 'Evento sincronizado com sucesso', [
+          'codseq=' + qrRecord.FieldByName('codseq').AsString,
+          'coderecord=' + qrRecord.FieldByName('coderecord_db').AsString,
+          'tabela=' + Self.NomeTabela(qrRecord.FieldByName('tablename_db').AsString)])
       end
       else
       begin
         Self.IncrementarContador(qrRecord.FieldByName('tablename_db').AsString, False);
-        Self.gerarLog('evt_erro', SyncResult.ErrorMessage, qrRecord, '');
+        TLogger.Log(llError, lcSync, SyncResult.ErrorMessage, [
+          'codseq=' + qrRecord.FieldByName('codseq').AsString,
+          'coderecord=' + qrRecord.FieldByName('coderecord_db').AsString,
+          'tabela=' + Self.NomeTabela(qrRecord.FieldByName('tablename_db').AsString)]);
       end;
 
     except
@@ -687,7 +626,10 @@ begin
         SyncResult.ErrorMessage := 'Falha no sync: ' + E.Message;
         Self.AtualizarEventoSync(qrRecord, SyncResult);
         Self.IncrementarContador(qrRecord.FieldByName('tablename_db').AsString, False);
-        Self.gerarLog('evt_erro', SyncResult.ErrorMessage, qrRecord, '');
+        TLogger.Log(llError, lcSync, SyncResult.ErrorMessage, [
+          'codseq=' + qrRecord.FieldByName('codseq').AsString,
+          'coderecord=' + qrRecord.FieldByName('coderecord_db').AsString,
+          'tabela=' + Self.NomeTabela(qrRecord.FieldByName('tablename_db').AsString)]);
       end;
     end;
 
@@ -695,7 +637,7 @@ begin
   except
     on E: Exception do
     begin
-      Self.gerarLog('auth_erro_busca_integrador', 'Mensagem: ' + E.Message, qrIntegrador, qrRecord.FieldByName('CODIGOFILIAL').AsString);
+      TLogger.Log(llError, lcAuth, 'Mensagem: ' + E.Message, ['filial=' + qrRecord.FieldByName('CODIGOFILIAL').AsString]);
     end;
   end;
 end;
@@ -704,7 +646,7 @@ procedure TForm2.monitorEventosAlert(ASender: TFDCustomEventAlerter; const AEven
 var
   newThread: TThreadCuca;
 begin
-  Memo1.Lines.Add('### PROCESSANDO - ' + FormatDateTime('DD-MM-YYYY * HH:MM:SS', Now));
+  TLogger.Log(llInfo, lcSystem, 'Processando eventos', []);
 
   if AEventName <> 'Event_DB_CHANGE' then
     Exit;
@@ -747,7 +689,7 @@ begin
           First;
         end;
 
-        Memo1.lines.Add('Total de registros pendentes para sincronização: ' + IntToStr(qrEventos.RecordCount));
+        TLogger.Log(llInfo, lcSystem, 'Registros pendentes: ' + IntToStr(qrEventos.RecordCount), []);
 
         while not qrEventos.eof do
         begin

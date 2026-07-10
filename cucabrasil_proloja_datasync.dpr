@@ -11,8 +11,9 @@ uses
   dmModulo in 'Local Files\dmModulo.pas' {modulo: TDataModule},
   uEntityBase in 'Entity Models\uEntityBase.pas',
   uEntityFactory in 'Entity Models\uEntityFactory.pas',
-  uEntityCliente in 'Entity Models\uEntityCliente.pas',
-  uEntityProduto in 'Entity Models\uEntityProduto.pas';
+  uEntityCliente in 'Entity Models\Entities\uEntityCliente.pas',
+  uEntityProduto in 'Entity Models\Entities\uEntityProduto.pas',
+  uLogger in 'uLogger.pas';
 
 {$R *.res}
 
