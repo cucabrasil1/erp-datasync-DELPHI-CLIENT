@@ -103,6 +103,7 @@
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
+        <Debugger_RunParams>INDUSTRIAL DEV</Debugger_RunParams>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
@@ -123,10 +124,22 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="frmPricipal.pas">
+        <DCCReference Include="frmPrincipal.pas">
             <Form>Form2</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="C:\Fontes\Comuns\Models\uThreadCuca.pas"/>
+        <DCCReference Include="C:\Fontes\Comuns\Models\uMRestIntegracao.pas"/>
+        <DCCReference Include="C:\Fontes\Comuns\ufuncoes.pas"/>
+        <DCCReference Include="Local Files\dmModulo.pas">
+            <Form>modulo</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Entity Models\uEntityBase.pas"/>
+        <DCCReference Include="Entity Models\uEntityFactory.pas"/>
+        <DCCReference Include="Entity Models\uEntityCliente.pas"/>
+        <DCCReference Include="Entity Models\uEntityProduto.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
