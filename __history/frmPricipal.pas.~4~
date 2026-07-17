@@ -1,0 +1,43 @@
+unit frmPricipal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FireDAC.Phys.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Intf, FireDAC.Comp.Client, Vcl.StdCtrls;
+
+type
+  TForm2 = class(TForm)
+    Button1: TButton;
+    Memo1: TMemo;
+    monitorEventos: TFDEventAlerter;
+    procedure monitorEventosAlert(ASender: TFDCustomEventAlerter;
+      const AEventName: string; const AArgument: Variant);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form2: TForm2;
+
+implementation
+
+uses
+  uThreadCuca, Modulo;
+
+{$R *.dfm}
+
+procedure TForm2.monitorEventosAlert(ASender: TFDCustomEventAlerter;
+  const AEventName: string; const AArgument: Variant);
+var
+  newThread: TThreadCuca;
+begin
+  if AEventName <> 'Event_DB_CHANGE' then
+    Exit;
+
+end;
+
+end.

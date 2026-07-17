@@ -1,0 +1,244 @@
+--- Log iniciado em 10/07/2026 15:47:06 ---
+[2026-07-10 15:47:06] [TID=4700] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-10 15:47:07] [TID=4700] [INFO] [SYSTEM] Processando eventos
+[2026-07-10 15:47:07] [TID=24676] [INFO] [SYNC] Registros pendentes: 0
+[2026-07-10 15:47:29] [TID=4700] [INFO] [SYSTEM] Processando eventos
+[2026-07-10 15:47:29] [TID=22236] [INFO] [SYNC] Registros pendentes: 0
+[2026-07-10 15:47:38] [TID=9312] [INFO] [AUTH] Autenticado com sucesso | filial=000001
+[2026-07-10 15:48:24] [TID=9312] [INFO] [EXPORT] 19209 registro(s) sincronizado(s) em 46,5s - Clientes sincronizados com sucesso
+--- Log iniciado em 10/07/2026 15:50:09 ---
+[2026-07-10 15:50:09] [TID=19268] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-10 15:50:09] [TID=19268] [INFO] [SYSTEM] Processando eventos
+[2026-07-10 15:50:09] [TID=6068] [INFO] [SYNC] Registros pendentes: 0
+--- Log iniciado em 10/07/2026 15:52:18 ---
+[2026-07-10 15:52:18] [TID=17700] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-10 15:52:19] [TID=17700] [INFO] [SYSTEM] Processando eventos
+[2026-07-10 15:52:19] [TID=17012] [INFO] [SYNC] Registros pendentes: 0
+[2026-07-10 15:55:28] [TID=17700] [INFO] [SYSTEM] Processando eventos
+[2026-07-10 15:55:28] [TID=19280] [INFO] [SYNC] Registros pendentes: 29
+[2026-07-10 15:55:29] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062840 | tabela=C000007
+[2026-07-10 15:55:30] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062841 | tabela=C000007
+[2026-07-10 15:55:31] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062842 | tabela=C000007
+[2026-07-10 15:55:32] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062843 | tabela=C000007
+[2026-07-10 15:55:33] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062844 | tabela=C000007
+[2026-07-10 15:55:34] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062845 | tabela=C000007
+[2026-07-10 15:55:35] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062846 | tabela=C000007
+[2026-07-10 15:55:36] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062847 | tabela=C000007
+[2026-07-10 15:55:37] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062848 | tabela=C000007
+[2026-07-10 15:55:38] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062849 | tabela=C000007
+[2026-07-10 15:55:39] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062850 | tabela=C000007
+[2026-07-10 15:55:40] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062851 | tabela=C000007
+[2026-07-10 15:55:41] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062852 | tabela=C000007
+[2026-07-10 15:55:42] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062853 | tabela=C000007
+[2026-07-10 15:55:43] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062854 | tabela=C000007
+[2026-07-10 15:55:44] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062855 | tabela=C000007
+[2026-07-10 15:55:45] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062856 | tabela=C000007
+[2026-07-10 15:55:46] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062857 | tabela=C000007
+[2026-07-10 15:55:47] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062858 | tabela=C000007
+[2026-07-10 15:55:48] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062859 | tabela=C000007
+[2026-07-10 15:55:49] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062860 | tabela=C000007
+[2026-07-10 15:55:50] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062861 | tabela=C000007
+[2026-07-10 15:55:51] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062862 | tabela=C000007
+[2026-07-10 15:55:52] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062863 | tabela=C000007
+[2026-07-10 15:55:53] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062864 | tabela=C000007
+[2026-07-10 15:55:54] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062865 | tabela=C000007
+[2026-07-10 15:55:55] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062866 | tabela=C000007
+[2026-07-10 15:55:57] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062867 | tabela=C000007
+[2026-07-10 15:55:58] [TID=19280] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062868 | tabela=C000007
+--- Log iniciado em 10/07/2026 15:59:14 ---
+[2026-07-10 15:59:14] [TID=17440] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-10 15:59:14] [TID=17440] [INFO] [SYSTEM] Processando eventos
+[2026-07-10 15:59:15] [TID=18872] [INFO] [SYNC] Registros pendentes: 0
+[2026-07-10 15:59:15] [TID=18872] [INFO] [SYSTEM] ========== RESUMO ==========
+[2026-07-10 15:59:15] [TID=18872] [INFO] [SYSTEM] ============================
+[2026-07-10 15:59:40] [TID=17440] [INFO] [SYSTEM] Processando eventos
+[2026-07-10 15:59:40] [TID=20952] [INFO] [SYNC] Registros pendentes: 48
+[2026-07-10 15:59:40] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062869 | coderecord=000001 | tabela=C000007
+[2026-07-10 15:59:41] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062870 | coderecord=000002 | tabela=C000007
+[2026-07-10 15:59:42] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062871 | coderecord=000003 | tabela=C000007
+[2026-07-10 15:59:44] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062872 | coderecord=000004 | tabela=C000007
+[2026-07-10 15:59:45] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062873 | coderecord=000005 | tabela=C000007
+[2026-07-10 15:59:46] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062874 | coderecord=000006 | tabela=C000007
+[2026-07-10 15:59:47] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062875 | coderecord=000007 | tabela=C000007
+[2026-07-10 15:59:48] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062876 | coderecord=000008 | tabela=C000007
+[2026-07-10 15:59:49] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062877 | coderecord=000009 | tabela=C000007
+[2026-07-10 15:59:50] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062878 | coderecord=000010 | tabela=C000007
+[2026-07-10 15:59:51] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062879 | coderecord=000011 | tabela=C000007
+[2026-07-10 15:59:52] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062880 | coderecord=000012 | tabela=C000007
+[2026-07-10 15:59:53] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062881 | coderecord=000013 | tabela=C000007
+[2026-07-10 15:59:54] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062882 | coderecord=000014 | tabela=C000007
+[2026-07-10 15:59:55] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062883 | coderecord=000015 | tabela=C000007
+[2026-07-10 15:59:56] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062884 | coderecord=000016 | tabela=C000007
+[2026-07-10 15:59:57] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062885 | coderecord=000017 | tabela=C000007
+[2026-07-10 15:59:58] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062886 | coderecord=000018 | tabela=C000007
+[2026-07-10 15:59:59] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062887 | coderecord=000019 | tabela=C000007
+[2026-07-10 16:00:00] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062888 | coderecord=000020 | tabela=C000007
+[2026-07-10 16:00:01] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062889 | coderecord=000021 | tabela=C000007
+[2026-07-10 16:00:02] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062890 | coderecord=000022 | tabela=C000007
+[2026-07-10 16:00:03] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062891 | coderecord=000023 | tabela=C000007
+[2026-07-10 16:00:04] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062892 | coderecord=000024 | tabela=C000007
+[2026-07-10 16:00:05] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062893 | coderecord=000025 | tabela=C000007
+[2026-07-10 16:00:06] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062894 | coderecord=000026 | tabela=C000007
+[2026-07-10 16:00:07] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062895 | coderecord=000027 | tabela=C000007
+[2026-07-10 16:00:08] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062896 | coderecord=000028 | tabela=C000007
+[2026-07-10 16:00:09] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062897 | coderecord=000029 | tabela=C000007
+[2026-07-10 16:00:10] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062898 | coderecord=000030 | tabela=C000007
+[2026-07-10 16:00:11] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062899 | coderecord=000031 | tabela=C000007
+[2026-07-10 16:00:12] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062900 | coderecord=000032 | tabela=C000007
+[2026-07-10 16:00:14] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062901 | coderecord=000033 | tabela=C000007
+[2026-07-10 16:00:15] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062902 | coderecord=000034 | tabela=C000007
+[2026-07-10 16:00:16] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062903 | coderecord=000035 | tabela=C000007
+[2026-07-10 16:00:17] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062904 | coderecord=000036 | tabela=C000007
+[2026-07-10 16:00:18] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062905 | coderecord=000037 | tabela=C000007
+[2026-07-10 16:00:19] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062906 | coderecord=000038 | tabela=C000007
+[2026-07-10 16:00:20] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062907 | coderecord=000039 | tabela=C000007
+[2026-07-10 16:00:21] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062908 | coderecord=000040 | tabela=C000007
+[2026-07-10 16:00:22] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062909 | coderecord=000041 | tabela=C000007
+[2026-07-10 16:00:23] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062910 | coderecord=000042 | tabela=C000007
+[2026-07-10 16:00:24] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062911 | coderecord=000043 | tabela=C000007
+[2026-07-10 16:00:25] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062912 | coderecord=000044 | tabela=C000007
+[2026-07-10 16:00:26] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062913 | coderecord=000045 | tabela=C000007
+[2026-07-10 16:00:27] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062914 | coderecord=000046 | tabela=C000007
+[2026-07-10 16:00:28] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062915 | coderecord=000047 | tabela=C000007
+[2026-07-10 16:00:29] [TID=20952] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1062916 | coderecord=000048 | tabela=C000007
+[2026-07-10 16:00:30] [TID=20952] [INFO] [SYSTEM] ========== RESUMO ==========
+[2026-07-10 16:00:30] [TID=20952] [INFO] [SYSTEM] Tabela C000007 - Sucesso: 48  Erro: 0
+[2026-07-10 16:00:30] [TID=20952] [INFO] [SYSTEM] ============================
+--- Log iniciado em 10/07/2026 16:02:58 ---
+[2026-07-10 16:02:58] [TID=17940] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-10 16:02:59] [TID=17940] [INFO] [SYSTEM] Processando eventos
+[2026-07-10 16:02:59] [TID=10928] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-10 16:02:59] [TID=10928] [INFO] [SYSTEM] ========== RESUMO ==========
+[2026-07-10 16:02:59] [TID=10928] [INFO] [SYSTEM] ============================
+[2026-07-10 16:03:41] [TID=17940] [INFO] [SYSTEM] Processando eventos
+[2026-07-10 16:03:41] [TID=444] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-10 16:03:41] [TID=444] [INFO] [SYSTEM] ========== RESUMO ==========
+[2026-07-10 16:03:41] [TID=444] [INFO] [SYSTEM] ============================
+[2026-07-10 16:03:53] [TID=1084] [INFO] [AUTH] Autenticado com sucesso | filial=000001
+[2026-07-10 16:04:34] [TID=1084] [INFO] [EXPORT] 19209 registro(s) sincronizado(s) em 40,6s - Clientes sincronizados com sucesso
+--- Log iniciado em 10/07/2026 16:09:36 ---
+[2026-07-10 16:09:36] [TID=18120] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-10 16:09:36] [TID=18120] [INFO] [SYSTEM] Processando eventos
+[2026-07-10 16:09:37] [TID=19032] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-10 16:09:37] [TID=19032] [INFO] [SYSTEM] ========== RESUMO ==========
+[2026-07-10 16:09:37] [TID=19032] [INFO] [SYSTEM] ============================
+[2026-07-10 16:09:53] [TID=20028] [INFO] [EXPORT] 16:09:53 | Enviando lote com 1000 registro(s) (1000 de 19209)
+[2026-07-10 16:09:55] [TID=20028] [INFO] [EXPORT] 16:09:55 | Lote de 1000 registro(s) enviado com sucesso
+[2026-07-10 16:09:56] [TID=20028] [INFO] [EXPORT] 16:09:56 | Enviando lote com 1000 registro(s) (2000 de 19209)
+[2026-07-10 16:09:58] [TID=20028] [INFO] [EXPORT] 16:09:58 | Lote de 1000 registro(s) enviado com sucesso
+[2026-07-10 16:10:00] [TID=20028] [INFO] [EXPORT] 16:10:00 | Enviando lote com 1000 registro(s) (3000 de 19209)
+[2026-07-10 16:10:03] [TID=20028] [INFO] [EXPORT] 16:10:03 | Lote de 1000 registro(s) enviado com sucesso
+[2026-07-10 16:10:04] [TID=20028] [INFO] [EXPORT] 16:10:04 | Enviando lote com 1000 registro(s) (4000 de 19209)
+[2026-07-10 16:10:07] [TID=20028] [INFO] [EXPORT] 16:10:07 | Lote de 1000 registro(s) enviado com sucesso
+[2026-07-10 16:10:08] [TID=20028] [INFO] [EXPORT] 16:10:08 | Enviando lote com 1000 registro(s) (5000 de 19209)
+[2026-07-10 16:10:11] [TID=20028] [INFO] [EXPORT] 16:10:11 | Lote de 1000 registro(s) enviado com sucesso
+[2026-07-10 16:10:13] [TID=20028] [INFO] [EXPORT] 16:10:13 | Enviando lote com 1000 registro(s) (6000 de 19209)
+[2026-07-10 16:10:15] [TID=20028] [INFO] [EXPORT] 16:10:15 | Lote de 1000 registro(s) enviado com sucesso
+[2026-07-10 16:10:17] [TID=20028] [INFO] [EXPORT] 16:10:17 | Enviando lote com 1000 registro(s) (7000 de 19209)
+[2026-07-10 16:10:19] [TID=20028] [INFO] [EXPORT] 16:10:19 | Lote de 1000 registro(s) enviado com sucesso
+[2026-07-10 16:10:20] [TID=20028] [INFO] [EXPORT] 16:10:20 | Enviando lote com 1000 registro(s) (8000 de 19209)
+[2026-07-10 16:10:21] [TID=20028] [INFO] [EXPORT] 16:10:21 | Lote de 1000 registro(s) enviado com sucesso
+[2026-07-10 16:10:22] [TID=20028] [INFO] [EXPORT] 16:10:22 | Enviando lote com 1000 registro(s) (9000 de 19209)
+[2026-07-10 16:10:23] [TID=20028] [INFO] [EXPORT] 16:10:23 | Lote de 1000 registro(s) enviado com sucesso
+[2026-07-10 16:10:24] [TID=20028] [INFO] [EXPORT] 16:10:24 | Enviando lote com 1000 registro(s) (10000 de 19209)
+[2026-07-10 16:10:25] [TID=20028] [INFO] [EXPORT] 16:10:25 | Lote de 1000 registro(s) enviado com sucesso
+[2026-07-10 16:10:26] [TID=20028] [INFO] [EXPORT] 16:10:26 | Enviando lote com 1000 registro(s) (11000 de 19209)
+[2026-07-10 16:10:27] [TID=20028] [INFO] [EXPORT] 16:10:27 | Lote de 1000 registro(s) enviado com sucesso
+[2026-07-10 16:10:28] [TID=20028] [INFO] [EXPORT] 16:10:28 | Enviando lote com 1000 registro(s) (12000 de 19209)
+[2026-07-10 16:10:29] [TID=20028] [INFO] [EXPORT] 16:10:29 | Lote de 1000 registro(s) enviado com sucesso
+[2026-07-10 16:10:30] [TID=18120] [INFO] [SYSTEM] Processando eventos
+[2026-07-10 16:10:30] [TID=17012] [INFO] [SYSTEM] Registros pendentes: 48
+[2026-07-10 16:10:30] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101335 | coderecord=000001 | tabela=C000007
+[2026-07-10 16:10:31] [TID=20028] [INFO] [EXPORT] 16:10:31 | Enviando lote com 1000 registro(s) (13000 de 19209)
+[2026-07-10 16:10:31] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101336 | coderecord=000002 | tabela=C000007
+[2026-07-10 16:10:32] [TID=20028] [INFO] [EXPORT] 16:10:32 | Lote de 1000 registro(s) enviado com sucesso
+[2026-07-10 16:10:32] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101337 | coderecord=000003 | tabela=C000007
+[2026-07-10 16:10:33] [TID=20028] [INFO] [EXPORT] 16:10:33 | Enviando lote com 1000 registro(s) (14000 de 19209)
+[2026-07-10 16:10:33] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101338 | coderecord=000004 | tabela=C000007
+[2026-07-10 16:10:34] [TID=20028] [INFO] [EXPORT] 16:10:34 | Lote de 1000 registro(s) enviado com sucesso
+[2026-07-10 16:10:34] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101339 | coderecord=000005 | tabela=C000007
+[2026-07-10 16:10:35] [TID=20028] [INFO] [EXPORT] 16:10:35 | Enviando lote com 1000 registro(s) (15000 de 19209)
+[2026-07-10 16:10:35] [TID=20028] [INFO] [EXPORT] 16:10:35 | Lote de 1000 registro(s) enviado com sucesso
+[2026-07-10 16:10:35] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101340 | coderecord=000006 | tabela=C000007
+[2026-07-10 16:10:37] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101341 | coderecord=000007 | tabela=C000007
+[2026-07-10 16:10:37] [TID=20028] [INFO] [EXPORT] 16:10:37 | Enviando lote com 1000 registro(s) (16000 de 19209)
+[2026-07-10 16:10:37] [TID=20028] [INFO] [EXPORT] 16:10:37 | Lote de 1000 registro(s) enviado com sucesso
+[2026-07-10 16:10:38] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101342 | coderecord=000008 | tabela=C000007
+[2026-07-10 16:10:38] [TID=20028] [INFO] [EXPORT] 16:10:38 | Enviando lote com 1000 registro(s) (17000 de 19209)
+[2026-07-10 16:10:39] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101343 | coderecord=000009 | tabela=C000007
+[2026-07-10 16:10:39] [TID=20028] [INFO] [EXPORT] 16:10:39 | Lote de 1000 registro(s) enviado com sucesso
+[2026-07-10 16:10:40] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101344 | coderecord=000010 | tabela=C000007
+[2026-07-10 16:10:40] [TID=20028] [INFO] [EXPORT] 16:10:40 | Enviando lote com 1000 registro(s) (18000 de 19209)
+[2026-07-10 16:10:41] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101345 | coderecord=000011 | tabela=C000007
+[2026-07-10 16:10:41] [TID=20028] [INFO] [EXPORT] 16:10:41 | Lote de 1000 registro(s) enviado com sucesso
+[2026-07-10 16:10:42] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101346 | coderecord=000012 | tabela=C000007
+[2026-07-10 16:10:42] [TID=20028] [INFO] [EXPORT] 16:10:42 | Enviando lote com 1000 registro(s) (19000 de 19209)
+[2026-07-10 16:10:43] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101347 | coderecord=000013 | tabela=C000007
+[2026-07-10 16:10:43] [TID=20028] [INFO] [EXPORT] 16:10:43 | Lote de 1000 registro(s) enviado com sucesso
+[2026-07-10 16:10:44] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101348 | coderecord=000014 | tabela=C000007
+[2026-07-10 16:10:44] [TID=20028] [INFO] [EXPORT] 16:10:44 | Enviando lote com 209 registro(s) (19209 de 19209)
+[2026-07-10 16:10:44] [TID=20028] [INFO] [EXPORT] 16:10:44 | Lote de 209 registro(s) enviado com sucesso
+[2026-07-10 16:10:44] [TID=20028] [INFO] [EXPORT] 19209 registro(s) sincronizado(s) em 52,5s - Clientes sincronizados com sucesso
+[2026-07-10 16:10:45] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101349 | coderecord=000015 | tabela=C000007
+[2026-07-10 16:10:46] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101350 | coderecord=000016 | tabela=C000007
+[2026-07-10 16:10:47] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101351 | coderecord=000017 | tabela=C000007
+[2026-07-10 16:10:48] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101352 | coderecord=000018 | tabela=C000007
+[2026-07-10 16:10:49] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101353 | coderecord=000019 | tabela=C000007
+[2026-07-10 16:10:50] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101354 | coderecord=000020 | tabela=C000007
+[2026-07-10 16:10:51] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101355 | coderecord=000021 | tabela=C000007
+[2026-07-10 16:10:52] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101356 | coderecord=000022 | tabela=C000007
+[2026-07-10 16:10:53] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101357 | coderecord=000023 | tabela=C000007
+[2026-07-10 16:10:54] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101358 | coderecord=000024 | tabela=C000007
+[2026-07-10 16:10:55] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101359 | coderecord=000025 | tabela=C000007
+[2026-07-10 16:10:56] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101360 | coderecord=000026 | tabela=C000007
+[2026-07-10 16:10:57] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101361 | coderecord=000027 | tabela=C000007
+[2026-07-10 16:10:58] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101362 | coderecord=000028 | tabela=C000007
+[2026-07-10 16:10:59] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101363 | coderecord=000029 | tabela=C000007
+[2026-07-10 16:11:00] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101364 | coderecord=000030 | tabela=C000007
+[2026-07-10 16:11:01] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101365 | coderecord=000031 | tabela=C000007
+[2026-07-10 16:11:02] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101366 | coderecord=000032 | tabela=C000007
+[2026-07-10 16:11:03] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101367 | coderecord=000033 | tabela=C000007
+[2026-07-10 16:11:04] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101368 | coderecord=000034 | tabela=C000007
+[2026-07-10 16:11:05] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101369 | coderecord=000035 | tabela=C000007
+[2026-07-10 16:11:06] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101370 | coderecord=000036 | tabela=C000007
+[2026-07-10 16:11:07] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101371 | coderecord=000037 | tabela=C000007
+[2026-07-10 16:11:08] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101372 | coderecord=000038 | tabela=C000007
+[2026-07-10 16:11:09] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101373 | coderecord=000039 | tabela=C000007
+[2026-07-10 16:11:11] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101374 | coderecord=000040 | tabela=C000007
+[2026-07-10 16:11:12] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101375 | coderecord=000041 | tabela=C000007
+[2026-07-10 16:11:13] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101376 | coderecord=000042 | tabela=C000007
+[2026-07-10 16:11:14] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101377 | coderecord=000043 | tabela=C000007
+[2026-07-10 16:11:15] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101378 | coderecord=000044 | tabela=C000007
+[2026-07-10 16:11:16] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101379 | coderecord=000045 | tabela=C000007
+[2026-07-10 16:11:17] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101380 | coderecord=000046 | tabela=C000007
+[2026-07-10 16:11:18] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101381 | coderecord=000047 | tabela=C000007
+[2026-07-10 16:11:19] [TID=17012] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101382 | coderecord=000048 | tabela=C000007
+[2026-07-10 16:11:20] [TID=17012] [INFO] [SYSTEM] ========== RESUMO ==========
+[2026-07-10 16:11:20] [TID=17012] [INFO] [SYSTEM] Tabela C000007 - Sucesso: 48  Erro: 0
+[2026-07-10 16:11:20] [TID=17012] [INFO] [SYSTEM] ============================
+--- Log iniciado em 10/07/2026 16:13:34 ---
+[2026-07-10 16:13:34] [TID=20732] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-10 16:13:34] [TID=20732] [INFO] [SYSTEM] Processando eventos
+[2026-07-10 16:13:35] [TID=21072] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-10 16:13:35] [TID=21072] [INFO] [SYNC] ========== RESUMO ==========
+[2026-07-10 16:13:35] [TID=21072] [INFO] [SYNC] ============================
+[2026-07-10 16:13:46] [TID=20732] [INFO] [SYSTEM] Processando eventos
+[2026-07-10 16:13:47] [TID=10776] [INFO] [SYSTEM] Registros pendentes: 9
+[2026-07-10 16:13:47] [TID=10776] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101383 | coderecord=000001 | tabela=C000007
+[2026-07-10 16:13:48] [TID=10776] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101384 | coderecord=000002 | tabela=C000007
+[2026-07-10 16:13:49] [TID=10776] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101385 | coderecord=000003 | tabela=C000007
+[2026-07-10 16:13:50] [TID=10776] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101386 | coderecord=000004 | tabela=C000007
+[2026-07-10 16:13:51] [TID=10776] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101387 | coderecord=000005 | tabela=C000007
+[2026-07-10 16:13:52] [TID=10776] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101388 | coderecord=000006 | tabela=C000007
+[2026-07-10 16:13:53] [TID=10776] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101389 | coderecord=000007 | tabela=C000007
+[2026-07-10 16:13:54] [TID=10776] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101390 | coderecord=000008 | tabela=C000007
+[2026-07-10 16:13:55] [TID=10776] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=1101391 | coderecord=000009 | tabela=C000007
+[2026-07-10 16:13:56] [TID=10776] [INFO] [SYNC] ========== RESUMO ==========
+[2026-07-10 16:13:56] [TID=10776] [INFO] [SYNC] Tabela C000007 - Sucesso: 9  Erro: 0
+[2026-07-10 16:13:56] [TID=10776] [INFO] [SYNC] ============================
+--- Log iniciado em 10/07/2026 16:30:29 ---
+[2026-07-10 16:30:29] [TID=23720] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-10 16:30:29] [TID=23720] [INFO] [SYSTEM] Processando eventos
+[2026-07-10 16:30:30] [TID=19632] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-10 16:30:30] [TID=19632] [INFO] [SYNC] ========== RESUMO ==========
+[2026-07-10 16:30:30] [TID=19632] [INFO] [SYNC] ============================

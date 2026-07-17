@@ -1,0 +1,202 @@
+﻿--- Log iniciado em 15/07/2026 09:42:16 ---
+[2026-07-15 09:42:16] [TID=21456] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-15 09:42:16] [TID=21456] [INFO] [SYSTEM] Processando eventos
+[2026-07-15 09:42:16] [TID=15600] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-15 09:42:16] [TID=15600] [INFO] [SYNC] === RESUMO ===
+[2026-07-15 09:42:55] [TID=21456] [INFO] [SYSTEM] Processando eventos
+[2026-07-15 09:42:55] [TID=19836] [INFO] [SYSTEM] Registros pendentes: 789
+[2026-07-15 09:42:55] [TID=19836] [INFO] [AUTH] Autenticado com sucesso | filial=000001
+[2026-07-15 09:42:55] [TID=19836] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=3261 | coderecord=000103 | tabela=C000007
+[2026-07-15 09:42:56] [TID=19836] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=3262 | coderecord=000104 | tabela=C000007
+[2026-07-15 09:42:57] [TID=19836] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=3263 | coderecord=000106 | tabela=C000007
+[2026-07-15 09:42:58] [TID=19836] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=3264 | coderecord=000109 | tabela=C000007
+[2026-07-15 09:42:59] [TID=19836] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=3265 | coderecord=000110 | tabela=C000007
+[2026-07-15 09:43:00] [TID=19836] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=3266 | coderecord=000111 | tabela=C000007
+[2026-07-15 09:43:01] [TID=19836] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=3267 | coderecord=000112 | tabela=C000007
+[2026-07-15 09:43:02] [TID=19836] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=3268 | coderecord=000115 | tabela=C000007
+[2026-07-15 09:43:04] [TID=19836] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=3269 | coderecord=000116 | tabela=C000007
+[2026-07-15 09:43:05] [TID=21456] [INFO] [SYSTEM] Processando eventos
+[2026-07-15 09:43:05] [TID=19836] [ERROR] [SYNC] [FireDAC][Phys][FB]deadlock
+update conflicts with concurrent update
+concurrent transaction number is 646790 | codseq=3270 | coderecord=000117 | tabela=C000007
+[2026-07-15 09:43:05] [TID=18948] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-15 09:43:05] [TID=18948] [INFO] [SYNC] === RESUMO === Tabela C000007 - Sucesso: 9  Erro: 1
+[2026-07-15 09:43:06] [TID=19836] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=3271 | coderecord=000118 | tabela=C000007
+[2026-07-15 09:43:07] [TID=19836] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=3272 | coderecord=000120 | tabela=C000007
+[2026-07-15 09:43:08] [TID=19836] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=3273 | coderecord=000121 | tabela=C000007
+[2026-07-15 09:43:09] [TID=19836] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=3274 | coderecord=000119 | tabela=C000007
+[2026-07-15 09:43:10] [TID=19836] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=3275 | coderecord=000122 | tabela=C000007
+[2026-07-15 09:43:11] [TID=19836] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=3276 | coderecord=000123 | tabela=C000007
+[2026-07-15 09:43:12] [TID=19836] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=3277 | coderecord=000124 | tabela=C000007
+[2026-07-15 09:43:13] [TID=19836] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=3278 | coderecord=000125 | tabela=C000007
+[2026-07-15 09:43:14] [TID=21456] [INFO] [SYSTEM] Processando eventos
+[2026-07-15 09:43:14] [TID=16176] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-15 09:43:14] [TID=16176] [INFO] [SYNC] === RESUMO === Tabela C000007 - Sucesso: 8  Erro: 0
+[2026-07-15 09:43:14] [TID=19836] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=3279 | coderecord=000127 | tabela=C000007
+[2026-07-15 09:43:15] [TID=19836] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=3280 | coderecord=000129 | tabela=C000007
+[2026-07-15 09:43:16] [TID=19836] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=3281 | coderecord=000130 | tabela=C000007
+[2026-07-15 09:43:17] [TID=19836] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=3282 | coderecord=000132 | tabela=C000007
+[2026-07-15 09:43:18] [TID=19836] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=3283 | coderecord=000133 | tabela=C000007
+[2026-07-15 09:43:19] [TID=19836] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=3284 | coderecord=000136 | tabela=C000007
+--- Log iniciado em 15/07/2026 09:43:43 ---
+[2026-07-15 09:43:43] [TID=13520] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-15 09:43:43] [TID=13520] [INFO] [SYSTEM] Processando eventos
+[2026-07-15 09:43:43] [TID=19992] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-15 09:43:43] [TID=19992] [INFO] [SYNC] === RESUMO ===
+[2026-07-15 09:43:48] [TID=20212] [INFO] [EXPORT] 09:43:48 | Enviando lote com 789 registro(s) (789 de 789)
+[2026-07-15 09:43:48] [TID=20212] [WARN] [SYSTEM] Sanitize removeu 2 char(s) [] em C000007.batch
+[2026-07-15 09:43:49] [TID=20212] [INFO] [EXPORT] 09:43:49 | Lote de 789 registro(s) enviado com sucesso
+[2026-07-15 09:43:50] [TID=20212] [INFO] [EXPORT] 789 registro(s) sincronizado(s) em 2,1s - Clientes sincronizados com sucesso
+[2026-07-15 09:59:05] [TID=13520] [INFO] [SYSTEM] Processando eventos
+[2026-07-15 09:59:05] [TID=2688] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-15 09:59:05] [TID=2688] [INFO] [SYNC] === RESUMO ===
+[2026-07-15 09:59:15] [TID=13520] [INFO] [SYSTEM] Processando eventos
+[2026-07-15 09:59:15] [TID=21408] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-15 09:59:15] [TID=21408] [INFO] [SYNC] === RESUMO ===
+[2026-07-15 09:59:27] [TID=13520] [INFO] [SYSTEM] Processando eventos
+[2026-07-15 09:59:27] [TID=6336] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-15 09:59:27] [TID=6336] [INFO] [SYNC] === RESUMO ===
+[2026-07-15 09:59:42] [TID=13520] [INFO] [SYSTEM] Processando eventos
+[2026-07-15 09:59:42] [TID=21352] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-15 09:59:42] [TID=21352] [INFO] [SYNC] === RESUMO ===
+[2026-07-15 09:59:52] [TID=13520] [INFO] [SYSTEM] Processando eventos
+[2026-07-15 09:59:53] [TID=6624] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-15 09:59:53] [TID=6624] [INFO] [SYNC] === RESUMO ===
+[2026-07-15 10:00:05] [TID=13520] [INFO] [SYSTEM] Processando eventos
+[2026-07-15 10:00:05] [TID=6100] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-15 10:00:05] [TID=6100] [INFO] [SYNC] === RESUMO ===
+[2026-07-15 10:00:27] [TID=13520] [INFO] [SYSTEM] Processando eventos
+[2026-07-15 10:00:27] [TID=19592] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-15 10:00:27] [TID=19592] [INFO] [SYNC] === RESUMO ===
+--- Log iniciado em 15/07/2026 10:01:32 ---
+[2026-07-15 10:01:32] [TID=2840] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-15 10:01:32] [TID=2840] [INFO] [SYSTEM] Processando eventos
+[2026-07-15 10:01:32] [TID=16876] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-15 10:01:32] [TID=16876] [INFO] [SYNC] === RESUMO ===
+[2026-07-15 10:01:50] [TID=16940] [INFO] [AUTH] Autenticado com sucesso | filial=000001
+[2026-07-15 10:01:51] [TID=16940] [INFO] [EXPORT] 10:01:51 | Enviando lote com 789 registro(s) (789 de 789)
+[2026-07-15 10:01:51] [TID=16940] [WARN] [SYSTEM] Sanitize removeu 2 char(s) [] em C000007.batch
+[2026-07-15 10:01:52] [TID=16940] [INFO] [EXPORT] 10:01:52 | Lote de 789 registro(s) enviado com sucesso
+[2026-07-15 10:01:52] [TID=16940] [INFO] [EXPORT] 789 registro(s) sincronizado(s) em 2,0s - Clientes sincronizados com sucesso
+[2026-07-15 10:01:52] [TID=16940] [INFO] [EXPORT] 10:01:52 | Enviando lote com 21 registro(s) (21 de 21)
+[2026-07-15 10:01:53] [TID=16940] [INFO] [EXPORT] 10:01:53 | Lote falhou: 409: {"code":"duplicate_codigoerp","message":"Acabamento 000004 já existe para este tenant"}
+[2026-07-15 10:01:53] [TID=16940] [ERROR] [EXPORT] 21 registro(s) com erro em 0,1s - Erro em Acabamentos: 409: {"code":"duplicate_codigoerp","message":"Acabamento 000004 já existe para este tenant"}
+[2026-07-15 10:01:53] [TID=16940] [INFO] [EXPORT] 10:01:53 | Enviando lote com 4 registro(s) (4 de 4)
+[2026-07-15 10:01:53] [TID=16940] [INFO] [EXPORT] 10:01:53 | Lote de 4 registro(s) enviado com sucesso
+[2026-07-15 10:01:53] [TID=16940] [INFO] [EXPORT] 4 registro(s) sincronizado(s) em 0,0s - Cenarios de Faturamento sincronizados com sucesso
+[2026-07-15 10:01:53] [TID=16940] [INFO] [EXPORT] 10:01:53 | Enviando lote com 68 registro(s) (68 de 68)
+[2026-07-15 10:01:53] [TID=16940] [INFO] [EXPORT] 10:01:53 | Lote de 68 registro(s) enviado com sucesso
+[2026-07-15 10:01:53] [TID=16940] [INFO] [EXPORT] 68 registro(s) sincronizado(s) em 0,2s - Tipos de Pagamento sincronizados com sucesso
+[2026-07-15 10:01:53] [TID=16940] [INFO] [EXPORT] 10:01:53 | Enviando lote com 26 registro(s) (26 de 26)
+[2026-07-15 10:01:53] [TID=16940] [INFO] [EXPORT] 10:01:53 | Lote de 26 registro(s) enviado com sucesso
+[2026-07-15 10:01:53] [TID=16940] [INFO] [EXPORT] 26 registro(s) sincronizado(s) em 0,1s - Condicoes de Pagamento sincronizados com sucesso
+[2026-07-15 10:01:53] [TID=16940] [INFO] [EXPORT] 10:01:53 | Enviando lote com 34 registro(s) (34 de 34)
+[2026-07-15 10:01:53] [TID=16940] [INFO] [EXPORT] 10:01:53 | Lote de 34 registro(s) enviado com sucesso
+[2026-07-15 10:01:53] [TID=16940] [INFO] [EXPORT] 34 registro(s) sincronizado(s) em 0,1s - Cores sincronizados com sucesso
+[2026-07-15 10:02:53] [TID=18780] [INFO] [EXPORT] 10:02:53 | Enviando lote com 21 registro(s) (21 de 21)
+[2026-07-15 10:02:54] [TID=18780] [INFO] [EXPORT] 10:02:54 | Lote de 21 registro(s) enviado com sucesso
+[2026-07-15 10:02:54] [TID=18780] [INFO] [EXPORT] 21 registro(s) sincronizado(s) em 0,1s - Acabamentos sincronizados com sucesso
+[2026-07-15 10:04:39] [TID=2840] [INFO] [SYSTEM] Processando eventos
+[2026-07-15 10:04:39] [TID=12584] [INFO] [SYSTEM] Registros pendentes: 1
+[2026-07-15 10:04:39] [TID=12584] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=8148 | coderecord=000010 | tabela=C000007
+[2026-07-15 10:04:40] [TID=12584] [INFO] [SYNC] === RESUMO === Tabela C000007 - Sucesso: 1  Erro: 0
+--- Log iniciado em 15/07/2026 11:01:28 ---
+[2026-07-15 11:01:28] [TID=22816] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-15 11:01:28] [TID=22816] [INFO] [SYSTEM] Processando eventos
+[2026-07-15 11:01:28] [TID=20260] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-15 11:01:28] [TID=20260] [INFO] [SYNC] === RESUMO ===
+[2026-07-15 11:01:33] [TID=19496] [INFO] [AUTH] Autenticado com sucesso | filial=000001
+[2026-07-15 11:01:33] [TID=19496] [INFO] [EXPORT] 11:01:33 | Enviando lote com 789 registro(s) (789 de 789)
+[2026-07-15 11:01:33] [TID=19496] [WARN] [SYSTEM] Sanitize removeu 2 char(s) [] em C000007.batch
+[2026-07-15 11:01:34] [TID=19496] [INFO] [EXPORT] 11:01:34 | Lote de 789 registro(s) enviado com sucesso
+[2026-07-15 11:01:35] [TID=19496] [INFO] [EXPORT] 789 registro(s) sincronizado(s) em 2,0s - Clientes sincronizados com sucesso
+--- Log iniciado em 15/07/2026 11:10:10 ---
+[2026-07-15 11:10:10] [TID=19680] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-15 11:10:10] [TID=19680] [INFO] [SYSTEM] Processando eventos
+[2026-07-15 11:10:10] [TID=13392] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-15 11:10:10] [TID=13392] [INFO] [SYNC] === RESUMO ===
+[2026-07-15 11:10:15] [TID=22196] [INFO] [EXPORT] 11:10:15 | Enviando lote com 789 registro(s) (789 de 789)
+[2026-07-15 11:10:15] [TID=22196] [WARN] [SYSTEM] Sanitize removeu 2 char(s) [] em C000007.batch
+[2026-07-15 11:10:16] [TID=22196] [INFO] [EXPORT] 11:10:16 | Lote de 789 registro(s) enviado com sucesso
+[2026-07-15 11:10:17] [TID=22196] [INFO] [EXPORT] 789 registro(s) sincronizado(s) em 2,0s - Clientes sincronizados com sucesso
+--- Log iniciado em 15/07/2026 11:11:43 ---
+[2026-07-15 11:11:43] [TID=22852] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-15 11:11:44] [TID=22852] [INFO] [SYSTEM] Processando eventos
+[2026-07-15 11:11:44] [TID=19668] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-15 11:11:44] [TID=19668] [INFO] [SYNC] === RESUMO ===
+[2026-07-15 11:11:59] [TID=12056] [INFO] [EXPORT] 11:11:59 | Enviando lote com 789 registro(s) (789 de 789)
+[2026-07-15 11:11:59] [TID=12056] [WARN] [SYSTEM] Sanitize removeu 2 char(s) [] em C000007.batch
+[2026-07-15 11:12:00] [TID=12056] [INFO] [EXPORT] 11:12:00 | Lote de 789 registro(s) enviado com sucesso
+[2026-07-15 11:12:01] [TID=12056] [INFO] [EXPORT] 789 registro(s) sincronizado(s) em 2,1s - Clientes sincronizados com sucesso
+--- Log iniciado em 15/07/2026 16:16:14 ---
+[2026-07-15 16:16:14] [TID=19916] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-15 16:16:14] [TID=19916] [INFO] [SYSTEM] Processando eventos
+[2026-07-15 16:16:14] [TID=16532] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-15 16:16:14] [TID=16532] [INFO] [SYNC] === RESUMO ===
+[2026-07-15 16:16:19] [TID=11896] [INFO] [AUTH] Autenticado com sucesso | filial=000001
+[2026-07-15 16:16:19] [TID=11896] [ERROR] [EXPORT] Erro em Fornecedores: Field 'habilitadoweb' not found
+--- Log iniciado em 15/07/2026 16:20:24 ---
+[2026-07-15 16:20:24] [TID=17680] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-15 16:20:24] [TID=17680] [INFO] [SYSTEM] Processando eventos
+[2026-07-15 16:20:25] [TID=11520] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-15 16:20:25] [TID=11520] [INFO] [SYNC] === RESUMO ===
+[2026-07-15 16:20:28] [TID=7340] [INFO] [EXPORT] 16:20:28 | Enviando lote com 121 registro(s) (121 de 121)
+[2026-07-15 16:20:29] [TID=7340] [INFO] [EXPORT] 16:20:29 | Lote falhou: 404: {"message":"Registro ou Rota não encontrados:{\"code\":\"not_found\",\"message\":\"Route not found\"}"}
+[2026-07-15 16:20:29] [TID=7340] [ERROR] [EXPORT] 121 registro(s) com erro em 0,2s - Erro em Fornecedores: 404: {"message":"Registro ou Rota não encontrados:{\"code\":\"not_found\",\"message\":\"Route not found\"}"}
+[2026-07-15 16:21:04] [TID=21280] [INFO] [EXPORT] 16:21:04 | Enviando lote com 121 registro(s) (121 de 121)
+[2026-07-15 16:21:04] [TID=21280] [INFO] [EXPORT] 16:21:04 | Lote falhou: 404: {"message":"Registro ou Rota não encontrados:{\"code\":\"not_found\",\"message\":\"Route not found\"}"}
+[2026-07-15 16:21:04] [TID=21280] [ERROR] [EXPORT] 121 registro(s) com erro em 0,0s - Erro em Fornecedores: 404: {"message":"Registro ou Rota não encontrados:{\"code\":\"not_found\",\"message\":\"Route not found\"}"}
+--- Log iniciado em 15/07/2026 16:21:34 ---
+[2026-07-15 16:21:34] [TID=22204] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-15 16:21:34] [TID=22204] [INFO] [SYSTEM] Processando eventos
+[2026-07-15 16:21:34] [TID=6980] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-15 16:21:35] [TID=6980] [INFO] [SYNC] === RESUMO ===
+[2026-07-15 16:21:39] [TID=9460] [INFO] [EXPORT] 16:21:39 | Enviando lote com 121 registro(s) (121 de 121)
+[2026-07-15 16:21:39] [TID=9460] [INFO] [EXPORT] 16:21:39 | Lote falhou: 409: {"code":"duplicate_codigoerp","message":"Já existe pessoa com este código e perfil"}
+[2026-07-15 16:21:39] [TID=9460] [ERROR] [EXPORT] 121 registro(s) com erro em 0,2s - Erro em Fornecedores: 409: {"code":"duplicate_codigoerp","message":"Já existe pessoa com este código e perfil"}
+--- Log iniciado em 15/07/2026 16:52:05 ---
+[2026-07-15 16:52:05] [TID=11896] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-15 16:52:05] [TID=11896] [INFO] [SYSTEM] Processando eventos
+[2026-07-15 16:52:05] [TID=20960] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-15 16:52:05] [TID=20960] [INFO] [SYNC] === RESUMO ===
+[2026-07-15 16:52:09] [TID=6396] [INFO] [AUTH] Autenticado com sucesso | filial=000001
+[2026-07-15 16:52:09] [TID=6396] [INFO] [EXPORT] 16:52:09 | Enviando lote com 121 registro(s) (121 de 121)
+[2026-07-15 16:52:09] [TID=6396] [INFO] [EXPORT] 16:52:09 | Lote de 121 registro(s) enviado com sucesso
+[2026-07-15 16:52:09] [TID=6396] [INFO] [EXPORT] 121 registro(s) sincronizado(s) em 0,4s - Fornecedores sincronizados com sucesso
+--- Log iniciado em 15/07/2026 17:24:02 ---
+[2026-07-15 17:24:02] [TID=19772] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-15 17:24:02] [TID=19772] [INFO] [SYSTEM] Processando eventos
+[2026-07-15 17:24:02] [TID=3616] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-15 17:24:02] [TID=3616] [INFO] [SYNC] === RESUMO ===
+[2026-07-15 17:24:07] [TID=2268] [INFO] [AUTH] Autenticado com sucesso | filial=000001
+[2026-07-15 17:24:07] [TID=2268] [INFO] [EXPORT] 17:24:07 | Enviando lote com 789 registro(s) (789 de 789)
+[2026-07-15 17:24:07] [TID=2268] [WARN] [SYSTEM] Sanitize removeu 2 char(s) [] em C000007.batch
+[2026-07-15 17:24:08] [TID=2268] [INFO] [EXPORT] 17:24:08 | Lote de 789 registro(s) enviado com sucesso
+[2026-07-15 17:24:09] [TID=2268] [INFO] [EXPORT] 789 registro(s) sincronizado(s) em 1,8s - Clientes sincronizados com sucesso
+[2026-07-15 17:24:09] [TID=2268] [INFO] [EXPORT] 17:24:09 | Enviando lote com 121 registro(s) (121 de 121)
+[2026-07-15 17:24:09] [TID=2268] [INFO] [EXPORT] 17:24:09 | Lote de 121 registro(s) enviado com sucesso
+[2026-07-15 17:24:09] [TID=2268] [INFO] [EXPORT] 121 registro(s) sincronizado(s) em 0,2s - Fornecedores sincronizados com sucesso
+--- Log iniciado em 15/07/2026 17:51:25 ---
+[2026-07-15 17:51:25] [TID=14872] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-15 17:51:25] [TID=14872] [INFO] [SYSTEM] Processando eventos
+[2026-07-15 17:51:25] [TID=20800] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-15 17:51:25] [TID=20800] [INFO] [SYNC] === RESUMO ===
+[2026-07-15 17:51:32] [TID=3288] [INFO] [AUTH] Autenticado com sucesso | filial=000001
+[2026-07-15 17:51:32] [TID=3288] [INFO] [EXPORT] 17:51:32 | Enviando lote com 789 registro(s) (789 de 789)
+[2026-07-15 17:51:32] [TID=3288] [WARN] [SYSTEM] Sanitize removeu 2 char(s) [] em C000007.batch
+[2026-07-15 17:51:33] [TID=3288] [INFO] [EXPORT] 17:51:33 | Lote de 789 registro(s) enviado com sucesso
+[2026-07-15 17:51:34] [TID=3288] [INFO] [EXPORT] 789 registro(s) sincronizado(s) em 2,1s - Clientes sincronizados com sucesso
+[2026-07-15 17:51:34] [TID=3288] [INFO] [EXPORT] 17:51:34 | Enviando lote com 121 registro(s) (121 de 121)
+[2026-07-15 17:51:34] [TID=3288] [INFO] [EXPORT] 17:51:34 | Lote de 121 registro(s) enviado com sucesso
+[2026-07-15 17:51:34] [TID=3288] [INFO] [EXPORT] 121 registro(s) sincronizado(s) em 0,3s - Fornecedores sincronizados com sucesso
+[2026-07-15 17:51:54] [TID=16212] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Clientes sincronizados com sucesso
+[2026-07-15 17:51:54] [TID=16212] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Fornecedores sincronizados com sucesso
+[2026-07-15 17:57:38] [TID=14872] [INFO] [SYSTEM] Processando eventos
+[2026-07-15 17:57:38] [TID=11880] [INFO] [SYSTEM] Registros pendentes: 1
+[2026-07-15 17:57:39] [TID=11880] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=12094 | coderecord=000010 | tabela=C000007
+[2026-07-15 17:57:40] [TID=11880] [INFO] [SYNC] === RESUMO === Tabela C000007 - Sucesso: 1  Erro: 0
+[2026-07-15 18:00:47] [TID=14872] [INFO] [SYSTEM] Processando eventos
+[2026-07-15 18:00:48] [TID=13916] [INFO] [SYSTEM] Registros pendentes: 2
+[2026-07-15 18:00:48] [TID=13916] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=12095 | coderecord=000023 | tabela=C000009
+[2026-07-15 18:00:49] [TID=13916] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=12096 | coderecord=000017 | tabela=C000009
+[2026-07-15 18:00:50] [TID=13916] [INFO] [SYNC] === RESUMO === Tabela C000009 - Sucesso: 2  Erro: 0

@@ -136,10 +136,38 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="Entity Models\uEntityBase.pas"/>
-        <DCCReference Include="Entity Models\uEntityFactory.pas"/>
-        <DCCReference Include="Entity Models\uEntityCliente.pas"/>
-        <DCCReference Include="Entity Models\uEntityProduto.pas"/>
+        <DCCReference Include="uLogger.pas"/>
+        <DCCReference Include="Entity Models\API\uApiClient.pas"/>
+        <DCCReference Include="Entity Models\ERP\uEntityBase.pas"/>
+        <DCCReference Include="Entity Models\ERP\uEntityFactory.pas"/>
+        <DCCReference Include="Entity Models\API\APIEntities\uPessoaAPI.pas"/>
+        <DCCReference Include="Entity Models\API\APIEntities\uAcabamentoAPI.pas"/>
+        <DCCReference Include="Entity Models\API\APIEntities\uCorAPI.pas"/>
+        <DCCReference Include="Entity Models\API\APIEntities\uTipoPagamentoAPI.pas"/>
+        <DCCReference Include="Entity Models\API\APIEntities\uGrupoClienteAPI.pas"/>
+        <DCCReference Include="Entity Models\API\APIEntities\uCenarioFaturamentoAPI.pas"/>
+        <DCCReference Include="Entity Models\API\APIEntities\uProdutoAPI.pas"/>
+        <DCCReference Include="Entity Models\API\APIEntities\uCondicaoPagamentoAPI.pas"/>
+        <DCCReference Include="Entity Models\API\APIEntities\uGrupoProdutoAPI.pas"/>
+        <DCCReference Include="Entity Models\API\APIEntities\uRegiaoClienteAPI.pas"/>
+        <DCCReference Include="Entity Models\API\APIEntities\uSubgrupoProdutoAPI.pas"/>
+        <DCCReference Include="Entity Models\ERP\ERPEntities\uEntityCliente.pas"/>
+        <DCCReference Include="Entity Models\ERP\ERPEntities\uEntityProduto.pas"/>
+        <DCCReference Include="Entity Models\ERP\ERPEntities\uEntityAcabamento.pas"/>
+        <DCCReference Include="Entity Models\ERP\ERPEntities\uEntityCenarioFaturamento.pas"/>
+        <DCCReference Include="Entity Models\ERP\ERPEntities\uEntityCondicaoPagamento.pas"/>
+        <DCCReference Include="Entity Models\ERP\ERPEntities\uEntityCor.pas"/>
+        <DCCReference Include="Entity Models\ERP\ERPEntities\uEntityFornecedor.pas"/>
+        <DCCReference Include="Entity Models\ERP\ERPEntities\uEntityGrupoCliente.pas"/>
+        <DCCReference Include="Entity Models\ERP\ERPEntities\uEntityGrupoProduto.pas"/>
+        <DCCReference Include="Entity Models\ERP\ERPEntities\uEntityPedidoVenda.pas"/>
+        <DCCReference Include="Entity Models\ERP\ERPEntities\uEntityRegiaoCliente.pas"/>
+        <DCCReference Include="Entity Models\ERP\ERPEntities\uEntitySubgrupoProduto.pas"/>
+        <DCCReference Include="Entity Models\ERP\ERPEntities\uEntitySupervisor.pas"/>
+        <DCCReference Include="Entity Models\ERP\ERPEntities\uEntityTipoPagamento.pas"/>
+        <DCCReference Include="Entity Models\ERP\ERPEntities\uEntityTransportador.pas"/>
+        <DCCReference Include="Entity Models\ERP\ERPEntities\uEntityVariacaoProduto.pas"/>
+        <DCCReference Include="Entity Models\ERP\ERPEntities\uEntityVendedor.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

@@ -1,0 +1,10 @@
+﻿--- Log iniciado em 17/07/2026 08:50:47 ---
+[2026-07-17 08:50:47] [TID=18088] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-17 08:50:47] [TID=18088] [INFO] [SYSTEM] Processando eventos
+[2026-07-17 08:50:47] [TID=18236] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-17 08:50:47] [TID=18236] [INFO] [SYNC] === RESUMO ===
+[2026-07-17 09:06:05] [TID=18088] [INFO] [SYSTEM] Processando eventos
+[2026-07-17 09:06:05] [TID=8024] [INFO] [SYSTEM] Registros pendentes: 1
+[2026-07-17 09:06:06] [TID=8024] [INFO] [AUTH] Autenticado com sucesso | filial=000001
+[2026-07-17 09:06:06] [TID=8024] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=46148 | coderecord=000025 | tabela=C000007 | filial=000001
+[2026-07-17 09:06:07] [TID=8024] [INFO] [SYNC] === RESUMO === Tabela C000007 - Sucesso: 1  Erro: 0

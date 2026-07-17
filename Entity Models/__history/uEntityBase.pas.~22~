@@ -1,0 +1,383 @@
+﻿unit uEntityBase;
+
+interface
+
+uses
+  System.JSON, System.SysUtils, System.DateUtils, FireDAC.Comp.Client, Data.DB,
+  uMRestIntegracao, System.Classes;
+
+type
+  TDatabaseType = (dtIndustrial, dtCommercial);
+  TEntityProgress = reference to procedure(const AMessage: string);
+
+  TSyncResult = record
+    Success: Boolean;
+    ApiId: string;
+    ErrorMessage: string;
+    RecordCount: Integer;
+  end;
+
+  TEntityBase = class(TObject)
+  protected
+    FConnection: TFDConnection;
+    FDatabaseType: TDatabaseType;
+    FOnProgress: TEntityProgress;
+    function GetTableName: string; virtual; abstract;
+    function GetResourceName: string; virtual; abstract;
+    function GetRecord(ACodRecord: string): TDataSet; virtual; abstract;
+    function MapToJson(ADataSet: TDataSet): TJSONObject; virtual; abstract;
+    function GetApiId(ADataSet: TDataSet): string; virtual; abstract;
+    procedure SetContextFlag(const AFlag, AValue: string);
+    procedure StoreApiIdBack(ACodRecord, AApiId: string); virtual;
+    function ExtractApiId(const AResponse: TJSONObject): string; virtual;
+    function GetUnsyncedRecords: TDataSet; virtual; abstract;
+    function IsResponseOk(const AResponse: TJSONObject; var AErrorMsg: string): Boolean;
+    procedure ProcessBatch(ADataSet: TDataSet; const ARest: TRestIntegracao;
+      const AToken, AAuthHeader: string; var ABatchPos: Integer; var AResult: TSyncResult);
+  public
+    constructor Create(AConnection: TFDConnection; ADatabaseType: TDatabaseType = dtIndustrial); virtual;
+    function Sync(const ATypeDb, ACodRecord, ACodFilial: string;
+      const ARest: TRestIntegracao; const AToken, AAuthHeader: string): TSyncResult; virtual;
+    function SyncAll(const ARest: TRestIntegracao; const AToken, AAuthHeader: string): TSyncResult; virtual;
+    function GetSyncAllMessage(ASuccess: Boolean; const AErrorMsg: string): string; virtual;
+
+    property TableName: string read GetTableName;
+    property ResourceName: string read GetResourceName;
+    property DatabaseType: TDatabaseType read FDatabaseType;
+    property OnProgress: TEntityProgress read FOnProgress write FOnProgress;
+  end;
+
+  TEntityBaseClass = class of TEntityBase;
+
+implementation
+
+{ TEntityBase }
+
+constructor TEntityBase.Create(AConnection: TFDConnection; ADatabaseType: TDatabaseType);
+begin
+  inherited Create;
+  FConnection := AConnection;
+  FDatabaseType := ADatabaseType;
+end;
+
+procedure TEntityBase.SetContextFlag(const AFlag, AValue: string);
+var
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Add('SELECT RDB$SET_CONTEXT(''USER_SESSION'', :flag, :val) FROM RDB$DATABASE');
+    Qry.ParamByName('flag').AsString := AFlag;
+    Qry.ParamByName('val').AsString := AValue;
+    Qry.Open;
+    Qry.Close;
+  finally
+    Qry.Free;
+  end;
+end;
+
+function TEntityBase.IsResponseOk(const AResponse: TJSONObject; var AErrorMsg: string): Boolean;
+var
+  InnerVal, OkVal, ErrVal: TJSONValue;
+begin
+  Result := False;
+  InnerVal := AResponse.GetValue('data');
+  if not (Assigned(InnerVal) and (InnerVal is TJSONObject)) then
+    Exit;
+
+  OkVal := TJSONObject(InnerVal).GetValue('ok');
+  if Assigned(OkVal) and (OkVal.Value = 'true') then
+    Result := True
+  else
+  begin
+    ErrVal := TJSONObject(InnerVal).GetValue('erro');
+    if Assigned(ErrVal) then
+      AErrorMsg := AErrorMsg + ErrVal.Value;
+  end;
+end;
+procedure TEntityBase.StoreApiIdBack(ACodRecord, AApiId: string);
+begin
+end;
+
+function TEntityBase.ExtractApiId(const AResponse: TJSONObject): string;
+var
+  InnerVal, DataVal: TJSONValue;
+  ArrVal: TJSONArray;
+begin
+  Result := '';
+
+  // TRestIntegracao.Executar retorna: {"status":"200","data":<resposta_original>}
+  // resposta_original tem: {"status":"200","data":[...]} ou {"status":"200","data":{...}}
+  // Portanto o id esta em response.data.data[0].id ou response.data.data.id
+
+  InnerVal := AResponse.GetValue('data');
+  if not (Assigned(InnerVal) and (InnerVal is TJSONObject)) then
+    Exit;
+
+  DataVal := TJSONObject(InnerVal).GetValue('data');
+  if DataVal is TJSONArray then
+  begin
+    ArrVal := TJSONArray(DataVal);
+    if (ArrVal.Count > 0) and (ArrVal.Items[0] is TJSONObject) then
+      TJSONObject(ArrVal.Items[0]).TryGetValue<string>('id', Result);
+  end
+  else if DataVal is TJSONObject then
+  begin
+    if TJSONObject(DataVal).TryGetValue<string>('id', Result) then Exit;
+    if TJSONObject(DataVal).TryGetValue<string>('_id', Result) then Exit;
+  end
+  else if DataVal is TJSONString then
+    Result := TJSONString(DataVal).Value
+  else if DataVal is TJSONNumber then
+    Result := TJSONNumber(DataVal).ToString;
+end;
+
+function TEntityBase.Sync(const ATypeDb, ACodRecord, ACodFilial: string;
+  const ARest: TRestIntegracao; const AToken, AAuthHeader: string): TSyncResult;
+var
+  DataSet: TDataSet;
+  JsonBody: TJSONObject;
+  Response: TJSONObject;
+  ApiId: string;
+begin
+  Result.Success := False;
+  Result.ApiId := '';
+  Result.ErrorMessage := '';
+  Response := nil;
+
+  try
+    if ATypeDb <> 'DELETE' then
+    begin
+      DataSet := GetRecord(ACodRecord);
+      try
+        if DataSet.IsEmpty then
+        begin
+          Result.ErrorMessage := 'Registro nao encontrado: ' + ACodRecord;
+          Exit;
+        end;
+        JsonBody := MapToJson(DataSet);
+        ApiId := GetApiId(DataSet);
+      finally
+        DataSet.Free;
+      end;
+
+      if ApiId <> '' then
+        Response := ARest.Executar('PUT', '/api' + Self.ResourceName + '/' + ApiId, AAuthHeader, AToken, JsonBody.ToString)
+      else
+        Response := ARest.Executar('POST', '/api' + Self.ResourceName, AAuthHeader, AToken, '[' + JsonBody.ToString + ']');
+    end
+    else
+    begin
+      DataSet := GetRecord(ACodRecord);
+      try
+        ApiId := GetApiId(DataSet);
+      finally
+        DataSet.Free;
+      end;
+
+      if ApiId <> '' then
+        Response := ARest.Executar('DELETE', Self.ResourceName + '/' + ApiId, AAuthHeader, AToken)
+      else
+      begin
+        Result.Success := True;
+        Exit;
+      end;
+    end;
+
+    if (Response.GetValue<string>('status') = '200') or
+       (Response.GetValue<string>('status') = '201') then
+    begin
+      if IsResponseOk(Response, Result.ErrorMessage) then
+      begin
+        Result.ApiId := ExtractApiId(Response);
+        if Result.ApiId <> '' then
+        begin
+          SetContextFlag('DATASYNC_IMPORTING', '1');
+          try
+            StoreApiIdBack(ACodRecord, Result.ApiId);
+          finally
+            SetContextFlag('DATASYNC_IMPORTING', '0');
+          end;
+        end;
+        Result.Success := True;
+      end;
+    end
+    else if Response.GetValue<string>('status') = '204' then
+    begin
+      Result.Success := True;
+    end
+    else
+    begin
+      if Assigned(Response.GetValue('erro')) then
+        Result.ErrorMessage := Response.GetValue<string>('status') + ': ' + Response.GetValue('erro').ToString
+      else
+      begin
+        Result.ErrorMessage := Response.GetValue<string>('status') + ': ';
+        IsResponseOk(Response, Result.ErrorMessage);
+      end;
+    end;
+
+    FreeAndNil(Response);
+  except
+    on E: Exception do
+    begin
+      FreeAndNil(Response);
+      Result.ErrorMessage := E.Message;
+    end;
+  end;
+end;
+
+function TEntityBase.SyncAll(const ARest: TRestIntegracao; const AToken, AAuthHeader: string): TSyncResult;
+const
+  BATCH_SIZE = 1000;
+var
+  DataSet: TDataSet;
+  JsonObj: TJSONObject;
+  batchPos: Integer;
+begin
+  Result.Success := False;
+  Result.ApiId := '';
+  Result.ErrorMessage := '';
+
+  DataSet := GetUnsyncedRecords;
+  try
+    Result.RecordCount := DataSet.RecordCount;
+
+    if DataSet.IsEmpty then
+    begin
+      Result.Success := True;
+      Result.ErrorMessage := 'Nenhum registro pendente';
+      Exit;
+    end;
+
+    DataSet.First;
+    batchPos := 0;
+
+    while not DataSet.Eof do
+      ProcessBatch(DataSet, ARest, AToken, AAuthHeader, batchPos, Result);
+
+    if Result.ErrorMessage = '' then
+      Result.Success := True;
+  finally
+    DataSet.Free;
+  end;
+end;
+
+procedure TEntityBase.ProcessBatch(ADataSet: TDataSet;
+  const ARest: TRestIntegracao; const AToken, AAuthHeader: string;
+  var ABatchPos: Integer; var AResult: TSyncResult);
+const
+  // Quantidade maxima de registros enviados por requisicao.
+  // A API oficial rejeita lotes acima de 5000 itens.
+  BATCH_SIZE = 1000;
+var
+  // JsonArray: contem os registros do lote atual (ate BATCH_SIZE)
+  // CodRecords: lista paralela com os codigos ERP de cada registro
+  JsonArray: TJSONArray;
+  JsonObj: TJSONObject;
+  Response: TJSONObject;
+  DataArr: TJSONArray;
+  i, idx: Integer;
+  ApiId, ItemCod: string;
+  CodRecords: TStringList;
+  InnerVal, ArrVal2: TJSONValue;
+begin
+  JsonArray := TJSONArray.Create;
+  CodRecords := TStringList.Create;
+  Response := nil;
+  try
+    while (CodRecords.Count < BATCH_SIZE) and not ADataSet.Eof do
+    begin
+      JsonObj := MapToJson(ADataSet);
+      JsonArray.AddElement(JsonObj);
+      CodRecords.Add(ADataSet.FieldByName('codigo').AsString);
+      ADataSet.Next;
+      Inc(ABatchPos);
+    end;
+
+    if JsonArray.Count < 1 then
+      Exit;
+
+    if Assigned(FOnProgress) then
+      FOnProgress(Format(sLineBreak + '%s | Enviando lote com %d registro(s) (%d de %d)',
+        [FormatDateTime('hh:nn:ss', Now), JsonArray.Count, ABatchPos, AResult.RecordCount]));
+
+    DataArr := nil;
+    Response := ARest.Executar('POST', '/api' + Self.ResourceName, AAuthHeader, AToken, JsonArray.ToString);
+
+    if (Response.GetValue<string>('status') <> '200') and
+       (Response.GetValue<string>('status') <> '201') then
+    begin
+      if Assigned(Response.GetValue('erro')) then
+        AResult.ErrorMessage := Response.GetValue<string>('status') + ': ' + Response.GetValue('erro').ToString
+      else
+      begin
+        AResult.ErrorMessage := Response.GetValue<string>('status') + ': ';
+        IsResponseOk(Response, AResult.ErrorMessage);
+      end;
+      if Assigned(FOnProgress) then
+        FOnProgress(Format('%s | Lote falhou: %s',
+          [FormatDateTime('hh:nn:ss', Now), AResult.ErrorMessage]));
+      Exit;
+    end;
+
+    if not IsResponseOk(Response, AResult.ErrorMessage) then
+      Exit;
+
+    if Assigned(FOnProgress) then
+      FOnProgress(Format('%s | Lote de %d registro(s) enviado com sucesso',
+        [FormatDateTime('hh:nn:ss', Now), JsonArray.Count]));
+
+    InnerVal := Response.GetValue('data');
+    if Assigned(InnerVal) and (InnerVal is TJSONObject) then
+    begin
+      ArrVal2 := TJSONObject(InnerVal).GetValue('data');
+      if Assigned(ArrVal2) and (ArrVal2 is TJSONArray) then
+        DataArr := TJSONArray(ArrVal2);
+    end;
+
+    if (not Assigned(DataArr)) or (DataArr.Count < CodRecords.Count) then
+    begin
+      AResult.ErrorMessage := 'Resposta da API com quantidade inesperada de itens';
+      Exit;
+    end;
+
+    SetContextFlag('DATASYNC_IMPORTING', '1');
+    try
+      for i := 0 to DataArr.Count - 1 do
+      begin
+        if not (DataArr.Items[i] is TJSONObject) then Continue;
+        JsonObj := TJSONObject(DataArr.Items[i]);
+
+        ItemCod := '';
+        JsonObj.TryGetValue<string>('codigoerp', ItemCod);
+        if ItemCod = '' then Continue;
+
+        ApiId := '';
+        JsonObj.TryGetValue<string>('id', ApiId);
+        if ApiId = '' then Continue;
+
+        idx := CodRecords.IndexOf(ItemCod);
+        if idx >= 0 then
+          StoreApiIdBack(CodRecords[idx], ApiId);
+      end;
+    finally
+      SetContextFlag('DATASYNC_IMPORTING', '0');
+    end;
+  finally
+    FreeAndNil(Response);
+    FreeAndNil(CodRecords);
+    FreeAndNil(JsonArray);
+  end;
+end;
+
+function TEntityBase.GetSyncAllMessage(ASuccess: Boolean; const AErrorMsg: string): string;
+begin
+  if ASuccess then
+    Result := GetTableName + ' sincronizado com sucesso'
+  else
+    Result := GetTableName + ': ' + AErrorMsg;
+end;
+
+end.

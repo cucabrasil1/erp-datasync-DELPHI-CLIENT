@@ -3,13 +3,14 @@ object Form2: TForm2
   Top = 0
   Caption = 'Form2'
   ClientHeight = 661
-  ClientWidth = 884
+  ClientWidth = 984
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  Position = poScreenCenter
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
@@ -17,21 +18,19 @@ object Form2: TForm2
   object pnSincronizar: TPanel
     Left = 0
     Top = 33
-    Width = 884
-    Height = 121
+    Width = 984
+    Height = 224
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 1343
     object btnSincronizar: TButton
       Left = 1
-      Top = 74
-      Width = 882
+      Top = 177
+      Width = 982
       Height = 46
       Align = alBottom
       Caption = 'Sincronizar Todos Selecionados'
       TabOrder = 0
       OnClick = btnSincronizarClick
-      ExplicitWidth = 1341
     end
     object cxGroupBox1: TcxGroupBox
       Left = 1
@@ -39,61 +38,308 @@ object Form2: TForm2
       Align = alClient
       Caption = 'Selecione para sincronizar TODOS registros de cada Entidade'
       TabOrder = 1
-      ExplicitWidth = 1341
-      Height = 73
-      Width = 882
-      object chkProdutos: TcxCheckBox
-        Left = 117
-        Top = 43
-        Align = alLeft
-        Caption = 'Produtos (C000025)'
-        Style.HotTrack = True
-        Style.TransparentBorder = False
-        TabOrder = 0
-        Transparent = True
-        ExplicitLeft = 123
-        ExplicitTop = 41
-        ExplicitHeight = 30
-      end
-      object chkClientes: TcxCheckBox
-        Left = 2
-        Top = 43
-        Align = alLeft
-        Caption = 'Clientes (C000007)'
-        Style.HotTrack = True
-        Style.TransparentBorder = False
-        TabOrder = 1
-        Transparent = True
-        ExplicitTop = 41
-        ExplicitHeight = 30
-      end
+      Height = 176
+      Width = 982
       object cmbEmpresa: TcxComboBox
         Left = 2
         Top = 20
         Align = alTop
         Properties.ReadOnly = False
-        TabOrder = 2
+        TabOrder = 0
         Text = 'cmbEmpresa'
-        ExplicitWidth = 1337
-        Width = 878
+        Width = 978
+      end
+      object Panel1: TPanel
+        Left = 2
+        Top = 64
+        Width = 191
+        Height = 105
+        TabOrder = 1
+        object chkAcabamentos: TcxCheckBox
+          Left = 1
+          Top = 20
+          Align = alTop
+          Caption = 'Acabamentos (C000250)'
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          TabOrder = 0
+          Transparent = True
+        end
+        object chkCenario: TcxCheckBox
+          Left = 1
+          Top = 39
+          Align = alTop
+          Caption = 'Cenarios Faturamento (C000233)'
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          TabOrder = 1
+          Transparent = True
+        end
+        object chkClientes: TcxCheckBox
+          Left = 1
+          Top = 1
+          Align = alTop
+          Caption = 'Clientes (C000007)'
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          TabOrder = 2
+          Transparent = True
+        end
+        object chkProdutos: TcxCheckBox
+          Left = 1
+          Top = 58
+          Align = alTop
+          Caption = 'Produtos (C000025)'
+          ParentBackground = False
+          ParentColor = False
+          ParentFont = False
+          Style.Color = clDefault
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clRed
+          Style.Font.Height = -12
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          Style.IsFontAssigned = True
+          TabOrder = 3
+          Transparent = True
+        end
+        object chkVariacaoProduto: TcxCheckBox
+          Left = 1
+          Top = 77
+          Align = alTop
+          Caption = 'Variacao Produtos (C000279)'
+          ParentBackground = False
+          ParentColor = False
+          ParentFont = False
+          Style.Color = clDefault
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clRed
+          Style.Font.Height = -12
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          Style.IsFontAssigned = True
+          TabOrder = 4
+          Transparent = True
+        end
+      end
+      object Panel2: TPanel
+        Left = 199
+        Top = 64
+        Width = 191
+        Height = 105
+        TabOrder = 2
+        object chkCondPagamento: TcxCheckBox
+          Left = 1
+          Top = 20
+          Align = alTop
+          Caption = 'Cond.Pagto (C000015/C000016)'
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          TabOrder = 0
+          Transparent = True
+        end
+        object chkFornecedor: TcxCheckBox
+          Left = 1
+          Top = 58
+          Align = alTop
+          Caption = 'Fornecedores (C00009)'
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          TabOrder = 1
+          Transparent = True
+        end
+        object chkTpPagamento: TcxCheckBox
+          Left = 1
+          Top = 1
+          Align = alTop
+          Caption = 'Tipo Pagto (C000014)'
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          TabOrder = 2
+          Transparent = True
+        end
+        object chkCor: TcxCheckBox
+          Left = 1
+          Top = 39
+          Align = alTop
+          Caption = 'Cores (C000129)'
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          TabOrder = 3
+          Transparent = True
+        end
+      end
+      object chkTodos: TcxCheckBox
+        Left = 2
+        Top = 43
+        Align = alTop
+        Caption = 'Marcar Todos'
+        ParentBackground = False
+        ParentColor = False
+        Style.BorderColor = clDefault
+        Style.Color = clBisque
+        Style.HotTrack = True
+        Style.LookAndFeel.NativeStyle = False
+        Style.TextColor = clRed
+        Style.TextStyle = [fsBold]
+        Style.TransparentBorder = False
+        StyleDisabled.LookAndFeel.NativeStyle = False
+        StyleFocused.LookAndFeel.NativeStyle = False
+        StyleHot.LookAndFeel.NativeStyle = False
+        StyleReadOnly.LookAndFeel.NativeStyle = False
+        TabOrder = 3
+        OnClick = chkTodosClick
+      end
+      object Panel3: TPanel
+        Left = 395
+        Top = 63
+        Width = 191
+        Height = 105
+        TabOrder = 4
+        object chkGrupoProduto: TcxCheckBox
+          Left = 1
+          Top = 20
+          Align = alTop
+          Caption = 'Grupo Produto (C000017)'
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          TabOrder = 0
+          Transparent = True
+        end
+        object chkRegiao: TcxCheckBox
+          Left = 1
+          Top = 58
+          Align = alTop
+          Caption = 'Regioao Clientes (C00005)'
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          TabOrder = 1
+          Transparent = True
+        end
+        object chkGrupoCliente: TcxCheckBox
+          Left = 1
+          Top = 1
+          Align = alTop
+          Caption = 'Grupo Cliente (C000144)'
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          TabOrder = 2
+          Transparent = True
+        end
+        object chkPedVenda: TcxCheckBox
+          Left = 1
+          Top = 39
+          Align = alTop
+          Caption = 'Pedido Venda (C000126)'
+          ParentFont = False
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clRed
+          Style.Font.Height = -12
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          Style.IsFontAssigned = True
+          TabOrder = 3
+          Transparent = True
+        end
+      end
+      object Panel4: TPanel
+        Left = 591
+        Top = 63
+        Width = 191
+        Height = 105
+        TabOrder = 5
+        object chkSupervisor: TcxCheckBox
+          Left = 1
+          Top = 20
+          Align = alTop
+          Caption = 'Supervisor (C000008)'
+          ParentBackground = False
+          ParentColor = False
+          ParentFont = False
+          Style.Color = clDefault
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clRed
+          Style.Font.Height = -12
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          Style.IsFontAssigned = True
+          TabOrder = 0
+          Transparent = True
+        end
+        object chkTransportador: TcxCheckBox
+          Left = 1
+          Top = 58
+          Align = alTop
+          Caption = 'Transportadores (C000010)'
+          ParentBackground = False
+          ParentColor = False
+          ParentFont = False
+          Style.Color = clDefault
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clRed
+          Style.Font.Height = -12
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          Style.IsFontAssigned = True
+          TabOrder = 1
+          Transparent = True
+        end
+        object chkSubgrupoProduto: TcxCheckBox
+          Left = 1
+          Top = 1
+          Align = alTop
+          Caption = 'Subgrupo Produto (C000018)'
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          TabOrder = 2
+          Transparent = True
+        end
+        object chkVendedor: TcxCheckBox
+          Left = 1
+          Top = 39
+          Align = alTop
+          Caption = 'Vendedor (C000008)'
+          ParentBackground = False
+          ParentColor = False
+          ParentFont = False
+          Style.Color = clDefault
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clRed
+          Style.Font.Height = -12
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          Style.IsFontAssigned = True
+          TabOrder = 3
+          Transparent = True
+        end
       end
     end
   end
   object Memo1: TMemo
     Left = 0
-    Top = 154
-    Width = 884
-    Height = 472
+    Top = 257
+    Width = 984
+    Height = 369
     Align = alClient
     ScrollBars = ssVertical
     TabOrder = 1
-    ExplicitWidth = 1343
-    ExplicitHeight = 252
   end
   object JvNavPanelHeader1: TJvNavPanelHeader
     Left = 0
     Top = 0
-    Width = 884
+    Width = 984
     Height = 33
     Align = alTop
     Font.Charset = DEFAULT_CHARSET
@@ -103,12 +349,11 @@ object Form2: TForm2
     Font.Style = [fsBold]
     ParentFont = False
     ImageIndex = 0
-    ExplicitWidth = 1343
   end
   object JvNavPanelHeader2: TJvNavPanelHeader
     Left = 0
     Top = 626
-    Width = 884
+    Width = 984
     Height = 35
     Align = alBottom
     Font.Charset = DEFAULT_CHARSET
@@ -118,11 +363,9 @@ object Form2: TForm2
     Font.Style = [fsBold]
     ParentFont = False
     ImageIndex = 0
-    ExplicitTop = 406
-    ExplicitWidth = 1343
     object btnSettings: TAdvGlowButton
       AlignWithMargins = True
-      Left = 844
+      Left = 944
       Top = 1
       Width = 35
       Height = 33
@@ -175,7 +418,6 @@ object Form2: TForm2
       Appearance.TextColorDown = 2303013
       Appearance.TextColorHot = 2303013
       Appearance.TextColorDisabled = 13948116
-      ExplicitLeft = 1303
     end
   end
   object monitorEventos: TFDEventAlerter

@@ -1,0 +1,19 @@
+program cucabrasil_proloja_datasync;
+
+uses
+  Vcl.Forms,
+  frmPricipal in 'frmPricipal.pas' {Form2},
+  uThreadCuca in 'C:\Fontes\Comuns\Models\uThreadCuca.pas',
+  uMRestIntegracao in 'C:\Fontes\Comuns\Models\uMRestIntegracao.pas',
+  ufuncoes in 'C:\Fontes\Comuns\ufuncoes.pas',
+  Modulo in 'C:\Fontes\Comuns\Modulo.pas' {FrmModulo: TDataModule};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm2, Form2);
+  Application.CreateForm(TFrmModulo, FrmModulo);
+  Application.Run;
+end.

@@ -1,0 +1,131 @@
+unit uEntityProduto;
+
+interface
+
+uses
+  System.JSON, System.SysUtils, FireDAC.Comp.Client, Data.DB,
+  uEntityBase;
+
+type
+  TEntityProduto = class(TEntityBase)
+  protected
+    function GetTableName: string; override;
+    function GetResourceName: string; override;
+    function GetRecord(ACodRecord: string): TDataSet; override;
+    function MapToJson(ADataSet: TDataSet): TJSONObject; override;
+    function GetApiId(ADataSet: TDataSet): string; override;
+    procedure StoreApiIdBack(ACodRecord, AApiId: string); override;
+  end;
+
+implementation
+
+uses
+  FireDAC.Stan.Param, uEntityFactory;
+
+{ TEntityProduto }
+
+function TEntityProduto.GetTableName: string;
+begin
+  Result := 'C000025';
+end;
+
+function TEntityProduto.GetResourceName: string;
+begin
+  Result := '/produtos';
+end;
+
+function TEntityProduto.GetRecord(ACodRecord: string): TDataSet;
+var
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Add('select * from ' + GetTableName);
+    Qry.SQL.Add('where codigo = :cod');
+    Qry.ParamByName('cod').AsString := ACodRecord;
+    Qry.Open;
+  except
+    Qry.Free;
+    raise;
+  end;
+  Result := Qry;
+end;
+
+function TEntityProduto.GetApiId(ADataSet: TDataSet): string;
+begin
+  if FDatabaseType = dtIndustrial then
+    Result := ADataSet.FieldByName('IDPRODUTO').AsString
+  else
+    Result := ADataSet.FieldByName('IDPRODUTO').AsString; // ajustar para comercial se diferente
+end;
+
+function TEntityProduto.MapToJson(ADataSet: TDataSet): TJSONObject;
+begin
+  Result := TJSONObject.Create;
+
+  case FDatabaseType of
+    dtIndustrial:
+    begin
+      Result.AddPair('produto', ADataSet.FieldByName('produto').AsString);
+      Result.AddPair('codigo', ADataSet.FieldByName('codigo').AsString);
+      Result.AddPair('referencia', ADataSet.FieldByName('referencia').AsString);
+      Result.AddPair('codbarras', ADataSet.FieldByName('codbarra').AsString);
+      Result.AddPair('unidade', ADataSet.FieldByName('unidade').AsString);
+      Result.AddPair('ncm', ADataSet.FieldByName('ncm').AsString);
+      Result.AddPair('cest', ADataSet.FieldByName('codigocest').AsString);
+      Result.AddPair('precocompra', TJSONNumber.Create(ADataSet.FieldByName('precocompra').AsFloat));
+      Result.AddPair('precocusto', TJSONNumber.Create(ADataSet.FieldByName('precocusto').AsFloat));
+      Result.AddPair('precovenda', TJSONNumber.Create(ADataSet.FieldByName('precovenda').AsFloat));
+      Result.AddPair('tipo', ADataSet.FieldByName('tipo').AsString);
+    end;
+
+    dtCommercial:
+    begin
+      // TODO: mapear campos do banco comercial
+      Result.AddPair('produto', ADataSet.FieldByName('produto').AsString);
+      Result.AddPair('codigo', ADataSet.FieldByName('codigo').AsString);
+      Result.AddPair('referencia', ADataSet.FieldByName('referencia').AsString);
+      Result.AddPair('codbarras', ADataSet.FieldByName('codbarra').AsString);
+      Result.AddPair('unidade', ADataSet.FieldByName('unidade').AsString);
+      Result.AddPair('ncm', ADataSet.FieldByName('ncm').AsString);
+      Result.AddPair('cest', ADataSet.FieldByName('codigocest').AsString);
+      Result.AddPair('precocompra', TJSONNumber.Create(ADataSet.FieldByName('precocompra').AsFloat));
+      Result.AddPair('precocusto', TJSONNumber.Create(ADataSet.FieldByName('precocusto').AsFloat));
+      Result.AddPair('precovenda', TJSONNumber.Create(ADataSet.FieldByName('precovenda').AsFloat));
+      Result.AddPair('tipo', ADataSet.FieldByName('tipo').AsString);
+    end;
+  end;
+
+  Result.AddPair('qtdevolume', TJSONNumber.Create(1));
+  Result.AddPair('m3', TJSONNumber.Create(0));
+  Result.AddPair('pesobruto', TJSONNumber.Create(0));
+  Result.AddPair('pesoliquido', TJSONNumber.Create(0));
+  Result.AddPair('ativo', 'S');
+  Result.AddPair('caminhoimagem1', '');
+  Result.AddPair('caminhoimagem2', '');
+  Result.AddPair('caminhoimagem3', '');
+end;
+
+procedure TEntityProduto.StoreApiIdBack(ACodRecord, AApiId: string);
+var
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Add('update ' + GetTableName + ' set idproduto = :apiid');
+    Qry.SQL.Add('where codigo = :cod');
+    Qry.ParamByName('apiid').AsString := AApiId;
+    Qry.ParamByName('cod').AsString := ACodRecord;
+    Qry.ExecSQL;
+  finally
+    Qry.Free;
+  end;
+end;
+
+initialization
+  TEntityFactory.RegisterEntity('000025', TEntityProduto);
+  TEntityFactory.RegisterEntity('C000025', TEntityProduto);
+
+end.

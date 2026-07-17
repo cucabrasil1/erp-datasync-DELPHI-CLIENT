@@ -3,7 +3,7 @@ unit uLogger;
 interface
 
 uses
-  System.SysUtils, System.Classes, SyncObjs;
+  System.SysUtils, System.Classes, System.StrUtils, SyncObjs, FireDAC.Comp.Client, FireDAC.Stan.Param;
 
 type
   TLogLevel = (llInfo, llWarn, llError, llDebug);
@@ -19,15 +19,18 @@ type
     class var FCurrentDate: TDate;
     class var FStream: TStreamWriter;
     class var FOnLog: TLogProc;
+    class var FDBConnection: TFDConnection;
     class function GetLogFileName: string;
     class procedure RotateFile;
     class function CategoryToString(ACat: TLogCategory): string;
     class function LevelToString(ALevel: TLogLevel): string;
+    class function ExtractValue(const APair: string): string;
   public
     class constructor Create;
     class destructor Destroy;
     class procedure Log(ALevel: TLogLevel; ACategory: TLogCategory;
-      const AMsg: string; const AExtra: array of string); overload;
+      const AMsg: string; const AExtra: array of string);
+    class procedure SetDBConnection(AConn: TFDConnection);
     class property OnLog: TLogProc read FOnLog write FOnLog;
   end;
 
@@ -106,6 +109,22 @@ begin
   end;
 end;
 
+class function TLogger.ExtractValue(const APair: string): string;
+var
+  p: Integer;
+begin
+  p := Pos('=', APair);
+  if p > 0 then
+    Result := Copy(APair, p + 1, MaxInt)
+  else
+    Result := APair;
+end;
+
+class procedure TLogger.SetDBConnection(AConn: TFDConnection);
+begin
+  FDBConnection := AConn;
+end;
+
 class procedure TLogger.Log(ALevel: TLogLevel; ACategory: TLogCategory;
   const AMsg: string; const AExtra: array of string);
 var
@@ -113,14 +132,39 @@ var
   tid: TThreadID;
   extra: string;
   i: Integer;
+  vFilial: string;
+  vCodSeq: string;
+  vTabela: string;
+  vExtraRest: string;
+  Pair: string;
+  Key: string;
+  Qry: TFDQuery;
 begin
   FLock.Enter;
   try
     tid := TThread.CurrentThread.ThreadID;
 
     extra := '';
+    vFilial := '';
+    vCodSeq := '';
+    vTabela := '';
+    vExtraRest := '';
+
     for i := 0 to High(AExtra) do
+    begin
       extra := extra + ' | ' + AExtra[i];
+      Pair := AExtra[i];
+      Key := LowerCase(Copy(Pair, 1, Pos('=', Pair) - 1));
+
+      if Key = 'filial' then
+        vFilial := ExtractValue(Pair)
+      else if Key = 'codseq' then
+        vCodSeq := ExtractValue(Pair)
+      else if Key = 'tabela' then
+        vTabela := ExtractValue(Pair)
+      else
+        vExtraRest := vExtraRest + IfThen(vExtraRest <> '', '; ', '') + Pair;
+    end;
 
     line := Format('[%s] [TID=%d] [%s] [%s] %s%s',
       [FormatDateTime('yyyy-mm-dd hh:nn:ss', Now),
@@ -139,6 +183,39 @@ begin
 
     if Assigned(FOnLog) then
       FOnLog(line);
+
+    if FDBConnection <> nil then
+    begin
+      Qry := TFDQuery.Create(nil);
+      try
+        Qry.Connection := FDBConnection;
+        Qry.SQL.Add('insert into EVENTS_DATASYNC_LOG (datahora, nivel, categoria, tabela, filial, codseq, mensagem, extra)');
+        Qry.SQL.Add('values (:datahora, :nivel, :categoria, :tabela, :filial, :codseq, :mensagem, :extra)');
+        Qry.ParamByName('datahora').AsDateTime := Now;
+        Qry.ParamByName('nivel').AsString := LevelToString(ALevel);
+        Qry.ParamByName('categoria').AsString := CategoryToString(ACategory);
+        if vTabela <> '' then
+          Qry.ParamByName('tabela').AsString := vTabela
+        else
+          Qry.ParamByName('tabela').Clear;
+        if vFilial <> '' then
+          Qry.ParamByName('filial').AsString := vFilial
+        else
+          Qry.ParamByName('filial').Clear;
+        if vCodSeq <> '' then
+          Qry.ParamByName('codseq').AsString := vCodSeq
+        else
+          Qry.ParamByName('codseq').Clear;
+        Qry.ParamByName('mensagem').AsString := AMsg;
+        if vExtraRest <> '' then
+          Qry.ParamByName('extra').AsString := vExtraRest
+        else
+          Qry.ParamByName('extra').Clear;
+        Qry.ExecSQL;
+      finally
+        Qry.Free;
+      end;
+    end;
   finally
     FLock.Leave;
   end;

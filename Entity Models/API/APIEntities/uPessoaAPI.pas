@@ -1,0 +1,393 @@
+﻿unit uPessoaAPI;
+
+interface
+
+uses
+  System.JSON, System.SysUtils, System.Generics.Collections, System.RegularExpressions;
+
+type
+  TPessoaContato = class
+  public
+    // campos enviados (ERP . API)
+    nome: string;
+    telefone: string;
+    email: string;
+    departamento: string;
+
+    // campos retornados pela API (GET)
+    id: string;
+    pessoa_id: string;
+    is_deleted: Integer;
+
+    function ToJson: TJSONObject;
+    procedure FromJson(AJson: TJSONObject);
+  end;
+
+  TPessoaEndereco = class
+  public
+    // --- campos enviados (ERP . API) ---
+    logradouro: string;
+    numero: string;
+    complemento: string;
+    bairro: string;
+    cidade: string;
+    uf: string;
+    cep: string;
+    descricao: string;
+    observacoes: string;
+
+    // campos retornados pela API (GET)
+    id: string;
+    pessoa_id: string;
+    is_deleted: Integer;
+
+    function ToJson: TJSONObject;
+    procedure FromJson(AJson: TJSONObject);
+  end;
+
+  TPessoaAPI = class
+  private
+    FContatos: TObjectList<TPessoaContato>;
+    FEnderecos: TObjectList<TPessoaEndereco>;
+  public
+    // --- campos enviados (ERP . API) ---
+    codigoerp: string;
+    nome: string;
+    nomefantasia: string;
+    logradouro: string;
+    numero: string;
+    bairro: string;
+    cidade: string;
+    uf: string;
+    cep: string;
+    ibge: string;
+    complemento: string;
+    documentoprincipal: string;
+    documentosecundario: string;
+    telefone: string;
+    celular: string;
+    email: string;
+    observacoes: string;
+    sexo: string;
+    tipopessoa: string;
+    habilitado: Integer;
+    ativo: Integer;
+    perfilcliente: Integer;
+    perfilfornecedor: Integer;
+    perfiltransportador: Integer;
+    perfilfuncionario: Integer;
+    datafundacaonascimento: string;
+    datacadastro: string;
+    dataultimacompra: string;
+
+    // --- campos retornados pela API (GET) ---
+    id: string;
+    tenant_id: string;
+    is_deleted: Integer;
+    deleted_at: string;
+    synced_at: string;
+    created_at: string;
+    updated_at: string;
+
+    constructor Create;
+    destructor Destroy; override;
+
+    procedure AddContato(const ANome, ATelefone, AEmail, ADepartamento: string);
+    procedure AddEndereco(const ALogradouro, ANumero, AComplemento, ABairro,
+      ACidade, AUf, ACep, ADescricao, AObservacoes: string);
+
+    class function ResourceName: string;
+    function ToJson: TJSONObject;
+    procedure FromJson(AJson: TJSONObject);
+  end;
+
+implementation
+
+{ TPessoaContato }
+
+function TPessoaContato.ToJson: TJSONObject;
+begin
+  Result := TJSONObject.Create;
+
+  Result.AddPair('nome',          nome);
+  Result.AddPair('telefone',      telefone);
+  Result.AddPair('email',         email);
+  Result.AddPair('departamento',  departamento);
+end;
+
+{ TPessoaContato }
+
+procedure TPessoaContato.FromJson(AJson: TJSONObject);
+begin
+  nome        := AJson.GetValue<string>('nome');
+  telefone    := AJson.GetValue<string>('telefone');
+  email       := AJson.GetValue<string>('email');
+  departamento:= AJson.GetValue<string>('departamento');
+  id          := AJson.GetValue<string>('id');
+  pessoa_id   := AJson.GetValue<string>('pessoa_id');
+  is_deleted  := AJson.GetValue<Integer>('is_deleted');
+end;
+
+{ TPessoaEndereco }
+
+function TPessoaEndereco.ToJson: TJSONObject;
+begin
+  Result := TJSONObject.Create;
+
+  Result.AddPair('logradouro',  logradouro);
+  Result.AddPair('numero',      numero);
+  Result.AddPair('complemento', complemento);
+  Result.AddPair('bairro',      bairro);
+  Result.AddPair('cidade',      cidade);
+  Result.AddPair('uf',          uf);
+  Result.AddPair('cep',         cep);
+  Result.AddPair('descricao',   descricao);
+  Result.AddPair('observacoes', observacoes);
+end;
+
+procedure TPessoaEndereco.FromJson(AJson: TJSONObject);
+begin
+  logradouro  := AJson.GetValue<string>('logradouro');
+  numero      := AJson.GetValue<string>('numero');
+  complemento := AJson.GetValue<string>('complemento');
+  bairro      := AJson.GetValue<string>('bairro');
+  cidade      := AJson.GetValue<string>('cidade');
+  uf          := AJson.GetValue<string>('uf');
+  cep         := AJson.GetValue<string>('cep');
+  descricao   := AJson.GetValue<string>('descricao');
+  observacoes := AJson.GetValue<string>('observacoes');
+  id          := AJson.GetValue<string>('id');
+  pessoa_id   := AJson.GetValue<string>('pessoa_id');
+  is_deleted  := AJson.GetValue<Integer>('is_deleted');
+end;
+
+{ TPessoaAPI }
+
+class function TPessoaAPI.ResourceName: string;
+begin
+  Result := '/pessoa';
+end;
+
+constructor TPessoaAPI.Create;
+begin
+  inherited;
+  FContatos   := TObjectList<TPessoaContato>.Create(True);
+  FEnderecos  := TObjectList<TPessoaEndereco>.Create(True);
+end;
+
+destructor TPessoaAPI.Destroy;
+begin
+  FContatos.Free;
+  FEnderecos.Free;
+  inherited;
+end;
+
+procedure TPessoaAPI.AddContato(const ANome, ATelefone, AEmail, ADepartamento: string);
+var
+  vTel: string;
+  C: TPessoaContato;
+begin
+  vTel := TRegEx.Replace(ATelefone, '[^0-9]', '');
+
+  if vTel = '' then
+    Exit;
+
+  C               := TPessoaContato.Create;
+
+  C.nome          := ANome;
+  C.telefone      := vTel;
+  C.email         := AEmail;
+  C.departamento  := ADepartamento;
+
+  FContatos.Add(C);
+end;
+
+procedure TPessoaAPI.AddEndereco(const ALogradouro, ANumero, AComplemento,
+  ABairro, ACidade, AUf, ACep, ADescricao, AObservacoes: string);
+var
+  E: TPessoaEndereco;
+begin
+  E             := TPessoaEndereco.Create;
+
+  E.logradouro  := ALogradouro;
+  E.numero      := ANumero;
+  E.complemento := AComplemento;
+  E.bairro      := ABairro;
+  E.cidade      := ACidade;
+  E.uf          := AUf;
+  E.cep         := ACep;
+  E.descricao   := ADescricao;
+  E.observacoes := AObservacoes;
+
+  FEnderecos.Add(E);
+end;
+
+function TPessoaAPI.ToJson: TJSONObject;
+
+  function StrOrNull(const AValue: string): TJSONValue;
+  begin
+    if AValue = '' then
+      Result := TJSONNull.Create
+    else
+      Result := TJSONString.Create(AValue);
+  end;
+
+  function CleanNumOrNull(const AValue: string): TJSONValue;
+  var
+    v: string;
+  begin
+    v := TRegEx.Replace(AValue, '[^0-9]', '');
+    if v = '' then
+      Result := TJSONNull.Create
+    else
+      Result := TJSONString.Create(v);
+  end;
+
+  function CleanDocOrNull(const AValue: string): TJSONValue;
+  var
+    v: string;
+  begin
+    v := UpperCase(TRegEx.Replace(AValue, '[^0-9A-Za-z]', ''));
+    if v = '' then
+      Result := TJSONNull.Create
+    else
+      Result := TJSONString.Create(v);
+  end;
+
+  function PerfilOrNull(const AValue: Integer): TJSONValue;
+  begin
+    if AValue = 0 then
+      Result := TJSONNull.Create
+    else
+      Result := TJSONNumber.Create(AValue);
+  end;
+
+var
+  Arr: TJSONArray;
+  C: TPessoaContato;
+  E: TPessoaEndereco;
+begin
+  Result := TJSONObject.Create;
+
+  Result.AddPair('codigoerp',               StrOrNull(codigoerp));
+  Result.AddPair('nome',                    StrOrNull(nome));
+  Result.AddPair('nomefantasia',            StrOrNull(nomefantasia));
+  Result.AddPair('logradouro',              StrOrNull(logradouro));
+  Result.AddPair('numero',                  StrOrNull(numero));
+  Result.AddPair('bairro',                  StrOrNull(bairro));
+  Result.AddPair('cidade',                  StrOrNull(cidade));
+  Result.AddPair('uf',                      StrOrNull(uf));
+  Result.AddPair('cep',                     CleanNumOrNull(cep));
+  Result.AddPair('ibge',                    StrOrNull(ibge));
+  Result.AddPair('complemento',             StrOrNull(complemento));
+  Result.AddPair('documentoprincipal',      CleanDocOrNull(documentoprincipal));
+  Result.AddPair('documentosecundario',     CleanDocOrNull(documentosecundario));
+  Result.AddPair('telefone',                CleanNumOrNull(telefone));
+  Result.AddPair('celular',                 CleanNumOrNull(celular));
+  Result.AddPair('email',                   StrOrNull(email));
+  Result.AddPair('observacoes',             StrOrNull(observacoes));
+  Result.AddPair('sexo',                    StrOrNull(sexo));
+  Result.AddPair('tipopessoa',              StrOrNull(tipopessoa));
+  Result.AddPair('habilitado',              TJSONNumber.Create(habilitado));
+  Result.AddPair('ativo',                   TJSONNumber.Create(ativo));
+  Result.AddPair('perfilcliente',           PerfilOrNull(perfilcliente));
+  Result.AddPair('perfilfornecedor',        PerfilOrNull(perfilfornecedor));
+  Result.AddPair('perfiltransportador',     PerfilOrNull(perfiltransportador));
+  Result.AddPair('perfilfuncionario',       PerfilOrNull(perfilfuncionario));
+  Result.AddPair('datafundacaonascimento',  StrOrNull(datafundacaonascimento));
+  Result.AddPair('datacadastro',            StrOrNull(datacadastro));
+  Result.AddPair('dataultimacompra',        StrOrNull(dataultimacompra));
+
+  Arr := TJSONArray.Create;
+  for C in FContatos do
+    Arr.AddElement(C.ToJson);
+  Result.AddPair('contatos',                Arr);
+
+  Arr := TJSONArray.Create;
+  for E in FEnderecos do
+    Arr.AddElement(E.ToJson);
+  Result.AddPair('enderecos',               Arr);
+end;
+
+{ TPessoaAPI.FromJson }
+
+procedure TPessoaAPI.FromJson(AJson: TJSONObject);
+
+  function StrOrEmpty(const AKey: string): string;
+  begin
+    if (AJson.GetValue(AKey) = nil) or (AJson.GetValue(AKey) is TJSONNull) then
+      Result := ''
+    else
+      Result := AJson.GetValue<string>(AKey);
+  end;
+
+  function IntOrZero(const AKey: string): Integer;
+  begin
+    if (AJson.GetValue(AKey) = nil) or (AJson.GetValue(AKey) is TJSONNull) then
+      Result := 0
+    else
+      Result := AJson.GetValue<Integer>(AKey);
+  end;
+
+var
+  Arr: TJSONArray;
+  i: Integer;
+  C: TPessoaContato;
+  E: TPessoaEndereco;
+begin
+  id                      := StrOrEmpty('id');
+  tenant_id               := StrOrEmpty('tenant_id');
+  codigoerp               := StrOrEmpty('codigoerp');
+  nome                    := StrOrEmpty('nome');
+  nomefantasia            := StrOrEmpty('nomefantasia');
+  logradouro              := StrOrEmpty('logradouro');
+  numero                  := StrOrEmpty('numero');
+  bairro                  := StrOrEmpty('bairro');
+  cidade                  := StrOrEmpty('cidade');
+  uf                      := StrOrEmpty('uf');
+  cep                     := StrOrEmpty('cep');
+  ibge                    := StrOrEmpty('ibge');
+  complemento             := StrOrEmpty('complemento');
+  documentoprincipal      := StrOrEmpty('documentoprincipal');
+  documentosecundario     := StrOrEmpty('documentosecundario');
+  telefone                := StrOrEmpty('telefone');
+  celular                 := StrOrEmpty('celular');
+  email                   := StrOrEmpty('email');
+  observacoes             := StrOrEmpty('observacoes');
+  sexo                    := StrOrEmpty('sexo');
+  tipopessoa              := StrOrEmpty('tipopessoa');
+  habilitado              := IntOrZero('habilitado');
+  ativo                   := IntOrZero('ativo');
+  perfilcliente           := IntOrZero('perfilcliente');
+  perfilfornecedor        := IntOrZero('perfilfornecedor');
+  perfiltransportador     := IntOrZero('perfiltransportador');
+  perfilfuncionario       := IntOrZero('perfilfuncionario');
+  datafundacaonascimento  := StrOrEmpty('datafundacaonascimento');
+  datacadastro            := StrOrEmpty('datacadastro');
+  dataultimacompra        := StrOrEmpty('dataultimacompra');
+  is_deleted              := IntOrZero('is_deleted');
+  deleted_at              := StrOrEmpty('deleted_at');
+  synced_at               := StrOrEmpty('synced_at');
+  created_at              := StrOrEmpty('created_at');
+  updated_at              := StrOrEmpty('updated_at');
+
+  if AJson.TryGetValue('contatos', Arr) then
+    for i := 0 to Arr.Count - 1 do
+    begin
+      C := TPessoaContato.Create;
+      C.FromJson(TJSONObject(Arr.Items[i]));
+      FContatos.Add(C);
+    end;
+
+  if AJson.TryGetValue('enderecos', Arr) then
+    for i := 0 to Arr.Count - 1 do
+    begin
+      E := TPessoaEndereco.Create;
+      E.FromJson(TJSONObject(Arr.Items[i]));
+      FEnderecos.Add(E);
+    end;
+end;
+
+end.
+
+

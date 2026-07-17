@@ -1,0 +1,164 @@
+﻿unit uEntityCliente;
+
+interface
+
+uses
+  System.JSON, System.SysUtils, FireDAC.Comp.Client, Data.DB,
+  uEntityBase;
+
+type
+  TEntityCliente = class(TEntityBase)
+  protected
+    function GetTableName: string; override;
+    function GetResourceName: string; override;
+    function GetRecord(ACodRecord: string): TDataSet; override;
+    function MapToJson(ADataSet: TDataSet): TJSONObject; override;
+    function GetApiId(ADataSet: TDataSet): string; override;
+    function GetUnsyncedRecords: TDataSet; override;
+    function GetSyncAllMessage(ASuccess: Boolean; const AErrorMsg: string): string; override;
+    procedure StoreApiIdBack(ACodRecord, AApiId: string); override;
+  end;
+
+implementation
+
+uses
+  FireDAC.Stan.Param, uEntityFactory;
+
+{ TEntityCliente }
+
+function TEntityCliente.GetTableName: string;
+begin
+  Result := 'C000007';
+end;
+
+function TEntityCliente.GetResourceName: string;
+begin
+  Result := '/pessoas';
+end;
+
+function TEntityCliente.GetRecord(ACodRecord: string): TDataSet;
+var
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Add('select * from ' + GetTableName);
+    Qry.SQL.Add('where codigo = :cod');
+    Qry.ParamByName('cod').AsString := ACodRecord;
+    Qry.Open;
+  except
+    Qry.Free;
+    raise;
+  end;
+  Result := Qry;
+end;
+
+function TEntityCliente.GetApiId(ADataSet: TDataSet): string;
+begin
+  if FDatabaseType = dtIndustrial then
+    Result := ADataSet.FieldByName('IDCLIENTE').AsString
+  else
+    Result := ADataSet.FieldByName('IDCLIENTE').AsString; // ajustar para comercial se diferente
+end;
+
+function TEntityCliente.MapToJson(ADataSet: TDataSet): TJSONObject;
+var
+  vTipo: string;
+  vIbge: string;
+begin
+  Result := TJSONObject.Create;
+
+   // campos comuns a ambos (COMERCIAL e INDUSTRIAL) que a API espera
+  Result.AddPair('codigoerp',           ADataSet.FieldByName('codigo').AsString);
+  Result.AddPair('nome',                ADataSet.FieldByName('nome').AsString);
+  Result.AddPair('nomefantasia',        ADataSet.FieldByName('apelido').AsString);
+  Result.AddPair('logradouro',          ADataSet.FieldByName('endereco').AsString);
+  Result.AddPair('bairro',              ADataSet.FieldByName('bairro').AsString);
+  Result.AddPair('cidade',              ADataSet.FieldByName('cidade').AsString);
+  Result.AddPair('uf',                  ADataSet.FieldByName('uf').AsString);
+  Result.AddPair('numero',              ADataSet.FieldByName('numero').AsString);
+  Result.AddPair('complemento',         ADataSet.FieldByName('complemento').AsString);
+  Result.AddPair('ativo',               ADataSet.FieldByName('situacao').AsInteger);
+  Result.AddPair('documentoprincipal',  ADataSet.FieldByName('cpf').AsString);
+  Result.AddPair('documentosecundario', ADataSet.FieldByName('rg').AsString);
+  Result.AddPair('telefone1',           ADataSet.FieldByName('telefone1').AsString);
+  Result.AddPair('telefone2',           ADataSet.FieldByName('telefone2').AsString);
+  Result.AddPair('telefone3',           ADataSet.FieldByName('telefone3').AsString);
+  Result.AddPair('celular',             ADataSet.FieldByName('celular').AsString);
+  Result.AddPair('email',               ADataSet.FieldByName('email').AsString);
+  Result.AddPair('observacoes',         ADataSet.FieldByName('observacaogeral').AsString);
+  Result.AddPair('sexo',                ADataSet.FieldByName('sexo').AsString);
+
+  if ADataSet.FieldByName('tipo').asinteger = 1 then
+    Result.AddPair('tipo', 'PESSOAFISICA')
+  else if ADataSet.FieldByName('tipo').asinteger = 2 then
+    Result.AddPair('tipo', 'PESSOAJURIDICA');
+
+  if ADataSet.FieldByName('nascimento').AsString.Trim.IsEmpty then  //campo está como string no banco
+    Result.AddPair('datafundacaonascimento',  nil)
+  else
+    Result.AddPair('datafundacaonascimento',  StrToDateTime(ADataSet.FieldByName('nascimento').AsString));
+
+  Result.AddPair('datacadastro',        ADataSet.FieldByName('data_cadastro').AsDateTime);
+  Result.AddPair('dataultimacompra',    ADataSet.FieldByName('data_ultimacompra').AsDateTime);
+//  Result.AddPair('datanascimentofundacao', TJSONNull.Create);
+
+  case FDatabaseType of
+    dtIndustrial:  //campos ESPEC�FICOS  para database INDUSTRIAL (PROINDUSTRIA)
+    begin
+
+    end;
+
+    dtCommercial: //campos ESPEC�FICOS  para database COMERCIAL (PROLOJA)
+    begin
+
+    end;
+  end;
+end;
+
+function TEntityCliente.GetUnsyncedRecords: TDataSet;
+var
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Add('select * from ' + GetTableName);
+    Qry.SQL.Add('where idcliente is null');
+    Qry.Open;
+  except
+    Qry.Free;
+    raise;
+  end;
+  Result := Qry;
+end;
+
+function TEntityCliente.GetSyncAllMessage(ASuccess: Boolean; const AErrorMsg: string): string;
+begin
+  if ASuccess then
+    Result := 'Clientes sincronizados com sucesso'
+  else
+    Result := 'Erro em Clientes: ' + AErrorMsg;
+end;
+
+procedure TEntityCliente.StoreApiIdBack(ACodRecord, AApiId: string);
+var
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Add('update ' + GetTableName + ' set idcliente = :apiid');
+    Qry.SQL.Add('where codigo = :cod');
+    Qry.ParamByName('apiid').AsString := AApiId;
+    Qry.ParamByName('cod').AsString := ACodRecord;
+    Qry.ExecSQL;
+  finally
+    Qry.Free;
+  end;
+end;
+
+initialization
+  TEntityFactory.RegisterEntity('C000007', TEntityCliente);
+end.

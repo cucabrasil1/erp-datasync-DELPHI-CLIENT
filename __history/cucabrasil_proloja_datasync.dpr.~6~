@@ -1,0 +1,41 @@
+program cucabrasil_proloja_datasync;
+
+
+
+uses
+  Vcl.Forms,
+  frmPrincipal in 'frmPrincipal.pas' {Form2},
+  uThreadCuca in 'C:\Fontes\Comuns\Models\uThreadCuca.pas',
+  uMRestIntegracao in 'C:\Fontes\Comuns\Models\uMRestIntegracao.pas',
+  ufuncoes in 'C:\Fontes\Comuns\ufuncoes.pas',
+  dmModulo in 'Local Files\dmModulo.pas' {modulo: TDataModule},
+  uEntityBase in 'Entity Models\uEntityBase.pas',
+  uEntityFactory in 'Entity Models\uEntityFactory.pas',
+  uEntityCliente in 'Entity Models\Entities\uEntityCliente.pas',
+  uEntityProduto in 'Entity Models\Entities\uEntityProduto.pas',
+  uLogger in 'uLogger.pas',
+  uEntityAcabamento in 'Entity Models\Entities\uEntityAcabamento.pas',
+  uEntityCenarioFaturamento in 'Entity Models\Entities\uEntityCenarioFaturamento.pas',
+  uEntityCondicaoPagamento in 'Entity Models\Entities\uEntityCondicaoPagamento.pas',
+  uEntityCor in 'Entity Models\Entities\uEntityCor.pas',
+  uEntityFornecedor in 'Entity Models\Entities\uEntityFornecedor.pas',
+  uEntityGrupoCliente in 'Entity Models\Entities\uEntityGrupoCliente.pas',
+  uEntityGrupoProduto in 'Entity Models\Entities\uEntityGrupoProduto.pas',
+  uEntityPedidoVenda in 'Entity Models\Entities\uEntityPedidoVenda.pas',
+  uEntityRegiao in 'Entity Models\Entities\uEntityRegiao.pas',
+  uEntitySubgrupoProduto in 'Entity Models\Entities\uEntitySubgrupoProduto.pas',
+  uEntitySupervisor in 'Entity Models\Entities\uEntitySupervisor.pas',
+  uEntityTipoPagamento in 'Entity Models\Entities\uEntityTipoPagamento.pas',
+  uEntityTransportador in 'Entity Models\Entities\uEntityTransportador.pas',
+  uEntityVariacaoProduto in 'Entity Models\Entities\uEntityVariacaoProduto.pas',
+  uEntityVendedor in 'Entity Models\Entities\uEntityVendedor.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm2, Form2);
+  Application.CreateForm(Tmodulo, modulo);
+  Application.Run;
+end.

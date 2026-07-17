@@ -1,0 +1,50 @@
+object modulo: Tmodulo
+  OnCreate = DataModuleCreate
+  Height = 521
+  Width = 988
+  object conexao: TFDConnection
+    Params.Strings = (
+      'User_Name=sysdba'
+      'Password=masterkey'
+      'Database=C:\Siscom\server\bd\BASE.FDB'
+      'DriverID=FB')
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    LoginPrompt = False
+    Left = 24
+    Top = 24
+  end
+  object FDPhysFBDriverLink1: TFDPhysFBDriverLink
+    Left = 112
+    Top = 24
+  end
+  object qrFiliais: TFDQuery
+    Connection = conexao
+    SQL.Strings = (
+      'select * from c000004')
+    Left = 24
+    Top = 88
+  end
+  object qrIntegrador: TFDQuery
+    Connection = conexao
+    SQL.Strings = (
+      'select * from c000440'
+      'where codigo = '#39'-1'#39)
+    Left = 312
+    Top = 24
+  end
+  object qrParametrosIntegrador: TFDQuery
+    Connection = conexao
+    SQL.Strings = (
+      'select * from c000441'
+      'where codigo = '#39'-1'#39)
+    Left = 312
+    Top = 80
+  end
+  object FDGUIxWaitCursor1: TFDGUIxWaitCursor
+    Provider = 'Forms'
+    ScreenCursor = gcrNone
+    Left = 120
+    Top = 96
+  end
+end
