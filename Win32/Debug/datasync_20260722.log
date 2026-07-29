@@ -1,0 +1,160 @@
+﻿--- Log iniciado em 22/07/2026 08:49:56 ---
+[2026-07-22 08:49:56] [TID=3124] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-22 08:49:56] [TID=3124] [INFO] [SYSTEM] Processando eventos
+[2026-07-22 08:49:57] [TID=1332] [INFO] [SYSTEM] Registros pendentes: 1
+[2026-07-22 08:49:57] [TID=1332] [INFO] [AUTH] Autenticado com sucesso | filial=000001
+[2026-07-22 08:49:57] [TID=1332] [ERROR] [SYNC] 404: {"message":"Registro ou Rota não encontrados:{\"code\":\"not_found\",\"message\":\"Route not found\"}"} | codseq=120033 | coderecord=001 | tabela=C000013 | filial=000001
+[2026-07-22 08:49:58] [TID=1332] [INFO] [SYNC] === RESUMO === Tabela C000013 - Sucesso: 0  Erro: 1
+--- Log iniciado em 22/07/2026 08:51:27 ---
+[2026-07-22 08:51:27] [TID=13376] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-22 08:51:27] [TID=13376] [INFO] [SYSTEM] Processando eventos
+[2026-07-22 08:51:28] [TID=9836] [INFO] [SYSTEM] Registros pendentes: 1
+[2026-07-22 08:51:28] [TID=9836] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=120033 | coderecord=001 | tabela=C000013 | filial=000001
+[2026-07-22 08:51:29] [TID=9836] [INFO] [SYNC] === RESUMO === Tabela C000013 - Sucesso: 1  Erro: 0
+[2026-07-22 08:52:40] [TID=11444] [ERROR] [EXPORT] Erro em Bancos: Field 'codigo' not found | tabela=C000013 | filial=000001
+--- Log iniciado em 22/07/2026 09:17:07 ---
+[2026-07-22 09:17:07] [TID=15128] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-22 09:17:07] [TID=15128] [INFO] [SYSTEM] Processando eventos
+[2026-07-22 09:17:07] [TID=20352] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-22 09:17:07] [TID=20352] [INFO] [SYNC] === RESUMO ===
+[2026-07-22 09:17:16] [TID=4048] [INFO] [AUTH] Autenticado com sucesso | filial=000001
+[2026-07-22 09:17:16] [TID=4048] [INFO] [EXPORT] 09:17:16 | Enviando lote com 8 registro(s) (8 de 8) | tabela=C000013 | filial=000001
+[2026-07-22 09:17:16] [TID=4048] [INFO] [EXPORT] 09:17:16 | Lote de 8 registro(s) enviado com sucesso | tabela=C000013 | filial=000001
+[2026-07-22 09:17:16] [TID=4048] [INFO] [EXPORT] 8 registro(s) sincronizado(s) em 0,1s - Bancos sincronizados com sucesso | tabela=C000013 | filial=000001
+--- Log iniciado em 22/07/2026 16:27:20 ---
+[2026-07-22 16:27:20] [TID=140] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-22 16:27:20] [TID=140] [INFO] [SYSTEM] Processando eventos
+[2026-07-22 16:27:20] [TID=13512] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-22 16:27:20] [TID=13512] [INFO] [SYNC] === RESUMO ===
+[2026-07-22 16:27:30] [TID=9416] [INFO] [AUTH] Autenticado com sucesso | filial=000001
+[2026-07-22 16:27:30] [TID=9416] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Funcionarios sincronizados com sucesso | tabela=C000008 | filial=000001
+[2026-07-22 16:27:41] [TID=140] [INFO] [SYSTEM] Processando eventos
+[2026-07-22 16:27:41] [TID=10772] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-22 16:27:41] [TID=10772] [INFO] [SYNC] === RESUMO ===
+[2026-07-22 16:27:50] [TID=19028] [INFO] [EXPORT] 16:27:50 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-07-22 16:27:50] [TID=19028] [ERROR] [EXPORT] 16:27:50 | Lote falhou: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"Validation error in body"} | tabela=C000008 | filial=000001
+[2026-07-22 16:27:50] [TID=19028] [ERROR] [EXPORT] 66 registro(s) com erro em 0,2s - Erro em Funcionarios: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"Validation error in body"} | tabela=C000008 | filial=000001
+[2026-07-22 16:35:34] [TID=14796] [INFO] [EXPORT] 16:35:34 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-07-22 16:35:34] [TID=14796] [ERROR] [EXPORT] 16:35:34 | Lote falhou: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"Validation error in body"} | tabela=C000008 | filial=000001
+[2026-07-22 16:35:34] [TID=14796] [ERROR] [EXPORT] 66 registro(s) com erro em 0,1s - Erro em Funcionarios: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"Validation error in body"} | tabela=C000008 | filial=000001
+[2026-07-22 16:38:35] [TID=23268] [INFO] [EXPORT] 16:38:35 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-07-22 16:38:35] [TID=23268] [ERROR] [EXPORT] 16:38:35 | Lote falhou: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"Validation error in body"} | tabela=C000008 | filial=000001
+[2026-07-22 16:38:35] [TID=23268] [ERROR] [EXPORT] 66 registro(s) com erro em 0,1s - Erro em Funcionarios: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"Validation error in body"} | tabela=C000008 | filial=000001
+[2026-07-22 16:38:46] [TID=23864] [INFO] [EXPORT] 16:38:46 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-07-22 16:39:14] [TID=23864] [ERROR] [EXPORT] 16:39:14 | Lote falhou: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"Validation error in body"} | tabela=C000008 | filial=000001
+[2026-07-22 16:39:14] [TID=23864] [ERROR] [EXPORT] 66 registro(s) com erro em 28,2s - Erro em Funcionarios: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"Validation error in body"} | tabela=C000008 | filial=000001
+[2026-07-22 16:41:19] [TID=22680] [INFO] [EXPORT] 16:41:19 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-07-22 16:41:23] [TID=22680] [ERROR] [EXPORT] 16:41:23 | Lote falhou: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"Validation error in body"} | tabela=C000008 | filial=000001
+[2026-07-22 16:41:23] [TID=22680] [ERROR] [EXPORT] 66 registro(s) com erro em 3,5s - Erro em Funcionarios: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"Validation error in body"} | tabela=C000008 | filial=000001
+[2026-07-22 16:41:44] [TID=16748] [INFO] [EXPORT] 16:41:44 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-07-22 16:41:44] [TID=16748] [ERROR] [EXPORT] 16:41:44 | Lote falhou: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"Validation error in body"} | tabela=C000008 | filial=000001
+[2026-07-22 16:41:44] [TID=16748] [ERROR] [EXPORT] 66 registro(s) com erro em 0,0s - Erro em Funcionarios: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"Validation error in body"} | tabela=C000008 | filial=000001
+[2026-07-22 16:42:03] [TID=7664] [INFO] [EXPORT] 16:42:03 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-07-22 16:42:03] [TID=7664] [ERROR] [EXPORT] 16:42:03 | Lote falhou: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"Validation error in body"} | tabela=C000008 | filial=000001
+[2026-07-22 16:42:03] [TID=7664] [ERROR] [EXPORT] 66 registro(s) com erro em 0,0s - Erro em Funcionarios: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"Validation error in body"} | tabela=C000008 | filial=000001
+[2026-07-22 16:42:19] [TID=18192] [INFO] [EXPORT] 16:42:19 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-07-22 16:42:19] [TID=18192] [ERROR] [EXPORT] 16:42:19 | Lote falhou: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"Validation error in body"} | tabela=C000008 | filial=000001
+[2026-07-22 16:42:19] [TID=18192] [ERROR] [EXPORT] 66 registro(s) com erro em 0,0s - Erro em Funcionarios: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"Validation error in body"} | tabela=C000008 | filial=000001
+[2026-07-22 16:42:34] [TID=22252] [INFO] [AUTH] Autenticado com sucesso | filial=000001
+[2026-07-22 16:42:34] [TID=22252] [INFO] [EXPORT] 16:42:34 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-07-22 16:42:34] [TID=22252] [ERROR] [EXPORT] 16:42:34 | Lote falhou: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"Validation error in body"} | tabela=C000008 | filial=000001
+[2026-07-22 16:42:34] [TID=22252] [ERROR] [EXPORT] 66 registro(s) com erro em 0,0s - Erro em Funcionarios: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"Validation error in body"} | tabela=C000008 | filial=000001
+[2026-07-22 16:43:42] [TID=23592] [INFO] [EXPORT] 16:43:42 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-07-22 16:45:43] [TID=23592] [ERROR] [EXPORT] 16:45:29 | Lote falhou: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"Validation error in body"} | tabela=C000008 | filial=000001
+[2026-07-22 16:46:50] [TID=23592] [ERROR] [EXPORT] 66 registro(s) com erro em 190,4s - Erro em Funcionarios: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"Validation error in body"} | tabela=C000008 | filial=000001
+[2026-07-22 16:50:19] [TID=7892] [INFO] [EXPORT] 16:50:16 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-07-22 16:50:19] [TID=7892] [ERROR] [EXPORT] 16:50:19 | Lote falhou: 400: {"statusCode":400,"code":"FST_ERR_VALIDATION","error":"Bad Request","message":"body/11/dadosbancarios/0/tipochavepix must be equal to one of the allowed values"} | tabela=C000008 | filial=000001
+[2026-07-22 16:50:19] [TID=7892] [ERROR] [EXPORT] 66 registro(s) com erro em 5,3s - Erro em Funcionarios: 400: {"statusCode":400,"code":"FST_ERR_VALIDATION","error":"Bad Request","message":"body/11/dadosbancarios/0/tipochavepix must be equal to one of the allowed values"} | tabela=C000008 | filial=000001
+[2026-07-22 17:02:10] [TID=8040] [INFO] [AUTH] Autenticado com sucesso | filial=000001
+[2026-07-22 17:02:10] [TID=8040] [INFO] [EXPORT] 17:02:10 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-07-22 17:02:10] [TID=8040] [ERROR] [EXPORT] 17:02:10 | Lote falhou: 400: {"statusCode":400,"code":"FST_ERR_VALIDATION","error":"Bad Request","message":"body/11/dadosbancarios/0/tipochavepix must be equal to one of the allowed values"} | tabela=C000008 | filial=000001
+[2026-07-22 17:02:10] [TID=8040] [ERROR] [EXPORT] 66 registro(s) com erro em 0,1s - Erro em Funcionarios: 400: {"statusCode":400,"code":"FST_ERR_VALIDATION","error":"Bad Request","message":"body/11/dadosbancarios/0/tipochavepix must be equal to one of the allowed values"} | tabela=C000008 | filial=000001
+[2026-07-22 17:03:56] [TID=23928] [INFO] [EXPORT] 17:03:56 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-07-22 17:03:56] [TID=23928] [ERROR] [EXPORT] 17:03:56 | Lote falhou: 400: {"statusCode":400,"code":"FST_ERR_VALIDATION","error":"Bad Request","message":"body/11/dadosbancarios/0/tipochavepix must be equal to one of the allowed values"} | tabela=C000008 | filial=000001
+[2026-07-22 17:03:56] [TID=23928] [ERROR] [EXPORT] 66 registro(s) com erro em 0,1s - Erro em Funcionarios: 400: {"statusCode":400,"code":"FST_ERR_VALIDATION","error":"Bad Request","message":"body/11/dadosbancarios/0/tipochavepix must be equal to one of the allowed values"} | tabela=C000008 | filial=000001
+[2026-07-22 17:04:06] [TID=9980] [INFO] [EXPORT] 17:04:06 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-07-22 17:04:06] [TID=9980] [ERROR] [EXPORT] 17:04:06 | Lote falhou: 400: {"statusCode":400,"code":"FST_ERR_VALIDATION","error":"Bad Request","message":"body/11/dadosbancarios/0/tipochavepix must be equal to one of the allowed values"} | tabela=C000008 | filial=000001
+[2026-07-22 17:04:06] [TID=9980] [ERROR] [EXPORT] 66 registro(s) com erro em 0,0s - Erro em Funcionarios: 400: {"statusCode":400,"code":"FST_ERR_VALIDATION","error":"Bad Request","message":"body/11/dadosbancarios/0/tipochavepix must be equal to one of the allowed values"} | tabela=C000008 | filial=000001
+[2026-07-22 17:04:56] [TID=2060] [INFO] [EXPORT] 17:04:56 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-07-22 17:04:56] [TID=2060] [ERROR] [EXPORT] 17:04:56 | Lote falhou: 400: {"statusCode":400,"code":"FST_ERR_VALIDATION","error":"Bad Request","message":"body/11/dadosbancarios/0/tipochavepix must be equal to one of the allowed values"} | tabela=C000008 | filial=000001
+[2026-07-22 17:04:56] [TID=2060] [ERROR] [EXPORT] 66 registro(s) com erro em 0,1s - Erro em Funcionarios: 400: {"statusCode":400,"code":"FST_ERR_VALIDATION","error":"Bad Request","message":"body/11/dadosbancarios/0/tipochavepix must be equal to one of the allowed values"} | tabela=C000008 | filial=000001
+[2026-07-22 17:05:38] [TID=20020] [INFO] [EXPORT] 17:05:38 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-07-22 17:05:44] [TID=20020] [ERROR] [EXPORT] Erro em Funcionarios: Erro ao Executar requisição:REST request failed: Error sending data: (12029) A connection with the server could not be established | tabela=C000008 | filial=000001
+[2026-07-22 17:05:53] [TID=24028] [INFO] [EXPORT] 17:05:53 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-07-22 17:05:53] [TID=24028] [ERROR] [EXPORT] 17:05:53 | Lote falhou: 400: {"statusCode":400,"code":"FST_ERR_VALIDATION","error":"Bad Request","message":"body/11/dadosbancarios/0/tipochavepix must be equal to one of the allowed values"} | tabela=C000008 | filial=000001
+[2026-07-22 17:05:53] [TID=24028] [ERROR] [EXPORT] 66 registro(s) com erro em 0,1s - Erro em Funcionarios: 400: {"statusCode":400,"code":"FST_ERR_VALIDATION","error":"Bad Request","message":"body/11/dadosbancarios/0/tipochavepix must be equal to one of the allowed values"} | tabela=C000008 | filial=000001
+[2026-07-22 17:06:26] [TID=9260] [INFO] [EXPORT] 17:06:26 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-07-22 17:06:26] [TID=9260] [ERROR] [EXPORT] 17:06:26 | Lote falhou: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":""} | tabela=C000008 | filial=000001
+[2026-07-22 17:06:26] [TID=9260] [ERROR] [EXPORT] 66 registro(s) com erro em 0,1s - Erro em Funcionarios: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":""} | tabela=C000008 | filial=000001
+[2026-07-22 17:10:46] [TID=24564] [INFO] [EXPORT] 17:10:46 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-07-22 17:10:46] [TID=24564] [ERROR] [EXPORT] 17:10:46 | Lote falhou: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"/11/dadosbancarios/0/tipochavepix must be equal to one of the allowed values: CPF, CNPJ, EMAIL, TELEFONE, CHAVEALEATORIA"} | tabela=C000008 | filial=000001
+[2026-07-22 17:10:46] [TID=24564] [ERROR] [EXPORT] 66 registro(s) com erro em 0,1s - Erro em Funcionarios: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"/11/dadosbancarios/0/tipochavepix must be equal to one of the allowed values: CPF, CNPJ, EMAIL, TELEFONE, CHAVEALEATORIA"} | tabela=C000008 | filial=000001
+[2026-07-22 17:17:27] [TID=140] [INFO] [SYSTEM] Processando eventos
+[2026-07-22 17:17:27] [TID=1092] [INFO] [SYSTEM] Registros pendentes: 1
+[2026-07-22 17:17:27] [TID=1092] [INFO] [AUTH] Autenticado com sucesso | filial=000001
+[2026-07-22 17:17:27] [TID=1092] [ERROR] [SYNC] 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"/0/dadosbancarios/0/tipochavepix must be equal to one of the allowed values: CPF, CNPJ, EMAIL, CELULAR, CHAVEALEATORIA"} | codseq=125716 | coderecord=000079 | tabela=C000008 | filial=000001
+[2026-07-22 17:17:29] [TID=1092] [INFO] [SYNC] === RESUMO === Tabela C000008 - Sucesso: 0  Erro: 1
+[2026-07-22 17:17:43] [TID=140] [INFO] [SYSTEM] Processando eventos
+[2026-07-22 17:17:43] [TID=5676] [INFO] [SYSTEM] Registros pendentes: 2
+[2026-07-22 17:17:43] [TID=5676] [ERROR] [SYNC] 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"/0/dadosbancarios/0/tipochavepix must be equal to one of the allowed values: CPF, CNPJ, EMAIL, CELULAR, CHAVEALEATORIA"} | codseq=125716 | coderecord=000079 | tabela=C000008 | filial=000001
+[2026-07-22 17:17:44] [TID=5676] [ERROR] [SYNC] 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"/0/dadosbancarios/0/tipochavepix must be equal to one of the allowed values: CPF, CNPJ, EMAIL, CELULAR, CHAVEALEATORIA"} | codseq=125717 | coderecord=000059 | tabela=C000008 | filial=000001
+[2026-07-22 17:17:45] [TID=5676] [INFO] [SYNC] === RESUMO === Tabela C000008 - Sucesso: 0  Erro: 2
+[2026-07-22 17:17:53] [TID=140] [INFO] [SYSTEM] Processando eventos
+[2026-07-22 17:17:54] [TID=2888] [INFO] [SYSTEM] Registros pendentes: 3
+[2026-07-22 17:17:54] [TID=2888] [ERROR] [SYNC] 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"/0/dadosbancarios/0/tipochavepix must be equal to one of the allowed values: CPF, CNPJ, EMAIL, CELULAR, CHAVEALEATORIA"} | codseq=125716 | coderecord=000079 | tabela=C000008 | filial=000001
+[2026-07-22 17:17:55] [TID=2888] [ERROR] [SYNC] 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"/0/dadosbancarios/0/tipochavepix must be equal to one of the allowed values: CPF, CNPJ, EMAIL, CELULAR, CHAVEALEATORIA"} | codseq=125717 | coderecord=000059 | tabela=C000008 | filial=000001
+[2026-07-22 17:17:56] [TID=2888] [ERROR] [SYNC] 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"/0/dadosbancarios/0/tipochavepix must be equal to one of the allowed values: CPF, CNPJ, EMAIL, CELULAR, CHAVEALEATORIA"} | codseq=125718 | coderecord=000056 | tabela=C000008 | filial=000001
+[2026-07-22 17:17:57] [TID=2888] [INFO] [SYNC] === RESUMO === Tabela C000008 - Sucesso: 0  Erro: 3
+--- Log iniciado em 22/07/2026 17:25:33 ---
+[2026-07-22 17:25:33] [TID=24072] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-22 17:25:33] [TID=24072] [INFO] [SYSTEM] Processando eventos
+[2026-07-22 17:25:33] [TID=23404] [INFO] [SYSTEM] Registros pendentes: 3
+[2026-07-22 17:25:34] [TID=23404] [ERROR] [SYNC] Falha na comunicação com a IntegraçãoHTTP/1.1 500 Internal Server Error | codseq=125716 | coderecord=000079 | tabela=C000008 | filial=000001
+[2026-07-22 17:25:35] [TID=23404] [ERROR] [SYNC] Falha na comunicação com a IntegraçãoHTTP/1.1 500 Internal Server Error | codseq=125717 | coderecord=000059 | tabela=C000008 | filial=000001
+[2026-07-22 17:25:36] [TID=23404] [ERROR] [SYNC] Falha na comunicação com a IntegraçãoHTTP/1.1 500 Internal Server Error | codseq=125718 | coderecord=000056 | tabela=C000008 | filial=000001
+[2026-07-22 17:25:37] [TID=23404] [INFO] [SYNC] === RESUMO === Tabela C000008 - Sucesso: 0  Erro: 3
+[2026-07-22 17:26:33] [TID=1300] [INFO] [EXPORT] 17:26:33 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-07-22 17:26:33] [TID=1300] [ERROR] [EXPORT] 17:26:33 | Lote falhou: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"/11/dadosbancarios/0/tipochavepix must be equal to one of the allowed values: DOCUMENTO, EMAIL, TELEFONE, CHAVEALEATORIA"} | tabela=C000008 | filial=000001
+[2026-07-22 17:26:33] [TID=1300] [ERROR] [EXPORT] 66 registro(s) com erro em 0,0s - Erro em Funcionarios: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"/11/dadosbancarios/0/tipochavepix must be equal to one of the allowed values: DOCUMENTO, EMAIL, TELEFONE, CHAVEALEATORIA"} | tabela=C000008 | filial=000001
+[2026-07-22 17:27:43] [TID=9436] [INFO] [EXPORT] 17:27:43 | Enviando lote com 785 registro(s) (785 de 785) | tabela=C000007 | filial=000001
+[2026-07-22 17:27:43] [TID=9436] [WARN] [SYSTEM] Sanitize removeu 2 char(s) [] em C000007.batch
+[2026-07-22 17:27:44] [TID=9436] [INFO] [EXPORT] 17:27:44 | Lote de 785 registro(s) enviado com sucesso | tabela=C000007 | filial=000001
+[2026-07-22 17:27:45] [TID=9436] [INFO] [EXPORT] 785 registro(s) sincronizado(s) em 2,5s - Clientes sincronizados com sucesso | tabela=C000007 | filial=000001
+[2026-07-22 17:27:53] [TID=20312] [INFO] [EXPORT] 17:27:53 | Enviando lote com 121 registro(s) (121 de 121) | tabela=C000009 | filial=000001
+[2026-07-22 17:27:53] [TID=20312] [INFO] [EXPORT] 17:27:53 | Lote de 121 registro(s) enviado com sucesso | tabela=C000009 | filial=000001
+[2026-07-22 17:27:53] [TID=20312] [INFO] [EXPORT] 121 registro(s) sincronizado(s) em 0,5s - Fornecedores sincronizados com sucesso | tabela=C000009 | filial=000001
+[2026-07-22 17:27:57] [TID=16376] [INFO] [EXPORT] 17:27:57 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-07-22 17:27:57] [TID=16376] [ERROR] [EXPORT] 17:27:57 | Lote falhou: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"/11/dadosbancarios/0/tipochavepix must be equal to one of the allowed values: DOCUMENTO, EMAIL, TELEFONE, CHAVEALEATORIA"} | tabela=C000008 | filial=000001
+[2026-07-22 17:27:57] [TID=16376] [ERROR] [EXPORT] 66 registro(s) com erro em 0,0s - Erro em Funcionarios: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"/11/dadosbancarios/0/tipochavepix must be equal to one of the allowed values: DOCUMENTO, EMAIL, TELEFONE, CHAVEALEATORIA"} | tabela=C000008 | filial=000001
+[2026-07-22 17:36:57] [TID=11180] [INFO] [AUTH] Autenticado com sucesso | filial=000001
+[2026-07-22 17:36:57] [TID=11180] [INFO] [EXPORT] 17:36:57 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-07-22 17:36:57] [TID=11180] [ERROR] [EXPORT] 17:36:57 | Lote falhou: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"/11/dadosbancarios/0/tipochavepix must be equal to one of the allowed values: DOCUMENTO, EMAIL, TELEFONE, CHAVEALEATORIA. Valor recebido: \"\""} | tabela=C000008 | filial=000001
+[2026-07-22 17:36:57] [TID=11180] [ERROR] [EXPORT] 66 registro(s) com erro em 0,1s - Erro em Funcionarios: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"/11/dadosbancarios/0/tipochavepix must be equal to one of the allowed values: DOCUMENTO, EMAIL, TELEFONE, CHAVEALEATORIA. Valor recebido: \"\""} | tabela=C000008 | filial=000001
+--- Log iniciado em 22/07/2026 17:41:02 ---
+[2026-07-22 17:41:02] [TID=10928] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-22 17:41:02] [TID=10928] [INFO] [SYSTEM] Processando eventos
+[2026-07-22 17:41:02] [TID=15524] [INFO] [SYSTEM] Registros pendentes: 3
+[2026-07-22 17:41:03] [TID=15524] [ERROR] [SYNC] Falha na comunicação com a IntegraçãoHTTP/1.1 500 Internal Server Error | codseq=125716 | coderecord=000079 | tabela=C000008 | filial=000001
+[2026-07-22 17:41:04] [TID=15524] [ERROR] [SYNC] Falha na comunicação com a IntegraçãoHTTP/1.1 500 Internal Server Error | codseq=125717 | coderecord=000059 | tabela=C000008 | filial=000001
+[2026-07-22 17:41:05] [TID=15524] [ERROR] [SYNC] Falha na comunicação com a IntegraçãoHTTP/1.1 500 Internal Server Error | codseq=125718 | coderecord=000056 | tabela=C000008 | filial=000001
+[2026-07-22 17:41:06] [TID=15524] [INFO] [SYNC] === RESUMO === Tabela C000008 - Sucesso: 0  Erro: 3
+[2026-07-22 17:41:10] [TID=23808] [INFO] [EXPORT] 17:41:10 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-07-22 17:41:10] [TID=23808] [ERROR] [EXPORT] 17:41:10 | Lote falhou: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"/11/dadosbancarios/0/tipochavepix must be equal to one of the allowed values: DOCUMENTO, EMAIL, TELEFONE, CHAVEALEATORIA. Valor recebido: \"\""} | tabela=C000008 | filial=000001
+[2026-07-22 17:41:10] [TID=23808] [ERROR] [EXPORT] 66 registro(s) com erro em 0,0s - Erro em Funcionarios: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"/11/dadosbancarios/0/tipochavepix must be equal to one of the allowed values: DOCUMENTO, EMAIL, TELEFONE, CHAVEALEATORIA. Valor recebido: \"\""} | tabela=C000008 | filial=000001
+[2026-07-22 17:42:47] [TID=22360] [INFO] [EXPORT] 17:42:47 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-07-22 17:42:47] [TID=22360] [ERROR] [EXPORT] Erro em Funcionarios: Falha na comunicação com a IntegraçãoHTTP/1.1 500 Internal Server Error | tabela=C000008 | filial=000001
+[2026-07-22 17:44:09] [TID=18780] [INFO] [EXPORT] 17:44:09 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-07-22 17:44:09] [TID=18780] [ERROR] [EXPORT] Erro em Funcionarios: Falha na comunicação com a IntegraçãoHTTP/1.1 500 Internal Server Error | tabela=C000008 | filial=000001
+[2026-07-22 17:45:13] [TID=13732] [INFO] [EXPORT] 17:45:13 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-07-22 17:45:13] [TID=13732] [ERROR] [EXPORT] Erro em Funcionarios: Falha na comunicação com a IntegraçãoHTTP/1.1 500 Internal Server Error | tabela=C000008 | filial=000001
+[2026-07-22 17:47:48] [TID=22864] [INFO] [EXPORT] 17:47:48 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-07-22 17:47:48] [TID=22864] [INFO] [EXPORT] 17:47:48 | Lote de 66 registro(s) enviado com sucesso | tabela=C000008 | filial=000001
+[2026-07-22 17:47:48] [TID=22864] [INFO] [EXPORT] 66 registro(s) sincronizado(s) em 0,4s - Funcionarios sincronizados com sucesso | tabela=C000008 | filial=000001
+--- Log iniciado em 22/07/2026 17:49:00 ---
+[2026-07-22 17:49:00] [TID=17832] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-22 17:49:00] [TID=17832] [INFO] [SYSTEM] Processando eventos
+[2026-07-22 17:49:00] [TID=8048] [INFO] [SYSTEM] Registros pendentes: 3
+[2026-07-22 17:49:00] [TID=8048] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=125716 | coderecord=000079 | tabela=C000008 | filial=000001
+[2026-07-22 17:49:01] [TID=8048] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=125717 | coderecord=000059 | tabela=C000008 | filial=000001
+[2026-07-22 17:49:03] [TID=8048] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=125718 | coderecord=000056 | tabela=C000008 | filial=000001
+[2026-07-22 17:49:04] [TID=8048] [INFO] [SYNC] === RESUMO === Tabela C000008 - Sucesso: 3  Erro: 0

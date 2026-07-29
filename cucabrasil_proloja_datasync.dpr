@@ -9,6 +9,7 @@ uses
   dmModulo in 'Local Files\dmModulo.pas' {modulo: TDataModule},
   uLogger in 'uLogger.pas',
   uApiClient in 'Entity Models\API\uApiClient.pas',
+  uSyncOrchestrator in 'Entity Models\API\uSyncOrchestrator.pas',
   uEntityBase in 'Entity Models\ERP\uEntityBase.pas',
   uEntityFactory in 'Entity Models\ERP\uEntityFactory.pas',
   uPessoaAPI in 'Entity Models\API\APIEntities\uPessoaAPI.pas',
@@ -22,6 +23,9 @@ uses
   uGrupoProdutoAPI in 'Entity Models\API\APIEntities\uGrupoProdutoAPI.pas',
   uRegiaoClienteAPI in 'Entity Models\API\APIEntities\uRegiaoClienteAPI.pas',
   uSubgrupoProdutoAPI in 'Entity Models\API\APIEntities\uSubgrupoProdutoAPI.pas',
+  uVariacaoProdutoAPI in 'Entity Models\API\APIEntities\uVariacaoProdutoAPI.pas',
+  uInstituicoesFinancirasAPI in 'Entity Models\API\APIEntities\uInstituicoesFinancirasAPI.pas',
+  uPedidoVendaAPI in 'Entity Models\API\APIEntities\uPedidoVendaAPI.pas',
   uEntityCliente in 'Entity Models\ERP\ERPEntities\uEntityCliente.pas',
   uEntityProduto in 'Entity Models\ERP\ERPEntities\uEntityProduto.pas',
   uEntityAcabamento in 'Entity Models\ERP\ERPEntities\uEntityAcabamento.pas',
@@ -34,11 +38,12 @@ uses
   uEntityPedidoVenda in 'Entity Models\ERP\ERPEntities\uEntityPedidoVenda.pas',
   uEntityRegiaoCliente in 'Entity Models\ERP\ERPEntities\uEntityRegiaoCliente.pas',
   uEntitySubgrupoProduto in 'Entity Models\ERP\ERPEntities\uEntitySubgrupoProduto.pas',
-  uEntitySupervisor in 'Entity Models\ERP\ERPEntities\uEntitySupervisor.pas',
   uEntityTipoPagamento in 'Entity Models\ERP\ERPEntities\uEntityTipoPagamento.pas',
   uEntityTransportador in 'Entity Models\ERP\ERPEntities\uEntityTransportador.pas',
   uEntityVariacaoProduto in 'Entity Models\ERP\ERPEntities\uEntityVariacaoProduto.pas',
-  uEntityVendedor in 'Entity Models\ERP\ERPEntities\uEntityVendedor.pas';
+  uEntityFuncionario in 'Entity Models\ERP\ERPEntities\uEntityFuncionario.pas',
+  uEntityBanco in 'Entity Models\ERP\ERPEntities\uEntityBanco.pas',
+  uJsonUtils in 'Local Files\uJsonUtils.pas';
 
 {$R *.res}
 

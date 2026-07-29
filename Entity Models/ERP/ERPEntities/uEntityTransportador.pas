@@ -4,7 +4,7 @@ interface
 
 uses
   System.JSON, System.SysUtils, System.Math, System.StrUtils, FireDAC.Comp.Client, Data.DB,
-  uEntityBase;
+  uEntityBase, uPessoaAPI;
 
 type
   TEntityTransportador = class(TEntityBase)
@@ -34,7 +34,7 @@ end;
 
 function TEntityTransportador.GetResourceName: string;
 begin
-  Result := '/transportador';
+  Result := TPessoaAPI.ResourceName;
 end;
 
 function TEntityTransportador.GetRecord(ACodRecord: string): TDataSet;
@@ -64,28 +64,83 @@ begin
 end;
 
 function TEntityTransportador.MapToJson(ADataSet: TDataSet): TJSONObject;
+
+  function ConcatObs: string;
+  var
+    s: string;
+  begin
+    Result := '';
+    s := Trim(ADataSet.FieldByName('obs1').AsString);
+    if s <> '' then
+      Result := s;
+    s := Trim(ADataSet.FieldByName('obs2').AsString);
+    if s <> '' then
+    begin
+      if Result <> '' then Result := Result + sLineBreak;
+      Result := Result + s;
+    end;
+    s := Trim(ADataSet.FieldByName('obs3').AsString);
+    if s <> '' then
+    begin
+      if Result <> '' then Result := Result + sLineBreak;
+      Result := Result + s;
+    end;
+  end;
+
+  function FormatDateField(const AFieldName: string): string;
+  begin
+    if ADataSet.FieldByName(AFieldName).IsNull then
+      Exit('');
+    Result := FormatDateTime('yyyy-mm-dd', ADataSet.FieldByName(AFieldName).AsDateTime);
+  end;
+
+var
+  Pessoa: TPessoaAPI;
 begin
-  Result := TJSONObject.Create;
+  Pessoa := TPessoaAPI.Create;
+  try
+    Pessoa.habilitado              := ifthen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
+    Pessoa.perfiltransportador     := 1;
+    Pessoa.ativo                   := 1;  //cadastro de transportador nao implementa ativo/inativo. Logo sempre ativo
 
-  // <<CHANGE_ME: mapear campos do banco para JSON da API>>
+    Pessoa.codigoerp               := ADataSet.FieldByName('codigo').AsString;
+    Pessoa.nome                    := ADataSet.FieldByName('nome').AsString;
+    Pessoa.nomefantasia            := ADataSet.FieldByName('nomefantasia').AsString;
+    Pessoa.logradouro              := ADataSet.FieldByName('endereco').AsString;
+    Pessoa.cep                     := ADataSet.FieldByName('cep').AsString;
+    Pessoa.bairro                  := ADataSet.FieldByName('bairro').AsString;
+    Pessoa.cidade                  := ADataSet.FieldByName('cidade').AsString;
+    Pessoa.uf                      := ADataSet.FieldByName('uf').AsString;
+    Pessoa.numero                  := ADataSet.FieldByName('numero').AsString;
+    Pessoa.documentoprincipal      := ADataSet.FieldByName('cpf').AsString;
+    Pessoa.documentosecundario     := ADataSet.FieldByName('rg').AsString;
+    Pessoa.telefone                := ADataSet.FieldByName('telefone').AsString;
+    Pessoa.celular                 := ADataSet.FieldByName('celular').AsString;
+    Pessoa.email                   := ADataSet.FieldByName('email').AsString;
+    Pessoa.observacoes             := ConcatObs;
+    Pessoa.rntrc_transportador     := ADataSet.FieldByName('rntrc').AsString;
+    Pessoa.datacadastro            := FormatDateField('data');
+    Pessoa.ibge                    := ADataSet.FieldByName('ibge').AsString;
+    Pessoa.complemento             := ADataSet.FieldByName('complemento').AsString;
 
-  Result.AddPair('codigoerp', ADataSet.FieldByName('codigo').AsString);
+    if ADataSet.FieldByName('tipo').AsInteger = 1 then
+      Pessoa.tipopessoa := 'FISICA'
+    else
+      Pessoa.tipopessoa := 'JURIDICA';
 
-  if ADataSet.FieldByName('situacao').AsInteger = 1 then
-    Result.AddPair('ativo', 1)
-  else
-    Result.AddPair('ativo', 0);
+    //Add dados bancarios
+    Pessoa.AddDadosBancarios('', ADataSet.FieldByName('codbanco').AsString,
+                            '', ADataSet.FieldByName('agencia').AsString,
+                            ADataSet.FieldByName('conta').AsString,
+                            '',
+                            ADataSet.FieldByName('chavepix').AsString,
+                            '',
+                            ADataSet.FieldByName('tipoconta').AsString
+    );
 
-  case FDatabaseType of
-    dtIndustrial:
-    begin
-      // <<CHANGE_ME: campos especificos industrial>>
-    end;
-
-    dtCommercial:
-    begin
-      // <<CHANGE_ME: campos especificos comercial>>
-    end;
+    Result := Pessoa.ToJson;
+  finally
+    Pessoa.Free;
   end;
 end;
 
@@ -98,6 +153,11 @@ begin
     Qry.Connection := FConnection;
     Qry.SQL.Add('select * from ' + GetTableNameClass);
     Qry.SQL.Add('where IDTRANSPORTADOR is null');
+    if FDatabaseType = dtIndustrial then
+    begin
+      Qry.SQL.Add('and codigofilial = :filial');
+      Qry.ParamByName('filial').AsString := FFilial;
+    end;
     Qry.SQL.Add('order by codigo');
     Qry.Open;
   except

@@ -23,7 +23,14 @@ type
     FConnection: TFDConnection;
     FDatabaseType: TDatabaseType;
     FOnProgress: TEntityProgress;
-    // --- Metodos abstratos (obrigatorios nas filhas) ---
+    FFilial: string;
+  protected
+    procedure ProcessBatch(ADataSet: TDataSet; const ABaseURL: string;
+      const AToken, AAuthHeader: string; var ABatchPos: Integer;
+      ABatchSize: Integer; var AResult: TSyncResult);
+  public
+    constructor Create(AConnection: TFDConnection; ADatabaseType: TDatabaseType = dtIndustrial); virtual;
+
     class function GetTableNameClass: string; virtual; abstract;
     function GetTableName: string; virtual;
     function GetResourceName: string; virtual; abstract;
@@ -33,16 +40,12 @@ type
     function GetUnsyncedRecords: TDataSet; virtual; abstract;
     function GetBatchSize: Integer; virtual; abstract;
 
-    // --- Metodos com implementacao padrao (opcional override) ---
     procedure SetContextFlag(const AFlag, AValue: string);
     procedure StoreApiIdBack(ACodRecord, AApiId: string); virtual;
+    function GetErpPKFieldName: string; virtual;
     function ExtractApiId(const AResponse: TJSONObject): string; virtual;
     function IsResponseOk(const AResponse: TJSONObject; var AErrorMsg: string): Boolean;
-    procedure ProcessBatch(ADataSet: TDataSet; const ABaseURL: string;
-      const AToken, AAuthHeader: string; var ABatchPos: Integer;
-      ABatchSize: Integer; var AResult: TSyncResult);
-  public
-    constructor Create(AConnection: TFDConnection; ADatabaseType: TDatabaseType = dtIndustrial); virtual;
+
     function Sync(const ATypeDb, ACodRecord, ACodFilial: string;
       const ARest: TRestIntegracao; const AToken, AAuthHeader: string): TSyncResult; virtual;
     function SyncAll(const ABaseURL: string; const AToken, AAuthHeader: string): TSyncResult; virtual;
@@ -52,6 +55,7 @@ type
     property TableName: string read GetTableName;
     property ResourceName: string read GetResourceName;
     property DatabaseType: TDatabaseType read FDatabaseType;
+    property Filial: string read FFilial write FFilial;
     property OnProgress: TEntityProgress read FOnProgress write FOnProgress;
   end;
 
@@ -111,6 +115,11 @@ begin
 end;
 procedure TEntityBase.StoreApiIdBack(ACodRecord, AApiId: string);
 begin
+end;
+
+function TEntityBase.GetErpPKFieldName: string;
+begin
+  Result := 'codigo';
 end;
 
 function TEntityBase.ExtractApiId(const AResponse: TJSONObject): string;

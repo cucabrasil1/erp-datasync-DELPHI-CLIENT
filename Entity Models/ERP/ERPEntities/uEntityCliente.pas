@@ -19,6 +19,7 @@ type
     function GetSyncAllMessage(ASuccess: Boolean; const AErrorMsg: string): string; override;
     procedure StoreApiIdBack(ACodRecord, AApiId: string); override;
     procedure LoadFromDTO(const ADTO: TPessoaAPI);
+    function GetContatosTabC000276(ACodCliente: string): TDataSet;
   end;
 
 implementation
@@ -56,6 +57,24 @@ begin
   Result := Qry;
 end;
 
+function TEntityCliente.GetContatosTabC000276(ACodCliente: string): TDataSet;
+var
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Add('select * from C000276');
+    Qry.SQL.Add('where codcliente = :cod');
+    Qry.ParamByName('cod').AsString := ACodCliente;
+    Qry.Open;
+  except
+    Qry.Free;
+    raise;
+  end;
+  Result := Qry;
+end;
+
 function TEntityCliente.GetApiId(ADataSet: TDataSet): string;
 begin
   if FDatabaseType = dtIndustrial then
@@ -67,12 +86,13 @@ end;
 function TEntityCliente.MapToJson(ADataSet: TDataSet): TJSONObject;
 var
   Pessoa: TPessoaAPI;
+  ContatosDs: TDataSet;
 begin
   Pessoa := TPessoaAPI.Create;
   try
     Pessoa.habilitado          := ifthen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
     Pessoa.perfilcliente       := 1;
-    Pessoa.codigoerp           := ADataSet.FieldByName('codigo').AsString;
+    Pessoa.codigoerp           := ADataSet.FieldByName('codigo').AsString;;
     Pessoa.nome                := ADataSet.FieldByName('nome').AsString;
     Pessoa.nomefantasia        := ADataSet.FieldByName('apelido').AsString;
     Pessoa.logradouro          := ADataSet.FieldByName('endereco').AsString;
@@ -80,8 +100,8 @@ begin
     Pessoa.bairro              := ADataSet.FieldByName('bairro').AsString;
     Pessoa.cidade              := ADataSet.FieldByName('cidade').AsString;
     Pessoa.uf                  := ADataSet.FieldByName('uf').AsString;
-    Pessoa.ibge                := ADataSet.FieldByName('ibge').AsString;
-    Pessoa.numero              := ADataSet.FieldByName('numero').AsString;
+    Pessoa.ibge                := ADataSet.FieldByName('cod_municipio_ibge').AsString;
+    Pessoa.numero              := ADataSet.FieldByName('numeroimovel').AsString;
     Pessoa.complemento         := ADataSet.FieldByName('complemento').AsString;
     Pessoa.documentoprincipal  := ADataSet.FieldByName('cpf').AsString;
     Pessoa.documentosecundario := ADataSet.FieldByName('rg').AsString;
@@ -108,10 +128,34 @@ begin
     else
       Pessoa.dataultimacompra := FormatDateTime('yyyy-mm-dd', ADataSet.FieldByName('data_ultimacompra').AsDateTime);
 
+
+    if ADataSet.FieldByName('telefone2').AsString <> '' then
+      Pessoa.AddContato('Telefone 2', ADataSet.FieldByName('telefone2').AsString, '', '');
+    if ADataSet.FieldByName('telefone3').AsString <> '' then
+      Pessoa.AddContato('Telefone 3', ADataSet.FieldByName('telefone3').AsString, '', '');
+    if ADataSet.FieldByName('contato').AsString <> '' then
+      Pessoa.AddContato('Contato',    ADataSet.FieldByName('contato').AsString, '', '');
+
     case FDatabaseType of
       dtIndustrial:
       begin
         // <<CHANGE_ME: campos especificos industrial>>
+        Pessoa.nomefantasia        := ADataSet.FieldByName('nomefantasia').AsString;
+
+        // Contatos da tabela C000276
+        ContatosDs := GetContatosTabC000276(ADataSet.FieldByName('codigo').AsString);
+        try
+          while not ContatosDs.Eof do
+          begin
+              Pessoa.AddContato(ContatosDs.FieldByName('identificador').AsString,
+                                ContatosDs.FieldByName('telefone').AsString,
+                                ContatosDs.FieldByName('email').AsString,
+                                ContatosDs.FieldByName('setor').AsString);
+            ContatosDs.Next;
+          end;
+        finally
+          ContatosDs.Free;
+        end;
       end;
 
       dtCommercial:
@@ -120,8 +164,6 @@ begin
       end;
     end;
 
-    Pessoa.AddContato('Telefone 2', ADataSet.FieldByName('telefone2').AsString, '', '');
-    Pessoa.AddContato('Telefone 3', ADataSet.FieldByName('telefone3').AsString, '', '');
 
     Result := Pessoa.ToJson;
   finally
@@ -138,6 +180,11 @@ begin
     Qry.Connection := FConnection;
     Qry.SQL.Add('select * from ' + GetTableNameClass);
     Qry.SQL.Add('where idcliente is null');
+    if FDatabaseType = dtIndustrial then
+    begin
+      Qry.SQL.Add('and codigofilial = :filial');
+      Qry.ParamByName('filial').AsString := FFilial;
+    end;
     Qry.SQL.Add('order by codigo');
     Qry.Open;
   except

@@ -4,7 +4,7 @@ interface
 
 uses
   System.JSON, System.SysUtils, System.Math, System.StrUtils, FireDAC.Comp.Client, Data.DB,
-  uEntityBase;
+  uEntityBase, uVariacaoProdutoAPI;
 
 type
   TEntityVariacaoProduto = class(TEntityBase)
@@ -34,7 +34,7 @@ end;
 
 function TEntityVariacaoProduto.GetResourceName: string;
 begin
-  Result := '/variacaoproduto';
+  Result := TVariacaoProdutoAPI.ResourceName;
 end;
 
 function TEntityVariacaoProduto.GetRecord(ACodRecord: string): TDataSet;
@@ -46,6 +46,7 @@ begin
     Qry.Connection := FConnection;
     Qry.SQL.Add('select * from ' + GetTableNameClass);
     Qry.SQL.Add('where codigo = :cod');
+    Qry.SQL.Add('and variacaobase = ''N''');
     Qry.ParamByName('cod').AsString := ACodRecord;
     Qry.Open;
   except
@@ -64,28 +65,37 @@ begin
 end;
 
 function TEntityVariacaoProduto.MapToJson(ADataSet: TDataSet): TJSONObject;
+var
+  Variacao: TVariacaoProdutoAPI;
 begin
-  Result := TJSONObject.Create;
+  Variacao := TVariacaoProdutoAPI.Create;
+  try
+    case FDatabaseType of
+      dtIndustrial:
+      begin
+        Variacao.codigoerp  := ADataSet.FieldByName('codigo').AsString;
+        Variacao.codproduto := ADataSet.FieldByName('codproduto').AsString;
+        Variacao.descricao  := ADataSet.FieldByName('descricao_variacao').AsString;
+        Variacao.ativo      := IfThen(ADataSet.FieldByName('ativo').AsString = 'S', 1, 0);
+        Variacao.variacaobase := IfThen(ADataSet.FieldByName('variacaobase').AsString = 'S', 1, 0);
+        Variacao.precocusto := ADataSet.FieldByName('precocusto').AsCurrency;
+        Variacao.habilitado := IfThen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
 
-  // <<CHANGE_ME: mapear campos do banco para JSON da API>>
+        if ADataSet.FieldByName('datamodificacao').IsNull then
+          Variacao.datamodificacao := ''
+        else
+          Variacao.datamodificacao := FormatDateTime('yyyy-mm-dd hh:nn:ss',
+            ADataSet.FieldByName('datamodificacao').AsDateTime);
+      end;
 
-  Result.AddPair('codigoerp', ADataSet.FieldByName('codigo').AsString);
-
-  if ADataSet.FieldByName('situacao').AsInteger = 1 then
-    Result.AddPair('ativo', 1)
-  else
-    Result.AddPair('ativo', 0);
-
-  case FDatabaseType of
-    dtIndustrial:
-    begin
-      // <<CHANGE_ME: campos especificos industrial>>
+      dtCommercial:
+      begin
+      end;
     end;
 
-    dtCommercial:
-    begin
-      // <<CHANGE_ME: campos especificos comercial>>
-    end;
+    Result := Variacao.ToJson;
+  finally
+    Variacao.Free;
   end;
 end;
 
@@ -98,6 +108,12 @@ begin
     Qry.Connection := FConnection;
     Qry.SQL.Add('select * from ' + GetTableNameClass);
     Qry.SQL.Add('where IDVARIACAO is null');
+    Qry.SQL.Add('and variacaobase = ''N''');
+    if FDatabaseType = dtIndustrial then
+    begin
+      Qry.SQL.Add('and codigofilial = :filial');
+      Qry.ParamByName('filial').AsString := FFilial;
+    end;
     Qry.SQL.Add('order by codigo');
     Qry.Open;
   except

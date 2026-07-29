@@ -3,17 +3,23 @@
 interface
 
 uses
-  System.JSON, System.SysUtils, System.Math;
+  System.JSON, System.SysUtils, System.Math, System.Generics.Collections,
+  uJsonUtils;
 
 type
   TProdutoAPI = class
   public
-    // --- campos enviados (ERP . API) ---
+    ativo: Integer;
     codigoerp: string;
+    idproduto: string;
     produto: string;
     referencia: string;
     codbarras: string;
+    codbarrastributavel: string;
     unidade: string;
+    origem: Integer;
+    classificacao: string;
+    cst: string;
     ncm: string;
     cest: string;
     precocompra: Double;
@@ -24,12 +30,21 @@ type
     m3: Double;
     pesobruto: Double;
     pesoliquido: Double;
-    ativo: string;
+    altura: Double;
+    largura: Double;
+    profundidade: Double;
+    possuivariacaocor: string;
+    destacargtindfe: string;
+    observacoes: string;
+    codigogrupo: string;
+    idgrupo: Integer;
+    volumes: TJSONArray;
+    habilitado: Integer;
+    nomesubgrupo: string;
     caminhoimagem1: string;
     caminhoimagem2: string;
     caminhoimagem3: string;
 
-    // --- campos retornados pela API (GET) ---
     id: string;
     tenant_id: string;
     is_deleted: Integer;
@@ -37,6 +52,9 @@ type
     synced_at: string;
     created_at: string;
     updated_at: string;
+
+    constructor Create;
+    destructor Destroy; override;
 
     class function ResourceName: string;
     function ToJson: TJSONObject;
@@ -46,84 +64,116 @@ type
 implementation
 
 { TProdutoAPI }
+
 class function TProdutoAPI.ResourceName: string;
 begin
   Result := '/produto';
 end;
 
+constructor TProdutoAPI.Create;
+begin
+  inherited;
+  volumes := TJSONArray.Create;
+end;
+
+destructor TProdutoAPI.Destroy;
+begin
+  volumes.Free;
+  inherited;
+end;
 
 function TProdutoAPI.ToJson: TJSONObject;
 begin
   Result := TJSONObject.Create;
-  Result.AddPair('codigoerp', codigoerp);
-  Result.AddPair('produto', produto);
-  Result.AddPair('referencia', referencia);
-  Result.AddPair('codbarras', codbarras);
-  Result.AddPair('unidade', unidade);
-  Result.AddPair('ncm', ncm);
-  Result.AddPair('cest', cest);
-  Result.AddPair('precocompra', TJSONNumber.Create(precocompra));
-  Result.AddPair('precocusto', TJSONNumber.Create(precocusto));
-  Result.AddPair('precovenda', TJSONNumber.Create(precovenda));
-  Result.AddPair('tipo', tipo);
-  Result.AddPair('qtdevolume', TJSONNumber.Create(qtdevolume));
-  Result.AddPair('m3', TJSONNumber.Create(m3));
-  Result.AddPair('pesobruto', TJSONNumber.Create(pesobruto));
-  Result.AddPair('pesoliquido', TJSONNumber.Create(pesoliquido));
-  Result.AddPair('ativo', ativo);
-  Result.AddPair('caminhoimagem1', caminhoimagem1);
-  Result.AddPair('caminhoimagem2', caminhoimagem2);
-  Result.AddPair('caminhoimagem3', caminhoimagem3);
+
+  Result.AddPair('codigoerp',                  StrOrNull(codigoerp));
+  Result.AddPair('ativo',                   TJSONNumber.Create(ativo));
+  Result.AddPair('idproduto',               StrOrNull(idproduto));
+  Result.AddPair('produto',                 StrOrNull(produto));
+  Result.AddPair('referencia',              StrOrNull(referencia));
+  Result.AddPair('codbarras',               StrOrNull(codbarras));
+  Result.AddPair('codbarrastributavel',     StrOrNull(codbarrastributavel));
+  Result.AddPair('unidade',                 StrOrNull(unidade));
+  Result.AddPair('origem',                  TJSONNumber.Create(origem));
+  Result.AddPair('classificacao',           StrOrNull(classificacao));
+  Result.AddPair('cst',                     StrOrNull(cst));
+  Result.AddPair('ncm',                     StrOrNull(ncm));
+  Result.AddPair('cest',                    StrOrNull(cest));
+  Result.AddPair('precocompra',             TJSONNumber.Create(precocompra));
+  Result.AddPair('precocusto',              TJSONNumber.Create(precocusto));
+  Result.AddPair('precovenda',              TJSONNumber.Create(precovenda));
+  Result.AddPair('tipo',                    StrOrNull(tipo));
+  Result.AddPair('qtdevolume',              TJSONNumber.Create(qtdevolume));
+  Result.AddPair('m3',                      TJSONNumber.Create(m3));
+  Result.AddPair('pesobruto',               TJSONNumber.Create(pesobruto));
+  Result.AddPair('pesoliquido',             TJSONNumber.Create(pesoliquido));
+  Result.AddPair('altura',                  TJSONNumber.Create(altura));
+  Result.AddPair('largura',                 TJSONNumber.Create(largura));
+  Result.AddPair('profundidade',            TJSONNumber.Create(profundidade));
+  Result.AddPair('possuivariacaocor',       StrOrNull(possuivariacaocor));
+  Result.AddPair('destacargtindfe',         StrOrNull(destacargtindfe));
+  Result.AddPair('observacoes',             StrOrNull(observacoes));
+  Result.AddPair('codigogrupo',             StrOrNull(codigogrupo));
+  Result.AddPair('idgrupo',                 TJSONNumber.Create(idgrupo));
+  Result.AddPair('volumes',                 volumes);
+  Result.AddPair('habilitado',              TJSONNumber.Create(habilitado));
+  Result.AddPair('nomesubgrupo',            StrOrNull(nomesubgrupo));
+  Result.AddPair('caminhoimagem1',          StrOrNull(caminhoimagem1));
+  Result.AddPair('caminhoimagem2',          StrOrNull(caminhoimagem2));
+  Result.AddPair('caminhoimagem3',          StrOrNull(caminhoimagem3));
 end;
 
 procedure TProdutoAPI.FromJson(AJson: TJSONObject);
-
-  function StrOrEmpty(const AKey: string): string;
-  begin
-    if (AJson.GetValue(AKey) = nil) or (AJson.GetValue(AKey) is TJSONNull) then
-      Result := ''
-    else
-      Result := AJson.GetValue<string>(AKey);
-  end;
-
-  function IntOrZero(const AKey: string): Integer;
-  begin
-    if (AJson.GetValue(AKey) = nil) or (AJson.GetValue(AKey) is TJSONNull) then
-      Result := 0
-    else
-      Result := AJson.GetValue<Integer>(AKey);
-  end;
-
+var
+  Arr: TJSONArray;
 begin
-  codigoerp      := StrOrEmpty('codigoerp');
-  produto        := StrOrEmpty('produto');
-  referencia     := StrOrEmpty('referencia');
-  codbarras      := StrOrEmpty('codbarras');
-  unidade        := StrOrEmpty('unidade');
-  ncm            := StrOrEmpty('ncm');
-  cest           := StrOrEmpty('cest');
-  precocompra    := IntOrZero('precocompra');
-  precocusto     := IntOrZero('precocusto');
-  precovenda     := IntOrZero('precovenda');
-  tipo           := StrOrEmpty('tipo');
-  qtdevolume     := IntOrZero('qtdevolume');
-  m3             := IntOrZero('m3');
-  pesobruto      := IntOrZero('pesobruto');
-  pesoliquido    := IntOrZero('pesoliquido');
-  ativo          := StrOrEmpty('ativo');
-  caminhoimagem1 := StrOrEmpty('caminhoimagem1');
-  caminhoimagem2 := StrOrEmpty('caminhoimagem2');
-  caminhoimagem3 := StrOrEmpty('caminhoimagem3');
-  id             := StrOrEmpty('id');
-  tenant_id      := StrOrEmpty('tenant_id');
-  is_deleted     := IntOrZero('is_deleted');
-  deleted_at     := StrOrEmpty('deleted_at');
-  synced_at      := StrOrEmpty('synced_at');
-  created_at     := StrOrEmpty('created_at');
-  updated_at     := StrOrEmpty('updated_at');
+  id                      := JsonStrOrEmpty('id', AJson);
+  tenant_id               := JsonStrOrEmpty('tenant_id', AJson);
+  codigoerp                  := JsonStrOrEmpty('codigoerp', AJson);
+  ativo                   := JsonIntOrZero('ativo', AJson);
+  idproduto               := JsonStrOrEmpty('idproduto', AJson);
+  produto                 := JsonStrOrEmpty('produto', AJson);
+  referencia              := JsonStrOrEmpty('referencia', AJson);
+  codbarras               := JsonStrOrEmpty('codbarras', AJson);
+  codbarrastributavel     := JsonStrOrEmpty('codbarrastributavel', AJson);
+  unidade                 := JsonStrOrEmpty('unidade', AJson);
+  origem                  := JsonIntOrZero('origem', AJson);
+  classificacao           := JsonStrOrEmpty('classificacao', AJson);
+  cst                     := JsonStrOrEmpty('cst', AJson);
+  ncm                     := JsonStrOrEmpty('ncm', AJson);
+  cest                    := JsonStrOrEmpty('cest', AJson);
+  precocompra             := JsonFloatOrZero('precocompra', AJson);
+  precocusto              := JsonFloatOrZero('precocusto', AJson);
+  precovenda              := JsonFloatOrZero('precovenda', AJson);
+  tipo                    := JsonStrOrEmpty('tipo', AJson);
+  qtdevolume              := JsonIntOrZero('qtdevolume', AJson);
+  m3                      := JsonFloatOrZero('m3', AJson);
+  pesobruto               := JsonFloatOrZero('pesobruto', AJson);
+  pesoliquido             := JsonFloatOrZero('pesoliquido', AJson);
+  altura                  := JsonFloatOrZero('altura', AJson);
+  largura                 := JsonFloatOrZero('largura', AJson);
+  profundidade            := JsonFloatOrZero('profundidade', AJson);
+  possuivariacaocor       := JsonStrOrEmpty('possuivariacaocor', AJson);
+  destacargtindfe         := JsonStrOrEmpty('destacargtindfe', AJson);
+  observacoes             := JsonStrOrEmpty('observacoes', AJson);
+  codigogrupo             := JsonStrOrEmpty('codigogrupo', AJson);
+  idgrupo                 := JsonIntOrZero('idgrupo', AJson);
+  habilitado              := JsonIntOrZero('habilitado', AJson);
+  nomesubgrupo            := JsonStrOrEmpty('nomesubgrupo', AJson);
+  caminhoimagem1          := JsonStrOrEmpty('caminhoimagem1', AJson);
+  caminhoimagem2          := JsonStrOrEmpty('caminhoimagem2', AJson);
+  caminhoimagem3          := JsonStrOrEmpty('caminhoimagem3', AJson);
+  is_deleted              := JsonIntOrZero('is_deleted', AJson);
+  deleted_at              := JsonStrOrEmpty('deleted_at', AJson);
+  synced_at               := JsonStrOrEmpty('synced_at', AJson);
+  created_at              := JsonStrOrEmpty('created_at', AJson);
+  updated_at              := JsonStrOrEmpty('updated_at', AJson);
+
+  if AJson.TryGetValue('volumes', Arr) then
+  begin
+    volumes.Free;
+    volumes := Arr.Clone as TJSONArray;
+  end;
 end;
 
 end.
-
-
-

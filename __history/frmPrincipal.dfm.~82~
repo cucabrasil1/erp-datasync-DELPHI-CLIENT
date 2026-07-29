@@ -1,0 +1,601 @@
+object Form2: TForm2
+  Left = 0
+  Top = 0
+  Caption = 'Form2'
+  ClientHeight = 661
+  ClientWidth = 984
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  Position = poScreenCenter
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  TextHeight = 15
+  object pnSincronizar: TPanel
+    Left = 0
+    Top = 33
+    Width = 984
+    Height = 224
+    Align = alTop
+    TabOrder = 0
+    object btnSincronizar: TButton
+      Left = 1
+      Top = 177
+      Width = 982
+      Height = 46
+      Align = alBottom
+      Caption = 'Sincronizar Todos Selecionados'
+      TabOrder = 0
+      OnClick = btnSincronizarClick
+    end
+    object cxGroupBox1: TcxGroupBox
+      Left = 1
+      Top = 1
+      Align = alClient
+      Caption = 'Selecione para sincronizar TODOS registros de cada Entidade'
+      TabOrder = 1
+      Height = 176
+      Width = 982
+      object cmbEmpresa: TcxComboBox
+        Left = 2
+        Top = 20
+        Align = alTop
+        Properties.ReadOnly = False
+        TabOrder = 0
+        Text = 'cmbEmpresa'
+        Width = 978
+      end
+      object Panel1: TPanel
+        Left = 2
+        Top = 64
+        Width = 191
+        Height = 105
+        TabOrder = 1
+        object chkAcabamentos: TcxCheckBox
+          Left = 1
+          Top = 20
+          Align = alTop
+          Caption = 'Acabamentos (C000250)'
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          TabOrder = 0
+          Transparent = True
+        end
+        object chkCenario: TcxCheckBox
+          Left = 1
+          Top = 39
+          Align = alTop
+          Caption = 'Cenarios Faturamento (C000233)'
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          TabOrder = 1
+          Transparent = True
+        end
+        object chkClientes: TcxCheckBox
+          Left = 1
+          Top = 1
+          Align = alTop
+          Caption = 'Clientes (C000007)'
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          TabOrder = 2
+          Transparent = True
+        end
+        object chkProdutos: TcxCheckBox
+          Left = 1
+          Top = 58
+          Align = alTop
+          Caption = 'Produtos (C000025)'
+          ParentBackground = False
+          ParentColor = False
+          ParentFont = False
+          Style.Color = clDefault
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clRed
+          Style.Font.Height = -12
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          Style.IsFontAssigned = True
+          TabOrder = 3
+          Transparent = True
+        end
+        object chkVariacaoProduto: TcxCheckBox
+          Left = 1
+          Top = 77
+          Align = alTop
+          Caption = 'Variacao Produtos (C000279)'
+          ParentBackground = False
+          ParentColor = False
+          ParentFont = False
+          Style.Color = clDefault
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clRed
+          Style.Font.Height = -12
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          Style.IsFontAssigned = True
+          TabOrder = 4
+          Transparent = True
+        end
+      end
+      object Panel2: TPanel
+        Left = 199
+        Top = 64
+        Width = 191
+        Height = 105
+        TabOrder = 2
+        object chkCondPagamento: TcxCheckBox
+          Left = 1
+          Top = 20
+          Align = alTop
+          Caption = 'Cond.Pagto (C000015/C000016)'
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          TabOrder = 0
+          Transparent = True
+        end
+        object chkFornecedor: TcxCheckBox
+          Left = 1
+          Top = 58
+          Align = alTop
+          Caption = 'Fornecedores (C00009)'
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          TabOrder = 1
+          Transparent = True
+        end
+        object chkTpPagamento: TcxCheckBox
+          Left = 1
+          Top = 1
+          Align = alTop
+          Caption = 'Tipo Pagto (C000014)'
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          TabOrder = 2
+          Transparent = True
+        end
+        object chkCor: TcxCheckBox
+          Left = 1
+          Top = 39
+          Align = alTop
+          Caption = 'Cores (C000129)'
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          TabOrder = 3
+          Transparent = True
+        end
+      end
+      object chkTodos: TcxCheckBox
+        Left = 2
+        Top = 43
+        Align = alTop
+        Caption = 'Marcar Todos'
+        ParentBackground = False
+        ParentColor = False
+        Style.BorderColor = clDefault
+        Style.Color = clBisque
+        Style.HotTrack = True
+        Style.LookAndFeel.NativeStyle = False
+        Style.TextColor = clRed
+        Style.TextStyle = [fsBold]
+        Style.TransparentBorder = False
+        StyleDisabled.LookAndFeel.NativeStyle = False
+        StyleFocused.LookAndFeel.NativeStyle = False
+        StyleHot.LookAndFeel.NativeStyle = False
+        StyleReadOnly.LookAndFeel.NativeStyle = False
+        TabOrder = 3
+        OnClick = chkTodosClick
+      end
+      object Panel3: TPanel
+        Left = 395
+        Top = 63
+        Width = 191
+        Height = 105
+        TabOrder = 4
+        object chkGrupoProduto: TcxCheckBox
+          Left = 1
+          Top = 20
+          Align = alTop
+          Caption = 'Grupo Produto (C000017)'
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          TabOrder = 0
+          Transparent = True
+        end
+        object chkRegiao: TcxCheckBox
+          Left = 1
+          Top = 58
+          Align = alTop
+          Caption = 'Regioao Clientes (C00005)'
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          TabOrder = 1
+          Transparent = True
+        end
+        object chkGrupoCliente: TcxCheckBox
+          Left = 1
+          Top = 1
+          Align = alTop
+          Caption = 'Grupo Cliente (C000144)'
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          TabOrder = 2
+          Transparent = True
+        end
+        object chkPedVenda: TcxCheckBox
+          Left = 1
+          Top = 39
+          Align = alTop
+          Caption = 'Pedido Venda (C000126)'
+          ParentFont = False
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clRed
+          Style.Font.Height = -12
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          Style.IsFontAssigned = True
+          TabOrder = 3
+          Transparent = True
+        end
+      end
+      object Panel4: TPanel
+        Left = 591
+        Top = 63
+        Width = 191
+        Height = 105
+        TabOrder = 5
+        object chkSupervisor: TcxCheckBox
+          Left = 1
+          Top = 20
+          Align = alTop
+          Caption = 'Supervisor (C000008)'
+          ParentBackground = False
+          ParentColor = False
+          ParentFont = False
+          Style.Color = clDefault
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clRed
+          Style.Font.Height = -12
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          Style.IsFontAssigned = True
+          TabOrder = 0
+          Transparent = True
+        end
+        object chkTransportador: TcxCheckBox
+          Left = 1
+          Top = 58
+          Align = alTop
+          Caption = 'Transportadores (C000010)'
+          ParentBackground = False
+          ParentColor = False
+          ParentFont = False
+          Style.Color = clDefault
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clRed
+          Style.Font.Height = -12
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          Style.IsFontAssigned = True
+          TabOrder = 1
+          Transparent = True
+        end
+        object chkSubgrupoProduto: TcxCheckBox
+          Left = 1
+          Top = 1
+          Align = alTop
+          Caption = 'Subgrupo Produto (C000018)'
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          TabOrder = 2
+          Transparent = True
+        end
+        object chkVendedor: TcxCheckBox
+          Left = 1
+          Top = 39
+          Align = alTop
+          Caption = 'Vendedor (C000008)'
+          ParentBackground = False
+          ParentColor = False
+          ParentFont = False
+          Style.Color = clDefault
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clRed
+          Style.Font.Height = -12
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          Style.IsFontAssigned = True
+          TabOrder = 3
+          Transparent = True
+        end
+      end
+    end
+  end
+  object Memo1: TMemo
+    Left = 0
+    Top = 257
+    Width = 984
+    Height = 369
+    Align = alClient
+    ScrollBars = ssVertical
+    TabOrder = 1
+  end
+  object JvNavPanelHeader1: TJvNavPanelHeader
+    Left = 0
+    Top = 0
+    Width = 984
+    Height = 33
+    Align = alTop
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWhite
+    Font.Height = -16
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    ImageIndex = 0
+  end
+  object JvNavPanelHeader2: TJvNavPanelHeader
+    Left = 0
+    Top = 626
+    Width = 984
+    Height = 35
+    Align = alBottom
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWhite
+    Font.Height = -16
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    ImageIndex = 0
+    object btnSettings: TAdvGlowButton
+      AlignWithMargins = True
+      Left = 944
+      Top = 1
+      Width = 35
+      Height = 33
+      Margins.Top = 1
+      Margins.Right = 5
+      Margins.Bottom = 1
+      Align = alRight
+      ImageIndex = 0
+      Images = cxImageList1
+      NotesFont.Charset = DEFAULT_CHARSET
+      NotesFont.Color = clWindowText
+      NotesFont.Height = -11
+      NotesFont.Name = 'Tahoma'
+      NotesFont.Style = []
+      Rounded = True
+      TabOrder = 0
+      OnClick = btnSettingsClick
+      Appearance.BorderColor = 11382963
+      Appearance.BorderColorHot = 11565130
+      Appearance.BorderColorCheckedHot = 11565130
+      Appearance.BorderColorDown = 11565130
+      Appearance.BorderColorChecked = 13744549
+      Appearance.BorderColorDisabled = 13948116
+      Appearance.Color = clWhite
+      Appearance.ColorTo = clWhite
+      Appearance.ColorChecked = 13744549
+      Appearance.ColorCheckedTo = 13744549
+      Appearance.ColorDisabled = clWhite
+      Appearance.ColorDisabledTo = clNone
+      Appearance.ColorDown = 11565130
+      Appearance.ColorDownTo = 11565130
+      Appearance.ColorHot = 16444643
+      Appearance.ColorHotTo = 16444643
+      Appearance.ColorMirror = clWhite
+      Appearance.ColorMirrorTo = clWhite
+      Appearance.ColorMirrorHot = 16444643
+      Appearance.ColorMirrorHotTo = 16444643
+      Appearance.ColorMirrorDown = 11565130
+      Appearance.ColorMirrorDownTo = 11565130
+      Appearance.ColorMirrorChecked = 13744549
+      Appearance.ColorMirrorCheckedTo = 13744549
+      Appearance.ColorMirrorDisabled = clWhite
+      Appearance.ColorMirrorDisabledTo = clNone
+      Appearance.GradientHot = ggVertical
+      Appearance.GradientMirrorHot = ggVertical
+      Appearance.GradientDown = ggVertical
+      Appearance.GradientMirrorDown = ggVertical
+      Appearance.GradientChecked = ggVertical
+      Appearance.TextColorChecked = 3750459
+      Appearance.TextColorDown = 2303013
+      Appearance.TextColorHot = 2303013
+      Appearance.TextColorDisabled = 13948116
+    end
+  end
+  object monitorEventos: TFDEventAlerter
+    Connection = modulo.conexao
+    Names.Strings = (
+      'Event_DB_CHANGE')
+    OnAlert = monitorEventosAlert
+    Left = 264
+    Top = 224
+  end
+  object cxImageList1: TcxImageList
+    SourceDPI = 96
+    FormatVersion = 1
+    Left = 356
+    Top = 330
+    Bitmap = {
+      494C010101000800040010001000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
+      0000000000003600000028000000400000001000000001002000000000000010
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000080400314C290597894B0BCC00000009000000004124048D713E08B9160C
+      0153000000050000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000190E
+      0258D77610FFD77610FFD77610FF3E2204890A050038D37410FDD77610FFD776
+      10FF5A3107A50000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000703
+      002ED77610FFD77610FFD77610FFD77610FFD77610FFD77610FFD77610FFD776
+      10FF221202660000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000002E1A0377170C01540905
+      0036D57610FED77610FFD77610FFD77610FFD77610FFD77610FFD77610FFD776
+      10FF160C0152140B0150311B037A000000010000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000009050037D77610FFD77610FFD776
+      10FFD77610FFD77610FFD77610FFD77610FFD77610FFD77610FFD77610FFD776
+      10FFD77610FFD77610FFD77610FF0C07003F0000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000522D069ED77610FFD77610FFD776
+      10FFD77610FFD37410FD341D037E01000016000000112514026BC96E0FF7D776
+      10FFD77610FFD77610FFD77610FF593107A40000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000005A3107A5D77610FFD77610FFD776
+      10FFD77610FF3F23048B000000000000000000000000000000002514026BD776
+      10FFD77610FFD77610FFD77610FF703D08B80000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000C07003ED07210FBD776
+      10FFD77610FF080400320000000000000000000000000000000001000012D776
+      10FFD77610FFD77610FF23130268000000010000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000083B200486D57510FED776
+      10FFD77610FF0A0500380000000000000000000000000000000001000017D776
+      10FFD77610FFD77610FF29160370000000030000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000007E4509C3D77610FFD77610FFD776
+      10FFD77610FF562F06A100000000000000000000000000000000351D037FD776
+      10FFD77610FFD77610FFD77610FF764009BD0000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000003B200486D77610FFD77610FFD776
+      10FFD77610FFD77610FF562F06A10A050038080400334124048DD47410FDD776
+      10FFD77610FFD77610FFD77610FF562F06A10000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000201001CCF7210FBD77610FFD576
+      10FED77610FFD77610FFD77610FFD77610FFD77610FFD77610FFD77610FFD776
+      10FFD57610FED77610FFD77610FF0B06003B0000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000140B014E090500350201
+      0019D57610FED77610FFD77610FFD77610FFD77610FFD77610FFD77610FFD776
+      10FF0A0500380A0600392715036E000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000804
+      0033D77610FFD77610FFD77610FFD27410FCD37410FDD77610FFD77610FFD776
+      10FF180D02570000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000180D
+      0257D77610FFD77610FFD77610FF1D10025F20120264D77610FFD77610FFD575
+      10FE2715026D0000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000503002A4325058F764009BD0000000200000001663808B0482705940502
+      0027000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000424D3E000000000000003E000000
+      2800000040000000100000000100010000000000800000000000000000000000
+      000000000000000000000000FFFFFF0000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000}
+    DesignInfo = 21627236
+    ImageInfo = <
+      item
+        ImageClass = 'TdxSmartImage'
+        Image.Data = {
+          3C3F786D6C2076657273696F6E3D22312E302220656E636F64696E673D225554
+          462D38223F3E0D0A3C7376672076657273696F6E3D22312E31222069643D224C
+          61796572312220786D6C6E733D22687474703A2F2F7777772E77332E6F72672F
+          323030302F7376672220786D6C6E733A786C696E6B3D22687474703A2F2F7777
+          772E77332E6F72672F313939392F786C696E6B2220783D223070782220793D22
+          307078222076696577426F783D2230203020333220333222207374796C653D22
+          656E61626C652D6261636B67726F756E643A6E6577203020302033322033323B
+          2220786D6C3A73706163653D227072657365727665223E262331333B26233130
+          3B20203C7374796C6520747970653D22746578742F6373732220786D6C3A7370
+          6163653D227072657365727665223E2E426C7565262331333B262331303B2020
+          20207B262331333B262331303B20202020202066696C6C3A233131373744373B
+          262331333B262331303B202020202020666F6E742D66616D696C793A2661706F
+          733B64782D666F6E742D69636F6E732661706F733B3B262331333B262331303B
+          202020202020666F6E742D73697A653A333270783B262331333B262331303B20
+          2020207D262331333B262331303B20203C2F7374796C653E0D0A3C7465787420
+          783D22302220793D2233322220636C6173733D22426C7565223EEFA2B03C2F74
+          6578743E0D0A3C2F7376673E0D0A}
+        FileName = 'FontIcons://SettingsSolid'
+        Keywords = 'FontIcons;SettingsSolid'
+      end>
+  end
+end

@@ -1,0 +1,122 @@
+unit uBancoAPI;
+
+interface
+
+uses
+  System.JSON, System.SysUtils, System.Math;
+
+type
+  TBancoAPI = class
+  public
+    // --- campos enviados (ERP . API) ---
+    codigoerp: string;
+    descricao: string;
+    numerobanco: string;
+    tipo: string;
+    logo: string;
+    cartaocredito: Integer;
+    financeira: Integer;
+    ressarcimento: Integer;
+    prazo: Integer;
+    comissaocredito: Double;
+    comissaodebito: Double;
+    recdebito: Integer;
+    recredito: Integer;
+    numeroparcelas: Integer;
+    habilitado: Integer;
+
+    // --- campos retornados pela API (GET) ---
+    id: string;
+    tenant_id: string;
+    is_deleted: Integer;
+    deleted_at: string;
+    synced_at: string;
+    created_at: string;
+    updated_at: string;
+
+    class function ResourceName: string;
+    function ToJson: TJSONObject;
+    procedure FromJson(AJson: TJSONObject);
+  end;
+
+implementation
+
+{ TBancoAPI }
+
+class function TBancoAPI.ResourceName: string;
+begin
+  Result := '/banco';
+end;
+
+function TBancoAPI.ToJson: TJSONObject;
+begin
+  Result := TJSONObject.Create;
+  Result.AddPair('codigoerp', codigoerp);
+  Result.AddPair('descricao', descricao);
+  Result.AddPair('numerobanco', numerobanco);
+  Result.AddPair('tipo', tipo);
+  Result.AddPair('logo', logo);
+  Result.AddPair('cartaocredito', TJSONNumber.Create(cartaocredito));
+  Result.AddPair('financeira', TJSONNumber.Create(financeira));
+  Result.AddPair('ressarcimento', TJSONNumber.Create(ressarcimento));
+  Result.AddPair('prazo', TJSONNumber.Create(prazo));
+  Result.AddPair('comissaocredito', TJSONNumber.Create(comissaocredito));
+  Result.AddPair('comissaodebito', TJSONNumber.Create(comissaodebito));
+  Result.AddPair('recdebito', TJSONNumber.Create(recdebito));
+  Result.AddPair('recredito', TJSONNumber.Create(recredito));
+  Result.AddPair('numeroparcelas', TJSONNumber.Create(numeroparcelas));
+  Result.AddPair('habilitado', TJSONNumber.Create(habilitado));
+end;
+
+procedure TBancoAPI.FromJson(AJson: TJSONObject);
+
+  function StrOrEmpty(const AKey: string): string;
+  begin
+    if (AJson.GetValue(AKey) = nil) or (AJson.GetValue(AKey) is TJSONNull) then
+      Result := ''
+    else
+      Result := AJson.GetValue<string>(AKey);
+  end;
+
+  function IntOrZero(const AKey: string): Integer;
+  begin
+    if (AJson.GetValue(AKey) = nil) or (AJson.GetValue(AKey) is TJSONNull) then
+      Result := 0
+    else
+      Result := AJson.GetValue<Integer>(AKey);
+  end;
+
+  function FloatOrZero(const AKey: string): Double;
+  begin
+    if (AJson.GetValue(AKey) = nil) or (AJson.GetValue(AKey) is TJSONNull) then
+      Result := 0
+    else
+      Result := AJson.GetValue<Double>(AKey);
+  end;
+
+begin
+  codigoerp       := StrOrEmpty('codigoerp');
+  descricao       := StrOrEmpty('descricao');
+  numerobanco     := StrOrEmpty('numerobanco');
+  tipo            := StrOrEmpty('tipo');
+  logo            := StrOrEmpty('logo');
+  cartaocredito   := IntOrZero('cartaocredito');
+  financeira      := IntOrZero('financeira');
+  ressarcimento   := IntOrZero('ressarcimento');
+  prazo           := IntOrZero('prazo');
+  comissaocredito := FloatOrZero('comissaocredito');
+  comissaodebito  := FloatOrZero('comissaodebito');
+  recdebito       := IntOrZero('recdebito');
+  recredito       := IntOrZero('recredito');
+  numeroparcelas  := IntOrZero('numeroparcelas');
+  habilitado      := IntOrZero('habilitado');
+  id              := StrOrEmpty('id');
+  tenant_id       := StrOrEmpty('tenant_id');
+  is_deleted      := IntOrZero('is_deleted');
+  deleted_at      := StrOrEmpty('deleted_at');
+  synced_at       := StrOrEmpty('synced_at');
+  created_at      := StrOrEmpty('created_at');
+  updated_at      := StrOrEmpty('updated_at');
+end;
+
+end.

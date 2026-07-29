@@ -11,7 +11,7 @@ uses
   cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore, cxGroupBox,
   cxCheckGroup, Vcl.ExtCtrls, cxTextEdit, cxMaskEdit, cxDropDownEdit,
   dxBarBuiltInMenu, cxPC, System.ImageList, Vcl.ImgList, cxImageList,
-  AdvGlowButton, JvExControls, JvNavigationPane;
+  AdvGlowButton, JvExControls, JvNavigationPane, uSyncOrchestrator;
 
 type
   TTableSummary = record
@@ -52,10 +52,8 @@ type
     chkGrupoCliente: TcxCheckBox;
     chkPedVenda: TcxCheckBox;
     Panel4: TPanel;
-    chkSupervisor: TcxCheckBox;
     chkTransportador: TcxCheckBox;
     chkSubgrupoProduto: TcxCheckBox;
-    chkVendedor: TcxCheckBox;
     chkVariacaoProduto: TcxCheckBox;
     procedure monitorEventosAlert(ASender: TFDCustomEventAlerter; const AEventName: string; const AArgument: Variant);
     procedure FormCreate(Sender: TObject);
@@ -87,8 +85,6 @@ uses
   uThreadCuca, dmModulo, uMRestIntegracao, uEntityFactory, uApiClient;
 
 {$R *.dfm}
-
-
 
 function TForm2.GetDatabaseType: TDatabaseType;
 var

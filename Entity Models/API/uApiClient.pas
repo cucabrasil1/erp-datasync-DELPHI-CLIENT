@@ -22,6 +22,11 @@ type
     function GetToken(const ARenovar: Boolean = False): string;
     procedure AutenticaApi(const ACodFilial: string = '');
 
+    // Parse de response (movidos de TEntityBase)
+    function ExtractApiId(const AResponse: TJSONObject): string;
+    function IsResponseOk(const AResponse: TJSONObject; var AErrorMsg: string): Boolean;
+    class function Sanitize(const AValue: string; const AContext: string = ''): string; static;
+
     // Metodos publicos
     function Get(const AResource: string; const AId: string = ''): TJSONObject;
     function Post(const AResource: string; const ABody: string): TJSONObject;
@@ -195,6 +200,82 @@ begin
     Result.Free;
     Result := Executar(AMethod, AResource, ABody);
   end;
+end;
+
+function TApiClient.IsResponseOk(const AResponse: TJSONObject;
+  var AErrorMsg: string): Boolean;
+var
+  InnerVal, OkVal, ErrVal: TJSONValue;
+begin
+  Result := False;
+  InnerVal := AResponse.GetValue('data');
+  if not (Assigned(InnerVal) and (InnerVal is TJSONObject)) then
+    Exit;
+
+  OkVal := TJSONObject(InnerVal).GetValue('ok');
+  if Assigned(OkVal) and (OkVal.Value = 'true') then
+    Result := True
+  else
+  begin
+    ErrVal := TJSONObject(InnerVal).GetValue('erro');
+    if Assigned(ErrVal) then
+      AErrorMsg := AErrorMsg + ErrVal.Value;
+  end;
+end;
+
+function TApiClient.ExtractApiId(const AResponse: TJSONObject): string;
+var
+  InnerVal, DataVal: TJSONValue;
+  ArrVal: TJSONArray;
+begin
+  Result := '';
+
+  // TApiClient.Executar retorna: {"status":"200","data":<resposta_original>}
+  // resposta_original tem: {"ok":true,"data":[...]} ou {"ok":true,"data":{...}}
+  // Portanto o id esta em response.data.data[0].id ou response.data.data.id
+
+  InnerVal := AResponse.GetValue('data');
+  if not (Assigned(InnerVal) and (InnerVal is TJSONObject)) then
+    Exit;
+
+  DataVal := TJSONObject(InnerVal).GetValue('data');
+  if DataVal is TJSONArray then
+  begin
+    ArrVal := TJSONArray(DataVal);
+    if (ArrVal.Count > 0) and (ArrVal.Items[0] is TJSONObject) then
+      TJSONObject(ArrVal.Items[0]).TryGetValue<string>('id', Result);
+  end
+  else if DataVal is TJSONObject then
+  begin
+    if TJSONObject(DataVal).TryGetValue<string>('id', Result) then Exit;
+    if TJSONObject(DataVal).TryGetValue<string>('_id', Result) then Exit;
+  end
+  else if DataVal is TJSONString then
+    Result := TJSONString(DataVal).Value
+  else if DataVal is TJSONNumber then
+    Result := TJSONNumber(DataVal).ToString;
+end;
+
+class function TApiClient.Sanitize(const AValue: string;
+  const AContext: string): string;
+var
+  i, removed: Integer;
+  badChar: string;
+begin
+  Result := AValue;
+  removed := 0;
+  badChar := '';
+  for i := Length(Result) downto 1 do
+    if (Result[i] < #32) or (Result[i] = #127) then
+    begin
+      badChar := Result[i];
+      Delete(Result, i, 1);
+      Inc(removed);
+    end;
+  if (removed > 0) and (AContext <> '') then
+    TLogger.Log(llWarn, lcSystem,
+      Format('Sanitize removeu %d char(s) [%s] em %s', [removed, badChar, AContext]), []);
+  // badChar fica como o ULTIMO char removido; era assim no original
 end;
 
 function TApiClient.Get(const AResource: string; const AId: string = ''): TJSONObject;

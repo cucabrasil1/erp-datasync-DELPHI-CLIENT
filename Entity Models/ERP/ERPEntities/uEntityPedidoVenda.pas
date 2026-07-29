@@ -4,7 +4,7 @@ interface
 
 uses
   System.JSON, System.SysUtils, System.Math, System.StrUtils, FireDAC.Comp.Client, Data.DB,
-  uEntityBase;
+  uEntityBase, uPedidoVendaAPI;
 
 type
   TEntityPedidoVenda = class(TEntityBase)
@@ -34,7 +34,7 @@ end;
 
 function TEntityPedidoVenda.GetResourceName: string;
 begin
-  Result := '/pedidos-venda';
+  Result := TPedidoVendaAPI.ResourceName;
 end;
 
 function TEntityPedidoVenda.GetRecord(ACodRecord: string): TDataSet;
@@ -98,6 +98,11 @@ begin
     Qry.Connection := FConnection;
     Qry.SQL.Add('select * from ' + GetTableNameClass);
     Qry.SQL.Add('where IDPEDIDO is null');
+    if FDatabaseType = dtIndustrial then
+    begin
+      Qry.SQL.Add('and codigofilial = :filial');
+      Qry.ParamByName('filial').AsString := FFilial;
+    end;
     Qry.SQL.Add('order by codigo');
     Qry.Open;
   except

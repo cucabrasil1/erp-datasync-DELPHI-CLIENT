@@ -79,6 +79,7 @@ begin
     Pessoa.bairro               := ADataSet.FieldByName('bairro').AsString;
     Pessoa.cidade               := ADataSet.FieldByName('cidade').AsString;
     Pessoa.uf                   := ADataSet.FieldByName('uf').AsString;
+    Pessoa.ibge                 := ADataSet.FieldByName('cod_municipio_ibge').AsString;
     Pessoa.numero               := ADataSet.FieldByName('numero').AsString;
     Pessoa.complemento          := ADataSet.FieldByName('complemento').AsString;
     Pessoa.documentoprincipal   := ADataSet.FieldByName('cnpj').AsString;
@@ -113,8 +114,16 @@ begin
       end;
     end;
 
+    //Add contatos
     Pessoa.AddContato('Contato 1', ADataSet.FieldByName('celular1').AsString, '', '');
     Pessoa.AddContato('Contato 2', ADataSet.FieldByName('celular2').AsString, '', '');
+
+    //Add dados bancarios
+    Pessoa.AddDadosBancarios('', '', ADataSet.FieldByName('banco').AsString,
+                            ADataSet.FieldByName('agencia').AsString,
+                            ADataSet.FieldByName('conta').AsString,
+                            '', '', '', ''
+    );
 
     Result := Pessoa.ToJson;
   finally
@@ -131,6 +140,11 @@ begin
     Qry.Connection := FConnection;
     Qry.SQL.Add('select * from ' + GetTableNameClass);
     Qry.SQL.Add('where IDFORNECEDOR is null');
+    if FDatabaseType = dtIndustrial then
+    begin
+      Qry.SQL.Add('and codigofilial = :filial');
+      Qry.ParamByName('filial').AsString := FFilial;
+    end;
     Qry.SQL.Add('order by codigo');
     Qry.Open;
   except

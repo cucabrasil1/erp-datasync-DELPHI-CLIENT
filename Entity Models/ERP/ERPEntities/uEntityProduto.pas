@@ -44,8 +44,9 @@ begin
   Qry := TFDQuery.Create(nil);
   try
     Qry.Connection := FConnection;
-    Qry.SQL.Add('select * from ' + GetTableNameClass);
-    Qry.SQL.Add('where codigo = :cod');
+    Qry.SQL.Add('select prod.*, gp.idsubgrupo,gp.subgrupo from ' + GetTableNameClass + ' p');
+    Qry.SQL.Add('left outer join C000018 gp on gp.codigo=prod.codsubgrupo');
+    Qry.SQL.Add('where p.codigo = :cod');
     Qry.ParamByName('cod').AsString := ACodRecord;
     Qry.Open;
   except
@@ -69,25 +70,39 @@ var
 begin
   DTO := TProdutoAPI.Create;
   try
-    DTO.codigoerp      := ADataSet.FieldByName('codigo').AsString;
-    DTO.produto        := ADataSet.FieldByName('produto').AsString;
-    DTO.referencia     := ADataSet.FieldByName('referencia').AsString;
-    DTO.codbarras      := ADataSet.FieldByName('codbarra').AsString;
-    DTO.unidade        := ADataSet.FieldByName('unidade').AsString;
-    DTO.ncm            := ADataSet.FieldByName('ncm').AsString;
-    DTO.cest           := ADataSet.FieldByName('codigocest').AsString;
-    DTO.precocompra    := ADataSet.FieldByName('precocompra').AsFloat;
-    DTO.precocusto     := ADataSet.FieldByName('precocusto').AsFloat;
-    DTO.precovenda     := ADataSet.FieldByName('precovenda').AsFloat;
-    DTO.tipo           := ADataSet.FieldByName('tipo').AsString;
-    DTO.qtdevolume     := 1;
-    DTO.m3             := 0;
-    DTO.pesobruto      := 0;
-    DTO.pesoliquido    := 0;
-    DTO.ativo          := 'S';
-    DTO.caminhoimagem1 := '';
-    DTO.caminhoimagem2 := '';
-    DTO.caminhoimagem3 := '';
+    DTO.codigoerp             := ADataSet.FieldByName('codigo').AsString;
+    DTO.produto               := ADataSet.FieldByName('produto').AsString;
+    DTO.referencia            := ADataSet.FieldByName('referencia').AsString;
+    DTO.codbarras             := ADataSet.FieldByName('codbarra').AsString;
+    DTO.codbarrastributavel   := ADataSet.FieldByName('codbarratributavel').AsString;
+    DTO.unidade               := ADataSet.FieldByName('unidade').AsString;
+    DTO.origem                := ADataSet.FieldByName('origem').AsInteger;
+    DTO.classificacao         := ADataSet.FieldByName('classificacao').AsString;
+    DTO.cst                   := ADataSet.FieldByName('cst').AsString;
+    DTO.ncm                   := ADataSet.FieldByName('ncm').AsString;
+    DTO.cest                  := ADataSet.FieldByName('codigocest').AsString;
+    DTO.precocompra           := ADataSet.FieldByName('precocompra').AsFloat;
+    DTO.precocusto            := ADataSet.FieldByName('precocusto').AsFloat;
+    DTO.precovenda            := ADataSet.FieldByName('precovenda').AsFloat;
+    DTO.tipo                  := ADataSet.FieldByName('tipo').AsString;
+    DTO.qtdevolume            := ADataSet.FieldByName('qtdevolume').AsInteger;
+    DTO.m3                    := ADataSet.FieldByName('m3').AsFloat;
+    DTO.pesobruto             := ADataSet.FieldByName('pesobruto').AsFloat;
+    DTO.pesoliquido           := ADataSet.FieldByName('pesoliquido').AsFloat;
+    DTO.altura                := ADataSet.FieldByName('altura').AsFloat;
+    DTO.largura               := ADataSet.FieldByName('largura').AsFloat;
+    DTO.profundidade          := ADataSet.FieldByName('profundidade').AsFloat;
+    DTO.possuivariacaocor     := ADataSet.FieldByName('possuivariacaocor').AsString;
+    DTO.destacargtindfe       := ADataSet.FieldByName('destacargtindfe').AsString;
+    DTO.observacoes           := ADataSet.FieldByName('observacoes').AsString;
+    DTO.codigogrupo           := ADataSet.FieldByName('codigogrupo').AsString;
+    DTO.idgrupo               := ADataSet.FieldByName('idgrupo').AsInteger;
+    DTO.nomesubgrupo          := ADataSet.FieldByName('nomesubgrupo').AsString;
+    DTO.ativo                 := ifthen(ADataSet.FieldByName('situacao').AsInteger = 1, 1, 0);
+    DTO.habilitado            := ifthen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
+    DTO.caminhoimagem1        := '';
+    DTO.caminhoimagem2        := '';
+    DTO.caminhoimagem3        := '';
 
     case FDatabaseType of
       dtIndustrial:
@@ -116,6 +131,11 @@ begin
     Qry.Connection := FConnection;
     Qry.SQL.Add('select * from ' + GetTableNameClass);
     Qry.SQL.Add('where idproduto is null');
+    if FDatabaseType = dtIndustrial then
+    begin
+      Qry.SQL.Add('and codigofilial = :filial');
+      Qry.ParamByName('filial').AsString := FFilial;
+    end;
     Qry.SQL.Add('order by codigo');
     Qry.Open;
   except

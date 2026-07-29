@@ -3,7 +3,7 @@
 interface
 
 uses
-  System.JSON, System.SysUtils, System.Math;
+  System.JSON, System.SysUtils, System.Math, uJsonUtils;
 
 type
   TGrupoProdutoAPI = class
@@ -49,44 +49,19 @@ begin
 end;
 
 procedure TGrupoProdutoAPI.FromJson(AJson: TJSONObject);
-
-  function StrOrEmpty(const AKey: string): string;
-  begin
-    if (AJson.GetValue(AKey) = nil) or (AJson.GetValue(AKey) is TJSONNull) then
-      Result := ''
-    else
-      Result := AJson.GetValue<string>(AKey);
-  end;
-
-  function IntOrZero(const AKey: string): Integer;
-  begin
-    if (AJson.GetValue(AKey) = nil) or (AJson.GetValue(AKey) is TJSONNull) then
-      Result := 0
-    else
-      Result := AJson.GetValue<Integer>(AKey);
-  end;
-
-  function DblOrZero(const AKey: string): Double;
-  begin
-    if (AJson.GetValue(AKey) = nil) or (AJson.GetValue(AKey) is TJSONNull) then
-      Result := 0
-    else
-      Result := AJson.GetValue<Double>(AKey);
-  end;
-
 begin
-  codigoerp  := StrOrEmpty('codigoerp');
-  descricao  := StrOrEmpty('descricao');
-  comissao   := DblOrZero('comissao');
-  desconto   := DblOrZero('desconto');
-  habilitado := IntOrZero('habilitado');
-  id         := StrOrEmpty('id');
-  tenant_id  := StrOrEmpty('tenant_id');
-  is_deleted := IntOrZero('is_deleted');
-  deleted_at := StrOrEmpty('deleted_at');
-  synced_at  := StrOrEmpty('synced_at');
-  created_at := StrOrEmpty('created_at');
-  updated_at := StrOrEmpty('updated_at');
+  codigoerp  := JsonStrOrEmpty('codigoerp', AJson);
+  descricao  := JsonStrOrEmpty('descricao', AJson);
+  comissao   := JsonFloatOrZero('comissao', AJson);
+  desconto   := JsonFloatOrZero('desconto', AJson);
+  habilitado := JsonIntOrZero('habilitado', AJson);
+  id         := JsonStrOrEmpty('id', AJson);
+  tenant_id  := JsonStrOrEmpty('tenant_id', AJson);
+  is_deleted := JsonIntOrZero('is_deleted', AJson);
+  deleted_at := JsonStrOrEmpty('deleted_at', AJson);
+  synced_at  := JsonStrOrEmpty('synced_at', AJson);
+  created_at := JsonStrOrEmpty('created_at', AJson);
+  updated_at := JsonStrOrEmpty('updated_at', AJson);
 end;
 
 end.

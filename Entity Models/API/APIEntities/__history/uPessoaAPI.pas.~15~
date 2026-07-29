@@ -1,0 +1,661 @@
+﻿unit uPessoaAPI;
+
+interface
+
+uses
+  System.JSON, System.SysUtils, System.Generics.Collections, System.RegularExpressions,
+  uJsonUtils;
+
+type
+  TPessoaContato = class
+  public
+    // campos enviados (ERP . API)
+    nome: string;
+    telefone: string;
+    email: string;
+    departamento: string;
+
+    // campos retornados pela API (GET)
+    id: string;
+    pessoa_id: string;
+    is_deleted: Integer;
+
+    function ToJson: TJSONObject;
+    procedure FromJson(AJson: TJSONObject);
+  end;
+
+  TPessoaEndereco = class
+  public
+    // --- campos enviados (ERP . API) ---
+    logradouro: string;
+    numero: string;
+    complemento: string;
+    bairro: string;
+    cidade: string;
+    uf: string;
+    cep: string;
+    descricao: string;
+    observacoes: string;
+
+    // campos retornados pela API (GET)
+    id: string;
+    pessoa_id: string;
+    is_deleted: Integer;
+
+    function ToJson: TJSONObject;
+    procedure FromJson(AJson: TJSONObject);
+  end;
+
+  TPessoaDadosBancarios = class
+  public
+    codigoerp: string;
+    codbanco: string;
+    titular: string;
+    agencia: string;
+    contacorrente: string;
+    digito: string;
+    chavepix: string;
+    tipochavepix: string;  //['CPF', 'CNPJ', 'EMAIL', 'TELEFONE', 'CHAVEALEATORIA']
+
+    id: string;
+    pessoa_id: string;
+    is_deleted: Integer;
+
+    function ToJson: TJSONObject;
+    procedure FromJson(AJson: TJSONObject);
+  end;
+
+  TFuncionarioComplemento = class
+  public
+    codigoerp: string;
+    ctps: string;
+    seriectps: string;
+    nis: string;
+    tituloeleitor: string;
+    secaoeleitoral: string;
+    funcao: string;
+    data_admissao: string;
+    data_demissao: string;
+    salario: Double;
+    comissao: Double;
+    f_caixa: Integer;
+    f_tecnico: Integer;
+    f_mecanico: Integer;
+    gerarfolhapagamento: Integer;
+    codfaixainss: string;
+    codfornecedorctaspagar: string;
+    habilitadoplanilhacusto: Integer;
+    ajudacusto: Double;
+    insalubridade: Double;
+    periculosidade: Double;
+    adicionalnoturno: Double;
+    decimoteceiro: Double;
+    ferias: Double;
+    umtrecoferias: Integer;
+    fgts: Double;
+    indenizacoes: Double;
+    total: Double;
+    comissaovenda: Double;
+    premioprodutividade: Double;
+    codregiao: string;
+    codsupervisor: string;
+    estadocivil: string;
+    conjugue: string;
+    dataentrada: string;
+    datafimcontratoexperiencia: string;
+    codcargo: string;
+    cargo: string;
+
+    function ToJson: TJSONObject;
+    procedure FromJson(AJson: TJSONObject);
+  end;
+
+  TPessoaAPI = class
+  private
+    FContatos: TObjectList<TPessoaContato>;
+    FEnderecos: TObjectList<TPessoaEndereco>;
+    FDadosBancarios: TObjectList<TPessoaDadosBancarios>;
+    FComplementoFuncionario: TFuncionarioComplemento;
+  public
+    // --- campos enviados (ERP . API) ---
+    codigoerp: string;
+    nome: string;
+    nomefantasia: string;
+    logradouro: string;
+    numero: string;
+    bairro: string;
+    cidade: string;
+    uf: string;
+    cep: string;
+    ibge: string;
+    complemento: string;
+    documentoprincipal: string;
+    documentosecundario: string;
+    telefone: string;
+    celular: string;
+    email: string;
+    observacoes: string;
+    sexo: string;
+    tipopessoa: string;
+    habilitado: Integer;
+    ativo: Integer;
+    perfilcliente: Integer;
+    perfilfornecedor: Integer;
+    perfiltransportador: Integer;
+    perfilfuncionario: Integer;
+    perfilvendedor: Integer;
+    perfilsupervisor: Integer;
+    datafundacaonascimento: string;
+    datacadastro: string;
+    dataultimacompra: string;
+
+    // --- campos retornados pela API (GET) ---
+    id: string;
+    tenant_id: string;
+    is_deleted: Integer;
+    deleted_at: string;
+    synced_at: string;
+    created_at: string;
+    updated_at: string;
+
+    constructor Create;
+    destructor Destroy; override;
+
+    procedure AddContato(const ANome, ATelefone, AEmail, ADepartamento: string);
+    procedure AddEndereco(const ALogradouro, ANumero, AComplemento, ABairro,
+      ACidade, AUf, ACep, ADescricao, AObservacoes: string);
+    procedure AddDadosBancarios(const ACodigoErp, ACodBanco, ATitular, AAgencia,
+      AContaCorrente, ADigito, AChavePix, ATipoChavePix: string);
+    procedure AddComplementoFuncionario(const ACodigoErp, ACtps, ASerieCtps,
+      ANis, ATituloEleitor, ASecaoEleitoral, AFuncao: string;
+      ADataAdmissao, ADataDemissao: string; ASalario, AComissao: Double;
+      AFCaixa, AFTecnico, AFMecanico, AGerarFolhaPagamento: Integer;
+      ACodFaixaInss, ACodFornecedorCtaspagar: string;
+      AHabilitadoPlanilhaCusto: Integer; AAjudaCusto, AInsalubridade,
+      APericulosidade, AAdicionalNoturno: Double;
+      ADecimoTerceiro, AFerias: Double; AUmTercoFerias: Integer;
+      AFgts, AIndenizacoes, ATotal: Double;
+      AComissaoVenda, APremioProdutividade: Double;
+      ACodRegiao, ACodSupervisor, AEstadoCivil, AConjugue: string;
+      ADataEntrada, ADataFimContratoExperiencia: string;
+      ACodCargo, ACargo: string);
+
+    class function ResourceName: string;
+    function ToJson: TJSONObject;
+    procedure FromJson(AJson: TJSONObject);
+  end;
+
+implementation
+
+{ TPessoaContato }
+
+function TPessoaContato.ToJson: TJSONObject;
+begin
+  Result := TJSONObject.Create;
+
+  Result.AddPair('nome',          nome);
+  Result.AddPair('telefone',      telefone);
+  Result.AddPair('email',         email);
+  Result.AddPair('departamento',  departamento);
+end;
+
+{ TPessoaContato }
+
+procedure TPessoaContato.FromJson(AJson: TJSONObject);
+begin
+  nome        := AJson.GetValue<string>('nome');
+  telefone    := AJson.GetValue<string>('telefone');
+  email       := AJson.GetValue<string>('email');
+  departamento:= AJson.GetValue<string>('departamento');
+  id          := AJson.GetValue<string>('id');
+  pessoa_id   := AJson.GetValue<string>('pessoa_id');
+  is_deleted  := AJson.GetValue<Integer>('is_deleted');
+end;
+
+{ TPessoaEndereco }
+
+function TPessoaEndereco.ToJson: TJSONObject;
+begin
+  Result := TJSONObject.Create;
+
+  Result.AddPair('logradouro',  logradouro);
+  Result.AddPair('numero',      numero);
+  Result.AddPair('complemento', complemento);
+  Result.AddPair('bairro',      bairro);
+  Result.AddPair('cidade',      cidade);
+  Result.AddPair('uf',          uf);
+  Result.AddPair('cep',         cep);
+  Result.AddPair('descricao',   descricao);
+  Result.AddPair('observacoes', observacoes);
+end;
+
+procedure TPessoaEndereco.FromJson(AJson: TJSONObject);
+begin
+  logradouro  := AJson.GetValue<string>('logradouro');
+  numero      := AJson.GetValue<string>('numero');
+  complemento := AJson.GetValue<string>('complemento');
+  bairro      := AJson.GetValue<string>('bairro');
+  cidade      := AJson.GetValue<string>('cidade');
+  uf          := AJson.GetValue<string>('uf');
+  cep         := AJson.GetValue<string>('cep');
+  descricao   := AJson.GetValue<string>('descricao');
+  observacoes := AJson.GetValue<string>('observacoes');
+  id          := AJson.GetValue<string>('id');
+  pessoa_id   := AJson.GetValue<string>('pessoa_id');
+  is_deleted  := AJson.GetValue<Integer>('is_deleted');
+end;
+
+{ TPessoaDadosBancarios }
+
+function TPessoaDadosBancarios.ToJson: TJSONObject;
+begin
+  Result := TJSONObject.Create;
+  Result.AddPair('codigoerp', codigoerp);
+  Result.AddPair('codbanco', codbanco);
+  Result.AddPair('titular', titular);
+  Result.AddPair('agencia', agencia);
+  Result.AddPair('contacorrente', contacorrente);
+  Result.AddPair('digito', digito);
+  Result.AddPair('chavepix', chavepix);
+  Result.AddPair('tipochavepix', StrOrNull(tipochavepix));
+end;
+
+procedure TPessoaDadosBancarios.FromJson(AJson: TJSONObject);
+begin
+  codigoerp     := AJson.GetValue<string>('codigoerp');
+  codbanco      := AJson.GetValue<string>('codbanco');
+  titular       := AJson.GetValue<string>('titular');
+  agencia       := AJson.GetValue<string>('agencia');
+  contacorrente := AJson.GetValue<string>('contacorrente');
+  digito        := AJson.GetValue<string>('digito');
+  chavepix      := AJson.GetValue<string>('chavepix');
+  tipochavepix  := AJson.GetValue<string>('tipochavepix');
+  id            := AJson.GetValue<string>('id');
+  pessoa_id     := AJson.GetValue<string>('pessoa_id');
+  is_deleted    := AJson.GetValue<Integer>('is_deleted');
+end;
+
+{ TFuncionarioComplemento }
+
+function TFuncionarioComplemento.ToJson: TJSONObject;
+begin
+  Result := TJSONObject.Create;
+  Result.AddPair('codigoerp',                  StrOrNull(codigoerp));
+  Result.AddPair('ctps',                       StrOrNull(ctps));
+  Result.AddPair('seriectps',                  StrOrNull(seriectps));
+  Result.AddPair('nis',                        StrOrNull(nis));
+  Result.AddPair('tituloeleitor',              StrOrNull(tituloeleitor));
+  Result.AddPair('secaoeleitoral',             StrOrNull(secaoeleitoral));
+  Result.AddPair('funcao',                     StrOrNull(funcao));
+  Result.AddPair('data_admissao',              StrOrNull(data_admissao));
+  Result.AddPair('data_demissao',              StrOrNull(data_demissao));
+  Result.AddPair('salario',                    TJSONNumber.Create(salario));
+  Result.AddPair('comissao',                   TJSONNumber.Create(comissao));
+  Result.AddPair('f_caixa',                    TJSONNumber.Create(f_caixa));
+  Result.AddPair('f_tecnico',                  TJSONNumber.Create(f_tecnico));
+  Result.AddPair('f_mecanico',                 TJSONNumber.Create(f_mecanico));
+  Result.AddPair('gerarfolhapagamento',        TJSONNumber.Create(gerarfolhapagamento));
+  Result.AddPair('codfaixainss',               StrOrNull(codfaixainss));
+  Result.AddPair('codfornecedorctaspagar',     StrOrNull(codfornecedorctaspagar));
+  Result.AddPair('habilitadoplanilhacusto',    TJSONNumber.Create(habilitadoplanilhacusto));
+  Result.AddPair('ajudacusto',                 NumOrNull(ajudacusto));
+  Result.AddPair('insalubridade',              NumOrNull(insalubridade));
+  Result.AddPair('periculosidade',             NumOrNull(periculosidade));
+  Result.AddPair('adicionalnoturno',           NumOrNull(adicionalnoturno));
+  Result.AddPair('decimoteceiro',              TJSONNumber.Create(decimoteceiro));
+  Result.AddPair('ferias',                     TJSONNumber.Create(ferias));
+  Result.AddPair('umtrecoferias',              TJSONNumber.Create(umtrecoferias));
+  Result.AddPair('fgts',                       TJSONNumber.Create(fgts));
+  Result.AddPair('indenizacoes',               TJSONNumber.Create(indenizacoes));
+  Result.AddPair('total',                      TJSONNumber.Create(total));
+  Result.AddPair('comissaovenda',              TJSONNumber.Create(comissaovenda));
+  Result.AddPair('premioprodutividade',        TJSONNumber.Create(premioprodutividade));
+  Result.AddPair('codregiao',                  StrOrNull(codregiao));
+  Result.AddPair('codsupervisor',              StrOrNull(codsupervisor));
+  Result.AddPair('estadocivil',                StrOrNull(estadocivil));
+  Result.AddPair('conjugue',                   StrOrNull(conjugue));
+  Result.AddPair('dataentrada',                StrOrNull(dataentrada));
+  Result.AddPair('datafimcontratoexperiencia', StrOrNull(datafimcontratoexperiencia));
+  Result.AddPair('codcargo',                   StrOrNull(codcargo));
+  Result.AddPair('cargo',                      StrOrNull(cargo));
+end;
+
+procedure TFuncionarioComplemento.FromJson(AJson: TJSONObject);
+begin
+  codigoerp                  := JsonStrOrEmpty('codigoerp', AJson);
+  ctps                       := JsonStrOrEmpty('ctps', AJson);
+  seriectps                  := JsonStrOrEmpty('seriectps', AJson);
+  nis                        := JsonStrOrEmpty('nis', AJson);
+  tituloeleitor              := JsonStrOrEmpty('tituloeleitor', AJson);
+  secaoeleitoral             := JsonStrOrEmpty('secaoeleitoral', AJson);
+  funcao                     := JsonStrOrEmpty('funcao', AJson);
+  data_admissao              := JsonStrOrEmpty('data_admissao', AJson);
+  data_demissao              := JsonStrOrEmpty('data_demissao', AJson);
+  salario                    := JsonFloatOrZero('salario', AJson);
+  comissao                   := JsonFloatOrZero('comissao', AJson);
+  f_caixa                    := JsonIntOrZero('f_caixa', AJson);
+  f_tecnico                  := JsonIntOrZero('f_tecnico', AJson);
+  f_mecanico                 := JsonIntOrZero('f_mecanico', AJson);
+  gerarfolhapagamento        := JsonIntOrZero('gerarfolhapagamento', AJson);
+  codfaixainss               := JsonStrOrEmpty('codfaixainss', AJson);
+  codfornecedorctaspagar     := JsonStrOrEmpty('codfornecedorctaspagar', AJson);
+  habilitadoplanilhacusto    := JsonIntOrZero('habilitadoplanilhacusto', AJson);
+  ajudacusto                 := JsonFloatOrZero('ajudacusto', AJson);
+  insalubridade              := JsonFloatOrZero('insalubridade', AJson);
+  periculosidade             := JsonFloatOrZero('periculosidade', AJson);
+  adicionalnoturno           := JsonFloatOrZero('adicionalnoturno', AJson);
+  decimoteceiro              := JsonFloatOrZero('decimoteceiro', AJson);
+  ferias                     := JsonFloatOrZero('ferias', AJson);
+  umtrecoferias              := JsonIntOrZero('umtrecoferias', AJson);
+  fgts                       := JsonFloatOrZero('fgts', AJson);
+  indenizacoes               := JsonFloatOrZero('indenizacoes', AJson);
+  total                      := JsonFloatOrZero('total', AJson);
+  comissaovenda              := JsonFloatOrZero('comissaovenda', AJson);
+  premioprodutividade        := JsonFloatOrZero('premioprodutividade', AJson);
+  codregiao                  := JsonStrOrEmpty('codregiao', AJson);
+  codsupervisor              := JsonStrOrEmpty('codsupervisor', AJson);
+  estadocivil                := JsonStrOrEmpty('estadocivil', AJson);
+  conjugue                   := JsonStrOrEmpty('conjugue', AJson);
+  dataentrada                := JsonStrOrEmpty('dataentrada', AJson);
+  datafimcontratoexperiencia := JsonStrOrEmpty('datafimcontratoexperiencia', AJson);
+  codcargo                   := JsonStrOrEmpty('codcargo', AJson);
+  cargo                      := JsonStrOrEmpty('cargo', AJson);
+end;
+
+{ TPessoaAPI }
+
+class function TPessoaAPI.ResourceName: string;
+begin
+  Result := '/pessoa';
+end;
+
+constructor TPessoaAPI.Create;
+begin
+  inherited;
+  FContatos               := TObjectList<TPessoaContato>.Create(True);
+  FEnderecos              := TObjectList<TPessoaEndereco>.Create(True);
+  FDadosBancarios          := TObjectList<TPessoaDadosBancarios>.Create(True);
+  FComplementoFuncionario   := nil;
+end;
+
+destructor TPessoaAPI.Destroy;
+begin
+  FContatos.Free;
+  FEnderecos.Free;
+  FDadosBancarios.Free;
+  FComplementoFuncionario.Free;
+  inherited;
+end;
+
+procedure TPessoaAPI.AddContato(const ANome, ATelefone, AEmail, ADepartamento: string);
+var
+  vTel: string;
+  C: TPessoaContato;
+begin
+  vTel := TRegEx.Replace(ATelefone, '[^0-9]', '');
+
+  if (vTel = '') and (Trim(ANome) = '') and (Trim(AEmail) = '') and (Trim(ADepartamento) = '') then
+    Exit;
+
+  C               := TPessoaContato.Create;
+
+  C.nome          := ANome;
+  C.telefone      := vTel;
+  C.email         := AEmail;
+  C.departamento  := ADepartamento;
+
+  FContatos.Add(C);
+end;
+
+procedure TPessoaAPI.AddEndereco(const ALogradouro, ANumero, AComplemento,
+  ABairro, ACidade, AUf, ACep, ADescricao, AObservacoes: string);
+var
+  E: TPessoaEndereco;
+begin
+  E             := TPessoaEndereco.Create;
+
+  E.logradouro  := ALogradouro;
+  E.numero      := ANumero;
+  E.complemento := AComplemento;
+  E.bairro      := ABairro;
+  E.cidade      := ACidade;
+  E.uf          := AUf;
+  E.cep         := ACep;
+  E.descricao   := ADescricao;
+  E.observacoes := AObservacoes;
+
+  FEnderecos.Add(E);
+end;
+
+procedure TPessoaAPI.AddDadosBancarios(const ACodigoErp, ACodBanco, ATitular, AAgencia,
+  AContaCorrente, ADigito, AChavePix, ATipoChavePix: string);
+
+  function MapTipoChavePix(const AErp: string): string;
+  begin
+    if AErp = 'CELULAR' then
+      Result := 'TELEFONE'
+    else if AErp = 'ALEATÓRIA' then
+      Result := 'CHAVEALEATORIA'
+    else if AErp = 'E-MAIL' then
+      Result := 'EMAIL'
+    else if (AErp = 'CPF/CNPJ') or (AErp = 'CPF') or (AErp = 'CNPJ') then
+      Result := 'DOCUMENTO'
+    else
+      Result := AErp;
+  end;
+
+var
+  D: TPessoaDadosBancarios;
+begin
+  if (Trim(AChavePix) = '') and (Trim(AContaCorrente) = '') then
+    Exit;
+
+  D                := TPessoaDadosBancarios.Create;
+  D.codigoerp      := ACodigoErp;
+  D.codbanco       := ACodBanco;
+  D.titular        := ATitular;
+  D.agencia        := AAgencia;
+  D.contacorrente  := AContaCorrente;
+  D.digito         := ADigito;
+  D.chavepix       := AChavePix;
+  D.tipochavepix   := MapTipoChavePix(ATipoChavePix);
+  FDadosBancarios.Add(D);
+end;
+
+procedure TPessoaAPI.AddComplementoFuncionario(const ACodigoErp, ACtps, ASerieCtps,
+  ANis, ATituloEleitor, ASecaoEleitoral, AFuncao: string;
+  ADataAdmissao, ADataDemissao: string; ASalario, AComissao: Double;
+  AFCaixa, AFTecnico, AFMecanico, AGerarFolhaPagamento: Integer;
+  ACodFaixaInss, ACodFornecedorCtaspagar: string;
+  AHabilitadoPlanilhaCusto: Integer; AAjudaCusto, AInsalubridade,
+  APericulosidade, AAdicionalNoturno: Double;
+  ADecimoTerceiro, AFerias: Double; AUmTercoFerias: Integer;
+  AFgts, AIndenizacoes, ATotal: Double;
+  AComissaoVenda, APremioProdutividade: Double;
+  ACodRegiao, ACodSupervisor, AEstadoCivil, AConjugue: string;
+  ADataEntrada, ADataFimContratoExperiencia: string;
+  ACodCargo, ACargo: string);
+var
+  FC: TFuncionarioComplemento;
+begin
+  FC                    := TFuncionarioComplemento.Create;
+  FC.codigoerp          := ACodigoErp;
+  FC.ctps               := ACtps;
+  FC.seriectps          := ASerieCtps;
+  FC.nis                := ANis;
+  FC.tituloeleitor      := ATituloEleitor;
+  FC.secaoeleitoral     := ASecaoEleitoral;
+  FC.funcao             := AFuncao;
+  FC.data_admissao      := ADataAdmissao;
+  FC.data_demissao      := ADataDemissao;
+  FC.salario            := ASalario;
+  FC.comissao           := AComissao;
+  FC.f_caixa            := AFCaixa;
+  FC.f_tecnico          := AFTecnico;
+  FC.f_mecanico         := AFMecanico;
+  FC.gerarfolhapagamento:= AGerarFolhaPagamento;
+  FC.codfaixainss       := ACodFaixaInss;
+  FC.codfornecedorctaspagar := ACodFornecedorCtaspagar;
+  FC.habilitadoplanilhacusto := AHabilitadoPlanilhaCusto;
+  FC.ajudacusto         := AAjudaCusto;
+  FC.insalubridade      := AInsalubridade;
+  FC.periculosidade     := APericulosidade;
+  FC.adicionalnoturno   := AAdicionalNoturno;
+  FC.decimoteceiro      := ADecimoTerceiro;
+  FC.ferias             := AFerias;
+  FC.umtrecoferias      := AUmTercoFerias;
+  FC.fgts               := AFgts;
+  FC.indenizacoes       := AIndenizacoes;
+  FC.total              := ATotal;
+  FC.comissaovenda      := AComissaoVenda;
+  FC.premioprodutividade:= APremioProdutividade;
+  FC.codregiao          := ACodRegiao;
+  FC.codsupervisor      := ACodSupervisor;
+  FC.estadocivil        := AEstadoCivil;
+  FC.conjugue           := AConjugue;
+  FC.dataentrada        := ADataEntrada;
+  FC.datafimcontratoexperiencia := ADataFimContratoExperiencia;
+  FC.codcargo           := ACodCargo;
+  FC.cargo              := ACargo;
+  FComplementoFuncionario := FC;
+end;
+
+function TPessoaAPI.ToJson: TJSONObject;
+var
+  Arr: TJSONArray;
+  C: TPessoaContato;
+  E: TPessoaEndereco;
+  D: TPessoaDadosBancarios;
+begin
+  Result := TJSONObject.Create;
+
+  Result.AddPair('codigoerp',               StrOrNull(codigoerp));
+  Result.AddPair('nome',                    StrOrNull(nome));
+  Result.AddPair('nomefantasia',            StrOrNull(nomefantasia));
+  Result.AddPair('logradouro',              StrOrNull(logradouro));
+  Result.AddPair('numero',                  StrOrNull(numero));
+  Result.AddPair('bairro',                  StrOrNull(bairro));
+  Result.AddPair('cidade',                  StrOrNull(cidade));
+  Result.AddPair('uf',                      StrOrNull(uf));
+  Result.AddPair('cep',                     CleanNumOrNull(cep));
+  Result.AddPair('ibge',                    StrOrNull(ibge));
+  Result.AddPair('complemento',             StrOrNull(complemento));
+  Result.AddPair('documentoprincipal',      CleanDocOrNull(documentoprincipal));
+  Result.AddPair('documentosecundario',     CleanDocOrNull(documentosecundario));
+  Result.AddPair('telefone',                CleanNumOrNull(telefone));
+  Result.AddPair('celular',                 CleanNumOrNull(celular));
+  Result.AddPair('email',                   StrOrNull(email));
+  Result.AddPair('observacoes',             StrOrNull(observacoes));
+  Result.AddPair('sexo',                    StrOrNull(sexo));
+  Result.AddPair('tipopessoa',              StrOrNull(tipopessoa));
+  Result.AddPair('habilitado',              TJSONNumber.Create(habilitado));
+  Result.AddPair('ativo',                   TJSONNumber.Create(ativo));
+  Result.AddPair('perfilcliente',           PerfilOrNull(perfilcliente));
+  Result.AddPair('perfilfornecedor',        PerfilOrNull(perfilfornecedor));
+  Result.AddPair('perfiltransportador',     PerfilOrNull(perfiltransportador));
+  Result.AddPair('perfilfuncionario',       PerfilOrNull(perfilfuncionario));
+  Result.AddPair('perfilvendedor',          PerfilOrNull(perfilvendedor));
+  Result.AddPair('perfilsupervisor',        PerfilOrNull(perfilsupervisor));
+  Result.AddPair('datafundacaonascimento',  StrOrNull(datafundacaonascimento));
+  Result.AddPair('datacadastro',            StrOrNull(datacadastro));
+  Result.AddPair('dataultimacompra',        StrOrNull(dataultimacompra));
+
+  Arr := TJSONArray.Create;
+  for C in FContatos do
+    Arr.AddElement(C.ToJson);
+  Result.AddPair('contatos',                Arr);
+
+  Arr := TJSONArray.Create;
+  for E in FEnderecos do
+    Arr.AddElement(E.ToJson);
+  Result.AddPair('enderecos',               Arr);
+
+  Arr := TJSONArray.Create;
+  for D in FDadosBancarios do
+    Arr.AddElement(D.ToJson);
+  Result.AddPair('dadosbancarios',          Arr);
+
+  if (perfilfuncionario <> 0) and (FComplementoFuncionario <> nil) then
+    Result.AddPair('complementofuncionario', FComplementoFuncionario.ToJson);
+end;
+
+{ TPessoaAPI.FromJson }
+
+procedure TPessoaAPI.FromJson(AJson: TJSONObject);
+var
+  Arr: TJSONArray;
+  Obj: TJSONObject;
+  i: Integer;
+  C: TPessoaContato;
+  E: TPessoaEndereco;
+  D: TPessoaDadosBancarios;
+begin
+  id                      := JsonStrOrEmpty('id', AJson);
+  tenant_id               := JsonStrOrEmpty('tenant_id', AJson);
+  codigoerp               := JsonStrOrEmpty('codigoerp', AJson);
+  nome                    := JsonStrOrEmpty('nome', AJson);
+  nomefantasia            := JsonStrOrEmpty('nomefantasia', AJson);
+  logradouro              := JsonStrOrEmpty('logradouro', AJson);
+  numero                  := JsonStrOrEmpty('numero', AJson);
+  bairro                  := JsonStrOrEmpty('bairro', AJson);
+  cidade                  := JsonStrOrEmpty('cidade', AJson);
+  uf                      := JsonStrOrEmpty('uf', AJson);
+  cep                     := JsonStrOrEmpty('cep', AJson);
+  ibge                    := JsonStrOrEmpty('ibge', AJson);
+  complemento             := JsonStrOrEmpty('complemento', AJson);
+  documentoprincipal      := JsonStrOrEmpty('documentoprincipal', AJson);
+  documentosecundario     := JsonStrOrEmpty('documentosecundario', AJson);
+  telefone                := JsonStrOrEmpty('telefone', AJson);
+  celular                 := JsonStrOrEmpty('celular', AJson);
+  email                   := JsonStrOrEmpty('email', AJson);
+  observacoes             := JsonStrOrEmpty('observacoes', AJson);
+  sexo                    := JsonStrOrEmpty('sexo', AJson);
+  tipopessoa              := JsonStrOrEmpty('tipopessoa', AJson);
+  habilitado              := JsonIntOrZero('habilitado', AJson);
+  ativo                   := JsonIntOrZero('ativo', AJson);
+  perfilcliente           := JsonIntOrZero('perfilcliente', AJson);
+  perfilfornecedor        := JsonIntOrZero('perfilfornecedor', AJson);
+  perfiltransportador     := JsonIntOrZero('perfiltransportador', AJson);
+  perfilfuncionario       := JsonIntOrZero('perfilfuncionario', AJson);
+  perfilvendedor          := JsonIntOrZero('perfilvendedor', AJson);
+  perfilsupervisor        := JsonIntOrZero('perfilsupervisor', AJson);
+  datafundacaonascimento  := JsonStrOrEmpty('datafundacaonascimento', AJson);
+  datacadastro            := JsonStrOrEmpty('datacadastro', AJson);
+  dataultimacompra        := JsonStrOrEmpty('dataultimacompra', AJson);
+  is_deleted              := JsonIntOrZero('is_deleted', AJson);
+  deleted_at              := JsonStrOrEmpty('deleted_at', AJson);
+  synced_at               := JsonStrOrEmpty('synced_at', AJson);
+  created_at              := JsonStrOrEmpty('created_at', AJson);
+  updated_at              := JsonStrOrEmpty('updated_at', AJson);
+
+  if AJson.TryGetValue('contatos', Arr) then
+    for i := 0 to Arr.Count - 1 do
+    begin
+      C := TPessoaContato.Create;
+      C.FromJson(TJSONObject(Arr.Items[i]));
+      FContatos.Add(C);
+    end;
+
+  if AJson.TryGetValue('enderecos', Arr) then
+    for i := 0 to Arr.Count - 1 do
+    begin
+      E := TPessoaEndereco.Create;
+      E.FromJson(TJSONObject(Arr.Items[i]));
+      FEnderecos.Add(E);
+    end;
+
+  if AJson.TryGetValue('dadosbancarios', Arr) then
+    for i := 0 to Arr.Count - 1 do
+    begin
+      D := TPessoaDadosBancarios.Create;
+      D.FromJson(TJSONObject(Arr.Items[i]));
+      FDadosBancarios.Add(D);
+    end;
+
+  if AJson.TryGetValue('complementofuncionario', Obj) then
+  begin
+    FComplementoFuncionario := TFuncionarioComplemento.Create;
+    FComplementoFuncionario.FromJson(Obj);
+  end;
+end;
+end.
