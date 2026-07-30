@@ -22,23 +22,13 @@ object Form2: TForm2
     Height = 224
     Align = alTop
     TabOrder = 0
-    object btnSincronizar: TButton
-      Left = 1
-      Top = 177
-      Width = 982
-      Height = 46
-      Align = alBottom
-      Caption = 'Sincronizar Todos Selecionados'
-      TabOrder = 0
-      OnClick = btnSincronizarClick
-    end
     object cxGroupBox1: TcxGroupBox
       Left = 1
       Top = 1
       Align = alClient
       Caption = 'Selecione para sincronizar TODOS registros de cada Entidade'
-      TabOrder = 1
-      Height = 176
+      TabOrder = 0
+      Height = 189
       Width = 982
       object cmbEmpresa: TcxComboBox
         Left = 2
@@ -124,8 +114,6 @@ object Form2: TForm2
           Style.IsFontAssigned = True
           TabOrder = 4
           Transparent = True
-          ExplicitLeft = 2
-          ExplicitTop = 64
         end
       end
       object Panel2: TPanel
@@ -217,6 +205,7 @@ object Form2: TForm2
           Top = 58
           Align = alTop
           Caption = 'Regioao Clientes (C00005)'
+          Enabled = False
           Style.HotTrack = True
           Style.TransparentBorder = False
           TabOrder = 1
@@ -227,6 +216,7 @@ object Form2: TForm2
           Top = 1
           Align = alTop
           Caption = 'Grupo Cliente (C000144)'
+          Enabled = False
           Style.HotTrack = True
           Style.TransparentBorder = False
           TabOrder = 2
@@ -275,7 +265,6 @@ object Form2: TForm2
           Style.IsFontAssigned = True
           TabOrder = 0
           Transparent = True
-          ExplicitTop = 58
         end
         object chkSubgrupoProduto: TcxCheckBox
           Left = 1
@@ -287,6 +276,52 @@ object Form2: TForm2
           TabOrder = 1
           Transparent = True
         end
+      end
+    end
+    object JvNavPanelHeader3: TJvNavPanelHeader
+      Left = 1
+      Top = 190
+      Width = 982
+      Height = 33
+      Align = alBottom
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -16
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ImageIndex = 0
+      object btnSincronizar: TButton
+        Left = 656
+        Top = 0
+        Width = 326
+        Height = 33
+        Align = alRight
+        Caption = 'Sincronizar Selecionados'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -12
+        Font.Name = 'Calibri'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 0
+        OnClick = btnSincronizarClick
+      end
+      object btnSyncAll: TButton
+        Left = 0
+        Top = 0
+        Width = 326
+        Height = 33
+        Align = alLeft
+        Caption = 'Sincronizar Todos'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -12
+        Font.Name = 'Calibri'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 1
+        OnClick = btnSyncAllClick
       end
     end
   end
