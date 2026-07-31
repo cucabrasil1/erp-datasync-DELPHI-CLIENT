@@ -3,15 +3,15 @@
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.StrUtils, System.Variants,
-  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
-  FireDAC.Phys.Intf, FireDAC.Stan.Option, FireDAC.Stan.Intf, FireDAC.Comp.Client,
-  Vcl.StdCtrls, System.JSON, system.DateUtils, System.Generics.Collections,
-   uEntityBase, uLogger, cxGraphics, cxControls, cxCheckBox, cxLookAndFeels,
-  cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore, cxGroupBox,
-  cxCheckGroup, Vcl.ExtCtrls, cxTextEdit, cxMaskEdit, cxDropDownEdit,
-  dxBarBuiltInMenu, cxPC, System.ImageList, Vcl.ImgList, cxImageList,
-  AdvGlowButton, JvExControls, JvNavigationPane, uSyncOrchestrator;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.StrUtils,
+  System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
+  Vcl.Dialogs, FireDAC.Phys.Intf, FireDAC.Stan.Option, FireDAC.Stan.Intf,
+  FireDAC.Comp.Client, Vcl.StdCtrls, System.JSON, system.DateUtils,
+  System.Generics.Collections, uEntityBase, uLogger, cxGraphics, cxControls,
+  cxCheckBox, cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit,
+  dxSkinsCore, cxGroupBox, cxCheckGroup, Vcl.ExtCtrls, cxTextEdit, cxMaskEdit,
+  cxDropDownEdit, dxBarBuiltInMenu, cxPC, System.ImageList, Vcl.ImgList,
+  cxImageList, AdvGlowButton, JvExControls, JvNavigationPane, uSyncOrchestrator;
 
 type
   TTableSummary = record
@@ -30,7 +30,6 @@ type
   end;
 
   TForm2 = class(TForm)
-    btnSincronizar: TButton;
     Memo1: TMemo;
     monitorEventos: TFDEventAlerter;
     pnSincronizar: TPanel;
@@ -46,27 +45,21 @@ type
     chkCenario: TcxCheckBox;
     Panel1: TPanel;
     Panel2: TPanel;
-    chkCondPagamento: TcxCheckBox;
     chkFornecedor: TcxCheckBox;
     chkTpPagamento: TcxCheckBox;
     chkCor: TcxCheckBox;
     chkTodos: TcxCheckBox;
     Panel3: TPanel;
-    chkGrupoProduto: TcxCheckBox;
-    chkRegiao: TcxCheckBox;
-    chkGrupoCliente: TcxCheckBox;
     chkPedVenda: TcxCheckBox;
     Panel4: TPanel;
     chkTransportador: TcxCheckBox;
-    chkSubgrupoProduto: TcxCheckBox;
-    chkVariacaoProduto: TcxCheckBox;
     JvNavPanelHeader3: TJvNavPanelHeader;
     btnSyncAll: TButton;
+    chkFuncioanrio: TcxCheckBox;
     procedure monitorEventosAlert(ASender: TFDCustomEventAlerter; const AEventName: string; const AArgument: Variant);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure btnSincronizarClick(Sender: TObject);
     procedure btnSettingsClick(Sender: TObject);
     procedure chkTodosClick(Sender: TObject);
     procedure btnSyncAllClick(Sender: TObject);
@@ -81,8 +74,8 @@ type
     procedure EnviarRegistroApi(qrRecord, qrIntegrador, qrParametrosIntegrador: TFDQuery; thConnection: TFDConnection);
     procedure BuscaIntegrador(qrIntegrador: TFDQuery; thConnection: TFDConnection; vWhereClauses: string = '');
 
-    function SyncGroup(AConnection: TFDConnection; qrIntegrador: TFDQuery;
-      const ATabelas: TArray<string>; const ACodFilial: string): Boolean;
+    function SyncGroup(AConnection: TFDConnection; qrIntegrador: TFDQuery; const ATabelas: TArray<string>; const ACodFilial: string): Boolean;
+    function GetGruposSync: TArray<TGroupSyncDef>;
     procedure AtualizarEventoSync(qrEvento: TFDQuery; const ASyncResult: TSyncResult);
   end;
 
@@ -104,7 +97,7 @@ begin
 
   Result := dtIndustrial; // default industrial
 
-  if vParam = 'INDUSTRIAL' then       //comercial proloja
+  if vParam <> 'INDUSTRIAL' then       //comercial proloja
     Result := dtCommercial;
 
   TLogger.Log(llInfo, lcSystem, 'Modo banco: ' + vParam, []);
@@ -123,8 +116,6 @@ begin
   end;
 end;
 
-
-
 procedure TForm2.FormDestroy(Sender: TObject);
 begin
   if hMutex <> 0 then
@@ -138,7 +129,8 @@ begin
   FDatabaseType := GetDatabaseType;
   FSummary := TDictionary<string, TTableSummary>.Create;
 
-  TLogger.OnLog := procedure(const ALine: string)
+  TLogger.OnLog :=
+    procedure(const ALine: string)
     begin
       Memo1.Lines.Add(ALine);
     end;
@@ -231,25 +223,64 @@ begin
   pnSincronizar.Visible := true;
 end;
 
+function TForm2.GetGruposSync: TArray<TGroupSyncDef>;
+begin
+  SetLength(Result, 10);
+
+  //clientes ('Regioes-C000005', 'GrupoCliente-C000144', 'Cliente-C000007')
+  Result[0].CheckboxName := 'chkClientes';
+  Result[0].Tabelas := TArray<string>.Create('C000005', 'C000144', 'C000007');
+
+  //cores (C000129)
+  Result[1].CheckboxName := 'chkCor';
+  Result[1].Tabelas := TArray<string>.Create('C000129');
+
+  //acabamentos (C000250)
+  Result[2].CheckboxName := 'chkAcabamentos';
+  Result[2].Tabelas := TArray<string>.Create('C000250');
+
+  //cenario faturamento (C000233)
+  Result[3].CheckboxName := 'chkCenario';
+  Result[3].Tabelas := TArray<string>.Create('C000233');
+
+  //Fornecedores (C000009)
+  Result[4].CheckboxName := 'chkFornecedor';
+  Result[4].Tabelas := TArray<string>.Create('C000009');
+
+  //Transportadores (C000010)
+  Result[5].CheckboxName := 'chkTransportador';
+  Result[5].Tabelas := TArray<string>.Create('C000010');
+
+  //Tipos de Pagamento ('Tipo - C000014', 'Condicoes - C000015', 'Parcelamento - C000016')
+  Result[6].CheckboxName := 'chkTpPagamento';
+  Result[6].Tabelas := TArray<string>.Create('C000014', 'C000015', 'C000016');
+
+  //Produtos ('Grupo - C000017', 'Subgrupo - C000018', 'Produto - C000025', 'VAriacao - C000279')
+  Result[7].CheckboxName := 'chkProdutos';
+//  Result[7].Tabelas := TArray<string>.Create('C000017', 'C000018', 'C000025', 'C000279');
+  Result[7].Tabelas := TArray<string>.Create('C000017', 'C000018', 'C000279');
+
+  //Funcionarios (C000008)
+  Result[8].CheckboxName := 'chkFuncioanrio';
+  Result[8].Tabelas := TArray<string>.Create('C000008');
+end;
+
 procedure TForm2.btnSyncAllClick(Sender: TObject);
 var
-  GRUPOS: array of TGroupSyncDef;
+  GRUPOS: TArray<TGroupSyncDef>;
   vCodFilial: string;
   t: TThreadCuca;
 begin
   if cmbEmpresa.ItemIndex < 0 then
     raise Exception.Create('Nenhuma empresa selecionada. Verifique.');
 
-  vCodFilial := Copy(cmbEmpresa.Properties.Items[cmbEmpresa.ItemIndex], 1,
-    Pos(' - ', cmbEmpresa.Properties.Items[cmbEmpresa.ItemIndex]) - 1);
+  vCodFilial := Copy(cmbEmpresa.Properties.Items[cmbEmpresa.ItemIndex], 1, Pos(' - ', cmbEmpresa.Properties.Items[cmbEmpresa.ItemIndex]) - 1);
 
   if Trim(vCodFilial) = '' then
     raise Exception.Create('Erro ao extrair código da filial.');
 
-  SetLength(GRUPOS, 1);
-  //clientes ('Regioes-C000005', 'GrupoCliente-C000144', 'Cliente-C000007')
-  GRUPOS[0].CheckboxName := 'chkClientes';
-  GRUPOS[0].Tabelas := TArray<string>.Create('C000005', 'C000144', 'C000007');
+  //definir entidades a serem exportadas
+  GRUPOS := Self.GetGruposSync;
 
   t := TThreadCuca.Create(
     procedure
@@ -282,8 +313,7 @@ begin
 
         if qrIntegrador.IsEmpty then
         begin
-          TLogger.Log(llWarn, lcAuth, 'Nenhum integrador para empresa selecionada',
-            ['filial=' + vCodFilial]);
+          TLogger.Log(llWarn, lcAuth, 'Nenhum integrador para empresa selecionada', ['filial=' + vCodFilial]);
           Exit;
         end;
 
@@ -295,9 +325,7 @@ begin
 
           if not Self.SyncGroup(thConnection, qrIntegrador, GRUPOS[i].Tabelas, vCodFilial) then
           begin
-            TLogger.Log(llError, lcSync,
-              'Grupo abortado por falha em dependência: ' + GRUPOS[i].CheckboxName,
-              ['filial=' + vCodFilial]);
+            TLogger.Log(llError, lcSync, 'Grupo abortado por falha em dependência: ' + GRUPOS[i].CheckboxName, ['filial=' + vCodFilial]);
           end;
         end;
 
@@ -310,8 +338,7 @@ begin
     end, False);
 end;
 
-function TForm2.SyncGroup(AConnection: TFDConnection; qrIntegrador: TFDQuery;
-  const ATabelas: TArray<string>; const ACodFilial: string): Boolean;
+function TForm2.SyncGroup(AConnection: TFDConnection; qrIntegrador: TFDQuery; const ATabelas: TArray<string>; const ACodFilial: string): Boolean;
 var
   i: Integer;
   Entity: TEntityBase;
@@ -340,15 +367,14 @@ begin
   begin
     try
       Entity := TEntityFactory.GetEntity(AConnection, ATabelas[i], FDatabaseType);
+      Entity.Filial := ACodFilial;
       Entity.OnProgress :=
         procedure(const AMsg: string)
         begin
           if Pos('falhou', LowerCase(AMsg)) > 0 then
-            TLogger.Log(llError, lcExport, Trim(AMsg),
-              ['tabela=' + ATabelas[i], 'filial=' + ACodFilial])
+            TLogger.Log(llError, lcExport, Trim(AMsg), ['tabela=' + ATabelas[i], 'filial=' + ACodFilial])
           else
-            TLogger.Log(llInfo, lcExport, Trim(AMsg),
-              ['tabela=' + ATabelas[i], 'filial=' + ACodFilial]);
+            TLogger.Log(llInfo, lcExport, Trim(AMsg), ['tabela=' + ATabelas[i], 'filial=' + ACodFilial]);
         end;
       try
         StartTime := Now;
@@ -377,16 +403,10 @@ begin
         ElapsedSec := (Now - StartTime) * 24 * 60 * 60;
 
         if SyncResult.Success then
-          TLogger.Log(llInfo, lcExport,
-            Format('%d registro(s) sincronizado(s) em %.1fs - %s',
-              [SyncResult.RecordCount, ElapsedSec, Entity.GetSyncAllMessage(True, '')]),
-            ['tabela=' + ATabelas[i], 'filial=' + ACodFilial])
+          TLogger.Log(llInfo, lcExport, Format('%d registro(s) sincronizado(s) em %.1fs - %s', [SyncResult.RecordCount, ElapsedSec, Entity.GetSyncAllMessage(True, '')]), ['tabela=' + ATabelas[i], 'filial=' + ACodFilial])
         else
         begin
-          TLogger.Log(llError, lcExport,
-            Format('%d registro(s) com erro em %.1fs - %s',
-              [SyncResult.RecordCount, ElapsedSec, Entity.GetSyncAllMessage(False, SyncResult.ErrorMessage)]),
-            ['tabela=' + ATabelas[i], 'filial=' + ACodFilial]);
+          TLogger.Log(llError, lcExport, Format('%d registro(s) com erro em %.1fs - %s', [SyncResult.RecordCount, ElapsedSec, Entity.GetSyncAllMessage(False, SyncResult.ErrorMessage)]), ['tabela=' + ATabelas[i], 'filial=' + ACodFilial]);
           Exit; { abort group }
         end;
 
@@ -396,205 +416,13 @@ begin
     except
       on E: Exception do
       begin
-        TLogger.Log(llError, lcExport,
-          'Falha ao sincronizar ' + ATabelas[i] + ': ' + E.Message,
-          ['tabela=' + ATabelas[i], 'filial=' + ACodFilial]);
+        TLogger.Log(llError, lcExport, 'Falha ao sincronizar ' + ATabelas[i] + ': ' + E.Message, ['tabela=' + ATabelas[i], 'filial=' + ACodFilial]);
         Exit; { abort group }
       end;
     end;
   end;
 
   Result := True;
-end;
-
-procedure TForm2.btnSincronizarClick(Sender: TObject);
-const
-  ENTIDADES: array[0..16] of TEntidadeSync = (
-    (CheckboxName: 'chkClientes'; TableName: 'C000007'),
-    (CheckboxName: 'chkProdutos'; TableName: 'C000025'),
-    (CheckboxName: 'chkAcabamentos'; TableName: 'C000250'),
-    (CheckboxName: 'chkCenario'; TableName: 'C000233'),
-    (CheckboxName: 'chkTpPagamento'; TableName: 'C000014'),
-    (CheckboxName: 'chkCondPagamento'; TableName: 'C000015'),
-    (CheckboxName: 'chkCor'; TableName: 'C000129'),
-    (CheckboxName: 'chkFornecedor'; TableName: 'C000009'),
-    (CheckboxName: 'chkGrupoCliente'; TableName: 'C000144'),
-    (CheckboxName: 'chkGrupoProduto'; TableName: 'C000017'),
-    (CheckboxName: 'chkPedVenda'; TableName: 'C000126'),
-    (CheckboxName: 'chkRegiao'; TableName: 'C000005'),
-    (CheckboxName: 'chkSubgrupoProduto'; TableName: 'C000018'),
-    (CheckboxName: 'chkSupervisor'; TableName: 'C000008'),
-    (CheckboxName: 'chkVendedor'; TableName: 'C000008'),
-    (CheckboxName: 'chkTransportador'; TableName: 'C000010'),
-    (CheckboxName: 'chkVariacaoProduto'; TableName: 'C000279')
-  );
-var
-  t: TThreadCuca;
-  chk: TcxCheckBox;
-  algumSelecionado: Boolean;
-  i: Integer;
-begin
-  algumSelecionado := False;
-
-  for i := Low(ENTIDADES) to High(ENTIDADES) do
-  begin
-    chk := FindComponent(ENTIDADES[i].CheckboxName) as TcxCheckBox;
-    if Assigned(chk) and chk.Checked then
-    begin
-      algumSelecionado := True;
-      Break;
-    end;
-  end;
-
-  if not algumSelecionado then
-  begin
-    MessageDlg('Selecione ao menos uma entidade para sincronizar.', mtWarning, [mbOK], 0);
-    Exit;
-  end;
-
-  t := TThreadCuca.Create(
-    procedure
-    var
-      thConnection: TFDConnection;
-      qrIntegrador, qrParametrosIntegrador: TFDQuery;
-      Entity: TEntityBase;
-      SyncResult: TSyncResult;
-      vToken: string;
-    var
-      i: Integer;
-      Checkbox: TComponent;
-      StartTime: TDateTime;
-      ElapsedSec: Double;
-    begin
-      try
-        thConnection := TFDConnection.Create(nil);
-        modulo.DoConnectionDatabase(thConnection);
-
-        qrIntegrador := TFDQuery.Create(nil);
-        qrIntegrador.Connection := thConnection;
-
-        qrParametrosIntegrador := TFDQuery.Create(nil);
-        qrParametrosIntegrador.Connection := thConnection;
-
-        with qrIntegrador do
-        begin
-          Close;
-          SQL.Clear;
-          SQL.Add('select * from c000440');
-          SQL.Add('where tipo = :pTipo');
-          SQL.Add('and habilitado = :pHab');
-          SQL.Add('and codigofilial = :pFilial');
-          ParamByName('pTipo').Value := 'CUCABRASIL DATASYNC';
-          ParamByName('pHab').Value := 'S';
-          ParamByName('pFilial').Value := Copy(cmbEmpresa.Properties.Items[cmbEmpresa.ItemIndex], 1, Pos(' - ', cmbEmpresa.Properties.Items[cmbEmpresa.ItemIndex]) - 1);
-          Open;
-        end;
-
-        if qrIntegrador.IsEmpty then
-        begin
-          TLogger.Log(llWarn, lcAuth, 'Nenhum integrador para empresa selecionada',
-            ['filial=' + qrIntegrador.FieldByName('codigofilial').AsString]);
-          Exit;
-        end;
-
-        with TApiClient.Create('', thConnection) do
-        try
-          AutenticaApi(qrIntegrador.FieldByName('codigofilial').AsString);
-        finally
-          Free;
-        end;
-
-        qrIntegrador.Close;
-        qrIntegrador.Open;
-
-        for i := Low(ENTIDADES) to High(ENTIDADES) do
-        begin
-          Checkbox := Self.FindComponent(ENTIDADES[i].CheckboxName);
-          if not Assigned(Checkbox) then
-            Continue;
-
-          if not (Checkbox is TcxCheckBox) then
-            Continue;
-
-          if not TcxCheckBox(Checkbox).Checked then
-            Continue;
-
-          qrIntegrador.First;
-          while not qrIntegrador.Eof do
-          begin
-            vToken := qrIntegrador.FieldByName('token').AsString;
-
-            try
-              Entity := TEntityFactory.GetEntity(thConnection, ENTIDADES[i].TableName, FDatabaseType);
-              Entity.OnProgress := procedure(const AMsg: string)
-                begin
-                  if Pos('falhou', LowerCase(AMsg)) > 0 then
-                    TLogger.Log(llError, lcExport, Trim(AMsg),
-                      ['tabela=' + ENTIDADES[i].TableName, 'filial=' + qrIntegrador.FieldByName('codigofilial').AsString])
-                  else
-                    TLogger.Log(llInfo, lcExport, Trim(AMsg),
-                      ['tabela=' + ENTIDADES[i].TableName, 'filial=' + qrIntegrador.FieldByName('codigofilial').AsString]);
-                end;
-              try
-                StartTime := Now;
-                if vToken <> '' then
-                  SyncResult := Entity.SyncAll(qrIntegrador.FieldByName('url').AsString, 'Bearer ' + vToken, 'Authorization')
-                else
-                  SyncResult := Entity.SyncAll(qrIntegrador.FieldByName('url').AsString, '', '');
-
-                if SyncResult.NeedAuth then
-                begin
-                  with TApiClient.Create('', thConnection) do
-                  try
-                    AutenticaApi(qrIntegrador.FieldByName('codigofilial').AsString);
-                  finally
-                    Free;
-                  end;
-                  qrIntegrador.Close;
-                  qrIntegrador.Open;
-
-                  vToken := qrIntegrador.FieldByName('token').AsString;
-                  if vToken <> '' then
-                    SyncResult := Entity.SyncAll(qrIntegrador.FieldByName('url').AsString, 'Bearer ' + vToken, 'Authorization')
-                  else
-                    SyncResult := Entity.SyncAll(qrIntegrador.FieldByName('url').AsString, '', '');
-                end;
-
-                ElapsedSec := (Now - StartTime) * 24 * 60 * 60;
-
-                if SyncResult.Success then
-                  TLogger.Log(llInfo, lcExport,
-                    Format('%d registro(s) sincronizado(s) em %.1fs - %s',
-                      [SyncResult.RecordCount, ElapsedSec, Entity.GetSyncAllMessage(True, '')]),
-                    ['tabela=' + ENTIDADES[i].TableName, 'filial=' + qrIntegrador.FieldByName('codigofilial').AsString])
-                else
-                  TLogger.Log(llError, lcExport,
-                    Format('%d registro(s) com erro em %.1fs - %s',
-                      [SyncResult.RecordCount, ElapsedSec, Entity.GetSyncAllMessage(False, SyncResult.ErrorMessage)]),
-                    ['tabela=' + ENTIDADES[i].TableName, 'filial=' + qrIntegrador.FieldByName('codigofilial').AsString]);
-              finally
-                Entity.Free;
-              end;
-            except
-              on E: Exception do
-                TLogger.Log(llError, lcExport, Entity.GetSyncAllMessage(False, E.Message),
-                  ['tabela=' + ENTIDADES[i].TableName, 'filial=' + qrIntegrador.FieldByName('codigofilial').AsString]);
-            end;
-
-            qrIntegrador.Next;
-          end;
-
-          qrIntegrador.First;
-        end;
-
-        FreeAndNil(qrIntegrador);
-        FreeAndNil(qrParametrosIntegrador);
-        FreeAndNil(thConnection);
-      except
-        on E: Exception do
-          MessageDLG('Falha no SyncAll: ' + #13 + E.Message, mtError, [mbOK], 0);
-      end;
-    end, False);
 end;
 
 procedure TForm2.AtualizarEventoSync(qrEvento: TFDQuery; const ASyncResult: TSyncResult);
@@ -719,11 +547,7 @@ begin
         SyncResult.ErrorMessage := 'Sem mapper para tabela ' + Self.NomeTabela(qrRecord.FieldByName('tablename_db').AsString) + ': ' + E.Message;
         Self.AtualizarEventoSync(qrRecord, SyncResult);
         Self.IncrementarContador(qrRecord.FieldByName('tablename_db').AsString, False);
-        TLogger.Log(llError, lcSync, SyncResult.ErrorMessage, [
-          'codseq=' + qrRecord.FieldByName('codseq').AsString,
-          'coderecord=' + qrRecord.FieldByName('coderecord_db').AsString,
-          'tabela=' + Self.NomeTabela(qrRecord.FieldByName('tablename_db').AsString),
-          'filial=' + qrRecord.FieldByName('CODIGOFILIAL').AsString]);
+        TLogger.Log(llError, lcSync, SyncResult.ErrorMessage, ['codseq=' + qrRecord.FieldByName('codseq').AsString, 'coderecord=' + qrRecord.FieldByName('coderecord_db').AsString, 'tabela=' + Self.NomeTabela(qrRecord.FieldByName('tablename_db').AsString), 'filial=' + qrRecord.FieldByName('CODIGOFILIAL').AsString]);
         Exit;
       end;
     end;
@@ -777,20 +601,12 @@ begin
       if SyncResult.Success then
       begin
         Self.IncrementarContador(qrRecord.FieldByName('tablename_db').AsString, True);
-        TLogger.Log(llInfo, lcSync, 'Evento sincronizado com sucesso', [
-          'codseq=' + qrRecord.FieldByName('codseq').AsString,
-          'coderecord=' + qrRecord.FieldByName('coderecord_db').AsString,
-          'tabela=' + Self.NomeTabela(qrRecord.FieldByName('tablename_db').AsString),
-          'filial=' + qrRecord.FieldByName('CODIGOFILIAL').AsString])
+        TLogger.Log(llInfo, lcSync, 'Evento sincronizado com sucesso', ['codseq=' + qrRecord.FieldByName('codseq').AsString, 'coderecord=' + qrRecord.FieldByName('coderecord_db').AsString, 'tabela=' + Self.NomeTabela(qrRecord.FieldByName('tablename_db').AsString), 'filial=' + qrRecord.FieldByName('CODIGOFILIAL').AsString])
       end
       else
       begin
         Self.IncrementarContador(qrRecord.FieldByName('tablename_db').AsString, False);
-        TLogger.Log(llError, lcSync, SyncResult.ErrorMessage, [
-          'codseq=' + qrRecord.FieldByName('codseq').AsString,
-          'coderecord=' + qrRecord.FieldByName('coderecord_db').AsString,
-          'tabela=' + Self.NomeTabela(qrRecord.FieldByName('tablename_db').AsString),
-          'filial=' + qrRecord.FieldByName('CODIGOFILIAL').AsString]);
+        TLogger.Log(llError, lcSync, SyncResult.ErrorMessage, ['codseq=' + qrRecord.FieldByName('codseq').AsString, 'coderecord=' + qrRecord.FieldByName('coderecord_db').AsString, 'tabela=' + Self.NomeTabela(qrRecord.FieldByName('tablename_db').AsString), 'filial=' + qrRecord.FieldByName('CODIGOFILIAL').AsString]);
       end;
 
     except
@@ -801,11 +617,7 @@ begin
         SyncResult.ErrorMessage := 'Falha no sync: ' + E.Message;
         Self.AtualizarEventoSync(qrRecord, SyncResult);
         Self.IncrementarContador(qrRecord.FieldByName('tablename_db').AsString, False);
-        TLogger.Log(llError, lcSync, SyncResult.ErrorMessage, [
-          'codseq=' + qrRecord.FieldByName('codseq').AsString,
-          'coderecord=' + qrRecord.FieldByName('coderecord_db').AsString,
-          'tabela=' + Self.NomeTabela(qrRecord.FieldByName('tablename_db').AsString),
-          'filial=' + qrRecord.FieldByName('CODIGOFILIAL').AsString]);
+        TLogger.Log(llError, lcSync, SyncResult.ErrorMessage, ['codseq=' + qrRecord.FieldByName('codseq').AsString, 'coderecord=' + qrRecord.FieldByName('coderecord_db').AsString, 'tabela=' + Self.NomeTabela(qrRecord.FieldByName('tablename_db').AsString), 'filial=' + qrRecord.FieldByName('CODIGOFILIAL').AsString]);
       end;
     end;
 
@@ -891,8 +703,7 @@ begin
           MessageDLG('Falha ao iniciar sincronização de dados: ' + #13 + e.Message, mtError, [mbOK], 0);
         end;
       end;
-    end,
-  False);
+    end, False);
 end;
 
 end.

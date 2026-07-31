@@ -1,0 +1,91 @@
+﻿--- Log iniciado em 30/07/2026 11:04:50 ---
+[2026-07-30 11:04:50] [TID=19848] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-30 11:04:50] [TID=19848] [INFO] [SYSTEM] Processando eventos
+[2026-07-30 11:04:50] [TID=18968] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-30 11:04:50] [TID=18968] [INFO] [SYNC] === RESUMO ===
+--- Log iniciado em 30/07/2026 13:45:13 ---
+[2026-07-30 13:45:13] [TID=20072] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-30 13:45:13] [TID=20072] [INFO] [SYSTEM] Processando eventos
+[2026-07-30 13:45:13] [TID=20668] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-30 13:45:13] [TID=20668] [INFO] [SYNC] === RESUMO ===
+--- Log iniciado em 30/07/2026 13:47:19 ---
+[2026-07-30 13:47:19] [TID=4068] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-30 13:47:19] [TID=4068] [INFO] [SYSTEM] Processando eventos
+[2026-07-30 13:47:19] [TID=9764] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-30 13:47:19] [TID=9764] [INFO] [SYNC] === RESUMO ===
+[2026-07-30 13:48:27] [TID=4068] [INFO] [AUTH] Autenticado com sucesso | filial=000001
+[2026-07-30 13:49:00] [TID=4068] [INFO] [EXPORT] 13:49:00 | Enviando lote com 7 registro(s) (7 de 7) | tabela=C000005 | filial=000001
+[2026-07-30 13:49:00] [TID=4068] [INFO] [EXPORT] 13:49:00 | Lote de 7 registro(s) enviado com sucesso | tabela=C000005 | filial=000001
+[2026-07-30 13:49:12] [TID=4068] [INFO] [EXPORT] 7 registro(s) sincronizado(s) em 13,8s - Regiao de Clientes sincronizados com sucesso | tabela=C000005 | filial=000001
+--- Log iniciado em 30/07/2026 15:05:57 ---
+[2026-07-30 15:05:57] [TID=18168] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-30 15:05:57] [TID=18168] [INFO] [SYSTEM] Processando eventos
+[2026-07-30 15:05:57] [TID=12204] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-30 15:05:57] [TID=12204] [INFO] [SYNC] === RESUMO ===
+--- Log iniciado em 30/07/2026 15:47:49 ---
+[2026-07-30 15:47:49] [TID=13436] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-30 15:47:49] [TID=13436] [INFO] [SYSTEM] Processando eventos
+[2026-07-30 15:47:49] [TID=19728] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-30 15:47:49] [TID=19728] [INFO] [SYNC] === RESUMO ===
+[2026-07-30 15:48:36] [TID=11524] [INFO] [AUTH] Autenticado com sucesso | filial=000001
+[2026-07-30 15:49:58] [TID=11524] [INFO] [EXPORT] 15:49:58 | Enviando lote com 7 registro(s) (7 de 7) | tabela=C000005 | filial=000001
+[2026-07-30 15:49:58] [TID=11524] [INFO] [EXPORT] 15:49:58 | Lote de 7 registro(s) enviado com sucesso | tabela=C000005 | filial=000001
+[2026-07-30 15:49:58] [TID=11524] [INFO] [EXPORT] 7 registro(s) sincronizado(s) em 1,8s - Regiao de Clientes sincronizados com sucesso | tabela=C000005 | filial=000001
+[2026-07-30 15:49:58] [TID=11524] [INFO] [EXPORT] 15:49:58 | Enviando lote com 2 registro(s) (2 de 2) | tabela=C000144 | filial=000001
+[2026-07-30 15:49:58] [TID=11524] [INFO] [EXPORT] 15:49:58 | Lote de 2 registro(s) enviado com sucesso | tabela=C000144 | filial=000001
+[2026-07-30 15:49:58] [TID=11524] [INFO] [EXPORT] 2 registro(s) sincronizado(s) em 0,0s - Grupos de Cliente sincronizados com sucesso | tabela=C000144 | filial=000001
+--- Log iniciado em 30/07/2026 15:50:28 ---
+[2026-07-30 15:50:28] [TID=16976] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-30 15:50:28] [TID=16976] [INFO] [SYSTEM] Processando eventos
+[2026-07-30 15:50:28] [TID=6976] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-30 15:50:28] [TID=6976] [INFO] [SYNC] === RESUMO ===
+[2026-07-30 15:51:04] [TID=4296] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Regiao de Clientes sincronizados com sucesso | tabela=C000005 | filial=000001
+[2026-07-30 15:51:10] [TID=4296] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Grupos de Cliente sincronizados com sucesso | tabela=C000144 | filial=000001
+--- Log iniciado em 30/07/2026 15:51:41 ---
+[2026-07-30 15:51:41] [TID=19256] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-30 15:51:41] [TID=19256] [INFO] [SYSTEM] Processando eventos
+[2026-07-30 15:51:41] [TID=16300] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-30 15:51:41] [TID=16300] [INFO] [SYNC] === RESUMO ===
+[2026-07-30 15:51:47] [TID=5496] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Regiao de Clientes sincronizados com sucesso | tabela=C000005 | filial=000001
+[2026-07-30 15:51:49] [TID=5496] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Grupos de Cliente sincronizados com sucesso | tabela=C000144 | filial=000001
+--- Log iniciado em 30/07/2026 15:52:33 ---
+[2026-07-30 15:52:33] [TID=15876] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-30 15:52:33] [TID=15876] [INFO] [SYSTEM] Processando eventos
+[2026-07-30 15:52:33] [TID=19192] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-30 15:52:33] [TID=19192] [INFO] [SYNC] === RESUMO ===
+[2026-07-30 15:52:55] [TID=14968] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 17,8s - Regiao de Clientes sincronizados com sucesso | tabela=C000005 | filial=000001
+[2026-07-30 15:53:20] [TID=14968] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 24,7s - Grupos de Cliente sincronizados com sucesso | tabela=C000144 | filial=000001
+[2026-07-30 15:54:48] [TID=14968] [INFO] [EXPORT] 15:54:48 | Enviando lote com 785 registro(s) (785 de 785) | tabela=C000007 | filial=000001
+[2026-07-30 15:55:46] [TID=14968] [WARN] [SYSTEM] Sanitize removeu 2 char(s) [] em C000007.batch
+[2026-07-30 15:56:24] [TID=14968] [INFO] [EXPORT] 15:56:24 | Lote de 785 registro(s) enviado com sucesso | tabela=C000007 | filial=000001
+[2026-07-30 15:57:04] [TID=14968] [INFO] [EXPORT] 785 registro(s) sincronizado(s) em 222,0s - Clientes sincronizados com sucesso | tabela=C000007 | filial=000001
+--- Log iniciado em 30/07/2026 15:58:39 ---
+[2026-07-30 15:58:39] [TID=13612] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-30 15:58:39] [TID=13612] [INFO] [SYSTEM] Processando eventos
+[2026-07-30 15:58:39] [TID=21024] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-30 15:58:39] [TID=21024] [INFO] [SYNC] === RESUMO ===
+[2026-07-30 15:58:46] [TID=18732] [INFO] [EXPORT] 15:58:46 | Enviando lote com 7 registro(s) (7 de 7) | tabela=C000005 | filial=000001
+[2026-07-30 15:58:47] [TID=18732] [INFO] [EXPORT] 15:58:47 | Lote de 7 registro(s) enviado com sucesso | tabela=C000005 | filial=000001
+[2026-07-30 15:58:48] [TID=18732] [INFO] [EXPORT] 7 registro(s) sincronizado(s) em 4,8s - Regiao de Clientes sincronizados com sucesso | tabela=C000005 | filial=000001
+[2026-07-30 15:58:50] [TID=18732] [INFO] [EXPORT] 15:58:50 | Enviando lote com 2 registro(s) (2 de 2) | tabela=C000144 | filial=000001
+[2026-07-30 15:58:50] [TID=18732] [INFO] [EXPORT] 15:58:50 | Lote de 2 registro(s) enviado com sucesso | tabela=C000144 | filial=000001
+[2026-07-30 15:58:51] [TID=18732] [INFO] [EXPORT] 2 registro(s) sincronizado(s) em 3,6s - Grupos de Cliente sincronizados com sucesso | tabela=C000144 | filial=000001
+[2026-07-30 15:58:53] [TID=18732] [INFO] [EXPORT] 15:58:53 | Enviando lote com 785 registro(s) (785 de 785) | tabela=C000007 | filial=000001
+[2026-07-30 15:58:53] [TID=18732] [WARN] [SYSTEM] Sanitize removeu 2 char(s) [] em C000007.batch
+[2026-07-30 15:58:54] [TID=18732] [INFO] [EXPORT] 15:58:54 | Lote de 785 registro(s) enviado com sucesso | tabela=C000007 | filial=000001
+[2026-07-30 15:58:57] [TID=18732] [INFO] [EXPORT] 785 registro(s) sincronizado(s) em 5,6s - Clientes sincronizados com sucesso | tabela=C000007 | filial=000001
+--- Log iniciado em 30/07/2026 15:59:49 ---
+[2026-07-30 15:59:49] [TID=7376] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-07-30 15:59:49] [TID=7376] [INFO] [SYSTEM] Processando eventos
+[2026-07-30 15:59:49] [TID=17836] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-07-30 15:59:49] [TID=17836] [INFO] [SYNC] === RESUMO ===
+[2026-07-30 15:59:54] [TID=21052] [INFO] [EXPORT] 15:59:54 | Enviando lote com 7 registro(s) (7 de 7) | tabela=C000005 | filial=000001
+[2026-07-30 15:59:54] [TID=21052] [INFO] [EXPORT] 15:59:54 | Lote de 7 registro(s) enviado com sucesso | tabela=C000005 | filial=000001
+[2026-07-30 15:59:54] [TID=21052] [INFO] [EXPORT] 7 registro(s) sincronizado(s) em 0,1s - Regiao de Clientes sincronizados com sucesso | tabela=C000005 | filial=000001
+[2026-07-30 15:59:54] [TID=21052] [INFO] [EXPORT] 15:59:54 | Enviando lote com 2 registro(s) (2 de 2) | tabela=C000144 | filial=000001
+[2026-07-30 15:59:54] [TID=21052] [INFO] [EXPORT] 15:59:54 | Lote de 2 registro(s) enviado com sucesso | tabela=C000144 | filial=000001
+[2026-07-30 15:59:54] [TID=21052] [INFO] [EXPORT] 2 registro(s) sincronizado(s) em 0,1s - Grupos de Cliente sincronizados com sucesso | tabela=C000144 | filial=000001
+[2026-07-30 15:59:54] [TID=21052] [INFO] [EXPORT] 15:59:54 | Enviando lote com 785 registro(s) (785 de 785) | tabela=C000007 | filial=000001
+[2026-07-30 15:59:54] [TID=21052] [WARN] [SYSTEM] Sanitize removeu 2 char(s) [] em C000007.batch
+[2026-07-30 15:59:55] [TID=21052] [INFO] [EXPORT] 15:59:55 | Lote de 785 registro(s) enviado com sucesso | tabela=C000007 | filial=000001
+[2026-07-30 15:59:56] [TID=21052] [INFO] [EXPORT] 785 registro(s) sincronizado(s) em 1,7s - Clientes sincronizados com sucesso | tabela=C000007 | filial=000001

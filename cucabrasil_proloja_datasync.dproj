@@ -138,6 +138,7 @@
         </DCCReference>
         <DCCReference Include="uLogger.pas"/>
         <DCCReference Include="Entity Models\API\uApiClient.pas"/>
+        <DCCReference Include="Entity Models\API\uSyncOrchestrator.pas"/>
         <DCCReference Include="Entity Models\ERP\uEntityBase.pas"/>
         <DCCReference Include="Entity Models\ERP\uEntityFactory.pas"/>
         <DCCReference Include="Entity Models\API\APIEntities\uPessoaAPI.pas"/>
@@ -151,6 +152,9 @@
         <DCCReference Include="Entity Models\API\APIEntities\uGrupoProdutoAPI.pas"/>
         <DCCReference Include="Entity Models\API\APIEntities\uRegiaoClienteAPI.pas"/>
         <DCCReference Include="Entity Models\API\APIEntities\uSubgrupoProdutoAPI.pas"/>
+        <DCCReference Include="Entity Models\API\APIEntities\uVariacaoProdutoAPI.pas"/>
+        <DCCReference Include="Entity Models\API\APIEntities\uInstituicoesFinancirasAPI.pas"/>
+        <DCCReference Include="Entity Models\API\APIEntities\uPedidoVendaAPI.pas"/>
         <DCCReference Include="Entity Models\ERP\ERPEntities\uEntityCliente.pas"/>
         <DCCReference Include="Entity Models\ERP\ERPEntities\uEntityProduto.pas"/>
         <DCCReference Include="Entity Models\ERP\ERPEntities\uEntityAcabamento.pas"/>
@@ -163,11 +167,12 @@
         <DCCReference Include="Entity Models\ERP\ERPEntities\uEntityPedidoVenda.pas"/>
         <DCCReference Include="Entity Models\ERP\ERPEntities\uEntityRegiaoCliente.pas"/>
         <DCCReference Include="Entity Models\ERP\ERPEntities\uEntitySubgrupoProduto.pas"/>
-        <DCCReference Include="Entity Models\ERP\ERPEntities\uEntitySupervisor.pas"/>
         <DCCReference Include="Entity Models\ERP\ERPEntities\uEntityTipoPagamento.pas"/>
         <DCCReference Include="Entity Models\ERP\ERPEntities\uEntityTransportador.pas"/>
         <DCCReference Include="Entity Models\ERP\ERPEntities\uEntityVariacaoProduto.pas"/>
-        <DCCReference Include="Entity Models\ERP\ERPEntities\uEntityVendedor.pas"/>
+        <DCCReference Include="Entity Models\ERP\ERPEntities\uEntityFuncionario.pas"/>
+        <DCCReference Include="Entity Models\ERP\ERPEntities\uEntityBanco.pas"/>
+        <DCCReference Include="Local Files\uJsonUtils.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

@@ -1,0 +1,104 @@
+unit dmModulo;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.VCLUI.Wait,
+  Data.DB, FireDAC.Comp.Client, REST.Types, REST.Client, Data.Bind.Components,
+  Data.Bind.ObjectScope, Vcl.Dialogs, Vcl.Forms, FireDAC.Phys.FBDef,
+  FireDAC.Phys.IBBase, FireDAC.Phys.FB, FireDAC.Stan.Param, FireDAC.DatS,
+  FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.UI;
+
+type
+  Tmodulo = class(TDataModule)
+    conexao: TFDConnection;
+    FDPhysFBDriverLink1: TFDPhysFBDriverLink;
+    qrIntegrador: TFDQuery;
+    qrParametrosIntegrador: TFDQuery;
+    FDGUIxWaitCursor1: TFDGUIxWaitCursor;
+    procedure DataModuleCreate(Sender: TObject);
+  private
+    function setConfigArquivoIni: string;
+    { Private declarations }
+  public
+    procedure DoConnectionDatabase(conex: TFDConnection; CaminhoArquivoConfiguracao: string = '');
+    { Public declarations }
+  end;
+
+var
+  modulo: Tmodulo;
+
+implementation
+
+uses
+  frmPrincipal;
+
+{%CLASSGROUP 'System.Classes.TPersistent'}
+
+{$R *.dfm}
+
+function Tmodulo.setConfigArquivoIni: string;
+begin
+  {$IFDEF RELEASE}
+    Result := ExtractFileDir(Application.ExeName) + '\..\dll\com.ini';
+  {$ELSE }
+    Result := 'com.ini';
+  {$ENDIF}
+end;
+
+procedure Tmodulo.DoConnectionDatabase(conex: TFDConnection; CaminhoArquivoConfiguracao: string = '');
+var
+  ArquivoConfiguracao: TextFile;
+  Linha, ServerName, dirDatabase: String;
+begin
+  try
+    {se nao for passado caminho do arquivo ini, ele define segundo
+    padrao usado nos modulos de acordo com compilacao Debug ou Release}
+    if CaminhoArquivoConfiguracao = '' then
+      CaminhoArquivoConfiguracao := Self.setConfigArquivoIni;
+
+    if not System.SysUtils.FileExists(CaminhoArquivoConfiguracao) then
+      raise Exception.Create('O Arquivo de Configuração do Banco de Dados está vazio ou não Existe');
+
+    assignfile(ArquivoConfiguracao, CaminhoArquivoConfiguracao);
+    reset(ArquivoConfiguracao);
+    while not eof(ArquivoConfiguracao) do
+    begin
+      Readln(ArquivoConfiguracao, Linha);
+      if copy(Linha,1,7) = '999-001' then dirDatabase := trim(copy(Linha,9,200));
+      if copy(Linha,1,7) = '999-002' then ServerName  := trim(copy(Linha,9,200));
+    end;
+
+    conex.Connected :=  False;
+    conex.Params.Clear;
+    conex.FetchOptions.Mode := fmAll;
+    conex.DriverName := 'FB';
+    conex.LoginPrompt := False;
+    conex.Params.Add('Server=' + ServerName);
+    conex.Params.Add('Database=' + dirDatabase);
+    conex.Params.Add('User_name=SYSDBA');
+    conex.Params.Add('Password=masterkey');
+    conex.Open;
+
+  except
+    raise
+  end;
+end;
+
+procedure Tmodulo.DataModuleCreate(Sender: TObject);
+begin
+  try
+    Self.DoConnectionDatabase(Self.conexao);
+  except
+    on E:Exception do
+    begin
+      MessageDLG('Falha na conexão com o banco de dados: ' + #13 + e.Message , mtError, [mbOK], 0);
+      Application.Terminate;
+    end;
+  end;
+
+end;
+
+end.
