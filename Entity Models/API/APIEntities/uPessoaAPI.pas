@@ -150,6 +150,10 @@ type
     dataultimacompra: string;
     rntrc_transportador: string;
 
+    // --- FKs da API (26 chars) ---
+    idclientegrupo: string;
+    idclienteregiao: string;
+
     // --- campos retornados pela API (GET) ---
     id: string;
     tenant_id: string;
@@ -268,7 +272,7 @@ begin
   codbanco      := AJson.GetValue<string>('codbanco');
   titular       := AJson.GetValue<string>('titular');
   agencia       := AJson.GetValue<string>('agencia');
-  numeroconta := AJson.GetValue<string>('numeroconta');
+  numeroconta   := AJson.GetValue<string>('numeroconta');
   digito        := AJson.GetValue<string>('digito');
   chavepix      := AJson.GetValue<string>('chavepix');
   tipochavepix  := AJson.GetValue<string>('tipochavepix');
@@ -305,7 +309,7 @@ begin
   Result.AddPair('insalubridade',              NumOrNull(insalubridade));
   Result.AddPair('periculosidade',             NumOrNull(periculosidade));
   Result.AddPair('adicionalnoturno',           NumOrNull(adicionalnoturno));
-  Result.AddPair('decimoterceiro',              TJSONNumber.Create(decimoterceiro));
+  Result.AddPair('decimoterceiro',             TJSONNumber.Create(decimoterceiro));
   Result.AddPair('ferias',                     TJSONNumber.Create(ferias));
   Result.AddPair('umtercoferias',              TJSONNumber.Create(umtercoferias));
   Result.AddPair('fgts',                       TJSONNumber.Create(fgts));
@@ -316,7 +320,7 @@ begin
   Result.AddPair('codregiao',                  StrOrNull(codregiao));
   Result.AddPair('codsupervisor',              StrOrNull(codsupervisor));
   Result.AddPair('estadocivil',                StrOrNull(estadocivil));
-  Result.AddPair('conjuge',                   StrOrNull(conjuge));
+  Result.AddPair('conjuge',                    StrOrNull(conjuge));
   Result.AddPair('dataentrada',                StrOrNull(dataentrada));
   Result.AddPair('datafimcontratoexperiencia', StrOrNull(datafimcontratoexperiencia));
   Result.AddPair('codcargo',                   StrOrNull(codcargo));
@@ -346,7 +350,7 @@ begin
   insalubridade              := JsonFloatOrZero('insalubridade', AJson);
   periculosidade             := JsonFloatOrZero('periculosidade', AJson);
   adicionalnoturno           := JsonFloatOrZero('adicionalnoturno', AJson);
-  decimoterceiro              := JsonFloatOrZero('decimoterceiro', AJson);
+  decimoterceiro             := JsonFloatOrZero('decimoterceiro', AJson);
   ferias                     := JsonFloatOrZero('ferias', AJson);
   umtercoferias              := JsonFloatOrZero('umtercoferias', AJson);
   fgts                       := JsonFloatOrZero('fgts', AJson);
@@ -357,7 +361,7 @@ begin
   codregiao                  := JsonStrOrEmpty('codregiao', AJson);
   codsupervisor              := JsonStrOrEmpty('codsupervisor', AJson);
   estadocivil                := JsonStrOrEmpty('estadocivil', AJson);
-  conjuge                   := JsonStrOrEmpty('conjuge', AJson);
+  conjuge                    := JsonStrOrEmpty('conjuge', AJson);
   dataentrada                := JsonStrOrEmpty('dataentrada', AJson);
   datafimcontratoexperiencia := JsonStrOrEmpty('datafimcontratoexperiencia', AJson);
   codcargo                   := JsonStrOrEmpty('codcargo', AJson);
@@ -375,8 +379,8 @@ begin
   inherited;
   FContatos               := TObjectList<TPessoaContato>.Create(True);
   FEnderecos              := TObjectList<TPessoaEndereco>.Create(True);
-  FDadosBancarios          := TObjectList<TPessoaDadosBancarios>.Create(True);
-  FComplementoFuncionario   := nil;
+  FDadosBancarios         := TObjectList<TPessoaDadosBancarios>.Create(True);
+  FComplementoFuncionario := nil;
 end;
 
 destructor TPessoaAPI.Destroy;
@@ -561,6 +565,9 @@ begin
   Result.AddPair('datacadastro',            StrOrNull(datacadastro));
   Result.AddPair('dataultimacompra',        StrOrNull(dataultimacompra));
   Result.AddPair('rntrc_transportador',     StrOrNull(rntrc_transportador));
+
+  Result.AddPair('idclientegrupo',          StrOrNull(idclientegrupo));
+  Result.AddPair('idclienteregiao',         StrOrNull(idclienteregiao));
 
   Arr := TJSONArray.Create;
   for C in FContatos do

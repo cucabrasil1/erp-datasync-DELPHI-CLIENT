@@ -1,0 +1,193 @@
+﻿unit uEntityProduto;
+
+interface
+
+uses
+  System.JSON, System.SysUtils, System.Math, System.StrUtils, FireDAC.Comp.Client, Data.DB,
+  uEntityBase, uProdutoAPI;
+
+type
+  TEntityProduto = class(TEntityBase)
+  protected
+    class function GetTableNameClass: string; override;
+    function GetResourceName: string; override;
+    function GetRecord(ACodRecord: string): TDataSet; override;
+    function MapToJson(ADataSet: TDataSet): TJSONObject; override;
+    function GetApiId(ADataSet: TDataSet): string; override;
+    function GetUnsyncedRecords: TDataSet; override;
+    function GetBatchSize: Integer; override;
+    function GetSyncAllMessage(ASuccess: Boolean; const AErrorMsg: string): string; override;
+    procedure StoreApiIdBack(ACodRecord, AApiId: string); override;
+  end;
+
+implementation
+
+uses
+  FireDAC.Stan.Param, uEntityFactory;
+
+{ TEntityProduto }
+
+class function TEntityProduto.GetTableNameClass: string;
+begin
+  Result := 'C000025';
+end;
+
+function TEntityProduto.GetResourceName: string;
+begin
+  Result := TProdutoAPI.ResourceName;
+end;
+
+function TEntityProduto.GetRecord(ACodRecord: string): TDataSet;
+var
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Add('select prod.*, sbg.idsubgrupo, sbg.subgrupo,');
+    Qry.SQL.Add('gp.idgrupo, gp.grupo');
+    Qry.SQL.Add('from ' + GetTableNameClass + ' p');
+    Qry.SQL.Add('left outer join C000018 sbg on sbgsbg.codigo=p.codsubgrupo');
+    Qry.SQL.Add('left outer join C000017 gp on gp.codigo=p.codgrupo');
+    Qry.SQL.Add('where p.codigo = :cod');
+    Qry.ParamByName('cod').AsString := ACodRecord;
+    Qry.Open;
+  except
+    Qry.Free;
+    raise;
+  end;
+  Result := Qry;
+end;
+
+function TEntityProduto.GetApiId(ADataSet: TDataSet): string;
+begin
+  if FDatabaseType = dtIndustrial then
+    Result := ADataSet.FieldByName('IDPRODUTO').AsString
+  else
+    Result := ADataSet.FieldByName('IDPRODUTO').AsString; // ajustar para comercial se diferente
+end;
+
+function TEntityProduto.MapToJson(ADataSet: TDataSet): TJSONObject;
+var
+  DTO: TProdutoAPI;
+begin
+  DTO := TProdutoAPI.Create;
+  try
+    DTO.codigoerp             := ADataSet.FieldByName('codigo').AsString;
+    DTO.produto               := ADataSet.FieldByName('produto').AsString;
+    DTO.referencia            := ADataSet.FieldByName('referencia').AsString;
+    DTO.codbarras             := ADataSet.FieldByName('codbarra').AsString;
+    DTO.codbarrastributavel   := ADataSet.FieldByName('codbarratributavel').AsString;
+    DTO.unidade               := ADataSet.FieldByName('unidade').AsString;
+    DTO.origem                := ADataSet.FieldByName('origemproduto').AsInteger;
+    DTO.classificacao         := ADataSet.FieldByName('tipo').AsString;
+    DTO.cst                   := ADataSet.FieldByName('cst').AsString;
+    DTO.ncm                   := ADataSet.FieldByName('ncm').AsString;
+    DTO.cest                  := ADataSet.FieldByName('codigocest').AsString;
+//    DTO.precocompra           := ADataSet.FieldByName('precocompra').AsFloat;
+//    DTO.precocusto            := ADataSet.FieldByName('precocusto').AsFloat;
+//    DTO.precovenda            := ADataSet.FieldByName('precovenda').AsFloat;
+//    DTO.tipo                  := ADataSet.FieldByName('tipo').AsString;
+    DTO.qtdevolume            := ADataSet.FieldByName('qtde_embalagem').AsInteger;
+    DTO.m3                    := ADataSet.FieldByName('m3').AsFloat;
+    DTO.pesobruto             := ADataSet.FieldByName('peso').AsFloat;
+    DTO.pesoliquido           := ADataSet.FieldByName('peso_liquido').AsFloat;
+    DTO.altura                := ADataSet.FieldByName('altura').AsFloat;
+    DTO.largura               := ADataSet.FieldByName('largura').AsFloat;
+    DTO.profundidade          := ADataSet.FieldByName('profundidade').AsFloat;
+    DTO.possuivariacaocor     := IfThen(ADataSet.FieldByName('produtopossuivariacaocor').AsString = 'S', 1, 0);
+    DTO.destacargtindfe       := IfThen(ADataSet.FieldByName('destacargtindfe').AsString = 'S', 1, 0);
+    DTO.observacoes           := ADataSet.FieldByName('observacoes').AsString;
+    DTO.codigogrupo           := ADataSet.FieldByName('codgrupo').AsString;
+    DTO.idgrupo               := ADataSet.FieldByName('idgrupo').AsInteger;
+    DTO.nomegrupo             := ADataSet.FieldByName('grupo').AsString;
+    DTO.codigosubgrupo        := ADataSet.FieldByName('codsubgrupo').AsString;
+    DTO.idsubgrupo            := ADataSet.FieldByName('idsubgrupo').AsInteger;
+    DTO.nomesubgrupo          := ADataSet.FieldByName('subgrupo').AsString;
+    DTO.ativo                 := ifthen(ADataSet.FieldByName('situacao').AsInteger = 1, 1, 0);
+    DTO.habilitado            := ifthen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
+    DTO.caminhoimagem1        := '';
+    DTO.caminhoimagem2        := '';
+    DTO.caminhoimagem3        := '';
+
+    case FDatabaseType of
+      dtIndustrial:
+      begin
+        // <<CHANGE_ME: campos especificos industrial>>
+      end;
+
+      dtCommercial:
+      begin
+        // <<CHANGE_ME: campos especificos comercial>>
+      end;
+    end;
+
+    Result := DTO.ToJson;
+  finally
+    DTO.Free;
+  end;
+end;
+
+function TEntityProduto.GetUnsyncedRecords: TDataSet;
+var
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Add('select * from ' + GetTableNameClass);
+    Qry.SQL.Add('where idproduto is null');
+    if FDatabaseType = dtIndustrial then
+    begin
+      Qry.SQL.Add('and codigofilial = :filial');
+      Qry.ParamByName('filial').AsString := FFilial;
+    end;
+    Qry.SQL.Add('order by codigo');
+    Qry.Open;
+  except
+    Qry.Free;
+    raise;
+  end;
+  Result := Qry;
+end;
+
+function TEntityProduto.GetBatchSize: Integer;
+begin
+  Result := 1000;
+end;
+
+function TEntityProduto.GetSyncAllMessage(ASuccess: Boolean; const AErrorMsg: string): string;
+begin
+  if ASuccess then
+    Result := 'Produtos sincronizados com sucesso'
+  else
+    Result := 'Erro em Produtos: ' + AErrorMsg;
+end;
+
+procedure TEntityProduto.StoreApiIdBack(ACodRecord, AApiId: string);
+var
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Add('update ' + GetTableNameClass + ' set idproduto = :apiid');
+    Qry.SQL.Add('where codigo = :cod');
+    Qry.ParamByName('apiid').AsString := AApiId;
+    Qry.ParamByName('cod').AsString := ACodRecord;
+    Qry.ExecSQL;
+  finally
+    Qry.Free;
+  end;
+end;
+
+initialization
+  TEntityFactory.RegisterEntity(TEntityProduto.GetTableNameClass, TEntityProduto);
+end.
+
+
+
+
+
+
+

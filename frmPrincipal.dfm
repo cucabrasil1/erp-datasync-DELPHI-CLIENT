@@ -45,39 +45,56 @@ object Form2: TForm2
       object Panel1: TPanel
         Left = 2
         Top = 64
-        Width = 191
+        Width = 415
         Height = 105
         TabOrder = 1
-        object chkAcabamentos: TcxCheckBox
+        object chkCenario: TcxCheckBox
           Left = 1
-          Top = 20
+          Top = 77
           Align = alTop
-          Caption = 'Acabamentos (C000250)'
+          Caption = 'Cenarios Faturamento (C000233)'
+          ParentShowHint = False
+          ShowHint = True
           Style.HotTrack = True
           Style.TextColor = clBlueviolet
           Style.TransparentBorder = False
           TabOrder = 0
           Transparent = True
-        end
-        object chkCenario: TcxCheckBox
-          Left = 1
-          Top = 39
-          Align = alTop
-          Caption = 'Cenarios Faturamento (C000233)'
-          Style.HotTrack = True
-          Style.TextColor = clBlueviolet
-          Style.TransparentBorder = False
-          TabOrder = 1
-          Transparent = True
-          ExplicitLeft = 2
-          ExplicitTop = 33
+          ExplicitLeft = -3
+          ExplicitTop = 83
         end
         object chkClientes: TcxCheckBox
           Left = 1
           Top = 1
+          Hint = 
+            'C000005: Regioes de Clientes'#13#10'C000144: Grupos de Clientes'#13#10'C0000' +
+            '07: Clientes'
           Align = alTop
-          Caption = 'Clientes (C000007)'
+          Caption = 'Clientes (C000005 - C000144 - C000007)'
           ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clBlueviolet
+          Style.Font.Height = -12
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          Style.IsFontAssigned = True
+          TabOrder = 1
+          Transparent = True
+          ExplicitLeft = -3
+          ExplicitTop = -5
+        end
+        object chkFuncioanrio: TcxCheckBox
+          Left = 1
+          Top = 39
+          Align = alTop
+          Caption = 'Funcioanrios (C000008)'
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
           Style.Font.Charset = DEFAULT_CHARSET
           Style.Font.Color = clBlueviolet
           Style.Font.Height = -12
@@ -88,16 +105,127 @@ object Form2: TForm2
           Style.IsFontAssigned = True
           TabOrder = 2
           Transparent = True
+          ExplicitTop = 77
+          ExplicitWidth = 189
         end
-        object chkProdutos: TcxCheckBox
+        object chkTransportador: TcxCheckBox
           Left = 1
-          Top = 58
+          Top = 20
           Align = alTop
-          Caption = 'Produtos (C000025)'
+          Caption = 'Transportadores (C000010)'
           ParentBackground = False
           ParentColor = False
           ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
           Style.Color = clDefault
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clBlueviolet
+          Style.Font.Height = -12
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          Style.IsFontAssigned = True
+          TabOrder = 3
+          Transparent = True
+          ExplicitTop = 4
+        end
+        object chkFornecedor: TcxCheckBox
+          Left = 1
+          Top = 58
+          Align = alTop
+          Caption = 'Fornecedores (C000009)'
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clBlueviolet
+          Style.Font.Height = -12
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          Style.IsFontAssigned = True
+          TabOrder = 4
+          Transparent = True
+          ExplicitTop = 77
+          ExplicitWidth = 189
+        end
+      end
+      object Panel2: TPanel
+        Left = 463
+        Top = 64
+        Width = 346
+        Height = 105
+        TabOrder = 2
+        object chkTpPagamento: TcxCheckBox
+          Left = 1
+          Top = 1
+          Hint = 
+            'C000014: Tipos Pagamento'#13#10'C000015: Condicoes de Pagamento'#13#10'C0000' +
+            '16: Parcelamento das Condicoes de Pagamento'
+          Align = alTop
+          Caption = 'Tipos Pagamento (C000014 - C000015 - C000016)'
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clBlueviolet
+          Style.Font.Height = -12
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          Style.IsFontAssigned = True
+          TabOrder = 0
+          Transparent = True
+          ExplicitLeft = -7
+          ExplicitTop = -15
+        end
+        object chkCor: TcxCheckBox
+          Left = 1
+          Top = 39
+          Align = alTop
+          Caption = 'Cores (C000129)'
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          Style.Font.Charset = DEFAULT_CHARSET
+          Style.Font.Color = clBlueviolet
+          Style.Font.Height = -12
+          Style.Font.Name = 'Segoe UI'
+          Style.Font.Style = []
+          Style.HotTrack = True
+          Style.TransparentBorder = False
+          Style.IsFontAssigned = True
+          TabOrder = 1
+          Transparent = True
+          ExplicitTop = 20
+          ExplicitWidth = 189
+        end
+        object chkAcabamentos: TcxCheckBox
+          Left = 1
+          Top = 20
+          Align = alTop
+          Caption = 'Acabamentos (C000250)'
+          ParentShowHint = False
+          ShowHint = True
+          Style.HotTrack = True
+          Style.TextColor = clBlueviolet
+          Style.TransparentBorder = False
+          TabOrder = 2
+          Transparent = True
+          ExplicitWidth = 413
+        end
+        object chkPedVenda: TcxCheckBox
+          Left = 1
+          Top = 77
+          Align = alTop
+          Caption = 'Pedido Venda (C000126)'
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
           Style.Font.Charset = DEFAULT_CHARSET
           Style.Font.Color = clRed
           Style.Font.Height = -12
@@ -108,86 +236,33 @@ object Form2: TForm2
           Style.IsFontAssigned = True
           TabOrder = 3
           Transparent = True
+          ExplicitWidth = 413
         end
-      end
-      object Panel2: TPanel
-        Left = 199
-        Top = 64
-        Width = 191
-        Height = 105
-        TabOrder = 2
-        object chkFornecedor: TcxCheckBox
+        object chkProdutos: TcxCheckBox
           Left = 1
           Top = 58
+          Hint = 
+            'C000017: Grupos '#13#10'C000018: Subgrupos'#13#10'C000025: Produtos'#13#10'C000279' +
+            ': Variacoes de Produtos'
           Align = alTop
-          Caption = 'Fornecedores (C000009)'
+          Caption = 'Produtos (C000017 - C000018 - C000025 - C000279)'
+          ParentBackground = False
+          ParentColor = False
           ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          Style.Color = clDefault
           Style.Font.Charset = DEFAULT_CHARSET
-          Style.Font.Color = clBlueviolet
+          Style.Font.Color = clRed
           Style.Font.Height = -12
           Style.Font.Name = 'Segoe UI'
           Style.Font.Style = []
           Style.HotTrack = True
           Style.TransparentBorder = False
           Style.IsFontAssigned = True
-          TabOrder = 0
+          TabOrder = 4
           Transparent = True
-          ExplicitLeft = 2
-          ExplicitTop = 63
-        end
-        object chkTpPagamento: TcxCheckBox
-          Left = 1
-          Top = 1
-          Align = alTop
-          Caption = 'Tipo Pagto (C000014)'
-          ParentFont = False
-          Style.Font.Charset = DEFAULT_CHARSET
-          Style.Font.Color = clBlueviolet
-          Style.Font.Height = -12
-          Style.Font.Name = 'Segoe UI'
-          Style.Font.Style = []
-          Style.HotTrack = True
-          Style.TransparentBorder = False
-          Style.IsFontAssigned = True
-          TabOrder = 1
-          Transparent = True
-          ExplicitTop = 4
-        end
-        object chkCor: TcxCheckBox
-          Left = 1
-          Top = 20
-          Align = alTop
-          Caption = 'Cores (C000129)'
-          ParentFont = False
-          Style.Font.Charset = DEFAULT_CHARSET
-          Style.Font.Color = clBlueviolet
-          Style.Font.Height = -12
-          Style.Font.Name = 'Segoe UI'
-          Style.Font.Style = []
-          Style.HotTrack = True
-          Style.TransparentBorder = False
-          Style.IsFontAssigned = True
-          TabOrder = 2
-          Transparent = True
-          ExplicitTop = 39
-        end
-        object chkFuncioanrio: TcxCheckBox
-          Left = 1
-          Top = 39
-          Align = alTop
-          Caption = 'Funcioanrios (C000008)'
-          ParentFont = False
-          Style.Font.Charset = DEFAULT_CHARSET
-          Style.Font.Color = clBlueviolet
-          Style.Font.Height = -12
-          Style.Font.Name = 'Segoe UI'
-          Style.Font.Style = []
-          Style.HotTrack = True
-          Style.TransparentBorder = False
-          Style.IsFontAssigned = True
-          TabOrder = 3
-          Transparent = True
-          ExplicitTop = 58
+          ExplicitWidth = 413
         end
       end
       object chkTodos: TcxCheckBox
@@ -211,59 +286,6 @@ object Form2: TForm2
         TabOrder = 3
         OnClick = chkTodosClick
         ExplicitWidth = 976
-      end
-      object Panel3: TPanel
-        Left = 395
-        Top = 63
-        Width = 191
-        Height = 105
-        TabOrder = 4
-        object chkPedVenda: TcxCheckBox
-          Left = 1
-          Top = 1
-          Align = alTop
-          Caption = 'Pedido Venda (C000126)'
-          ParentFont = False
-          Style.Font.Charset = DEFAULT_CHARSET
-          Style.Font.Color = clRed
-          Style.Font.Height = -12
-          Style.Font.Name = 'Segoe UI'
-          Style.Font.Style = []
-          Style.HotTrack = True
-          Style.TransparentBorder = False
-          Style.IsFontAssigned = True
-          TabOrder = 0
-          Transparent = True
-          ExplicitTop = 39
-        end
-      end
-      object Panel4: TPanel
-        Left = 592
-        Top = 64
-        Width = 191
-        Height = 105
-        TabOrder = 5
-        object chkTransportador: TcxCheckBox
-          Left = 1
-          Top = 1
-          Align = alTop
-          Caption = 'Transportadores (C000010)'
-          ParentBackground = False
-          ParentColor = False
-          ParentFont = False
-          Style.Color = clDefault
-          Style.Font.Charset = DEFAULT_CHARSET
-          Style.Font.Color = clBlueviolet
-          Style.Font.Height = -12
-          Style.Font.Name = 'Segoe UI'
-          Style.Font.Style = []
-          Style.HotTrack = True
-          Style.TransparentBorder = False
-          Style.IsFontAssigned = True
-          TabOrder = 0
-          Transparent = True
-          ExplicitTop = 20
-        end
       end
     end
     object JvNavPanelHeader3: TJvNavPanelHeader

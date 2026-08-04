@@ -46,8 +46,11 @@ begin
   Qry := TFDQuery.Create(nil);
   try
     Qry.Connection := FConnection;
-    Qry.SQL.Add('select * from ' + GetTableNameClass);
-    Qry.SQL.Add('where codigo = :cod');
+    Qry.SQL.Add('select c.*, r.idregiao, g.idgrupocliente');
+    Qry.SQL.Add('from ' + GetTableNameClass + ' c');
+    Qry.SQL.Add('left join C000005 r on r.codigo = c.codregiao');
+    Qry.SQL.Add('left join C000144 g on g.codigo = c.codigogrupo');
+    Qry.SQL.Add('where c.codigo = :cod');
     Qry.ParamByName('cod').AsString := ACodRecord;
     Qry.Open;
   except
@@ -112,6 +115,8 @@ begin
     Pessoa.sexo                := ADataSet.FieldByName('sexo').AsString;
     Pessoa.ativo               := ifthen(ADataSet.FieldByName('situacao').AsInteger = 1, 1, 0);
     Pessoa.tipopessoa          := IfThen(ADataSet.FieldByName('tipo').asinteger = 1, 'FISICA', 'JURIDICA');
+    Pessoa.idclientegrupo      := ADataSet.FieldByName('IDGRUPOCLIENTE').AsString;
+    Pessoa.idclienteregiao     := ADataSet.FieldByName('IDREGIAO').AsString;
 
     if ADataSet.FieldByName('nascimento').AsString.Trim.IsEmpty then
       Pessoa.datafundacaonascimento := ''
@@ -178,14 +183,17 @@ begin
   Qry := TFDQuery.Create(nil);
   try
     Qry.Connection := FConnection;
-    Qry.SQL.Add('select * from ' + GetTableNameClass);
-    Qry.SQL.Add('where idcliente is null');
+    Qry.SQL.Add('select c.*, r.idregiao, g.idgrupocliente');
+    Qry.SQL.Add('from ' + GetTableNameClass + ' c');
+    Qry.SQL.Add('left join C000005 r on r.codigo = c.codregiao');
+    Qry.SQL.Add('left join C000144 g on g.codigo = c.codigogrupo');
+    Qry.SQL.Add('where c.idcliente is null');
     if FDatabaseType = dtIndustrial then
     begin
-      Qry.SQL.Add('and codigofilial = :filial');
+      Qry.SQL.Add('and c.codigofilial = :filial');
       Qry.ParamByName('filial').AsString := FFilial;
     end;
-    Qry.SQL.Add('order by codigo');
+    Qry.SQL.Add('order by c.codigo');
     Qry.Open;
   except
     Qry.Free;

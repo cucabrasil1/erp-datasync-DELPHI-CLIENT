@@ -49,9 +49,7 @@ type
     chkTpPagamento: TcxCheckBox;
     chkCor: TcxCheckBox;
     chkTodos: TcxCheckBox;
-    Panel3: TPanel;
     chkPedVenda: TcxCheckBox;
-    Panel4: TPanel;
     chkTransportador: TcxCheckBox;
     JvNavPanelHeader3: TJvNavPanelHeader;
     btnSyncAll: TButton;
@@ -251,14 +249,14 @@ begin
   Result[5].CheckboxName := 'chkTransportador';
   Result[5].Tabelas := TArray<string>.Create('C000010');
 
-  //Tipos de Pagamento ('Tipo - C000014', 'Condicoes - C000015', 'Parcelamento - C000016')
+  //Tipos de Pagamento ('Tipo - C000014', 'Condicoes + Parcelamento - C000015 + C000016 no mesmo envio com a 15')
   Result[6].CheckboxName := 'chkTpPagamento';
-  Result[6].Tabelas := TArray<string>.Create('C000014', 'C000015', 'C000016');
+  Result[6].Tabelas := TArray<string>.Create('C000014', 'C000015');
 
   //Produtos ('Grupo - C000017', 'Subgrupo - C000018', 'Produto - C000025', 'VAriacao - C000279')
   Result[7].CheckboxName := 'chkProdutos';
 //  Result[7].Tabelas := TArray<string>.Create('C000017', 'C000018', 'C000025', 'C000279');
-  Result[7].Tabelas := TArray<string>.Create('C000017', 'C000018', 'C000279');
+  Result[7].Tabelas := TArray<string>.Create('C000017', 'C000018', 'C000025', 'C000279');
 
   //Funcionarios (C000008)
   Result[8].CheckboxName := 'chkFuncioanrio';
@@ -335,7 +333,8 @@ begin
         on E: Exception do
           MessageDlg('Falha no SyncAll: ' + #13 + E.Message, mtError, [mbOK], 0);
       end;
-    end, False);
+    end
+  , False);
 end;
 
 function TForm2.SyncGroup(AConnection: TFDConnection; qrIntegrador: TFDQuery; const ATabelas: TArray<string>; const ACodFilial: string): Boolean;
