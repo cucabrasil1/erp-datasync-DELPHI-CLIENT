@@ -208,3 +208,27 @@
 [2026-08-04 14:58:39] [TID=15644] [INFO] [EXPORT] 14:58:39 | Enviando lote com 1000 registro(s) (1000 de 2492) | tabela=C000025 | filial=000001
 [2026-08-04 14:58:55] [TID=15644] [ERROR] [EXPORT] Falha ao sincronizar C000025: Access violation at address 00989CA2 in module 'cucabrasil_proloja_datasync.exe' (offset 9CA2). Read of address 00000800 | tabela=C000025 | filial=000001
 [2026-08-04 14:58:55] [TID=15644] [ERROR] [SYNC] Grupo abortado por falha em dependência: chkProdutos | filial=000001
+--- Log iniciado em 04/08/2026 14:59:06 ---
+[2026-08-04 14:59:06] [TID=17784] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-08-04 14:59:07] [TID=17784] [INFO] [SYSTEM] Processando eventos
+[2026-08-04 14:59:07] [TID=20768] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-08-04 14:59:07] [TID=20768] [INFO] [SYNC] === RESUMO ===
+[2026-08-04 14:59:11] [TID=20912] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Grupos de Produto sincronizados com sucesso | tabela=C000017 | filial=000001
+[2026-08-04 14:59:11] [TID=20912] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Subgrupos de Produto sincronizados com sucesso | tabela=C000018 | filial=000001
+[2026-08-04 14:59:11] [TID=20912] [INFO] [EXPORT] 14:59:11 | Enviando lote com 1000 registro(s) (1000 de 2492) | tabela=C000025 | filial=000001
+[2026-08-04 15:00:24] [TID=20912] [ERROR] [EXPORT] Falha ao sincronizar C000025: Access violation at address 00989CA2 in module 'cucabrasil_proloja_datasync.exe' (offset 9CA2). Read of address 000204CC | tabela=C000025 | filial=000001
+[2026-08-04 15:00:24] [TID=20912] [ERROR] [SYNC] Grupo abortado por falha em dependência: chkProdutos | filial=000001
+[2026-08-04 15:00:51] [TID=21008] [INFO] [AUTH] Autenticado com sucesso | filial=000001
+[2026-08-04 15:00:51] [TID=21008] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Grupos de Produto sincronizados com sucesso | tabela=C000017 | filial=000001
+[2026-08-04 15:00:51] [TID=21008] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Subgrupos de Produto sincronizados com sucesso | tabela=C000018 | filial=000001
+[2026-08-04 15:01:01] [TID=21008] [INFO] [EXPORT] 15:01:01 | Enviando lote com 1000 registro(s) (1000 de 2492) | tabela=C000025 | filial=000001
+[2026-08-04 15:01:03] [TID=21008] [ERROR] [EXPORT] Falha ao sincronizar C000025: Access violation at address 00989CA2 in module 'cucabrasil_proloja_datasync.exe' (offset 9CA2). Read of address 000204CC | tabela=C000025 | filial=000001
+[2026-08-04 15:01:03] [TID=21008] [ERROR] [SYNC] Grupo abortado por falha em dependência: chkProdutos | filial=000001
+[2026-08-04 15:01:32] [TID=12580] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Grupos de Produto sincronizados com sucesso | tabela=C000017 | filial=000001
+[2026-08-04 15:01:32] [TID=12580] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Subgrupos de Produto sincronizados com sucesso | tabela=C000018 | filial=000001
+[2026-08-04 15:01:46] [TID=12580] [INFO] [EXPORT] 15:01:46 | Enviando lote com 1000 registro(s) (1000 de 2492) | tabela=C000025 | filial=000001
+--- Log iniciado em 04/08/2026 15:56:23 ---
+[2026-08-04 15:56:23] [TID=18452] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-08-04 15:56:23] [TID=18452] [INFO] [SYSTEM] Processando eventos
+[2026-08-04 15:56:24] [TID=17956] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-08-04 15:56:24] [TID=17956] [INFO] [SYNC] === RESUMO ===

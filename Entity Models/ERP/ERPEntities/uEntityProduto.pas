@@ -18,6 +18,7 @@ type
     function GetBatchSize: Integer; override;
     function GetSyncAllMessage(ASuccess: Boolean; const AErrorMsg: string): string; override;
     procedure StoreApiIdBack(ACodRecord, AApiId: string); override;
+    function GetVolumes(ACodProduto: string): TDataSet;
   end;
 
 implementation
@@ -45,7 +46,9 @@ begin
   try
     Qry.Connection := FConnection;
     Qry.SQL.Add('select p.*, sbg.idsubgrupo, sbg.subgrupo,');
-    Qry.SQL.Add('gp.idgrupo, gp.grupo');
+    Qry.SQL.Add('gp.idgrupo, gp.grupo,');
+    Qry.SQL.Add('case when exists (select 1 from C000248 v where v.codproduto = p.codigo)');
+    Qry.SQL.Add('  then 1 else 0 end as possui_volume');
     Qry.SQL.Add('from ' + GetTableNameClass + ' p');
     Qry.SQL.Add('left outer join C000018 sbg on sbg.codigo = p.codsubgrupo');
     Qry.SQL.Add('left outer join C000017 gp on gp.codigo = p.codgrupo');
@@ -67,9 +70,28 @@ begin
     Result := ADataSet.FieldByName('IDPRODUTO').AsString; // ajustar para comercial se diferente
 end;
 
+function TEntityProduto.GetVolumes(ACodProduto: string): TDataSet;
+var
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Add('select * from C000248');
+    Qry.SQL.Add('where codproduto = :cod');
+    Qry.ParamByName('cod').AsString := ACodProduto;
+    Qry.Open;
+  except
+    Qry.Free;
+    raise;
+  end;
+  Result := Qry;
+end;
+
 function TEntityProduto.MapToJson(ADataSet: TDataSet): TJSONObject;
 var
   DTO: TProdutoAPI;
+  VolumesDs: TDataSet;
 begin
   DTO := TProdutoAPI.Create;
   try
@@ -110,6 +132,35 @@ begin
     DTO.caminhoimagem2        := '';
     DTO.caminhoimagem3        := '';
 
+    // Volumes: busca so quando produto possuir volume (flag possui_volume)
+    if ADataSet.FieldByName('possui_volume').AsInteger > 0 then
+    begin
+      VolumesDs := GetVolumes(ADataSet.FieldByName('codigo').AsString);
+      try
+        while not VolumesDs.Eof do
+        begin
+          DTO.AddVolume(
+            VolumesDs.FieldByName('codigo').AsString,
+            VolumesDs.FieldByName('nome').AsString,
+            VolumesDs.FieldByName('codbarras').AsString,
+            VolumesDs.FieldByName('referencia').AsString,
+            VolumesDs.FieldByName('pesobruto').AsFloat,
+            VolumesDs.FieldByName('pesoliquido').AsFloat,
+            VolumesDs.FieldByName('altura').AsInteger,
+            VolumesDs.FieldByName('largura').AsInteger,
+            VolumesDs.FieldByName('profundidade').AsInteger,
+            VolumesDs.FieldByName('quantidade').AsInteger,
+            VolumesDs.FieldByName('m3').AsFloat,
+            VolumesDs.FieldByName('seqvolume').AsString
+          );
+
+          VolumesDs.Next;
+        end;
+      finally
+        VolumesDs.Free;
+      end;
+    end;
+
     case FDatabaseType of
       dtIndustrial:
       begin
@@ -136,7 +187,9 @@ begin
   try
     Qry.Connection := FConnection;
     Qry.SQL.Add('select p.*, sbg.idsubgrupo, sbg.subgrupo,');
-    Qry.SQL.Add('gp.idgrupo, gp.grupo');
+    Qry.SQL.Add('gp.idgrupo, gp.grupo,');
+    Qry.SQL.Add('case when exists (select 1 from C000248 v where v.codproduto = p.codigo)');
+    Qry.SQL.Add('  then 1 else 0 end as possui_volume');
     Qry.SQL.Add('from ' + GetTableNameClass + ' p');
     Qry.SQL.Add('left outer join C000018 sbg on sbg.codigo = p.codsubgrupo');
     Qry.SQL.Add('left outer join C000017 gp on gp.codigo = p.codgrupo');

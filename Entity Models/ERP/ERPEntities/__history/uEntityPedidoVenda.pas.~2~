@@ -1,0 +1,322 @@
+﻿unit uEntityPedidoVenda;
+
+interface
+
+uses
+  System.JSON, System.SysUtils, System.Math, System.StrUtils, FireDAC.Comp.Client, Data.DB,
+  uEntityBase, uPedidoVendaAPI;
+
+type
+  TEntityPedidoVenda = class(TEntityBase)
+  protected
+    class function GetTableNameClass: string; override;
+    function GetResourceName: string; override;
+    function GetRecord(ACodRecord: string): TDataSet; override;
+    function MapToJson(ADataSet: TDataSet): TJSONObject; override;
+    function GetApiId(ADataSet: TDataSet): string; override;
+    function GetUnsyncedRecords: TDataSet; override;
+    function GetBatchSize: Integer; override;
+    function GetSyncAllMessage(ASuccess: Boolean; const AErrorMsg: string): string; override;
+    procedure StoreApiIdBack(ACodRecord, AApiId: string); override;
+    function GetItens(ACodPedido: string): TDataSet;
+  end;
+
+implementation
+
+uses
+  FireDAC.Stan.Param, uEntityFactory;
+
+{ TEntityPedidoVenda }
+
+class function TEntityPedidoVenda.GetTableNameClass: string;
+begin
+  Result := 'C000126';
+end;
+
+function TEntityPedidoVenda.GetResourceName: string;
+begin
+  Result := TPedidoVendaAPI.ResourceName;
+end;
+
+function TEntityPedidoVenda.GetRecord(ACodRecord: string): TDataSet;
+var
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Add('select p.*,');
+    Qry.SQL.Add('cli.idcliente as IDCLIENTE, cli.nome as NOMECLIENTE,');
+    Qry.SQL.Add('rep.idfuncionario as IDREPRESENTANTE, rep.nome as NOMEREPRESENTANTE,');
+    Qry.SQL.Add('transp.idtransportador as IDTRANSPORTADORA,');
+    Qry.SQL.Add('cond.idformapagamento as IDCONDICAOPAGAMENTO');
+    Qry.SQL.Add('from ' + GetTableNameClass + ' p');
+    Qry.SQL.Add('left outer join C000007 cli on cli.codigo = p.codcliente');
+    Qry.SQL.Add('left outer join C000008 rep on rep.codigo = p.codrepresentante');
+    Qry.SQL.Add('left outer join C000010 transp on transp.codigo = p.codtransportadora');
+    Qry.SQL.Add('left outer join C000015 cond on cond.codigo = p.codcondicaopagamento');
+    Qry.SQL.Add('where p.codigo = :cod');
+    Qry.ParamByName('cod').AsString := ACodRecord;
+    Qry.Open;
+  except
+    Qry.Free;
+    raise;
+  end;
+  Result := Qry;
+end;
+
+function TEntityPedidoVenda.GetItens(ACodPedido: string): TDataSet;
+var
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Add('select it.*,');
+    Qry.SQL.Add('prod.idproduto as IDPRODUTO,');
+    Qry.SQL.Add('var.idvariacao as IDVARIACAO');
+    Qry.SQL.Add('from C000127 it');
+    Qry.SQL.Add('left outer join C000025 prod on prod.codigo = it.codproduto');
+    Qry.SQL.Add('left outer join C000279 var on var.codigo = it.codvariacao');
+    Qry.SQL.Add('where it.pedido = :cod');
+    Qry.SQL.Add('order by it.sequencia');
+    Qry.ParamByName('cod').AsString := ACodPedido;
+    Qry.Open;
+  except
+    Qry.Free;
+    raise;
+  end;
+  Result := Qry;
+end;
+
+function TEntityPedidoVenda.GetApiId(ADataSet: TDataSet): string;
+begin
+  Result := ADataSet.FieldByName('IDPEDIDO').AsString;
+end;
+
+function TEntityPedidoVenda.MapToJson(ADataSet: TDataSet): TJSONObject;
+var
+  DTO: TPedidoVendaAPI;
+  ItensDs: TDataSet;
+  Item: TPedidoVendaItemAPI;
+
+  function FormatDateField(const AFieldName: string): string;
+  begin
+    if ADataSet.FieldByName(AFieldName).IsNull then
+      Exit('');
+    Result := FormatDateTime('yyyy-mm-dd', ADataSet.FieldByName(AFieldName).AsDateTime);
+  end;
+
+begin
+  DTO := TPedidoVendaAPI.Create;
+  try
+    DTO.codigoerp                    := ADataSet.FieldByName('codigo').AsString;
+    DTO.pedido                       := ADataSet.FieldByName('pedido').AsString;
+    DTO.cliente_codigoerp                   := ADataSet.FieldByName('codcliente').AsString;
+    DTO.representante_codigoerp             := ADataSet.FieldByName('codrepresentante').AsString;
+    DTO.supervisor_codigoerp                := ADataSet.FieldByName('codsupervisor').AsString;
+    DTO.transportadora_codigoerp            := ADataSet.FieldByName('codtransportadora').AsString;
+    DTO.endereco_codigoerp                  := ADataSet.FieldByName('codendereco').AsString;
+    DTO.tabelafaturamento_codigoerp         := ADataSet.FieldByName('codtabelafaturamento').AsString;
+    DTO.condicaopagamento_codigoerp         := ADataSet.FieldByName('codcondicaopagamento').AsString;
+    DTO.tipopagamento_codigoerp             := ADataSet.FieldByName('codtipopagamento').AsString;
+    DTO.setor_codigoerp                     := ADataSet.FieldByName('codsetor').AsString;
+    DTO.tabelapreco_codigoerp               := ADataSet.FieldByName('codtabelapreco').AsString;
+    DTO.datapedido                   := FormatDateField('data_pedido');
+    DTO.previsaoentrega              := FormatDateField('data_entrega');
+    DTO.dataentrega                  := FormatDateField('dataentrega');
+    DTO.datacadastro                 := FormatDateField('datacadastro');
+    DTO.database                     := FormatDateField('data_base');
+    DTO.idcliente                    := ADataSet.FieldByName('IDCLIENTE').AsString;
+    DTO.nomecliente                  := ADataSet.FieldByName('NOMECLIENTE').AsString;
+    DTO.idrepresentante              := ADataSet.FieldByName('IDREPRESENTANTE').AsString;
+    DTO.nomerepresentante            := ADataSet.FieldByName('NOMEREPRESENTANTE').AsString;
+    DTO.idtransportadora             := ADataSet.FieldByName('IDTRANSPORTADORA').AsString;
+    DTO.idcondicaopagamento          := ADataSet.FieldByName('IDCONDICAOPAGAMENTO').AsString;
+    DTO.valorprodutos                := ADataSet.FieldByName('subtotal').AsCurrency;
+    DTO.valorpedido                  := ADataSet.FieldByName('valor').AsCurrency;
+    DTO.valordesconto                := ADataSet.FieldByName('desconto').AsCurrency;
+    DTO.valorfrete                   := ADataSet.FieldByName('valorfrete').AsCurrency;
+    DTO.valorantecipacao             := ADataSet.FieldByName('antecipacao').AsCurrency;
+    DTO.percentualfretecif           := ADataSet.FieldByName('percentualfretecif').AsFloat;
+    DTO.percentualfretefob           := ADataSet.FieldByName('percentualfretefob').AsFloat;
+    DTO.valorfreteciffob             := ADataSet.FieldByName('valorfreteciffob').AsCurrency;
+    DTO.percentualcomissao           := ADataSet.FieldByName('comissaopercent').AsFloat;
+    DTO.percentualcomissaosupervisor := ADataSet.FieldByName('percentcomissaosupervisor').AsFloat;
+    DTO.observacao1                  := ADataSet.FieldByName('obs1').AsString;
+    DTO.observacao2                  := ADataSet.FieldByName('obs2').AsString;
+    DTO.observacao3                  := ADataSet.FieldByName('obs3').AsString;
+    DTO.observacao4                  := ADataSet.FieldByName('obs4').AsString;
+    DTO.observacao5                  := ADataSet.FieldByName('obs5').AsString;
+    DTO.observacaonfe                := ADataSet.FieldByName('observacaonfe').AsString;
+    DTO.observacao                   := ADataSet.FieldByName('observacao').AsString;
+    DTO.situacao                     := ADataSet.FieldByName('situacao').AsInteger;
+    DTO.situacaoproducao             := ADataSet.FieldByName('situacaoproducao').AsInteger;
+    DTO.usuariocadastro              := ADataSet.FieldByName('usuariocadastro').AsString;
+    DTO.prazo1                       := ADataSet.FieldByName('prazo1').AsInteger;
+    DTO.prazo2                       := ADataSet.FieldByName('prazo2').AsInteger;
+    DTO.prazo3                       := ADataSet.FieldByName('prazo3').AsInteger;
+    DTO.prazo4                       := ADataSet.FieldByName('prazo4').AsInteger;
+    DTO.prazo5                       := ADataSet.FieldByName('prazo5').AsInteger;
+    DTO.prazo6                       := ADataSet.FieldByName('prazo6').AsInteger;
+    DTO.prazo7                       := ADataSet.FieldByName('prazo7').AsInteger;
+    DTO.prazo8                       := ADataSet.FieldByName('prazo8').AsInteger;
+    DTO.prazo9                       := ADataSet.FieldByName('prazo9').AsInteger;
+    DTO.prazo10                      := ADataSet.FieldByName('prazo10').AsInteger;
+    DTO.prazo11                      := ADataSet.FieldByName('prazo11').AsInteger;
+    DTO.prazo12                      := ADataSet.FieldByName('prazo12').AsInteger;
+    DTO.vencimento1                  := FormatDateField('vencimento1');
+    DTO.vencimento2                  := FormatDateField('vencimento2');
+    DTO.vencimento3                  := FormatDateField('vencimento3');
+    DTO.vencimento4                  := FormatDateField('vencimento4');
+    DTO.vencimento5                  := FormatDateField('vencimento5');
+    DTO.vencimento6                  := FormatDateField('vencimento6');
+    DTO.vencimento7                  := FormatDateField('vencimento7');
+    DTO.vencimento8                  := FormatDateField('vencimento8');
+    DTO.vencimento9                  := FormatDateField('vencimento9');
+    DTO.vencimento10                 := FormatDateField('vencimento10');
+    DTO.vencimento11                 := FormatDateField('vencimento11');
+    DTO.vencimento12                 := FormatDateField('vencimento12');
+    DTO.codigofilial                 := ADataSet.FieldByName('codigofilial').AsString;
+    DTO.tipo                         := ADataSet.FieldByName('tipo').AsString;
+    DTO.gerarfaturamento             := ADataSet.FieldByName('gerarfaturamento').AsString;
+    DTO.gerarcontasreceber           := ADataSet.FieldByName('gerarctasreceber').AsString;
+    DTO.movimento                    := ADataSet.FieldByName('movimento').AsString;
+    DTO.gerarcomissao                := ADataSet.FieldByName('gerarcomissao').AsString;
+    DTO.imprimirduplicata            := ADataSet.FieldByName('imprimirduplicata').AsString;
+    DTO.tipofrete                    := ADataSet.FieldByName('tipofrete').AsInteger;
+    DTO.carga_codigoerp                     := ADataSet.FieldByName('carga').AsString;
+    DTO.notafiscal                   := ADataSet.FieldByName('notafiscal').AsString;
+    DTO.dataemissaonf                := FormatDateField('dataemissaonf');
+    DTO.datasaidanf                  := FormatDateField('datasaidanf');
+    DTO.notafiscalassistencia        := ADataSet.FieldByName('notafiscalassistencia').AsString;
+    DTO.volumes                      := ADataSet.FieldByName('volumes').AsFloat;
+    DTO.especie                      := ADataSet.FieldByName('especie').AsString;
+    DTO.pesobruto                    := ADataSet.FieldByName('pesobruto').AsFloat;
+    DTO.pesoliquido                  := ADataSet.FieldByName('pesoliquido').AsFloat;
+    DTO.m3                           := ADataSet.FieldByName('m3').AsFloat;
+    DTO.bloqueado                    := ADataSet.FieldByName('bloqueado').AsString;
+    DTO.datafaturamento              := FormatDateField('datafaturamento');
+    DTO.assistenciatecnica           := ADataSet.FieldByName('assistenciatecnica').AsString;
+    DTO.codigorastreamento           := ADataSet.FieldByName('codigorastreio').AsString;
+    DTO.vendaloja                    := ADataSet.FieldByName('vendaloja').AsString;
+    DTO.idpedido                     := ADataSet.FieldByName('idpedido').AsString;
+    DTO.pedidoweb                    := ADataSet.FieldByName('pedidoweb').AsString;
+    DTO.responsavelentrega           := ADataSet.FieldByName('responsavelentrega').AsString;
+    DTO.habilitadoweb                := ADataSet.FieldByName('habilitadoweb').AsString;
+    DTO.tipodesconto                 := ADataSet.FieldByName('tipodesconto').AsInteger;
+
+    ItensDs := GetItens(ADataSet.FieldByName('codigo').AsString);
+    try
+      while not ItensDs.Eof do
+      begin
+        Item := TPedidoVendaItemAPI.Create;
+        Item.codigo             := ItensDs.FieldByName('codigo').AsString;
+        Item.sequencia          := ItensDs.FieldByName('sequencia').AsInteger;
+        Item.pedido_codigoerp          := ItensDs.FieldByName('pedido').AsString;
+        Item.produto_codigoerp         := ItensDs.FieldByName('codproduto').AsString;
+        Item.cor_codigoerp             := ItensDs.FieldByName('codcor').AsString;
+        Item.acabamento_codigoerp      := ItensDs.FieldByName('codacabamento').AsString;
+        Item.variacao_codigoerp        := ItensDs.FieldByName('codvariacao').AsString;
+        Item.idproduto          := ItensDs.FieldByName('IDPRODUTO').AsString;
+        Item.idvariacao         := ItensDs.FieldByName('IDVARIACAO').AsString;
+        Item.nomeproduto        := ItensDs.FieldByName('nomeproduto').AsString;
+        Item.referencia         := ItensDs.FieldByName('referencia').AsString;
+        Item.cor                := ItensDs.FieldByName('cor').AsString;
+        Item.tamanho            := ItensDs.FieldByName('tamanho').AsString;
+        Item.quantidade         := ItensDs.FieldByName('quantidade').AsFloat;
+        Item.quantidadeproduzir := ItensDs.FieldByName('qtdeproduzir').AsFloat;
+        Item.valorunitario      := ItensDs.FieldByName('valor').AsCurrency;
+        Item.valorsubtotal      := ItensDs.FieldByName('subtotal').AsCurrency;
+        Item.percentualdesconto := ItensDs.FieldByName('percentualdesconto').AsFloat;
+        Item.valordesconto      := ItensDs.FieldByName('valordesconto').AsCurrency;
+        Item.valortotal         := ItensDs.FieldByName('total').AsCurrency;
+        Item.codigofilial       := ItensDs.FieldByName('codigofilial').AsString;
+        Item.setor              := ItensDs.FieldByName('setor').AsString;
+        Item.numeroserie        := ItensDs.FieldByName('serie').AsString;
+        Item.pesobruto          := ItensDs.FieldByName('pesobruto').AsFloat;
+        Item.pesoliquido        := ItensDs.FieldByName('pesoliquido').AsFloat;
+        Item.m3                 := ItensDs.FieldByName('m3').AsFloat;
+        Item.qtdevolumes        := ItensDs.FieldByName('qtdevolumes').AsFloat;
+        Item.observacoes        := ItensDs.FieldByName('observacoes').AsString;
+        Item.ordemcompra        := ItensDs.FieldByName('ordemcompra').AsString;
+        Item.sku                := ItensDs.FieldByName('sku').AsString;
+
+        DTO.AddItem(Item);
+        ItensDs.Next;
+      end;
+    finally
+      ItensDs.Free;
+    end;
+
+    Result := DTO.ToJson;
+  finally
+    DTO.Free;
+  end;
+end;
+
+function TEntityPedidoVenda.GetUnsyncedRecords: TDataSet;
+var
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Add('select p.*,');
+    Qry.SQL.Add('cli.idcliente as IDCLIENTE, cli.nome as NOMECLIENTE,');
+    Qry.SQL.Add('rep.idfuncionario as IDREPRESENTANTE, rep.nome as NOMEREPRESENTANTE,');
+    Qry.SQL.Add('transp.idtransportador as IDTRANSPORTADORA,');
+    Qry.SQL.Add('cond.idformapagamento as IDCONDICAOPAGAMENTO');
+    Qry.SQL.Add('from ' + GetTableNameClass + ' p');
+    Qry.SQL.Add('left outer join C000007 cli on cli.codigo = p.codcliente');
+    Qry.SQL.Add('left outer join C000008 rep on rep.codigo = p.codrepresentante');
+    Qry.SQL.Add('left outer join C000010 transp on transp.codigo = p.codtransportadora');
+    Qry.SQL.Add('left outer join C000015 cond on cond.codigo = p.codcondicaopagamento');
+    Qry.SQL.Add('where p.idpedido is null');
+    if FDatabaseType = dtIndustrial then
+    begin
+      Qry.SQL.Add('and p.codigofilial = :filial');
+      Qry.ParamByName('filial').AsString := FFilial;
+    end;
+    Qry.SQL.Add('order by p.codigo');
+    Qry.Open;
+  except
+    Qry.Free;
+    raise;
+  end;
+  Result := Qry;
+end;
+
+function TEntityPedidoVenda.GetBatchSize: Integer;
+begin
+  Result := 100;
+end;
+
+function TEntityPedidoVenda.GetSyncAllMessage(ASuccess: Boolean; const AErrorMsg: string): string;
+begin
+  if ASuccess then
+    Result := 'Pedidos de Venda sincronizados com sucesso'
+  else
+    Result := 'Erro em Pedidos de Venda: ' + AErrorMsg;
+end;
+
+procedure TEntityPedidoVenda.StoreApiIdBack(ACodRecord, AApiId: string);
+var
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Add('update ' + GetTableNameClass + ' set IDPEDIDO = :apiid');
+    Qry.SQL.Add('where codigo = :cod');
+    Qry.ParamByName('apiid').AsString := AApiId;
+    Qry.ParamByName('cod').AsString := ACodRecord;
+    Qry.ExecSQL;
+  finally
+    Qry.Free;
+  end;
+end;
+
+initialization
+  TEntityFactory.RegisterEntity(TEntityPedidoVenda.GetTableNameClass, TEntityPedidoVenda);
+end.

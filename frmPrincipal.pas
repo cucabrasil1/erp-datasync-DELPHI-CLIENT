@@ -11,7 +11,8 @@ uses
   cxCheckBox, cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit,
   dxSkinsCore, cxGroupBox, cxCheckGroup, Vcl.ExtCtrls, cxTextEdit, cxMaskEdit,
   cxDropDownEdit, dxBarBuiltInMenu, cxPC, System.ImageList, Vcl.ImgList,
-  cxImageList, AdvGlowButton, JvExControls, JvNavigationPane, uSyncOrchestrator;
+  cxImageList, AdvGlowButton, JvExControls, JvNavigationPane, uSyncOrchestrator,
+  cxProgressBar;
 
 type
   TTableSummary = record
@@ -54,6 +55,8 @@ type
     JvNavPanelHeader3: TJvNavPanelHeader;
     btnSyncAll: TButton;
     chkFuncioanrio: TcxCheckBox;
+    pgbParcial: TcxProgressBar;
+    pgbTotal: TcxProgressBar;
     procedure monitorEventosAlert(ASender: TFDCustomEventAlerter; const AEventName: string; const AArgument: Variant);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -223,7 +226,7 @@ end;
 
 function TForm2.GetGruposSync: TArray<TGroupSyncDef>;
 begin
-  SetLength(Result, 10);
+  SetLength(Result, 11);
 
   //clientes ('Regioes-C000005', 'GrupoCliente-C000144', 'Cliente-C000007')
   Result[0].CheckboxName := 'chkClientes';
@@ -253,14 +256,17 @@ begin
   Result[6].CheckboxName := 'chkTpPagamento';
   Result[6].Tabelas := TArray<string>.Create('C000014', 'C000015');
 
-  //Produtos ('Grupo - C000017', 'Subgrupo - C000018', 'Produto - C000025', 'VAriacao - C000279')
+  //Produtos ('Grupo - C000017', 'Subgrupo - C000018', 'Produto + Volumes - C000025 + C000248', 'VAriacao - C000279')
   Result[7].CheckboxName := 'chkProdutos';
-//  Result[7].Tabelas := TArray<string>.Create('C000017', 'C000018', 'C000025', 'C000279');
   Result[7].Tabelas := TArray<string>.Create('C000017', 'C000018', 'C000025', 'C000279');
 
   //Funcionarios (C000008)
   Result[8].CheckboxName := 'chkFuncioanrio';
   Result[8].Tabelas := TArray<string>.Create('C000008');
+
+  //Pedidos de Venda (C000126 + itens C000127 enviados aninhados no mesmo payload)
+  Result[9].CheckboxName := 'chkPedVenda';
+  Result[9].Tabelas := TArray<string>.Create('C000126');
 end;
 
 procedure TForm2.btnSyncAllClick(Sender: TObject);

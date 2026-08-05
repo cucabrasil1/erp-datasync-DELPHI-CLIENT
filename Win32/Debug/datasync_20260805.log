@@ -1,0 +1,185 @@
+﻿--- Log iniciado em 05/08/2026 09:15:06 ---
+[2026-08-05 09:15:06] [TID=23104] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-08-05 09:15:06] [TID=23104] [INFO] [SYSTEM] Processando eventos
+[2026-08-05 09:15:06] [TID=13460] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-08-05 09:15:06] [TID=13460] [INFO] [SYNC] === RESUMO ===
+[2026-08-05 09:15:16] [TID=15560] [INFO] [AUTH] Autenticado com sucesso | filial=000001
+[2026-08-05 09:15:16] [TID=15560] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Grupos de Produto sincronizados com sucesso | tabela=C000017 | filial=000001
+[2026-08-05 09:15:16] [TID=15560] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Subgrupos de Produto sincronizados com sucesso | tabela=C000018 | filial=000001
+[2026-08-05 09:15:16] [TID=15560] [INFO] [EXPORT] 09:15:16 | Enviando lote com 1000 registro(s) (1000 de 2492) | tabela=C000025 | filial=000001
+[2026-08-05 09:15:17] [TID=15560] [ERROR] [EXPORT] 09:15:17 | Lote falhou: 404: {"message":"Registro ou Rota não encontrados:{\"code\":\"not_found\",\"message\":\"Route not found\"}"} | tabela=C000025 | filial=000001
+[2026-08-05 09:15:17] [TID=15560] [INFO] [EXPORT] 09:15:17 | Enviando lote com 1000 registro(s) (2000 de 2492) | tabela=C000025 | filial=000001
+[2026-08-05 09:15:17] [TID=15560] [ERROR] [EXPORT] 09:15:17 | Lote falhou: 404: {"message":"Registro ou Rota não encontrados:{\"code\":\"not_found\",\"message\":\"Route not found\"}"} | tabela=C000025 | filial=000001
+[2026-08-05 09:15:17] [TID=15560] [INFO] [EXPORT] 09:15:17 | Enviando lote com 492 registro(s) (2492 de 2492) | tabela=C000025 | filial=000001
+[2026-08-05 09:15:17] [TID=15560] [ERROR] [EXPORT] 09:15:17 | Lote falhou: 404: {"message":"Registro ou Rota não encontrados:{\"code\":\"not_found\",\"message\":\"Route not found\"}"} | tabela=C000025 | filial=000001
+[2026-08-05 09:15:17] [TID=15560] [ERROR] [EXPORT] 2492 registro(s) com erro em 1,4s - Erro em Produtos: 404: {"message":"Registro ou Rota não encontrados:{\"code\":\"not_found\",\"message\":\"Route not found\"}"} | tabela=C000025 | filial=000001
+[2026-08-05 09:15:17] [TID=15560] [ERROR] [SYNC] Grupo abortado por falha em dependência: chkProdutos | filial=000001
+--- Log iniciado em 05/08/2026 09:16:07 ---
+[2026-08-05 09:16:07] [TID=1876] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-08-05 09:16:07] [TID=1876] [INFO] [SYSTEM] Processando eventos
+[2026-08-05 09:16:07] [TID=14552] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-08-05 09:16:07] [TID=14552] [INFO] [SYNC] === RESUMO ===
+[2026-08-05 09:16:12] [TID=17780] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Grupos de Produto sincronizados com sucesso | tabela=C000017 | filial=000001
+[2026-08-05 09:16:12] [TID=17780] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Subgrupos de Produto sincronizados com sucesso | tabela=C000018 | filial=000001
+[2026-08-05 09:16:13] [TID=17780] [INFO] [EXPORT] 09:16:13 | Enviando lote com 1000 registro(s) (1000 de 2492) | tabela=C000025 | filial=000001
+[2026-08-05 09:16:15] [TID=17780] [INFO] [EXPORT] 09:16:15 | Lote de 1000 registro(s) enviado com sucesso | tabela=C000025 | filial=000001
+[2026-08-05 09:16:17] [TID=17780] [INFO] [EXPORT] 09:16:17 | Enviando lote com 1000 registro(s) (2000 de 2492) | tabela=C000025 | filial=000001
+[2026-08-05 09:16:19] [TID=17780] [INFO] [EXPORT] 09:16:19 | Lote de 1000 registro(s) enviado com sucesso | tabela=C000025 | filial=000001
+[2026-08-05 09:16:20] [TID=17780] [INFO] [EXPORT] 09:16:20 | Enviando lote com 492 registro(s) (2492 de 2492) | tabela=C000025 | filial=000001
+[2026-08-05 09:16:20] [TID=17780] [INFO] [EXPORT] 09:16:20 | Lote de 492 registro(s) enviado com sucesso | tabela=C000025 | filial=000001
+[2026-08-05 09:16:21] [TID=17780] [INFO] [EXPORT] 2492 registro(s) sincronizado(s) em 8,9s - Produtos sincronizados com sucesso | tabela=C000025 | filial=000001
+[2026-08-05 09:16:21] [TID=17780] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Variacoes de Produto sincronizados com sucesso | tabela=C000279 | filial=000001
+--- Log iniciado em 05/08/2026 09:45:47 ---
+[2026-08-05 09:45:47] [TID=5340] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-08-05 09:45:47] [TID=5340] [INFO] [SYSTEM] Processando eventos
+[2026-08-05 09:45:47] [TID=14084] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-08-05 09:45:47] [TID=14084] [INFO] [SYNC] === RESUMO ===
+[2026-08-05 09:47:09] [TID=5340] [INFO] [SYSTEM] Processando eventos
+[2026-08-05 09:47:09] [TID=9368] [INFO] [SYSTEM] Registros pendentes: 1
+[2026-08-05 09:47:10] [TID=9368] [INFO] [AUTH] Autenticado com sucesso | filial=000001
+[2026-08-05 09:47:10] [TID=9368] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=188223 | coderecord=002402 | tabela=C000025 | filial=000001
+[2026-08-05 09:47:11] [TID=9368] [INFO] [SYNC] === RESUMO === Tabela C000025 - Sucesso: 1  Erro: 0
+[2026-08-05 09:49:15] [TID=5340] [INFO] [SYSTEM] Processando eventos
+[2026-08-05 09:49:15] [TID=12968] [INFO] [SYSTEM] Registros pendentes: 1
+[2026-08-05 09:50:05] [TID=12968] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=188224 | coderecord=002402 | tabela=C000025 | filial=000001
+[2026-08-05 09:50:06] [TID=12968] [INFO] [SYNC] === RESUMO === Tabela C000025 - Sucesso: 1  Erro: 0
+[2026-08-05 09:50:11] [TID=5340] [INFO] [SYSTEM] Processando eventos
+[2026-08-05 09:50:11] [TID=15292] [INFO] [SYSTEM] Registros pendentes: 1
+[2026-08-05 09:50:38] [TID=15292] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=188225 | coderecord=002402 | tabela=C000025 | filial=000001
+[2026-08-05 09:50:39] [TID=15292] [INFO] [SYNC] === RESUMO === Tabela C000025 - Sucesso: 1  Erro: 0
+[2026-08-05 09:52:54] [TID=5340] [INFO] [SYSTEM] Processando eventos
+[2026-08-05 09:52:54] [TID=22488] [INFO] [SYSTEM] Registros pendentes: 1
+[2026-08-05 09:52:59] [TID=22488] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=188226 | coderecord=002402 | tabela=C000025 | filial=000001
+[2026-08-05 09:53:00] [TID=22488] [INFO] [SYNC] === RESUMO === Tabela C000025 - Sucesso: 1  Erro: 0
+--- Log iniciado em 05/08/2026 10:52:53 ---
+[2026-08-05 10:52:53] [TID=28912] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-08-05 10:52:53] [TID=28912] [INFO] [SYSTEM] Processando eventos
+[2026-08-05 10:52:53] [TID=28380] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-08-05 10:52:53] [TID=28380] [INFO] [SYNC] === RESUMO ===
+[2026-08-05 10:52:59] [TID=30580] [INFO] [AUTH] Autenticado com sucesso | filial=000001
+[2026-08-05 10:52:59] [TID=30580] [INFO] [EXPORT] 10:52:59 | Enviando lote com 100 registro(s) (100 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 10:52:59] [TID=30580] [INFO] [EXPORT] 10:52:59 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 10:53:00] [TID=30580] [INFO] [EXPORT] 10:53:00 | Enviando lote com 100 registro(s) (200 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 10:53:00] [TID=30580] [INFO] [EXPORT] 10:53:00 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 10:53:00] [TID=30580] [INFO] [EXPORT] 10:53:00 | Enviando lote com 100 registro(s) (300 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 10:53:01] [TID=30580] [INFO] [EXPORT] 10:53:01 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 10:53:01] [TID=30580] [INFO] [EXPORT] 10:53:01 | Enviando lote com 100 registro(s) (400 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 10:53:02] [TID=30580] [INFO] [EXPORT] 10:53:02 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 10:53:02] [TID=30580] [INFO] [EXPORT] 10:53:02 | Enviando lote com 100 registro(s) (500 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 10:53:03] [TID=30580] [INFO] [EXPORT] 10:53:03 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 10:53:03] [TID=30580] [INFO] [EXPORT] 10:53:03 | Enviando lote com 100 registro(s) (600 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 10:53:03] [TID=30580] [INFO] [EXPORT] 10:53:03 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 10:53:04] [TID=30580] [INFO] [EXPORT] 10:53:04 | Enviando lote com 100 registro(s) (700 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 10:53:04] [TID=30580] [INFO] [EXPORT] 10:53:04 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 10:53:04] [TID=30580] [INFO] [EXPORT] 10:53:04 | Enviando lote com 100 registro(s) (800 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 10:53:05] [TID=30580] [INFO] [EXPORT] 10:53:05 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 10:53:05] [TID=30580] [INFO] [EXPORT] 10:53:05 | Enviando lote com 100 registro(s) (900 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 10:53:05] [TID=30580] [INFO] [EXPORT] 10:53:05 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 10:53:05] [TID=30580] [INFO] [EXPORT] 10:53:05 | Enviando lote com 100 registro(s) (1000 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 10:53:06] [TID=30580] [ERROR] [EXPORT] 10:53:06 | Lote falhou: 400: {"statusCode":400,"code":"VALIDATION_ERROR","error":"Bad Request","message":"/93/itens/0/qtdevolumes must be integer. Valor recebido: 1.55172413793103"} | tabela=C000126 | filial=000001
+[2026-08-05 10:53:06] [TID=30580] [INFO] [EXPORT] 10:53:06 | Enviando lote com 100 registro(s) (1100 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 10:53:06] [TID=30580] [ERROR] [EXPORT] Falha ao sincronizar C000126: Falha na comunicação com a IntegraçãoHTTP/1.1 500 Internal Server Error | tabela=C000126 | filial=000001
+[2026-08-05 10:53:06] [TID=30580] [ERROR] [SYNC] Grupo abortado por falha em dependência: chkPedVenda | filial=000001
+--- Log iniciado em 05/08/2026 11:08:44 ---
+[2026-08-05 11:08:44] [TID=10340] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-08-05 11:08:44] [TID=10340] [INFO] [SYSTEM] Processando eventos
+[2026-08-05 11:08:45] [TID=22640] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-08-05 11:08:45] [TID=22640] [INFO] [SYNC] === RESUMO ===
+[2026-08-05 11:13:38] [TID=10340] [INFO] [SYSTEM] Processando eventos
+[2026-08-05 11:13:38] [TID=17048] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-08-05 11:13:38] [TID=17048] [INFO] [SYNC] === RESUMO ===
+[2026-08-05 11:13:46] [TID=12744] [INFO] [AUTH] Autenticado com sucesso | filial=000001
+[2026-08-05 11:13:46] [TID=12744] [INFO] [EXPORT] 11:13:46 | Enviando lote com 100 registro(s) (100 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 11:13:47] [TID=12744] [INFO] [EXPORT] 11:13:47 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 11:13:47] [TID=12744] [INFO] [EXPORT] 11:13:47 | Enviando lote com 100 registro(s) (200 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 11:13:47] [TID=12744] [INFO] [EXPORT] 11:13:47 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 11:13:48] [TID=12744] [INFO] [EXPORT] 11:13:48 | Enviando lote com 100 registro(s) (300 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 11:13:48] [TID=12744] [INFO] [EXPORT] 11:13:48 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 11:13:48] [TID=12744] [INFO] [EXPORT] 11:13:48 | Enviando lote com 100 registro(s) (400 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 11:13:49] [TID=12744] [INFO] [EXPORT] 11:13:49 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 11:13:49] [TID=12744] [INFO] [EXPORT] 11:13:49 | Enviando lote com 100 registro(s) (500 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 11:13:49] [TID=12744] [INFO] [EXPORT] 11:13:49 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 11:13:50] [TID=12744] [INFO] [EXPORT] 11:13:50 | Enviando lote com 100 registro(s) (600 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 11:13:50] [TID=12744] [INFO] [EXPORT] 11:13:50 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 11:13:50] [TID=12744] [INFO] [EXPORT] 11:13:50 | Enviando lote com 100 registro(s) (700 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 11:13:51] [TID=12744] [INFO] [EXPORT] 11:13:51 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 11:13:51] [TID=12744] [INFO] [EXPORT] 11:13:51 | Enviando lote com 100 registro(s) (800 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 11:13:51] [TID=12744] [INFO] [EXPORT] 11:13:51 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 11:13:52] [TID=12744] [INFO] [EXPORT] 11:13:52 | Enviando lote com 100 registro(s) (900 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 11:13:52] [TID=12744] [INFO] [EXPORT] 11:13:52 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 11:13:52] [TID=12744] [INFO] [EXPORT] 11:13:52 | Enviando lote com 100 registro(s) (1000 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 11:13:53] [TID=12744] [INFO] [EXPORT] 11:13:53 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 11:13:53] [TID=12744] [INFO] [EXPORT] 11:13:53 | Enviando lote com 100 registro(s) (1100 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 11:13:53] [TID=12744] [ERROR] [EXPORT] Falha ao sincronizar C000126: Falha na comunicação com a IntegraçãoHTTP/1.1 500 Internal Server Error | tabela=C000126 | filial=000001
+[2026-08-05 11:13:53] [TID=12744] [ERROR] [SYNC] Grupo abortado por falha em dependência: chkPedVenda | filial=000001
+--- Log iniciado em 05/08/2026 13:57:35 ---
+[2026-08-05 13:57:35] [TID=28432] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-08-05 13:57:35] [TID=28432] [INFO] [SYSTEM] Processando eventos
+[2026-08-05 13:57:35] [TID=11076] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-08-05 13:57:35] [TID=11076] [INFO] [SYNC] === RESUMO ===
+[2026-08-05 13:57:40] [TID=15476] [INFO] [AUTH] Autenticado com sucesso | filial=000001
+[2026-08-05 13:57:41] [TID=15476] [INFO] [EXPORT] 13:57:41 | Enviando lote com 100 registro(s) (100 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 13:57:41] [TID=15476] [INFO] [EXPORT] 13:57:41 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 13:57:41] [TID=15476] [INFO] [EXPORT] 13:57:41 | Enviando lote com 100 registro(s) (200 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 13:57:42] [TID=15476] [INFO] [EXPORT] 13:57:42 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 13:57:42] [TID=15476] [INFO] [EXPORT] 13:57:42 | Enviando lote com 100 registro(s) (300 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 13:57:43] [TID=15476] [INFO] [EXPORT] 13:57:43 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 13:57:43] [TID=15476] [INFO] [EXPORT] 13:57:43 | Enviando lote com 100 registro(s) (400 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 13:57:43] [TID=15476] [INFO] [EXPORT] 13:57:43 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 13:57:44] [TID=15476] [INFO] [EXPORT] 13:57:44 | Enviando lote com 100 registro(s) (500 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 13:57:44] [TID=15476] [INFO] [EXPORT] 13:57:44 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 13:57:44] [TID=15476] [INFO] [EXPORT] 13:57:44 | Enviando lote com 100 registro(s) (600 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 13:57:45] [TID=15476] [INFO] [EXPORT] 13:57:45 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 13:57:45] [TID=15476] [INFO] [EXPORT] 13:57:45 | Enviando lote com 100 registro(s) (700 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 13:57:45] [TID=15476] [INFO] [EXPORT] 13:57:45 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 13:57:46] [TID=15476] [INFO] [EXPORT] 13:57:46 | Enviando lote com 100 registro(s) (800 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 13:57:46] [TID=15476] [INFO] [EXPORT] 13:57:46 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 13:57:46] [TID=15476] [INFO] [EXPORT] 13:57:46 | Enviando lote com 100 registro(s) (900 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 13:57:47] [TID=15476] [INFO] [EXPORT] 13:57:47 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 13:57:47] [TID=15476] [INFO] [EXPORT] 13:57:47 | Enviando lote com 100 registro(s) (1000 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 13:57:47] [TID=15476] [INFO] [EXPORT] 13:57:47 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 13:57:48] [TID=15476] [INFO] [EXPORT] 13:57:48 | Enviando lote com 100 registro(s) (1100 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 13:57:48] [TID=15476] [INFO] [EXPORT] 13:57:48 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 13:57:48] [TID=15476] [INFO] [EXPORT] 13:57:48 | Enviando lote com 100 registro(s) (1200 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 13:57:49] [TID=15476] [INFO] [EXPORT] 13:57:49 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 13:57:49] [TID=15476] [INFO] [EXPORT] 13:57:49 | Enviando lote com 100 registro(s) (1300 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 13:57:49] [TID=15476] [INFO] [EXPORT] 13:57:49 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 13:57:50] [TID=15476] [INFO] [EXPORT] 13:57:50 | Enviando lote com 100 registro(s) (1400 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 13:57:50] [TID=15476] [INFO] [EXPORT] 13:57:50 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 13:57:50] [TID=15476] [INFO] [EXPORT] 13:57:50 | Enviando lote com 100 registro(s) (1500 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 13:57:51] [TID=15476] [INFO] [EXPORT] 13:57:51 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 13:57:51] [TID=15476] [INFO] [EXPORT] 13:57:51 | Enviando lote com 100 registro(s) (1600 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 13:57:51] [TID=15476] [INFO] [EXPORT] 13:57:51 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 13:57:52] [TID=15476] [INFO] [EXPORT] 13:57:52 | Enviando lote com 100 registro(s) (1700 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 13:57:52] [TID=15476] [INFO] [EXPORT] 13:57:52 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 13:57:52] [TID=15476] [INFO] [EXPORT] 13:57:52 | Enviando lote com 100 registro(s) (1800 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 13:57:53] [TID=15476] [INFO] [EXPORT] 13:57:53 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 13:57:53] [TID=15476] [INFO] [EXPORT] 13:57:53 | Enviando lote com 100 registro(s) (1900 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 13:57:53] [TID=15476] [INFO] [EXPORT] 13:57:53 | Lote de 100 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 13:57:53] [TID=15476] [INFO] [EXPORT] 13:57:53 | Enviando lote com 4 registro(s) (1904 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 13:57:53] [TID=15476] [INFO] [EXPORT] 13:57:53 | Lote de 4 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 13:57:53] [TID=15476] [INFO] [EXPORT] 1904 registro(s) sincronizado(s) em 13,0s - Pedidos de Venda sincronizados com sucesso | tabela=C000126 | filial=000001
+--- Log iniciado em 05/08/2026 14:07:04 ---
+[2026-08-05 14:07:04] [TID=19108] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-08-05 14:07:04] [TID=19108] [INFO] [SYSTEM] Processando eventos
+[2026-08-05 14:07:04] [TID=19748] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-08-05 14:07:04] [TID=19748] [INFO] [SYNC] === RESUMO ===
+[2026-08-05 14:07:34] [TID=24148] [INFO] [EXPORT] 14:07:34 | Enviando lote com 500 registro(s) (500 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 14:07:37] [TID=24148] [INFO] [EXPORT] 14:07:37 | Lote de 500 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 14:07:38] [TID=24148] [INFO] [EXPORT] 14:07:38 | Enviando lote com 500 registro(s) (1000 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 14:07:40] [TID=24148] [INFO] [EXPORT] 14:07:40 | Lote de 500 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 14:07:41] [TID=24148] [INFO] [EXPORT] 14:07:41 | Enviando lote com 500 registro(s) (1500 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 14:07:43] [TID=24148] [INFO] [EXPORT] 14:07:43 | Lote de 500 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 14:07:45] [TID=24148] [INFO] [EXPORT] 14:07:45 | Enviando lote com 404 registro(s) (1904 de 1904) | tabela=C000126 | filial=000001
+[2026-08-05 14:07:46] [TID=24148] [INFO] [EXPORT] 14:07:46 | Lote de 404 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-05 14:07:47] [TID=24148] [INFO] [EXPORT] 1904 registro(s) sincronizado(s) em 13,5s - Pedidos de Venda sincronizados com sucesso | tabela=C000126 | filial=000001
+--- Log iniciado em 05/08/2026 14:15:59 ---
+[2026-08-05 14:15:59] [TID=30288] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-08-05 14:15:59] [TID=30288] [INFO] [SYSTEM] Processando eventos
+[2026-08-05 14:15:59] [TID=28572] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-08-05 14:15:59] [TID=28572] [INFO] [SYNC] === RESUMO ===
+--- Log iniciado em 05/08/2026 14:35:42 ---
+[2026-08-05 14:35:42] [TID=17772] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-08-05 14:35:42] [TID=17772] [INFO] [SYSTEM] Processando eventos
+[2026-08-05 14:35:42] [TID=16292] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-08-05 14:35:42] [TID=16292] [INFO] [SYNC] === RESUMO ===
