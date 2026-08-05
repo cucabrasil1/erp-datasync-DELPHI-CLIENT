@@ -20,6 +20,7 @@ type
     procedure StoreApiIdBack(ACodRecord, AApiId: string); override;
     procedure LoadFromDTO(const ADTO: TPessoaAPI);
     function GetContatosTabC000276(ACodCliente: string): TDataSet;
+    function GetEnderecosTabC000183(ACodCliente: string): TDataSet;
   end;
 
 implementation
@@ -46,7 +47,9 @@ begin
   Qry := TFDQuery.Create(nil);
   try
     Qry.Connection := FConnection;
-    Qry.SQL.Add('select c.*, r.idregiao, g.idgrupocliente');
+    Qry.SQL.Add('select c.*, r.idregiao, g.idgrupocliente,');
+    Qry.SQL.Add('case when exists (select 1 from C000183 e where e.codcliente = c.codigo)');
+    Qry.SQL.Add('  then 1 else 0 end as possui_endereco');
     Qry.SQL.Add('from ' + GetTableNameClass + ' c');
     Qry.SQL.Add('left join C000005 r on r.codigo = c.codregiao');
     Qry.SQL.Add('left join C000144 g on g.codigo = c.codigogrupo');
@@ -78,6 +81,25 @@ begin
   Result := Qry;
 end;
 
+function TEntityCliente.GetEnderecosTabC000183(ACodCliente: string): TDataSet;
+var
+  Qry: TFDQuery;
+begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
+    Qry.SQL.Add('select * from C000183');
+    Qry.SQL.Add('where codcliente = :cod');
+    Qry.SQL.Add('order by codigo');
+    Qry.ParamByName('cod').AsString := ACodCliente;
+    Qry.Open;
+  except
+    Qry.Free;
+    raise;
+  end;
+  Result := Qry;
+end;
+
 function TEntityCliente.GetApiId(ADataSet: TDataSet): string;
 begin
   if FDatabaseType = dtIndustrial then
@@ -90,6 +112,7 @@ function TEntityCliente.MapToJson(ADataSet: TDataSet): TJSONObject;
 var
   Pessoa: TPessoaAPI;
   ContatosDs: TDataSet;
+  EnderecosDs: TDataSet;
 begin
   Pessoa := TPessoaAPI.Create;
   try
@@ -169,6 +192,35 @@ begin
       end;
     end;
 
+    // Enderecos adicionais do cliente (C000183)
+    if ADataSet.FieldByName('possui_endereco').AsInteger > 0 then
+    begin
+      EnderecosDs := GetEnderecosTabC000183(ADataSet.FieldByName('codigo').AsString);
+      try
+        while not EnderecosDs.Eof do
+        begin
+          Pessoa.AddEndereco(
+            EnderecosDs.FieldByName('ENDERECO').AsString,
+            EnderecosDs.FieldByName('NUMERO').AsString,
+            EnderecosDs.FieldByName('COMPLEMENTO').AsString,
+            EnderecosDs.FieldByName('BAIRRO').AsString,
+            EnderecosDs.FieldByName('CIDADE').AsString,
+            EnderecosDs.FieldByName('UF').AsString,
+            EnderecosDs.FieldByName('CEP').AsString,
+            EnderecosDs.FieldByName('DESCRICAO').AsString,
+            '',
+            EnderecosDs.FieldByName('CODIGO').AsString,
+            EnderecosDs.FieldByName('COD_MUNICIPIO_IBGE').AsString,
+            EnderecosDs.FieldByName('CPFCNPJ').AsString,
+            EnderecosDs.FieldByName('RGIE').AsString,
+            IfThen(EnderecosDs.FieldByName('ATIVO').AsString = 'S', 1, 0)
+          );
+          EnderecosDs.Next;
+        end;
+      finally
+        EnderecosDs.Free;
+      end;
+    end;
 
     Result := Pessoa.ToJson;
   finally
@@ -183,7 +235,9 @@ begin
   Qry := TFDQuery.Create(nil);
   try
     Qry.Connection := FConnection;
-    Qry.SQL.Add('select c.*, r.idregiao, g.idgrupocliente');
+    Qry.SQL.Add('select c.*, r.idregiao, g.idgrupocliente,');
+    Qry.SQL.Add('case when exists (select 1 from C000183 e where e.codcliente = c.codigo)');
+    Qry.SQL.Add('  then 1 else 0 end as possui_endereco');
     Qry.SQL.Add('from ' + GetTableNameClass + ' c');
     Qry.SQL.Add('left join C000005 r on r.codigo = c.codregiao');
     Qry.SQL.Add('left join C000144 g on g.codigo = c.codigogrupo');

@@ -27,6 +27,11 @@ type
   TPessoaEndereco = class
   public
     // --- campos enviados (ERP . API) ---
+    codigoerp: string;
+    ibge: string;
+    ativo: Integer;
+    documentoprincipal: string;
+    documentosecundario: string;
     logradouro: string;
     numero: string;
     complemento: string;
@@ -168,7 +173,8 @@ type
 
     procedure AddContato(const ANome, ATelefone, AEmail, ADepartamento: string);
     procedure AddEndereco(const ALogradouro, ANumero, AComplemento, ABairro,
-      ACidade, AUf, ACep, ADescricao, AObservacoes: string);
+      ACidade, AUf, ACep, ADescricao, AObservacoes, ACodigoErp: string;
+      AIbge, ADocumentoPrincipal, ADocumentoSecundario: string; AAtivo: Integer);
     procedure AddDadosBancarios(const ACodigoErp, ACodBanco, ATitular, AAgencia,
       ANumeroconta, ADigito, AChavePix, ATipoChavePix, ATipoConta: string);
     procedure AddComplementoFuncionario(const ACodigoErp, ACtps, ASerieCtps,
@@ -223,20 +229,30 @@ function TPessoaEndereco.ToJson: TJSONObject;
 begin
   Result := TJSONObject.Create;
 
-  Result.AddPair('logradouro',  logradouro);
-  Result.AddPair('numero',      numero);
-  Result.AddPair('complemento', complemento);
-  Result.AddPair('bairro',      bairro);
-  Result.AddPair('cidade',      cidade);
-  Result.AddPair('uf',          uf);
-  Result.AddPair('cep',         cep);
-  Result.AddPair('descricao',   descricao);
-  Result.AddPair('observacoes', observacoes);
+  Result.AddPair('codigoerp',           StrOrNull(codigoerp));
+  Result.AddPair('ibge',                StrOrNull(ibge));
+  Result.AddPair('ativo',               TJSONNumber.Create(ativo));
+  Result.AddPair('documentoprincipal',  CleanDocOrNull(documentoprincipal));
+  Result.AddPair('documentosecundario', CleanDocOrNull(documentosecundario));
+  Result.AddPair('logradouro',          logradouro);
+  Result.AddPair('numero',              numero);
+  Result.AddPair('complemento',         complemento);
+  Result.AddPair('bairro',              bairro);
+  Result.AddPair('cidade',              cidade);
+  Result.AddPair('uf',                  uf);
+  Result.AddPair('cep',                 cep);
+  Result.AddPair('descricao',           descricao);
+  Result.AddPair('observacoes',         observacoes);
 end;
 
 procedure TPessoaEndereco.FromJson(AJson: TJSONObject);
 begin
-  logradouro  := AJson.GetValue<string>('logradouro');
+  codigoerp           := JsonStrOrEmpty('codigoerp', AJson);
+  ibge                := JsonStrOrEmpty('ibge', AJson);
+  ativo               := JsonIntOrZero('ativo', AJson);
+  documentoprincipal  := JsonStrOrEmpty('documentoprincipal', AJson);
+  documentosecundario := JsonStrOrEmpty('documentosecundario', AJson);
+  logradouro          := AJson.GetValue<string>('logradouro');
   numero      := AJson.GetValue<string>('numero');
   complemento := AJson.GetValue<string>('complemento');
   bairro      := AJson.GetValue<string>('bairro');
@@ -413,21 +429,27 @@ begin
 end;
 
 procedure TPessoaAPI.AddEndereco(const ALogradouro, ANumero, AComplemento,
-  ABairro, ACidade, AUf, ACep, ADescricao, AObservacoes: string);
+  ABairro, ACidade, AUf, ACep, ADescricao, AObservacoes, ACodigoErp: string;
+  AIbge, ADocumentoPrincipal, ADocumentoSecundario: string; AAtivo: Integer);
 var
   E: TPessoaEndereco;
 begin
-  E             := TPessoaEndereco.Create;
+  E                       := TPessoaEndereco.Create;
 
-  E.logradouro  := ALogradouro;
-  E.numero      := ANumero;
-  E.complemento := AComplemento;
-  E.bairro      := ABairro;
-  E.cidade      := ACidade;
-  E.uf          := AUf;
-  E.cep         := ACep;
-  E.descricao   := ADescricao;
-  E.observacoes := AObservacoes;
+  E.codigoerp             := ACodigoErp;
+  E.ibge                  := AIbge;
+  E.ativo                 := AAtivo;
+  E.documentoprincipal    := ADocumentoPrincipal;
+  E.documentosecundario   := ADocumentoSecundario;
+  E.logradouro            := ALogradouro;
+  E.numero                := ANumero;
+  E.complemento           := AComplemento;
+  E.bairro                := ABairro;
+  E.cidade                := ACidade;
+  E.uf                    := AUf;
+  E.cep                   := ACep;
+  E.descricao             := ADescricao;
+  E.observacoes           := AObservacoes;
 
   FEnderecos.Add(E);
 end;

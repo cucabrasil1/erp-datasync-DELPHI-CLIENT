@@ -6,8 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.StrUtils,
   System.Variants, System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms,
   Vcl.Dialogs, FireDAC.Phys.Intf, FireDAC.Stan.Option, FireDAC.Stan.Intf,
-  FireDAC.Comp.Client, Vcl.StdCtrls, System.JSON, system.DateUtils,
-  System.Generics.Collections, uEntityBase, uLogger, cxGraphics, cxControls,
+  FireDAC.Comp.Client, Data.DB, Vcl.StdCtrls, System.JSON, system.DateUtils,
+  System.Generics.Collections, System.RegularExpressions, uEntityBase, uLogger, cxGraphics, cxControls,
   cxCheckBox, cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit,
   dxSkinsCore, cxGroupBox, cxCheckGroup, Vcl.ExtCtrls, cxTextEdit, cxMaskEdit,
   cxDropDownEdit, dxBarBuiltInMenu, cxPC, System.ImageList, Vcl.ImgList,
@@ -68,6 +68,8 @@ type
     FDatabaseType: TDatabaseType;
     FSummary: TDictionary<string, TTableSummary>;
     hMutex: THandle;
+    FPgbTotalMax: Integer;
+    FPgbTotalDone: Integer;
     function GetDatabaseType: TDatabaseType;
     function NomeTabela(const ATabela: string): string;
     procedure IncrementarContador(const ATabela: string; ASucesso: Boolean);
@@ -78,6 +80,8 @@ type
     function SyncGroup(AConnection: TFDConnection; qrIntegrador: TFDQuery; const ATabelas: TArray<string>; const ACodFilial: string): Boolean;
     function GetGruposSync: TArray<TGroupSyncDef>;
     procedure AtualizarEventoSync(qrEvento: TFDQuery; const ASyncResult: TSyncResult);
+    procedure AtualizarProgressoParcial(const APos, AMax: Integer);
+    procedure AtualizarProgressoTotal;
   end;
 
 var
@@ -291,8 +295,10 @@ begin
     var
       thConnection: TFDConnection;
       qrIntegrador: TFDQuery;
+      qrPendente: TDataSet;
+      Entity: TEntityBase;
       chk: TcxCheckBox;
-      i: Integer;
+      i, j: Integer;
     begin
       try
         thConnection := TFDConnection.Create(nil);
@@ -320,6 +326,37 @@ begin
           TLogger.Log(llWarn, lcAuth, 'Nenhum integrador para empresa selecionada', ['filial=' + vCodFilial]);
           Exit;
         end;
+
+        FPgbTotalMax := 0;
+        FPgbTotalDone := 0;
+        for i := 0 to High(GRUPOS) do
+        begin
+          chk := FindComponent(GRUPOS[i].CheckboxName) as TcxCheckBox;
+          if not Assigned(chk) or not chk.Checked then
+            Continue;
+
+          for j := 0 to High(GRUPOS[i].Tabelas) do
+          begin
+            if not TEntityFactory.HasEntity(GRUPOS[i].Tabelas[j]) then
+              Continue;
+
+            Entity := TEntityFactory.GetEntity(thConnection, GRUPOS[i].Tabelas[j], FDatabaseType);
+            try
+              Entity.Filial := vCodFilial;
+              qrPendente := Entity.GetUnsyncedRecords;
+              try
+                FPgbTotalMax := FPgbTotalMax + qrPendente.RecordCount;
+              finally
+                qrPendente.Free;
+              end;
+            finally
+              Entity.Free;
+            end;
+          end;
+        end;
+        if FPgbTotalMax <= 0 then
+          FPgbTotalMax := 1;
+        Self.AtualizarProgressoTotal;
 
         for i := 0 to High(GRUPOS) do
         begin
@@ -373,13 +410,25 @@ begin
     try
       Entity := TEntityFactory.GetEntity(AConnection, ATabelas[i], FDatabaseType);
       Entity.Filial := ACodFilial;
+      Self.AtualizarProgressoParcial(0, 100);
       Entity.OnProgress :=
         procedure(const AMsg: string)
+        var
+          M: TMatch;
+          vPos, vMax: Integer;
         begin
           if Pos('falhou', LowerCase(AMsg)) > 0 then
             TLogger.Log(llError, lcExport, Trim(AMsg), ['tabela=' + ATabelas[i], 'filial=' + ACodFilial])
           else
             TLogger.Log(llInfo, lcExport, Trim(AMsg), ['tabela=' + ATabelas[i], 'filial=' + ACodFilial]);
+
+          M := TRegEx.Match(AMsg, '\((\d+)\s+de\s+(\d+)\)');
+          if M.Success then
+          begin
+            vPos := StrToIntDef(M.Groups[1].Value, 0);
+            vMax := StrToIntDef(M.Groups[2].Value, 0);
+            Self.AtualizarProgressoParcial(vPos, vMax);
+          end;
         end;
       try
         StartTime := Now;
@@ -405,6 +454,9 @@ begin
             SyncResult := Entity.SyncAll(vUrl, '', '');
         end;
 
+        FPgbTotalDone := FPgbTotalDone + SyncResult.RecordCount;
+        Self.AtualizarProgressoTotal;
+
         ElapsedSec := (Now - StartTime) * 24 * 60 * 60;
 
         if SyncResult.Success then
@@ -428,6 +480,34 @@ begin
   end;
 
   Result := True;
+end;
+
+procedure TForm2.AtualizarProgressoParcial(const APos, AMax: Integer);
+var
+  AThread: TThread;
+  AProc: TThreadProcedure;
+begin
+  AProc := procedure
+    begin
+      pgbParcial.Properties.Max := AMax;
+      pgbParcial.Position := APos;
+    end;
+  AThread := nil;
+  TThread.Queue(AThread, AProc);
+end;
+
+procedure TForm2.AtualizarProgressoTotal;
+var
+  AThread: TThread;
+  AProc: TThreadProcedure;
+begin
+  AProc := procedure
+    begin
+      pgbTotal.Properties.Max := FPgbTotalMax;
+      pgbTotal.Position := FPgbTotalDone;
+    end;
+  AThread := nil;
+  TThread.Queue(AThread, AProc);
 end;
 
 procedure TForm2.AtualizarEventoSync(qrEvento: TFDQuery; const ASyncResult: TSyncResult);

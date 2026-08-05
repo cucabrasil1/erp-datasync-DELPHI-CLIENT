@@ -19,7 +19,7 @@ object Form2: TForm2
     Left = 0
     Top = 33
     Width = 984
-    Height = 224
+    Height = 256
     Align = alTop
     TabOrder = 0
     object cxGroupBox1: TcxGroupBox
@@ -28,8 +28,8 @@ object Form2: TForm2
       Align = alClient
       Caption = 'Selecione para sincronizar TODOS registros de cada Entidade'
       TabOrder = 0
-      ExplicitHeight = 189
-      Height = 143
+      ExplicitHeight = 147
+      Height = 175
       Width = 982
       object cmbEmpresa: TcxComboBox
         Left = 2
@@ -58,6 +58,7 @@ object Form2: TForm2
           Style.TransparentBorder = False
           TabOrder = 0
           Transparent = True
+          ExplicitTop = 85
         end
         object chkClientes: TcxCheckBox
           Left = 1
@@ -99,6 +100,7 @@ object Form2: TForm2
           Style.IsFontAssigned = True
           TabOrder = 2
           Transparent = True
+          ExplicitTop = 41
         end
         object chkTransportador: TcxCheckBox
           Left = 1
@@ -188,6 +190,7 @@ object Form2: TForm2
           Style.IsFontAssigned = True
           TabOrder = 1
           Transparent = True
+          ExplicitTop = 41
         end
         object chkAcabamentos: TcxCheckBox
           Left = 1
@@ -221,6 +224,7 @@ object Form2: TForm2
           Style.IsFontAssigned = True
           TabOrder = 3
           Transparent = True
+          ExplicitTop = 79
         end
         object chkProdutos: TcxCheckBox
           Left = 1
@@ -272,7 +276,7 @@ object Form2: TForm2
     end
     object JvNavPanelHeader3: TJvNavPanelHeader
       Left = 1
-      Top = 144
+      Top = 176
       Width = 982
       Height = 33
       Align = alBottom
@@ -283,7 +287,7 @@ object Form2: TForm2
       Font.Style = [fsBold]
       ParentFont = False
       ImageIndex = 0
-      ExplicitTop = 190
+      ExplicitTop = 148
       object btnSyncAll: TButton
         Left = 0
         Top = 0
@@ -303,31 +307,31 @@ object Form2: TForm2
     end
     object pgbParcial: TcxProgressBar
       Left = 1
-      Top = 200
+      Top = 232
       Align = alBottom
       TabOrder = 2
-      ExplicitLeft = -15
-      ExplicitTop = 215
+      ExplicitTop = 202
       Width = 982
     end
     object pgbTotal: TcxProgressBar
       Left = 1
-      Top = 177
+      Top = 209
       Align = alBottom
       TabOrder = 3
-      ExplicitTop = 171
+      ExplicitTop = 179
       Width = 982
     end
   end
   object Memo1: TMemo
     Left = 0
-    Top = 257
+    Top = 289
     Width = 984
-    Height = 369
+    Height = 337
     Align = alClient
     ScrollBars = ssVertical
     TabOrder = 1
-    ExplicitTop = 254
+    ExplicitTop = 263
+    ExplicitHeight = 369
   end
   object JvNavPanelHeader1: TJvNavPanelHeader
     Left = 0
