@@ -54,7 +54,6 @@ type
     chkTransportador: TcxCheckBox;
     JvNavPanelHeader3: TJvNavPanelHeader;
     btnSyncAll: TButton;
-    chkFuncioanrio: TcxCheckBox;
     pgbParcial: TcxProgressBar;
     pgbTotal: TcxProgressBar;
     procedure monitorEventosAlert(ASender: TFDCustomEventAlerter; const AEventName: string; const AArgument: Variant);
@@ -234,7 +233,7 @@ begin
 
   //clientes ('Regioes-C000005', 'GrupoCliente-C000144', 'Cliente-C000007')
   Result[0].CheckboxName := 'chkClientes';
-  Result[0].Tabelas := TArray<string>.Create('C000005', 'C000144', 'C000007');
+  Result[0].Tabelas := TArray<string>.Create('C000005', 'C000144', 'C000008', 'C000007');
 
   //cores (C000129)
   Result[1].CheckboxName := 'chkCor';
@@ -263,10 +262,6 @@ begin
   //Produtos ('Grupo - C000017', 'Subgrupo - C000018', 'Produto + Volumes - C000025 + C000248', 'VAriacao - C000279')
   Result[7].CheckboxName := 'chkProdutos';
   Result[7].Tabelas := TArray<string>.Create('C000017', 'C000018', 'C000025', 'C000279');
-
-  //Funcionarios (C000008)
-  Result[8].CheckboxName := 'chkFuncioanrio';
-  Result[8].Tabelas := TArray<string>.Create('C000008');
 
   //Pedidos de Venda (C000126 + itens C000127 enviados aninhados no mesmo payload)
   Result[9].CheckboxName := 'chkPedVenda';

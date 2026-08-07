@@ -48,11 +48,13 @@ begin
   try
     Qry.Connection := FConnection;
     Qry.SQL.Add('select c.*, r.idregiao, g.idgrupocliente,');
+    Qry.SQL.Add('vend.codigo as VENDEDOR_CODIGOERP, vend.idfuncionario as VENDEDOR_ID, vend.nome as VENDEDOR_NOME,');
     Qry.SQL.Add('case when exists (select 1 from C000183 e where e.codcliente = c.codigo)');
     Qry.SQL.Add('  then 1 else 0 end as possui_endereco');
     Qry.SQL.Add('from ' + GetTableNameClass + ' c');
     Qry.SQL.Add('left join C000005 r on r.codigo = c.codregiao');
     Qry.SQL.Add('left join C000144 g on g.codigo = c.codigogrupo');
+    Qry.SQL.Add('left join C000008 vend on vend.codigo = c.codvendedor');
     Qry.SQL.Add('where c.codigo = :cod');
     Qry.ParamByName('cod').AsString := ACodRecord;
     Qry.Open;
@@ -140,6 +142,11 @@ begin
     Pessoa.tipopessoa          := IfThen(ADataSet.FieldByName('tipo').asinteger = 1, 'FISICA', 'JURIDICA');
     Pessoa.idclientegrupo      := ADataSet.FieldByName('IDGRUPOCLIENTE').AsString;
     Pessoa.idclienteregiao     := ADataSet.FieldByName('IDREGIAO').AsString;
+    Pessoa.AddComplementoCliente(
+      ADataSet.FieldByName('VENDEDOR_CODIGOERP').AsString,
+      ADataSet.FieldByName('VENDEDOR_ID').AsString,
+      ADataSet.FieldByName('VENDEDOR_NOME').AsString
+    );
 
     if ADataSet.FieldByName('nascimento').AsString.Trim.IsEmpty then
       Pessoa.datafundacaonascimento := ''
@@ -236,11 +243,13 @@ begin
   try
     Qry.Connection := FConnection;
     Qry.SQL.Add('select c.*, r.idregiao, g.idgrupocliente,');
+    Qry.SQL.Add('vend.codigo as VENDEDOR_CODIGOERP, vend.idfuncionario as VENDEDOR_ID, vend.nome as VENDEDOR_NOME,');
     Qry.SQL.Add('case when exists (select 1 from C000183 e where e.codcliente = c.codigo)');
     Qry.SQL.Add('  then 1 else 0 end as possui_endereco');
     Qry.SQL.Add('from ' + GetTableNameClass + ' c');
     Qry.SQL.Add('left join C000005 r on r.codigo = c.codregiao');
     Qry.SQL.Add('left join C000144 g on g.codigo = c.codigogrupo');
+    Qry.SQL.Add('left join C000008 vend on vend.codigo = c.codvendedor');
     Qry.SQL.Add('where c.idcliente is null');
     if FDatabaseType = dtIndustrial then
     begin

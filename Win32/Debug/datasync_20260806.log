@@ -1,0 +1,114 @@
+﻿--- Log iniciado em 06/08/2026 17:03:45 ---
+[2026-08-06 17:03:45] [TID=8668] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-08-06 17:03:45] [TID=8668] [INFO] [SYSTEM] Processando eventos
+[2026-08-06 17:03:45] [TID=30612] [INFO] [SYSTEM] Registros pendentes: 1
+[2026-08-06 17:03:45] [TID=30612] [INFO] [AUTH] Autenticado com sucesso | filial=000001
+[2026-08-06 17:03:46] [TID=30612] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=250828 | coderecord=002091 | tabela=C000126 | filial=000001
+[2026-08-06 17:03:47] [TID=30612] [INFO] [SYNC] === RESUMO === Tabela C000126 - Sucesso: 1  Erro: 0
+[2026-08-06 17:05:05] [TID=8668] [INFO] [SYSTEM] Processando eventos
+[2026-08-06 17:05:05] [TID=31332] [INFO] [SYSTEM] Registros pendentes: 1
+[2026-08-06 17:05:06] [TID=31332] [INFO] [SYNC] Evento sincronizado com sucesso | codseq=250829 | coderecord=000025 | tabela=C000008 | filial=000001
+[2026-08-06 17:05:07] [TID=31332] [INFO] [SYNC] === RESUMO === Tabela C000008 - Sucesso: 1  Erro: 0
+[2026-08-06 17:05:38] [TID=19548] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Regiao de Clientes sincronizados com sucesso | tabela=C000005 | filial=000001
+[2026-08-06 17:05:38] [TID=19548] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Grupos de Cliente sincronizados com sucesso | tabela=C000144 | filial=000001
+[2026-08-06 17:05:38] [TID=19548] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Clientes sincronizados com sucesso | tabela=C000007 | filial=000001
+[2026-08-06 17:05:38] [TID=19548] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Cores sincronizados com sucesso | tabela=C000129 | filial=000001
+[2026-08-06 17:05:38] [TID=19548] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Acabamentos sincronizados com sucesso | tabela=C000250 | filial=000001
+[2026-08-06 17:05:38] [TID=19548] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Cenarios de Faturamento sincronizados com sucesso | tabela=C000233 | filial=000001
+[2026-08-06 17:05:38] [TID=19548] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Fornecedores sincronizados com sucesso | tabela=C000009 | filial=000001
+[2026-08-06 17:05:38] [TID=19548] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Transportadores sincronizados com sucesso | tabela=C000010 | filial=000001
+[2026-08-06 17:05:38] [TID=19548] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Tipos de Pagamento sincronizados com sucesso | tabela=C000014 | filial=000001
+[2026-08-06 17:05:38] [TID=19548] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Condicoes de Pagamento sincronizados com sucesso | tabela=C000015 | filial=000001
+[2026-08-06 17:05:38] [TID=19548] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Grupos de Produto sincronizados com sucesso | tabela=C000017 | filial=000001
+[2026-08-06 17:05:38] [TID=19548] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Subgrupos de Produto sincronizados com sucesso | tabela=C000018 | filial=000001
+[2026-08-06 17:05:38] [TID=19548] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Produtos sincronizados com sucesso | tabela=C000025 | filial=000001
+[2026-08-06 17:05:38] [TID=19548] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Variacoes de Produto sincronizados com sucesso | tabela=C000279 | filial=000001
+[2026-08-06 17:05:38] [TID=19548] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Funcionarios sincronizados com sucesso | tabela=C000008 | filial=000001
+[2026-08-06 17:05:38] [TID=19548] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Pedidos de Venda sincronizados com sucesso | tabela=C000126 | filial=000001
+--- Log iniciado em 06/08/2026 17:27:51 ---
+[2026-08-06 17:27:51] [TID=17860] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-08-06 17:27:51] [TID=17860] [INFO] [SYSTEM] Processando eventos
+[2026-08-06 17:27:51] [TID=26196] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-08-06 17:27:51] [TID=26196] [INFO] [SYNC] === RESUMO ===
+--- Log iniciado em 06/08/2026 17:59:42 ---
+[2026-08-06 17:59:42] [TID=6804] [INFO] [SYSTEM] Modo banco: INDUSTRIAL
+[2026-08-06 17:59:42] [TID=6804] [INFO] [SYSTEM] Processando eventos
+[2026-08-06 17:59:42] [TID=27224] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-08-06 17:59:42] [TID=27224] [INFO] [SYNC] === RESUMO ===
+[2026-08-06 17:59:49] [TID=18888] [INFO] [AUTH] Autenticado com sucesso | filial=000001
+[2026-08-06 17:59:49] [TID=18888] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Regiao de Clientes sincronizados com sucesso | tabela=C000005 | filial=000001
+[2026-08-06 17:59:49] [TID=18888] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Grupos de Cliente sincronizados com sucesso | tabela=C000144 | filial=000001
+[2026-08-06 17:59:49] [TID=18888] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Clientes sincronizados com sucesso | tabela=C000007 | filial=000001
+[2026-08-06 17:59:49] [TID=18888] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Cores sincronizados com sucesso | tabela=C000129 | filial=000001
+[2026-08-06 17:59:49] [TID=18888] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Acabamentos sincronizados com sucesso | tabela=C000250 | filial=000001
+[2026-08-06 17:59:49] [TID=18888] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Cenarios de Faturamento sincronizados com sucesso | tabela=C000233 | filial=000001
+[2026-08-06 17:59:49] [TID=18888] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Fornecedores sincronizados com sucesso | tabela=C000009 | filial=000001
+[2026-08-06 17:59:49] [TID=18888] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Transportadores sincronizados com sucesso | tabela=C000010 | filial=000001
+[2026-08-06 17:59:49] [TID=18888] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Tipos de Pagamento sincronizados com sucesso | tabela=C000014 | filial=000001
+[2026-08-06 17:59:49] [TID=18888] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Condicoes de Pagamento sincronizados com sucesso | tabela=C000015 | filial=000001
+[2026-08-06 17:59:49] [TID=18888] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Grupos de Produto sincronizados com sucesso | tabela=C000017 | filial=000001
+[2026-08-06 17:59:49] [TID=18888] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Subgrupos de Produto sincronizados com sucesso | tabela=C000018 | filial=000001
+[2026-08-06 17:59:49] [TID=18888] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Produtos sincronizados com sucesso | tabela=C000025 | filial=000001
+[2026-08-06 17:59:49] [TID=18888] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Variacoes de Produto sincronizados com sucesso | tabela=C000279 | filial=000001
+[2026-08-06 17:59:49] [TID=18888] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Funcionarios sincronizados com sucesso | tabela=C000008 | filial=000001
+[2026-08-06 17:59:49] [TID=18888] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Pedidos de Venda sincronizados com sucesso | tabela=C000126 | filial=000001
+[2026-08-06 18:00:02] [TID=6804] [INFO] [SYSTEM] Processando eventos
+[2026-08-06 18:00:02] [TID=11600] [INFO] [SYSTEM] Registros pendentes: 0
+[2026-08-06 18:00:02] [TID=11600] [INFO] [SYNC] === RESUMO ===
+[2026-08-06 18:00:13] [TID=9780] [INFO] [EXPORT] 18:00:13 | Enviando lote com 7 registro(s) (7 de 7) | tabela=C000005 | filial=000001
+[2026-08-06 18:00:13] [TID=9780] [INFO] [EXPORT] 18:00:13 | Lote de 7 registro(s) enviado com sucesso | tabela=C000005 | filial=000001
+[2026-08-06 18:00:13] [TID=9780] [INFO] [EXPORT] 7 registro(s) sincronizado(s) em 0,1s - Regiao de Clientes sincronizados com sucesso | tabela=C000005 | filial=000001
+[2026-08-06 18:00:13] [TID=9780] [INFO] [EXPORT] 18:00:13 | Enviando lote com 2 registro(s) (2 de 2) | tabela=C000144 | filial=000001
+[2026-08-06 18:00:13] [TID=9780] [INFO] [EXPORT] 18:00:13 | Lote de 2 registro(s) enviado com sucesso | tabela=C000144 | filial=000001
+[2026-08-06 18:00:13] [TID=9780] [INFO] [EXPORT] 2 registro(s) sincronizado(s) em 0,0s - Grupos de Cliente sincronizados com sucesso | tabela=C000144 | filial=000001
+[2026-08-06 18:00:14] [TID=9780] [INFO] [EXPORT] 18:00:14 | Enviando lote com 785 registro(s) (785 de 785) | tabela=C000007 | filial=000001
+[2026-08-06 18:00:14] [TID=9780] [WARN] [SYSTEM] Sanitize removeu 2 char(s) [] em C000007.batch
+[2026-08-06 18:00:15] [TID=9780] [INFO] [EXPORT] 18:00:15 | Lote de 785 registro(s) enviado com sucesso | tabela=C000007 | filial=000001
+[2026-08-06 18:00:16] [TID=9780] [INFO] [EXPORT] 785 registro(s) sincronizado(s) em 2,4s - Clientes sincronizados com sucesso | tabela=C000007 | filial=000001
+[2026-08-06 18:00:16] [TID=9780] [INFO] [EXPORT] 18:00:16 | Enviando lote com 34 registro(s) (34 de 34) | tabela=C000129 | filial=000001
+[2026-08-06 18:00:16] [TID=9780] [INFO] [EXPORT] 18:00:16 | Lote de 34 registro(s) enviado com sucesso | tabela=C000129 | filial=000001
+[2026-08-06 18:00:16] [TID=9780] [INFO] [EXPORT] 34 registro(s) sincronizado(s) em 0,1s - Cores sincronizados com sucesso | tabela=C000129 | filial=000001
+[2026-08-06 18:00:16] [TID=9780] [INFO] [EXPORT] 18:00:16 | Enviando lote com 21 registro(s) (21 de 21) | tabela=C000250 | filial=000001
+[2026-08-06 18:00:16] [TID=9780] [INFO] [EXPORT] 18:00:16 | Lote de 21 registro(s) enviado com sucesso | tabela=C000250 | filial=000001
+[2026-08-06 18:00:16] [TID=9780] [INFO] [EXPORT] 21 registro(s) sincronizado(s) em 0,1s - Acabamentos sincronizados com sucesso | tabela=C000250 | filial=000001
+[2026-08-06 18:00:16] [TID=9780] [INFO] [EXPORT] 18:00:16 | Enviando lote com 4 registro(s) (4 de 4) | tabela=C000233 | filial=000001
+[2026-08-06 18:00:16] [TID=9780] [INFO] [EXPORT] 18:00:16 | Lote de 4 registro(s) enviado com sucesso | tabela=C000233 | filial=000001
+[2026-08-06 18:00:16] [TID=9780] [INFO] [EXPORT] 4 registro(s) sincronizado(s) em 0,0s - Cenarios de Faturamento sincronizados com sucesso | tabela=C000233 | filial=000001
+[2026-08-06 18:00:16] [TID=9780] [INFO] [EXPORT] 18:00:16 | Enviando lote com 121 registro(s) (121 de 121) | tabela=C000009 | filial=000001
+[2026-08-06 18:00:16] [TID=9780] [INFO] [EXPORT] 18:00:16 | Lote de 121 registro(s) enviado com sucesso | tabela=C000009 | filial=000001
+[2026-08-06 18:00:16] [TID=9780] [INFO] [EXPORT] 121 registro(s) sincronizado(s) em 0,3s - Fornecedores sincronizados com sucesso | tabela=C000009 | filial=000001
+[2026-08-06 18:00:16] [TID=9780] [INFO] [EXPORT] 18:00:16 | Enviando lote com 59 registro(s) (59 de 59) | tabela=C000010 | filial=000001
+[2026-08-06 18:00:16] [TID=9780] [INFO] [EXPORT] 18:00:16 | Lote de 59 registro(s) enviado com sucesso | tabela=C000010 | filial=000001
+[2026-08-06 18:00:16] [TID=9780] [INFO] [EXPORT] 59 registro(s) sincronizado(s) em 0,1s - Transportadores sincronizados com sucesso | tabela=C000010 | filial=000001
+[2026-08-06 18:00:16] [TID=9780] [INFO] [EXPORT] 18:00:16 | Enviando lote com 68 registro(s) (68 de 68) | tabela=C000014 | filial=000001
+[2026-08-06 18:00:16] [TID=9780] [INFO] [EXPORT] 18:00:16 | Lote de 68 registro(s) enviado com sucesso | tabela=C000014 | filial=000001
+[2026-08-06 18:00:16] [TID=9780] [INFO] [EXPORT] 68 registro(s) sincronizado(s) em 0,2s - Tipos de Pagamento sincronizados com sucesso | tabela=C000014 | filial=000001
+[2026-08-06 18:00:16] [TID=9780] [INFO] [EXPORT] 18:00:16 | Enviando lote com 26 registro(s) (26 de 26) | tabela=C000015 | filial=000001
+[2026-08-06 18:00:17] [TID=9780] [INFO] [EXPORT] 18:00:17 | Lote de 26 registro(s) enviado com sucesso | tabela=C000015 | filial=000001
+[2026-08-06 18:00:17] [TID=9780] [INFO] [EXPORT] 26 registro(s) sincronizado(s) em 0,1s - Condicoes de Pagamento sincronizados com sucesso | tabela=C000015 | filial=000001
+[2026-08-06 18:00:17] [TID=9780] [INFO] [EXPORT] 18:00:17 | Enviando lote com 3 registro(s) (3 de 3) | tabela=C000017 | filial=000001
+[2026-08-06 18:00:17] [TID=9780] [INFO] [EXPORT] 18:00:17 | Lote de 3 registro(s) enviado com sucesso | tabela=C000017 | filial=000001
+[2026-08-06 18:00:17] [TID=9780] [INFO] [EXPORT] 3 registro(s) sincronizado(s) em 0,0s - Grupos de Produto sincronizados com sucesso | tabela=C000017 | filial=000001
+[2026-08-06 18:00:17] [TID=9780] [INFO] [EXPORT] 18:00:17 | Enviando lote com 90 registro(s) (90 de 90) | tabela=C000018 | filial=000001
+[2026-08-06 18:00:17] [TID=9780] [INFO] [EXPORT] 18:00:17 | Lote de 90 registro(s) enviado com sucesso | tabela=C000018 | filial=000001
+[2026-08-06 18:00:17] [TID=9780] [INFO] [EXPORT] 90 registro(s) sincronizado(s) em 0,2s - Subgrupos de Produto sincronizados com sucesso | tabela=C000018 | filial=000001
+[2026-08-06 18:00:17] [TID=9780] [INFO] [EXPORT] 18:00:17 | Enviando lote com 1000 registro(s) (1000 de 2492) | tabela=C000025 | filial=000001
+[2026-08-06 18:00:19] [TID=9780] [INFO] [EXPORT] 18:00:19 | Lote de 1000 registro(s) enviado com sucesso | tabela=C000025 | filial=000001
+[2026-08-06 18:00:21] [TID=9780] [INFO] [EXPORT] 18:00:21 | Enviando lote com 1000 registro(s) (2000 de 2492) | tabela=C000025 | filial=000001
+[2026-08-06 18:00:22] [TID=9780] [INFO] [EXPORT] 18:00:22 | Lote de 1000 registro(s) enviado com sucesso | tabela=C000025 | filial=000001
+[2026-08-06 18:00:23] [TID=9780] [INFO] [EXPORT] 18:00:23 | Enviando lote com 492 registro(s) (2492 de 2492) | tabela=C000025 | filial=000001
+[2026-08-06 18:00:24] [TID=9780] [INFO] [EXPORT] 18:00:24 | Lote de 492 registro(s) enviado com sucesso | tabela=C000025 | filial=000001
+[2026-08-06 18:00:24] [TID=9780] [INFO] [EXPORT] 2492 registro(s) sincronizado(s) em 7,6s - Produtos sincronizados com sucesso | tabela=C000025 | filial=000001
+[2026-08-06 18:00:24] [TID=9780] [INFO] [EXPORT] 0 registro(s) sincronizado(s) em 0,0s - Variacoes de Produto sincronizados com sucesso | tabela=C000279 | filial=000001
+[2026-08-06 18:00:24] [TID=9780] [INFO] [EXPORT] 18:00:24 | Enviando lote com 66 registro(s) (66 de 66) | tabela=C000008 | filial=000001
+[2026-08-06 18:00:24] [TID=9780] [INFO] [EXPORT] 18:00:24 | Lote de 66 registro(s) enviado com sucesso | tabela=C000008 | filial=000001
+[2026-08-06 18:00:25] [TID=9780] [INFO] [EXPORT] 66 registro(s) sincronizado(s) em 0,2s - Funcionarios sincronizados com sucesso | tabela=C000008 | filial=000001
+[2026-08-06 18:00:25] [TID=9780] [INFO] [EXPORT] 18:00:25 | Enviando lote com 500 registro(s) (500 de 1904) | tabela=C000126 | filial=000001
+[2026-08-06 18:00:27] [TID=9780] [INFO] [EXPORT] 18:00:27 | Lote de 500 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-06 18:00:29] [TID=9780] [INFO] [EXPORT] 18:00:29 | Enviando lote com 500 registro(s) (1000 de 1904) | tabela=C000126 | filial=000001
+[2026-08-06 18:00:30] [TID=9780] [INFO] [EXPORT] 18:00:30 | Lote de 500 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-06 18:00:32] [TID=9780] [INFO] [EXPORT] 18:00:32 | Enviando lote com 500 registro(s) (1500 de 1904) | tabela=C000126 | filial=000001
+[2026-08-06 18:00:33] [TID=9780] [INFO] [EXPORT] 18:00:33 | Lote de 500 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-06 18:00:34] [TID=9780] [INFO] [EXPORT] 18:00:34 | Enviando lote com 404 registro(s) (1904 de 1904) | tabela=C000126 | filial=000001
+[2026-08-06 18:00:36] [TID=9780] [INFO] [EXPORT] 18:00:36 | Lote de 404 registro(s) enviado com sucesso | tabela=C000126 | filial=000001
+[2026-08-06 18:00:36] [TID=9780] [INFO] [EXPORT] 1904 registro(s) sincronizado(s) em 11,4s - Pedidos de Venda sincronizados com sucesso | tabela=C000126 | filial=000001

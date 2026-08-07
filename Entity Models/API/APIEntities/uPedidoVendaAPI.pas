@@ -77,6 +77,8 @@ type
     nomecliente: string;
     idrepresentante: string;
     nomerepresentante: string;
+    idsupervisor: string;
+    nomesupervisor: string;
     idtransportadora: string;
     idcondicaopagamento: string;
     valorprodutos: Double;
@@ -306,6 +308,8 @@ begin
   Result.AddPair('nomecliente',               StrOrNull(nomecliente));
   Result.AddPair('idrepresentante',           StrOrNull(idrepresentante));
   Result.AddPair('nomerepresentante',         StrOrNull(nomerepresentante));
+  Result.AddPair('idsupervisor',              StrOrNull(idsupervisor));
+  Result.AddPair('nomesupervisor',            StrOrNull(nomesupervisor));
   Result.AddPair('idtransportadora',          StrOrNull(idtransportadora));
   Result.AddPair('idcondicaopagamento',       StrOrNull(idcondicaopagamento));
   Result.AddPair('valorprodutos',             TJSONNumber.Create(valorprodutos));
@@ -411,6 +415,8 @@ begin
   nomecliente               := JsonStrOrEmpty('nomecliente', AJson);
   idrepresentante           := JsonStrOrEmpty('idrepresentante', AJson);
   nomerepresentante         := JsonStrOrEmpty('nomerepresentante', AJson);
+  idsupervisor              := JsonStrOrEmpty('idsupervisor', AJson);
+  nomesupervisor            := JsonStrOrEmpty('nomesupervisor', AJson);
   idtransportadora          := JsonStrOrEmpty('idtransportadora', AJson);
   idcondicaopagamento       := JsonStrOrEmpty('idcondicaopagamento', AJson);
   valorprodutos             := JsonFloatOrZero('valorprodutos', AJson);

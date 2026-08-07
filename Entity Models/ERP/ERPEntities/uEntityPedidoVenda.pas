@@ -48,11 +48,13 @@ begin
     Qry.SQL.Add('select p.*,');
     Qry.SQL.Add('cli.idcliente as IDCLIENTE, cli.nome as NOMECLIENTE,');
     Qry.SQL.Add('rep.idfuncionario as IDREPRESENTANTE, rep.nome as NOMEREPRESENTANTE,');
+    Qry.SQL.Add('sup.idsupervisor as IDSUPERVISOR, sup.nome as NOMESUPERVISOR,');
     Qry.SQL.Add('transp.idtransportador as IDTRANSPORTADORA,');
     Qry.SQL.Add('cond.idformapagamento as IDCONDICAOPAGAMENTO');
     Qry.SQL.Add('from ' + GetTableNameClass + ' p');
     Qry.SQL.Add('left outer join C000007 cli on cli.codigo = p.codcliente');
     Qry.SQL.Add('left outer join C000008 rep on rep.codigo = p.codrepresentante');
+    Qry.SQL.Add('left outer join C000008 sup on sup.codigo = p.codsupervisor');
     Qry.SQL.Add('left outer join C000010 transp on transp.codigo = p.codtransportadora');
     Qry.SQL.Add('left outer join C000015 cond on cond.codigo = p.codcondicaopagamento');
     Qry.SQL.Add('where p.codigo = :cod');
@@ -131,6 +133,8 @@ begin
     DTO.nomecliente                  := ADataSet.FieldByName('NOMECLIENTE').AsString;
     DTO.idrepresentante              := ADataSet.FieldByName('IDREPRESENTANTE').AsString;
     DTO.nomerepresentante            := ADataSet.FieldByName('NOMEREPRESENTANTE').AsString;
+    DTO.idsupervisor                 := ADataSet.FieldByName('IDSUPERVISOR').AsString;
+    DTO.nomesupervisor               := ADataSet.FieldByName('NOMESUPERVISOR').AsString;
     DTO.idtransportadora             := ADataSet.FieldByName('IDTRANSPORTADORA').AsString;
     DTO.idcondicaopagamento          := ADataSet.FieldByName('IDCONDICAOPAGAMENTO').AsString;
     DTO.valorprodutos                := ADataSet.FieldByName('subtotal').AsCurrency;
@@ -265,11 +269,13 @@ begin
     Qry.SQL.Add('select p.*,');
     Qry.SQL.Add('cli.idcliente as IDCLIENTE, cli.nome as NOMECLIENTE,');
     Qry.SQL.Add('rep.idfuncionario as IDREPRESENTANTE, rep.nome as NOMEREPRESENTANTE,');
+    Qry.SQL.Add('sup.idsupervisor as IDSUPERVISOR, sup.nome as NOMESUPERVISOR,');
     Qry.SQL.Add('transp.idtransportador as IDTRANSPORTADORA,');
     Qry.SQL.Add('cond.idformapagamento as IDCONDICAOPAGAMENTO');
     Qry.SQL.Add('from ' + GetTableNameClass + ' p');
     Qry.SQL.Add('left outer join C000007 cli on cli.codigo = p.codcliente');
     Qry.SQL.Add('left outer join C000008 rep on rep.codigo = p.codrepresentante');
+    Qry.SQL.Add('left outer join C000008 sup on sup.codigo = p.codsupervisor');
     Qry.SQL.Add('left outer join C000010 transp on transp.codigo = p.codtransportadora');
     Qry.SQL.Add('left outer join C000015 cond on cond.codigo = p.codcondicaopagamento');
     Qry.SQL.Add('where p.idpedido is null');

@@ -28,7 +28,6 @@ object Form2: TForm2
       Align = alClient
       Caption = 'Selecione para sincronizar TODOS registros de cada Entidade'
       TabOrder = 0
-      ExplicitHeight = 147
       Height = 175
       Width = 982
       object cmbEmpresa: TcxComboBox
@@ -48,7 +47,7 @@ object Form2: TForm2
         TabOrder = 1
         object chkCenario: TcxCheckBox
           Left = 1
-          Top = 77
+          Top = 58
           Align = alTop
           Caption = 'Cenarios Faturamento (C000233)'
           ParentShowHint = False
@@ -58,16 +57,16 @@ object Form2: TForm2
           Style.TransparentBorder = False
           TabOrder = 0
           Transparent = True
-          ExplicitTop = 85
+          ExplicitTop = 77
         end
         object chkClientes: TcxCheckBox
           Left = 1
           Top = 1
           Hint = 
             'C000005: Regioes de Clientes'#13#10'C000144: Grupos de Clientes'#13#10'C0000' +
-            '07: Clientes'
+            '08: Funcionarios'#13#10'C000007: Clientes'
           Align = alTop
-          Caption = 'Clientes (C000005 - C000144 - C000007)'
+          Caption = 'Funcionarios e Clientes (C000005 - C000144 - C000008 - C000007)'
           ParentFont = False
           ParentShowHint = False
           ShowHint = True
@@ -81,26 +80,6 @@ object Form2: TForm2
           Style.IsFontAssigned = True
           TabOrder = 1
           Transparent = True
-        end
-        object chkFuncioanrio: TcxCheckBox
-          Left = 1
-          Top = 39
-          Align = alTop
-          Caption = 'Funcioanrios (C000008)'
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = True
-          Style.Font.Charset = DEFAULT_CHARSET
-          Style.Font.Color = clBlueviolet
-          Style.Font.Height = -12
-          Style.Font.Name = 'Segoe UI'
-          Style.Font.Style = []
-          Style.HotTrack = True
-          Style.TransparentBorder = False
-          Style.IsFontAssigned = True
-          TabOrder = 2
-          Transparent = True
-          ExplicitTop = 41
         end
         object chkTransportador: TcxCheckBox
           Left = 1
@@ -121,12 +100,12 @@ object Form2: TForm2
           Style.HotTrack = True
           Style.TransparentBorder = False
           Style.IsFontAssigned = True
-          TabOrder = 3
+          TabOrder = 2
           Transparent = True
         end
         object chkFornecedor: TcxCheckBox
           Left = 1
-          Top = 58
+          Top = 39
           Align = alTop
           Caption = 'Fornecedores (C000009)'
           ParentFont = False
@@ -140,8 +119,9 @@ object Form2: TForm2
           Style.HotTrack = True
           Style.TransparentBorder = False
           Style.IsFontAssigned = True
-          TabOrder = 4
+          TabOrder = 3
           Transparent = True
+          ExplicitTop = 58
         end
       end
       object Panel2: TPanel
@@ -190,7 +170,6 @@ object Form2: TForm2
           Style.IsFontAssigned = True
           TabOrder = 1
           Transparent = True
-          ExplicitTop = 41
         end
         object chkAcabamentos: TcxCheckBox
           Left = 1
@@ -224,7 +203,6 @@ object Form2: TForm2
           Style.IsFontAssigned = True
           TabOrder = 3
           Transparent = True
-          ExplicitTop = 79
         end
         object chkProdutos: TcxCheckBox
           Left = 1
@@ -287,7 +265,6 @@ object Form2: TForm2
       Font.Style = [fsBold]
       ParentFont = False
       ImageIndex = 0
-      ExplicitTop = 148
       object btnSyncAll: TButton
         Left = 0
         Top = 0
@@ -310,7 +287,6 @@ object Form2: TForm2
       Top = 232
       Align = alBottom
       TabOrder = 2
-      ExplicitTop = 202
       Width = 982
     end
     object pgbTotal: TcxProgressBar
@@ -318,7 +294,6 @@ object Form2: TForm2
       Top = 209
       Align = alBottom
       TabOrder = 3
-      ExplicitTop = 179
       Width = 982
     end
   end
@@ -330,8 +305,6 @@ object Form2: TForm2
     Align = alClient
     ScrollBars = ssVertical
     TabOrder = 1
-    ExplicitTop = 263
-    ExplicitHeight = 369
   end
   object JvNavPanelHeader1: TJvNavPanelHeader
     Left = 0

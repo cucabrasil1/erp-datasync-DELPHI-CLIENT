@@ -115,12 +115,24 @@ type
     procedure FromJson(AJson: TJSONObject);
   end;
 
+  TClienteComplemento = class
+  public
+    // --- campos enviados (ERP . API) ---
+    vendedor_codigoerp: string;
+    vendedor_id: string;
+    vendedor_nome: string;
+
+    function ToJson: TJSONObject;
+    procedure FromJson(AJson: TJSONObject);
+  end;
+
   TPessoaAPI = class
   private
     FContatos: TObjectList<TPessoaContato>;
     FEnderecos: TObjectList<TPessoaEndereco>;
     FDadosBancarios: TObjectList<TPessoaDadosBancarios>;
     FComplementoFuncionario: TFuncionarioComplemento;
+    FComplementoCliente: TClienteComplemento;
   public
     // --- campos enviados (ERP . API) ---
     codigoerp: string;
@@ -177,6 +189,7 @@ type
       AIbge, ADocumentoPrincipal, ADocumentoSecundario: string; AAtivo: Integer);
     procedure AddDadosBancarios(const ACodigoErp, ACodBanco, ATitular, AAgencia,
       ANumeroconta, ADigito, AChavePix, ATipoChavePix, ATipoConta: string);
+    procedure AddComplementoCliente(const AVendedorCodigoErp, AVendedorId, AVendedorNome: string);
     procedure AddComplementoFuncionario(const ACodigoErp, ACtps, ASerieCtps,
       ANis, ATituloEleitor, ASecaoEleitoral, AFuncao: string;
       ADataAdmissao, ADataDemissao: string; ASalario, AComissao: Double;
@@ -342,6 +355,24 @@ begin
   Result.AddPair('codcargo',                   StrOrNull(codcargo));
 end;
 
+{ TClienteComplemento }
+
+function TClienteComplemento.ToJson: TJSONObject;
+begin
+  Result := TJSONObject.Create;
+
+  Result.AddPair('vendedor_codigoerp', StrOrNull(vendedor_codigoerp));
+  Result.AddPair('vendedor_id',        StrOrNull(vendedor_id));
+  Result.AddPair('vendedor_nome',      StrOrNull(vendedor_nome));
+end;
+
+procedure TClienteComplemento.FromJson(AJson: TJSONObject);
+begin
+  vendedor_codigoerp := JsonStrOrEmpty('vendedor_codigoerp', AJson);
+  vendedor_id        := JsonStrOrEmpty('vendedor_id', AJson);
+  vendedor_nome      := JsonStrOrEmpty('vendedor_nome', AJson);
+end;
+
 procedure TFuncionarioComplemento.FromJson(AJson: TJSONObject);
 begin
   codigoerp                  := JsonStrOrEmpty('codigoerp', AJson);
@@ -397,6 +428,7 @@ begin
   FEnderecos              := TObjectList<TPessoaEndereco>.Create(True);
   FDadosBancarios         := TObjectList<TPessoaDadosBancarios>.Create(True);
   FComplementoFuncionario := nil;
+  FComplementoCliente     := nil;
 end;
 
 destructor TPessoaAPI.Destroy;
@@ -405,7 +437,22 @@ begin
   FEnderecos.Free;
   FDadosBancarios.Free;
   FComplementoFuncionario.Free;
+  FComplementoCliente.Free;
   inherited;
+end;
+
+procedure TPessoaAPI.AddComplementoCliente(const AVendedorCodigoErp, AVendedorId, AVendedorNome: string);
+var
+  CC: TClienteComplemento;
+begin
+  if (Trim(AVendedorCodigoErp) = '') and (Trim(AVendedorId) = '') then
+    Exit;
+
+  CC                    := TClienteComplemento.Create;
+  CC.vendedor_codigoerp := AVendedorCodigoErp;
+  CC.vendedor_id        := AVendedorId;
+  CC.vendedor_nome      := AVendedorNome;
+  FComplementoCliente   := CC;
 end;
 
 procedure TPessoaAPI.AddContato(const ANome, ATelefone, AEmail, ADepartamento: string);
@@ -608,6 +655,9 @@ begin
 
   if (perfilfuncionario <> 0) and (FComplementoFuncionario <> nil) then
     Result.AddPair('complementofuncionario', FComplementoFuncionario.ToJson);
+
+  if (perfilcliente <> 0) and (FComplementoCliente <> nil) then
+    Result.AddPair('complementocliente', FComplementoCliente.ToJson);
 end;
 
 { TPessoaAPI.FromJson }
@@ -688,6 +738,12 @@ begin
   begin
     FComplementoFuncionario := TFuncionarioComplemento.Create;
     FComplementoFuncionario.FromJson(Obj);
+  end;
+
+  if AJson.TryGetValue('complementocliente', Obj) then
+  begin
+    FComplementoCliente := TClienteComplemento.Create;
+    FComplementoCliente.FromJson(Obj);
   end;
 end;
 end.
