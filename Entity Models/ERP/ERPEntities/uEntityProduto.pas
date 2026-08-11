@@ -128,9 +128,9 @@ begin
     DTO.nomesubgrupo          := ADataSet.FieldByName('subgrupo').AsString;
     DTO.ativo                 := ifthen(ADataSet.FieldByName('situacao').AsInteger = 1, 1, 0);
     DTO.habilitado            := ifthen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
-    DTO.caminhoimagem1        := '';
-    DTO.caminhoimagem2        := '';
-    DTO.caminhoimagem3        := '';
+    DTO.AddImagem('');
+    DTO.AddImagem('');
+    DTO.AddImagem('');
 
     // Volumes: busca so quando produto possuir volume (flag possui_volume)
     if ADataSet.FieldByName('possui_volume').AsInteger > 0 then

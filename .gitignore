@@ -1,0 +1,17 @@
+# Build artifacts
+Win32/Debug/
+Win64/Debug/
+Win32/Release/
+Win64/Release/
+__history/
+*.~*
+*.local
+*.map
+*.drc
+*.dsk
+*.identcache
+*.tvsconfig
+*.log
+*.err
+*.dcu
+*.exe

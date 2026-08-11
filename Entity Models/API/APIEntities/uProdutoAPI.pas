@@ -70,9 +70,7 @@ type
     codigosubgrupo: string;
     idsubgrupo: string;
     nomesubgrupo: string;
-    caminhoimagem1: string;
-    caminhoimagem2: string;
-    caminhoimagem3: string;
+    imagens: TArray<string>;
 
     id: string;
     tenant_id: string;
@@ -88,6 +86,7 @@ type
     procedure AddVolume(const ACodigoErp, ADescricao, ACodbarras, AReferencia: string;
       APesobruto, APesoliquido: Double; AAltura, ALargura, AProfundidade: Integer;
       AQuantidade: Integer; AM3: Double; ASeqVolume: string);
+    procedure AddImagem(const AUrl: string);
 
     class function ResourceName: string;
     function ToJson: TJSONObject;
@@ -181,10 +180,17 @@ begin
   FVolumes.Add(V);
 end;
 
+procedure TProdutoAPI.AddImagem(const AUrl: string);
+begin
+  SetLength(imagens, Length(imagens) + 1);
+  imagens[High(imagens)] := AUrl;
+end;
+
 function TProdutoAPI.ToJson: TJSONObject;
 var
   Arr: TJSONArray;
   V: TProdutoVolume;
+  s: string;
 begin
   Result := TJSONObject.Create;
 
@@ -228,9 +234,11 @@ begin
   Result.AddPair('codigosubgrupo',          StrOrNull(codigosubgrupo));
   Result.AddPair('idsubgrupo',              StrOrNull(idsubgrupo));
   Result.AddPair('nomesubgrupo',            StrOrNull(nomesubgrupo));
-  Result.AddPair('caminhoimagem1',          StrOrNull(caminhoimagem1));
-  Result.AddPair('caminhoimagem2',          StrOrNull(caminhoimagem2));
-  Result.AddPair('caminhoimagem3',          StrOrNull(caminhoimagem3));
+
+  Arr := TJSONArray.Create;
+  for s in imagens do
+    Arr.AddElement(StrOrNull(s));
+  Result.AddPair('imagens',                 Arr);
 end;
 
 procedure TProdutoAPI.FromJson(AJson: TJSONObject);
@@ -275,9 +283,6 @@ begin
   codigosubgrupo          := JsonStrOrEmpty('codigosubgrupo', AJson);
   idsubgrupo              := JsonStrOrEmpty('idsubgrupo', AJson);
   nomesubgrupo            := JsonStrOrEmpty('nomesubgrupo', AJson);
-  caminhoimagem1          := JsonStrOrEmpty('caminhoimagem1', AJson);
-  caminhoimagem2          := JsonStrOrEmpty('caminhoimagem2', AJson);
-  caminhoimagem3          := JsonStrOrEmpty('caminhoimagem3', AJson);
   is_deleted              := JsonIntOrZero('is_deleted', AJson);
   deleted_at              := JsonStrOrEmpty('deleted_at', AJson);
   synced_at               := JsonStrOrEmpty('synced_at', AJson);
@@ -290,6 +295,15 @@ begin
       V := TProdutoVolume.Create;
       V.FromJson(TJSONObject(Arr.Items[i]));
       FVolumes.Add(V);
+    end;
+
+  if AJson.TryGetValue('imagens', Arr) then
+    for i := 0 to Arr.Count - 1 do
+    begin
+      if Arr.Items[i] is TJSONNull then
+        AddImagem('')
+      else
+        AddImagem(Arr.Items[i].Value);
     end;
 end;
 
