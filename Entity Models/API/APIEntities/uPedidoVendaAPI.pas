@@ -1,4 +1,4 @@
-unit uPedidoVendaAPI;
+﻿unit uPedidoVendaAPI;
 
 interface
 
@@ -151,7 +151,7 @@ type
     idpedido: string;
     pedidoweb: string;
     responsavelentrega: string;
-    habilitadoweb: string;
+    habilitadoweb: Smallint;
     tipodesconto: Integer;
 
     // --- campos retornados pela API (GET) ---
@@ -382,7 +382,7 @@ begin
   Result.AddPair('idpedido',                  StrOrNull(idpedido));
   Result.AddPair('pedidoweb',                 StrOrNull(pedidoweb));
   Result.AddPair('responsavelentrega',        StrOrNull(responsavelentrega));
-  Result.AddPair('habilitadoweb',             StrOrNull(habilitadoweb));
+  Result.AddPair('habilitadoweb',             TJSONNumber.Create(habilitadoweb));
   Result.AddPair('tipodesconto',              TJSONNumber.Create(tipodesconto));
 
   Result.AddPair('itens',                     GetItens);
@@ -489,7 +489,7 @@ begin
   idpedido                  := JsonStrOrEmpty('idpedido', AJson);
   pedidoweb                 := JsonStrOrEmpty('pedidoweb', AJson);
   responsavelentrega        := JsonStrOrEmpty('responsavelentrega', AJson);
-  habilitadoweb             := JsonStrOrEmpty('habilitadoweb', AJson);
+  habilitadoweb             := JsonIntOrZero('habilitadoweb', AJson);
   tipodesconto              := JsonIntOrZero('tipodesconto', AJson);
   id                        := JsonStrOrEmpty('id', AJson);
   tenant_id                 := JsonStrOrEmpty('tenant_id', AJson);

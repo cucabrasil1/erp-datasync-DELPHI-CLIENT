@@ -69,7 +69,7 @@ var
 begin
   Pessoa := TPessoaAPI.Create;
   try
-    Pessoa.habilitado           := ifthen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
+    Pessoa.habilitadoweb           := ifthen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
     Pessoa.perfilfornecedor     := 1;
     Pessoa.codigoerp            := ADataSet.FieldByName('codigo').AsString;
     Pessoa.nome                 := ADataSet.FieldByName('nome').AsString;

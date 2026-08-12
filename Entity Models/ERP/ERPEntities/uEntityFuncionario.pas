@@ -1,4 +1,4 @@
-unit uEntityFuncionario;
+﻿unit uEntityFuncionario;
 
 interface
 
@@ -94,7 +94,7 @@ var
 begin
   Pessoa := TPessoaAPI.Create;
   try
-    Pessoa.habilitado          := ifthen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
+    Pessoa.habilitadoweb          := ifthen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
     Pessoa.perfilfuncionario   := 1;
     Pessoa.perfilvendedor      := SafeFlagInt('f_vendedor');
     if ADataSet.FieldByName('situacao').AsInteger = 1 then

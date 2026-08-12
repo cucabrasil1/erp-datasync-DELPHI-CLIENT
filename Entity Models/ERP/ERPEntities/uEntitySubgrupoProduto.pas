@@ -74,7 +74,7 @@ begin
     DTO.codgrupo   := ADataSet.FieldByName('codgrupo').AsString;
     DTO.comissao   := ADataSet.FieldByName('comissao').AsFloat;
     DTO.desconto   := ADataSet.FieldByName('desconto').AsFloat;
-    DTO.habilitado := IfThen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
+    DTO.habilitadoweb := IfThen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
 
     case FDatabaseType of
       dtIndustrial:

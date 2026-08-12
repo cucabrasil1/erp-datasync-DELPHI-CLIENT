@@ -99,7 +99,7 @@ var
 begin
   Pessoa := TPessoaAPI.Create;
   try
-    Pessoa.habilitado              := ifthen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
+    Pessoa.habilitadoweb              := ifthen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
     Pessoa.perfiltransportador     := 1;
     Pessoa.ativo                   := 1;  //cadastro de transportador nao implementa ativo/inativo. Logo sempre ativo
 

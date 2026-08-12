@@ -74,7 +74,7 @@ begin
     DTO.descricao        := ADataSet.FieldByName('condpgto').AsString;
     DTO.codtipopagamento := ADataSet.FieldByName('codtipopagamento').AsString;
     DTO.qtdeparcelas     := ADataSet.FieldByName('parcelas').AsInteger;
-    DTO.habilitado       := IfThen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
+    DTO.habilitadoweb       := IfThen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
 
     QryDet := TFDQuery.Create(nil);
     try

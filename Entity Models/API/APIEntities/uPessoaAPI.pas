@@ -154,7 +154,7 @@ type
     observacoes: string;
     sexo: string;
     tipopessoa: string;
-    habilitado: Integer;
+    habilitadoweb: Smallint;
     ativo: Integer;
     perfilcliente: Integer;
     perfilfornecedor: Integer;
@@ -622,7 +622,7 @@ begin
   Result.AddPair('observacoes',             StrOrNull(observacoes));
   Result.AddPair('sexo',                    StrOrNull(sexo));
   Result.AddPair('tipopessoa',              StrOrNull(tipopessoa));
-  Result.AddPair('habilitado',              TJSONNumber.Create(habilitado));
+  Result.AddPair('habilitadoweb',           TJSONNumber.Create(habilitadoweb));
   Result.AddPair('ativo',                   TJSONNumber.Create(ativo));
   Result.AddPair('perfilcliente',           PerfilOrNull(perfilcliente));
   Result.AddPair('perfilfornecedor',        PerfilOrNull(perfilfornecedor));
@@ -692,7 +692,7 @@ begin
   observacoes             := JsonStrOrEmpty('observacoes', AJson);
   sexo                    := JsonStrOrEmpty('sexo', AJson);
   tipopessoa              := JsonStrOrEmpty('tipopessoa', AJson);
-  habilitado              := JsonIntOrZero('habilitado', AJson);
+  habilitadoweb           := JsonIntOrZero('habilitadoweb', AJson);
   ativo                   := JsonIntOrZero('ativo', AJson);
   perfilcliente           := JsonIntOrZero('perfilcliente', AJson);
   perfilfornecedor        := JsonIntOrZero('perfilfornecedor', AJson);

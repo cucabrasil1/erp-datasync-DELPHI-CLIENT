@@ -1,4 +1,4 @@
-unit uEntityBanco;
+﻿unit uEntityBanco;
 
 interface
 
@@ -83,7 +83,7 @@ begin
     DTO.creditoprazo    := ADataSet.FieldByName('rec_credito').AsInteger;
     DTO.debitocomissao  := ADataSet.FieldByName('comissao_debito').AsCurrency;
     DTO.debitoprazo     := ADataSet.FieldByName('rec_debito').AsInteger;
-    DTO.habilitado      := IfThen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
+    DTO.habilitadoweb      := IfThen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
 
     case FDatabaseType of
       dtIndustrial:

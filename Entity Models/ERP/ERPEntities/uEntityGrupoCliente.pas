@@ -71,7 +71,7 @@ begin
   try
     DTO.codigoerp  := ADataSet.FieldByName('codigo').AsString;
     DTO.descricao  := ADataSet.FieldByName('nomegrupo').AsString;
-    DTO.habilitado := IfThen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
+    DTO.habilitadoweb := IfThen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
 
     case FDatabaseType of
       dtIndustrial:

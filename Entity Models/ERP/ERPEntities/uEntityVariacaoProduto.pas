@@ -79,7 +79,7 @@ begin
         Variacao.ativo      := IfThen(ADataSet.FieldByName('ativo').AsString = 'S', 1, 0);
         Variacao.variacaobase := IfThen(ADataSet.FieldByName('variacaobase').AsString = 'S', 1, 0);
         Variacao.precocusto := ADataSet.FieldByName('precocusto').AsCurrency;
-        Variacao.habilitado := IfThen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
+        Variacao.habilitadoweb := IfThen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
 
         if ADataSet.FieldByName('datamodificacao').IsNull then
           Variacao.datamodificacao := ''

@@ -53,6 +53,7 @@ type
     precocusto: Double;
     precovenda: Double;
     tipo: string;
+    codtipoitem: Smallint;
     qtdevolume: Integer;
     m3: Double;
     pesobruto: Double;
@@ -63,7 +64,7 @@ type
     possuivariacaocor: Integer;
     destacargtindfe: Integer;
     observacoes: string;
-    habilitado: Integer;
+    habilitadoweb: Smallint;
     codigogrupo: string;
     idgrupo: string;
     nomegrupo: string;
@@ -211,6 +212,7 @@ begin
   Result.AddPair('precocusto',              TJSONNumber.Create(precocusto));
   Result.AddPair('precovenda',              TJSONNumber.Create(precovenda));
   Result.AddPair('tipo',                    StrOrNull(tipo));
+  Result.AddPair('codtipoitem',             TJSONNumber.Create(codtipoitem));
   Result.AddPair('qtdevolume',              TJSONNumber.Create(qtdevolume));
   Result.AddPair('m3',                      TJSONNumber.Create(m3));
   Result.AddPair('pesobruto',               TJSONNumber.Create(pesobruto));
@@ -227,7 +229,7 @@ begin
     Arr.AddElement(V.ToJson);
   Result.AddPair('volumes',                 Arr);
 
-  Result.AddPair('habilitado',              TJSONNumber.Create(habilitado));
+  Result.AddPair('habilitadoweb',              TJSONNumber.Create(habilitadoweb));
   Result.AddPair('codigogrupo',             StrOrNull(codigogrupo));
   Result.AddPair('idgrupo',                 StrOrNull(idgrupo));
   Result.AddPair('nomegrupo',               StrOrNull(nomegrupo));
@@ -266,6 +268,7 @@ begin
   precocusto              := JsonFloatOrZero('precocusto', AJson);
   precovenda              := JsonFloatOrZero('precovenda', AJson);
   tipo                    := JsonStrOrEmpty('tipo', AJson);
+  codtipoitem             := JsonIntOrZero('codtipoitem', AJson);
   qtdevolume              := JsonIntOrZero('qtdevolume', AJson);
   m3                      := JsonFloatOrZero('m3', AJson);
   pesobruto               := JsonFloatOrZero('pesobruto', AJson);
@@ -276,7 +279,7 @@ begin
   possuivariacaocor       := JsonIntOrZero('possuivariacaocor', AJson);
   destacargtindfe         := JsonIntOrZero('destacargtindfe', AJson);
   observacoes             := JsonStrOrEmpty('observacoes', AJson);
-  habilitado              := JsonIntOrZero('habilitado', AJson);
+  habilitadoweb              := JsonIntOrZero('habilitadoweb', AJson);
   codigogrupo             := JsonStrOrEmpty('codigogrupo', AJson);
   idgrupo                 := JsonStrOrEmpty('idgrupo', AJson);
   nomegrupo               := JsonStrOrEmpty('nomegrupo', AJson);

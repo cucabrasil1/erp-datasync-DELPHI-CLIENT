@@ -118,7 +118,7 @@ var
 begin
   Pessoa := TPessoaAPI.Create;
   try
-    Pessoa.habilitado          := ifthen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
+    Pessoa.habilitadoweb          := ifthen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
     Pessoa.perfilcliente       := 1;
     Pessoa.codigoerp           := ADataSet.FieldByName('codigo').AsString;;
     Pessoa.nome                := ADataSet.FieldByName('nome').AsString;
@@ -350,7 +350,7 @@ begin
     ParamByName('sexo').AsString           := ADTO.sexo;
     ParamByName('situacao').AsInteger      := ADTO.ativo;
     ParamByName('tipo').AsInteger          := vTipo;
-    ParamByName('habilitadoweb').AsString  := IfThen(ADTO.habilitado = 1, 'S', 'N');
+    ParamByName('habilitadoweb').AsString  := IfThen(ADTO.habilitadoweb = 1, 'S', 'N');
     ParamByName('idcliente').AsString      := ADTO.id;
     ExecSQL;
   finally

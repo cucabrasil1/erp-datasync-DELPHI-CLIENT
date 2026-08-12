@@ -13,7 +13,7 @@ type
     descricao: string;
     comissao: Double;
     desconto: Double;
-    habilitado: Integer;
+    habilitadoweb: Smallint;
 
     // --- campos retornados pela API (GET) ---
     id: string;
@@ -45,7 +45,7 @@ begin
   Result.AddPair('descricao', descricao);
   Result.AddPair('comissao',  TJSONNumber.Create(comissao));
   Result.AddPair('desconto',  TJSONNumber.Create(desconto));
-  Result.AddPair('habilitado', TJSONNumber.Create(habilitado));
+  Result.AddPair('habilitadoweb', TJSONNumber.Create(habilitadoweb));
 end;
 
 procedure TGrupoProdutoAPI.FromJson(AJson: TJSONObject);
@@ -54,7 +54,7 @@ begin
   descricao  := JsonStrOrEmpty('descricao', AJson);
   comissao   := JsonFloatOrZero('comissao', AJson);
   desconto   := JsonFloatOrZero('desconto', AJson);
-  habilitado := JsonIntOrZero('habilitado', AJson);
+  habilitadoweb := JsonIntOrZero('habilitadoweb', AJson);
   id         := JsonStrOrEmpty('id', AJson);
   tenant_id  := JsonStrOrEmpty('tenant_id', AJson);
   is_deleted := JsonIntOrZero('is_deleted', AJson);

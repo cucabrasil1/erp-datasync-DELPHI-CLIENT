@@ -92,6 +92,27 @@ function TEntityProduto.MapToJson(ADataSet: TDataSet): TJSONObject;
 var
   DTO: TProdutoAPI;
   VolumesDs: TDataSet;
+
+  function DescricaoTipoItem(const ACodTipoItem: Integer): string;
+  begin
+    case ACodTipoItem of
+      0:  Result := 'Mercadoria para Revenda';
+      1:  Result := 'Materia-prima';
+      2:  Result := 'Embalagem';
+      3:  Result := 'Produto em Processo';
+      4:  Result := 'Produto Acabado';
+      5:  Result := 'Subproduto';
+      6:  Result := 'Produto Intermediario';
+      7:  Result := 'Material de Uso e Consumo';
+      8:  Result := 'Ativo Imobilizado';
+      9:  Result := 'Serviço';
+      10: Result := 'Outros insumos';
+      99: Result := 'Outras';
+    else
+      Result := '';
+    end;
+  end;
+
 begin
   DTO := TProdutoAPI.Create;
   try
@@ -102,7 +123,8 @@ begin
     DTO.codbarrastributavel   := ADataSet.FieldByName('codbarratributavel').AsString;
     DTO.unidade               := ADataSet.FieldByName('unidade').AsString;
     DTO.origem                := ADataSet.FieldByName('origemproduto').AsInteger;
-    DTO.classificacao         := ADataSet.FieldByName('tipo').AsString;
+    DTO.classificacao         := DescricaoTipoItem(ADataSet.FieldByName('codtipoitem').AsInteger);
+    DTO.codtipoitem           := ADataSet.FieldByName('codtipoitem').AsInteger;
     DTO.cst                   := ADataSet.FieldByName('cst').AsString;
     DTO.ncm                   := ADataSet.FieldByName('ncm').AsString;
     DTO.cest                  := ADataSet.FieldByName('codigocest').AsString;
@@ -126,8 +148,8 @@ begin
     DTO.codigosubgrupo        := ADataSet.FieldByName('codsubgrupo').AsString;
     DTO.idsubgrupo            := ADataSet.FieldByName('idsubgrupo').AsString;
     DTO.nomesubgrupo          := ADataSet.FieldByName('subgrupo').AsString;
-    DTO.ativo                 := ifthen(ADataSet.FieldByName('situacao').AsInteger = 1, 1, 0);
-    DTO.habilitado            := ifthen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
+    DTO.ativo                 := ifthen(ADataSet.FieldByName('situacao').AsInteger = 0, 1, 0);
+    DTO.habilitadoweb            := ifthen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
     DTO.AddImagem('');
     DTO.AddImagem('');
     DTO.AddImagem('');

@@ -207,7 +207,7 @@ begin
     DTO.idpedido                     := ADataSet.FieldByName('idpedido').AsString;
     DTO.pedidoweb                    := ADataSet.FieldByName('pedidoweb').AsString;
     DTO.responsavelentrega           := ADataSet.FieldByName('responsavelentrega').AsString;
-    DTO.habilitadoweb                := ADataSet.FieldByName('habilitadoweb').AsString;
+    DTO.habilitadoweb                := IfThen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
     DTO.tipodesconto                 := ADataSet.FieldByName('tipodesconto').AsInteger;
 
     ItensDs := GetItens(ADataSet.FieldByName('codigo').AsString);

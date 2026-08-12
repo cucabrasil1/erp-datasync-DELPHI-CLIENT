@@ -73,7 +73,7 @@ begin
     DTO.descricao           := ADataSet.FieldByName('descricao').AsString;
     DTO.percentual          := ADataSet.FieldByName('percentual').AsFloat;
     DTO.rateioparcelamento := ADataSet.FieldByName('rateioparcelamento').AsInteger;
-    DTO.habilitado         := IfThen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
+    DTO.habilitadoweb         := IfThen(ADataSet.FieldByName('habilitadoweb').AsString = 'S', 1, 0);
 
     case FDatabaseType of
       dtIndustrial:
